@@ -16,45 +16,45 @@ import Intro from "../components/Intro";
 import Input from "../components/Input";
 import GameProgress from "../components/GameProgress";
 import StenoLayoutDiagram from "../../../StenoLayout/AmericanStenoDiagram";
-import Stroke from "../../../utils/stroke";
+import Stroke from "utils/stroke";
+import strokeBits from "utils/strokeBits";
 import mapBriefsFunction from "../../../utils/stenoLayouts/mapBriefToAmericanStenoKeys";
 import Puzzle from "./Puzzle";
 import { ReactComponent as MischievousRobot } from "../../../images/MischievousRobot.svg";
 import { choosePuzzleKey, prettyKey } from "./utilities";
-import * as stroke from "../../../utils/stroke";
 import { mapQWERTYKeysToStenoStroke } from "../../../utils/mapQWERTYKeysToStenoStroke";
 import type { GlobalUserSettings } from "types";
 
 const stenoTypedTextToKeysMapping = {
-  "-Z": stroke.Z,
-  "-D": stroke.D,
-  "-S": stroke.RS,
-  "-T": stroke.RT,
-  "-G": stroke.G,
-  "-L": stroke.L,
-  "-B": stroke.B,
-  "-P": stroke.RP,
-  "-R": stroke.RR,
-  "-F": stroke.F,
-  "U": stroke.U,
-  "E": stroke.E,
-  "*": stroke.STAR,
-  "O": stroke.O,
-  "A": stroke.A,
-  "R": stroke.R,
-  "H": stroke.H,
-  "W": stroke.W,
-  "P": stroke.P,
-  "K": stroke.K,
-  "T": stroke.T,
-  "S": stroke.S,
-  "#": stroke.HASH,
-  "Z": stroke.Z,
-  "D": stroke.D,
-  "G": stroke.G,
-  "L": stroke.L,
-  "B": stroke.B,
-  "F": stroke.F,
+  "-Z": strokeBits.Z,
+  "-D": strokeBits.D,
+  "-S": strokeBits.RS,
+  "-T": strokeBits.RT,
+  "-G": strokeBits.G,
+  "-L": strokeBits.L,
+  "-B": strokeBits.B,
+  "-P": strokeBits.RP,
+  "-R": strokeBits.RR,
+  "-F": strokeBits.F,
+  "U": strokeBits.U,
+  "E": strokeBits.E,
+  "*": strokeBits.STAR,
+  "O": strokeBits.O,
+  "A": strokeBits.A,
+  "R": strokeBits.R,
+  "H": strokeBits.H,
+  "W": strokeBits.W,
+  "P": strokeBits.P,
+  "K": strokeBits.K,
+  "T": strokeBits.T,
+  "S": strokeBits.S,
+  "#": strokeBits.HASH,
+  "Z": strokeBits.Z,
+  "D": strokeBits.D,
+  "G": strokeBits.G,
+  "L": strokeBits.L,
+  "B": strokeBits.B,
+  "F": strokeBits.F,
 };
 
 const particles: Confetti.ConfettiParticle[] = [];
