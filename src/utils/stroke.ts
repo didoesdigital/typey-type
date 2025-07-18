@@ -28,13 +28,17 @@ const {
   RIGHT_KEYS,
 } = strokeBits;
 
+/** e.g. `2` or two in hex: `0b00000000000000000000010` for the left S key or `16384` for the right R key (`RR`) */
+type StrokeKeyNumber = number;
+
 class Stroke {
+  bits: StrokeKeyNumber;
+
   constructor(bits = 0) {
     this.bits = bits;
   }
 
-  /** @param key { number } e.g. `2` or two in hex: `0b00000000000000000000010` for the left S key or `16384` for the right R key (`RR`) */
-  set(key) {
+  set(key: StrokeKeyNumber) {
     return new Stroke(this.bits | key);
   }
 
