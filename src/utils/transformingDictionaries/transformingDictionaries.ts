@@ -79,7 +79,7 @@ function getListOfValidDictionariesAddedAndInConfig(
   dictNamesFromAddedConfig: DictName[],
   namesOfValidAddedDictionaries: DictName[]
 ) {
-  let listOfValidDictionariesAddedAndInConfig = [];
+  let listOfValidDictionariesAddedAndInConfig: DictName[] = [];
   const numberOfDictionariesInAddedConfig = dictNamesFromAddedConfig.length;
 
   for (let i = 0; i < numberOfDictionariesInAddedConfig; i++) {

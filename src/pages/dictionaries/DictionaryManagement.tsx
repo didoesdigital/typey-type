@@ -13,6 +13,7 @@ import Subheader from "../../components/Subheader";
 import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 import { useAtomValue } from "jotai";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
+import type { DictName } from "types";
 
 // type Props = {
 //   fetchAndSetupGlobalDict
@@ -34,6 +35,8 @@ const invalidEntries = {
   "WEUBG/*APB": "Wiccan",
 };
 
+type ValidDictionariesState = [string, string][];
+
 // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 const DictionaryManagement = (props) => {
   const globalUserSettings = useAtomValue(globalUserSettingsState);
@@ -53,16 +56,17 @@ const DictionaryManagement = (props) => {
     dictionariesTypeyTypeWillUseState,
     setDictionariesTypeyTypeWillUseState,
   ] = useState([]);
-  const [validDictionariesState, setValidDictionariesState] = useState([]);
+  const [validDictionariesState, setValidDictionariesState] =
+    useState<ValidDictionariesState>([]);
   const [invalidDictionariesState, setInvalidDictionariesState] = useState([]);
   const [
     namesOfValidImportedDictionariesState,
     setNamesOfValidImportedDictionariesState,
-  ] = useState([]);
+  ] = useState<DictName[]>([]);
   const [
     validDictionariesListedInConfigState,
     setValidDictionariesListedInConfigState,
-  ] = useState([]);
+  ] = useState<DictName[]>([]);
   const [validConfig, setValidConfig] = useState("");
   const [invalidConfig, setInvalidConfig] = useState([]);
 
@@ -98,13 +102,11 @@ const DictionaryManagement = (props) => {
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'files' implicitly has an 'any' type.
   function validateDictionaries(files) {
-    // @ts-expect-error TS(7005) FIXME: Variable 'validDictionaries' implicitly has an 'an... Remove this comment to see the full error message
     let validDictionaries = validDictionariesState.slice();
     let invalidDictionaries = [];
     let filesLength = files.length;
 
     if (filesLength === 0) {
-      // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
       setValidDictionariesState(validDictionaries);
       setInvalidDictionariesState([
         // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'never'.
@@ -131,7 +133,6 @@ const DictionaryManagement = (props) => {
               throw new Error("This is not a JSON file.");
             }
 
-            // @ts-expect-error TS(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
             if (validDictionariesState.map((d) => d[0]).includes(dictName)) {
               throw new Error(
                 "This dictionary name conflicts with an existing dictionary. You may have imported it already."
@@ -238,10 +239,8 @@ const DictionaryManagement = (props) => {
           // @ts-expect-error TS(2345) FIXME: Argument of type 'string[]' is not assignable to p... Remove this comment to see the full error message
           setDictionariesTypeyTypeWillUseState(dictionariesTypeyTypeWillUse);
           setNamesOfValidImportedDictionariesState(
-            // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
             namesOfValidImportedDictionaries
           );
-          // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
           setValidDictionariesState(validDictionaries);
           // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
           setInvalidDictionariesState(invalidDictionaries);
@@ -366,7 +365,6 @@ const DictionaryManagement = (props) => {
         setDictionariesTypeyTypeWillUseState(dictionariesTypeyTypeWillUse);
         setValidConfig(validConfig);
         setValidDictionariesListedInConfigState(
-          // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
           validDictionariesListedInConfig
         );
         // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
@@ -481,9 +479,7 @@ const DictionaryManagement = (props) => {
     setImportedDictionariesLoaded(false);
     setImportedDictionariesLoading(true);
 
-    // @ts-expect-error TS(7005) FIXME: Variable 'configOrder' implicitly has an 'any[]' t... Remove this comment to see the full error message
     let configOrder = validDictionariesListedInConfigState;
-    // @ts-expect-error TS(7005) FIXME: Variable 'sortedValidDictionaries' implicitly has ... Remove this comment to see the full error message
     let sortedValidDictionaries = validDictionariesState.slice(0);
     sortedValidDictionaries = sortedValidDictionaries.sort((a, b) => {
       // dictionaries that don't appear in config will be before dictionaries that do
@@ -518,7 +514,6 @@ const DictionaryManagement = (props) => {
       }
     }
 
-    // @ts-expect-error TS(7005) FIXME: Variable 'dictionariesTypeyTypeWillUse' implicitly... Remove this comment to see the full error message
     let dictionariesTypeyTypeWillUse = dictionariesTypeyTypeWillUseState;
 
     let labelString = dictionariesTypeyTypeWillUse || "No files for config";
@@ -658,7 +653,6 @@ const DictionaryManagement = (props) => {
     }
   );
 
-  // @ts-expect-error TS(7005) FIXME: Variable 'namesOfValidImportedDictionaries' implic... Remove this comment to see the full error message
   const namesOfValidImportedDictionaries =
     namesOfValidImportedDictionariesState;
   const validDictionariesListedInConfig =
