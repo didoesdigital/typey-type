@@ -8,20 +8,46 @@ import Notification from "../../components/Notification";
 import { getListOfValidDictionariesAddedAndInConfig } from "../../utils/transformingDictionaries/transformingDictionaries";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import { writePersonalPreferences } from "../../utils/typey-type";
-import misstrokesJSON from "../../json/misstrokes.json";
+import misstrokes from "../../json/misstrokes.json";
 import Subheader from "../../components/Subheader";
 import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 import { useAtomValue } from "jotai";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
-import type { DictName } from "types";
+import type {
+  DictionaryConfigurationList,
+  DictName,
+  FetchAndSetupGlobalDict,
+  LookupDictWithNamespacedDictsAndConfig,
+  Outline,
+  StenoDictionary,
+  Translation,
+} from "types";
+import { useToggleExperiment } from "pages/lessons/components/UserSettings/updateGlobalUserSetting";
 
-// type Props = {
-//   fetchAndSetupGlobalDict
-//   globalLookupDictionary
-//   globalUserSettings.experiments?.stenohintsonthefly
-//   toggleExperiment
-//   updatePersonalDictionaries
-// }
+type ValidDictionariesState = [DictName, StenoDictionary][];
+
+type ErrorMessage = string;
+type InvalidDictionariesState = [DictName, ErrorMessage][];
+
+type PersonalDictionariesInput = {
+  dictionariesNamesAndContents: ValidDictionariesState;
+};
+
+type Props = {
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  toggleExperiment: ReturnType<typeof useToggleExperiment>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
+  updatePersonalDictionaries: (input: PersonalDictionariesInput) => void;
+};
+
+type ProbableMisstrokeList = [Outline, Translation][];
+
+type MisstrokeInDictEntry = {
+  name: DictName;
+  probableMisstrokes: ProbableMisstrokeList;
+};
+
+const misstrokesJSON = misstrokes as StenoDictionary;
 
 // From an older version of Plover
 // https://github.com/openstenoproject/plover/commit/1bfc3b3eb04ad7bf8b74d8d236174255b5382925#diff-ec83a43e05da03d0e1df2dce12cad3ebb30e8fad3d0ddab6243951e15f6b102b
@@ -35,13 +61,9 @@ const invalidEntries = {
   "WEUBG/*APB": "Wiccan",
 };
 
-type ValidDictionariesState = [string, string][];
-
-// @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-const DictionaryManagement = (props) => {
+const DictionaryManagement = (props: Props) => {
   const globalUserSettings = useAtomValue(globalUserSettingsState);
-  const mainHeading = useRef(null);
-  // const mainHeading = useRef<HTMLHeadingElement>(null);
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   const { updateMessage } = useAnnouncerApi();
 
   const [misstrokesInDictionaries, setMisstrokesInDictionaries] =
@@ -55,10 +77,11 @@ const DictionaryManagement = (props) => {
   const [
     dictionariesTypeyTypeWillUseState,
     setDictionariesTypeyTypeWillUseState,
-  ] = useState([]);
+  ] = useState<DictionaryConfigurationList>([]);
   const [validDictionariesState, setValidDictionariesState] =
     useState<ValidDictionariesState>([]);
-  const [invalidDictionariesState, setInvalidDictionariesState] = useState([]);
+  const [invalidDictionariesState, setInvalidDictionariesState] =
+    useState<InvalidDictionariesState>([]);
   const [
     namesOfValidImportedDictionariesState,
     setNamesOfValidImportedDictionariesState,
@@ -72,17 +95,14 @@ const DictionaryManagement = (props) => {
 
   const globalDict = props.globalLookupDictionary;
   useEffect(() => {
-    // @ts-expect-error TS(2339) FIXME: Property 'focus' does not exist on type 'never'.
     mainHeading.current?.focus();
 
-    let config = [];
+    let config: DictionaryConfigurationList = [];
     if (globalDict && globalDict["configuration"]) {
       config = globalDict["configuration"]
-        // @ts-expect-error TS(7006) FIXME: Parameter 'dictName' implicitly has an 'any' type.
         .filter((dictName) =>
           dictName.startsWith(SOURCE_NAMESPACES.get("user") + ":")
         )
-        // @ts-expect-error TS(7006) FIXME: Parameter 'dictName' implicitly has an 'any' type.
         .map((dictName) => dictName.replace(/^.+:/, ""));
     }
     setDictionariesTypeyTypeWillUseState(config);
@@ -103,18 +123,16 @@ const DictionaryManagement = (props) => {
   // @ts-expect-error TS(7006) FIXME: Parameter 'files' implicitly has an 'any' type.
   function validateDictionaries(files) {
     let validDictionaries = validDictionariesState.slice();
-    let invalidDictionaries = [];
+    let invalidDictionaries: [DictName, string][] = [];
     let filesLength = files.length;
 
     if (filesLength === 0) {
       setValidDictionariesState(validDictionaries);
       setInvalidDictionariesState([
-        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'never'.
         ["No dictionary", "Choose a dictionary file to import."],
       ]);
     } else {
-      // @ts-expect-error TS(7034) FIXME: Variable 'misstrokesInDictionaries' implicitly has... Remove this comment to see the full error message
-      let misstrokesInDictionaries = [];
+      let misstrokesInDictionaries: MisstrokeInDictEntry[] = [];
       for (let i = 0; i < filesLength; ++i) {
         let dictionary = files[i];
         let dictName = dictionary.name;
@@ -122,8 +140,7 @@ const DictionaryManagement = (props) => {
         const reader = new FileReader();
 
         reader.onload = (event) => {
-          // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-          let text = event.target.result;
+          let text = event?.target?.result ?? "";
 
           try {
             if (dictionary.size > 25000000) {
@@ -159,11 +176,13 @@ const DictionaryManagement = (props) => {
             }
 
             // @ts-expect-error TS(2345) FIXME: Argument of type 'string | ArrayBuffer | null' is ... Remove this comment to see the full error message
-            let parsedDictionary = JSON.parse(text);
+            let maybeParsedDictionary = JSON.parse(text);
 
-            if (parsedDictionary.constructor !== {}.constructor) {
+            if (maybeParsedDictionary.constructor !== {}.constructor) {
               throw new Error("This JSON does not contain an object.");
             }
+
+            let parsedDictionary = maybeParsedDictionary as StenoDictionary;
 
             let parsedDictionaryEntries = Object.entries(parsedDictionary);
 
@@ -171,7 +190,7 @@ const DictionaryManagement = (props) => {
               throw new Error("This dictionary is empty.");
             }
 
-            let probableMisstrokes = [];
+            let probableMisstrokes: ProbableMisstrokeList = [];
             let parsedDictionaryEntriesLength = parsedDictionaryEntries.length;
 
             for (let i = 0; i < parsedDictionaryEntriesLength; ++i) {
@@ -191,9 +210,7 @@ const DictionaryManagement = (props) => {
               }
 
               if (
-                // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 misstrokesJSON[outline] &&
-                // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 misstrokesJSON[outline] === translation
               ) {
                 probableMisstrokes.push([outline, translation]);
@@ -216,7 +233,7 @@ const DictionaryManagement = (props) => {
             if (probableMisstrokes.length > 0) {
               misstrokesInDictionaries.push({
                 name: dictName,
-                probableMisstrokes: probableMisstrokes,
+                probableMisstrokes,
               });
             }
           } catch (error) {
@@ -236,13 +253,11 @@ const DictionaryManagement = (props) => {
               namesOfValidImportedDictionaries
             );
 
-          // @ts-expect-error TS(2345) FIXME: Argument of type 'string[]' is not assignable to p... Remove this comment to see the full error message
           setDictionariesTypeyTypeWillUseState(dictionariesTypeyTypeWillUse);
           setNamesOfValidImportedDictionariesState(
             namesOfValidImportedDictionaries
           );
           setValidDictionariesState(validDictionaries);
-          // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
           setInvalidDictionariesState(invalidDictionaries);
         };
 
@@ -361,7 +376,6 @@ const DictionaryManagement = (props) => {
             namesOfValidImportedDictionariesState
           );
 
-        // @ts-expect-error TS(2345) FIXME: Argument of type 'string[]' is not assignable to p... Remove this comment to see the full error message
         setDictionariesTypeyTypeWillUseState(dictionariesTypeyTypeWillUse);
         setValidConfig(validConfig);
         setValidDictionariesListedInConfigState(
@@ -533,7 +547,6 @@ const DictionaryManagement = (props) => {
         setImportedDictionariesLoaded(true);
         setImportedDictionariesLoading(false);
       })
-      // @ts-expect-error TS(7006) FIXME: Parameter 'error' implicitly has an 'any' type.
       .catch((error) => {
         console.error(error);
         showDictionaryErrorNotification("FetchAndSetupGlobalDictFailed");
