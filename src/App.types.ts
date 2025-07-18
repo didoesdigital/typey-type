@@ -1,12 +1,12 @@
 import type { AppStateForDescendants } from "AppRoutes";
-import type { Attempt, PresentedMaterial } from "types";
+import type { Attempt, RevisionMaterial } from "types";
 
 export type AppState = AppStateForDescendants & {
   currentPhraseAttempts: Attempt[];
   isGlobalLookupDictionaryLoaded: boolean;
   numberOfMatchedChars: number;
   totalNumberOfMatchedChars: number;
-  revisionMaterial: PresentedMaterial[];
+  revisionMaterial: RevisionMaterial;
 };
 
 export type BufferEntry = {

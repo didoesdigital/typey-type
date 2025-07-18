@@ -6,7 +6,7 @@ import FinishedNextLessonButton from "./FinishedNextLessonButton";
 type FinishedActionButtonsProps = {
   numericAccuracy: number;
   restartPath: string;
-  restartLesson: () => void;
+  restartLesson: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   suggestedNextUrl: string;
 };
 

@@ -11,7 +11,7 @@ import Flashcards from "./flashcards/Flashcards";
 import { loadPersonalPreferences } from "utils/storage";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
-import { LessonProps } from "./types";
+import type { LessonProps } from "./types";
 import type { Lesson as LessonType } from "../../types";
 import Zipper from "../../utils/zipper";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";

@@ -47,6 +47,7 @@ import type {
   LessonPathWithBasenameAndFilename,
   LookupDictWithNamespacedDicts,
   LookupDictWithNamespacedDictsAndConfig,
+  RevisionMaterial,
   RevisionMode,
   UserSettings,
 } from 'types';
@@ -470,7 +471,6 @@ class App extends Component<Props, AppState> {
 
     // Copy source or revision material to presented material:
     if (revisionMode) {
-      // @ts-expect-error TS(2322) FIXME: Type '{ [x: number]: MaterialItem; length: number;... Remove this comment to see the full error message
       newLesson.presentedMaterial = revisionMaterial.map(line => ({...line}));
     }
     else {
@@ -660,8 +660,7 @@ class App extends Component<Props, AppState> {
     return event;
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  reviseLesson(event, newRevisionMaterial) {
+  reviseLesson(event: React.MouseEvent<HTMLAnchorElement>, newRevisionMaterial: RevisionMaterial) {
     event.preventDefault();
     this.stopLesson();
     this.setupLesson({
@@ -671,8 +670,7 @@ class App extends Component<Props, AppState> {
     });
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  restartLesson(event) {
+  restartLesson(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     this.stopLesson();
     this.setupLesson({

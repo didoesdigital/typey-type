@@ -8,6 +8,8 @@ import type {
   Outline,
   MaterialText,
   ActualTypedText,
+  RevisionMaterial,
+  LessonIndexEntry,
 } from "../../types";
 import type { MainLessonViewProps } from "pages/lessons/MainLessonView";
 
@@ -95,11 +97,14 @@ export type FinishedProps = Pick<
 > & {
   chooseStudy: LessonCanvasFooterProps["chooseStudy"];
   toggleHideOtherSettings: () => void;
-  metadata: any;
+  metadata: LessonIndexEntry;
   path: any;
-  restartLesson: any;
-  reviseLesson: any;
-  revisionMode: any;
+  restartLesson: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  reviseLesson: (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    newRevisionMaterial: RevisionMaterial
+  ) => void;
+  revisionMode: boolean;
   updatePreset: (studyType: Study) => void;
   updateRevisionMaterial: (
     event: React.ChangeEvent<HTMLInputElement>
