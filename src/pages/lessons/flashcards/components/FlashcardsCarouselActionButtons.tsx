@@ -4,7 +4,7 @@ type Props = {
   currentSlideContentType: any;
   ButtonNext: any;
   numberOfFlashcards: any;
-  nextSlide: () => void;
+  nextSlide: (event: any) => void;
   currentSlideContent: any;
   setupFlashCards: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };

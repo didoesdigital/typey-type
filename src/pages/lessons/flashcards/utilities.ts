@@ -1,3 +1,7 @@
+import {
+  type CurrentSlideContent,
+  type CurrentSlideType,
+} from "pages/lessons/flashcards/Flashcards";
 import * as Utils from "../../../utils/utils";
 
 type MaterialItem = { phrase: string; stroke: string };
@@ -99,7 +103,10 @@ const getCurrentSlideContentAndType = (
   flashcards: any,
   flashcardsCarouselCurrentSlide: any
 ) => {
-  let currentSlideContent = ["", ""];
+  let currentSlideContent: [CurrentSlideContent, CurrentSlideType] = [
+    "",
+    "phrase",
+  ];
   let currentSlide = flashcardsCarouselCurrentSlide;
   let flashcardsIndex = 0;
   // assumes stroke slides are always odd

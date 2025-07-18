@@ -3,7 +3,7 @@ import { atom, useAtom, useAtomValue } from "jotai";
 import { getFlashcardsNextLesson, getFlashcardsRecommendedCourses } from "../utils/flashcardsRecommendations";
 import { globalUserSettingsState } from "./globalUserSettingsState";
 
-type FlashcardsProgressState = {
+export type FlashcardsProgressState = {
   [lessonpath: string]: {
     lastSeen: number;
   };

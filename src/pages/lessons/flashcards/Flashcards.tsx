@@ -25,15 +25,88 @@ import { Link } from 'react-router-dom';
 import Subheader from "../../../components/Subheader";
 import { flashcardsMetWordsState } from "../../../states/flashcardsMetWordsState";
 import {
+  type FlashcardsProgressState,
   flashcardsProgressState,
-  fullscreenState} from "../../../states/flashcardsProgressState";
+  fullscreenState,
+  useUpdateFlashcardsProgress
+} from "../../../states/flashcardsProgressState";
+
+import type {
+  FetchAndSetupGlobalDict,
+  ImportedPersonalDictionaries,
+  LookupDictWithNamespacedDictsAndConfig,
+  MaterialItem,
+  MaterialText,
+  Outline,
+  PresentedMaterial,
+  SourceMaterial,
+  UserSettings
+} from 'types';
 
 const shortestDimension = 3;
 const longestDimension = 4;
 
-export class Flashcards extends Component {
-  // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+type FlashcardsMetWords = {
+  [word: string]: {
+    phrase: MaterialText;
+    stroke: Outline;
+    rung: number;
+  }
+}
+
+export type CurrentSlideContent = MaterialText | Outline | "Finished!";
+export type CurrentSlideType = "phrase" | "stroke" | "finished";
+
+export type FlashcardsProps = {
+  /** e.g. "/flashcards" or "/lessons/fundamentals/introduction/flashcards" */
+  lessonpath: string;
+  /** e.g. "/lessons/collections/human-resources/hris-vocabulary/flashcards" */
+  locationpathname: string;
+  flashcardsProgress: FlashcardsProgressState;
+  updateFlashcardsProgress: ReturnType<typeof useUpdateFlashcardsProgress>;
+  setFlashcardsMetWords: (word: string, show: string, currentSlideContent: CurrentSlideContent) => void;
+  flashcardsMetWords: FlashcardsMetWords;
+  fullscreen: boolean;
+  changeFullscreen: React.ChangeEventHandler<HTMLInputElement>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionaryLoaded: boolean;
+  personalDictionaries: ImportedPersonalDictionaries;
+  userSettings: UserSettings;
+}
+
+type State = {
+  naturalSlideWidth: any;
+  naturalSlideHeight: any;
+  currentSlide: any;
+  showModal: boolean;
+  slideNodes: any[];
+  flashcards: MaterialItem[]
+  sourceMaterial: SourceMaterial;
+  presentedMaterial: PresentedMaterial;
+  currentSlideContent: CurrentSlideContent;
+  currentSlideContentType: CurrentSlideType;
+  title: string;
+  subtitle: string;
+}
+
+type SetupFlashcards = {
+  target: {
+    dataset: {
+      unfocus: boolean;
+      shuffle: any;
+      restart: any
+    }
+  };
+  preventDefault: () => void;
+}
+
+export class Flashcards extends Component<FlashcardsProps, State> {
+  mainHeading: any;
+  flashcardsCarousel: any;
+  surveyLink: any;
+
+  constructor(props: FlashcardsProps) {
     super(props);
     this.state = {
       showModal: false,
@@ -146,8 +219,7 @@ currentSlide: currentSlide
     });
   };
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  setupFlashCards(event) {
+  setupFlashCards(event?: SetupFlashcards) {
     let shuffle = false;
     let restart = false;
     let unfocus = false;
@@ -402,7 +474,12 @@ currentSlide: currentSlide
           <Subheader fullscreen={fullscreen}>
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="heading-link table-cell mr2" role="button">
+                <a href="./flashcards"
+                  // @ts-expect-error Property 'dataset' is missing in type 'EventTarget' but required in type
+                  onClick={this.setupFlashCards.bind(this)}
+                  className="heading-link table-cell mr2"
+                  role="button"
+                  >
                   {/* @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'. */}
                   <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="flashcards">{flashcardsHeading}</h2>
                 </a>
@@ -411,7 +488,14 @@ currentSlide: currentSlide
             <div className="flex mxn2">
               <Link to={lessonpath} className="link-button link-button-ghost table-cell mr1">Back to lesson</Link>
               {/* Shuffle button */}
-              <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} data-shuffle="true" role="button">Shuffle</a>
+              <a href="./flashcards"
+                // @ts-expect-error Property 'dataset' is missing in type 'EventTarget' but required in type
+                onClick={this.setupFlashCards.bind(this)}
+                className="button button--secondary table-cell mr2"
+                style={{lineHeight: 2}}
+                data-shuffle="true"
+                role="button"
+                >Shuffle</a>
             </div>
           </Subheader>
 
@@ -437,7 +521,7 @@ currentSlide: currentSlide
                     className={"carousel__slider" + fullscreen}
                     // @ts-expect-error TS(2322) FIXME: Type '{ children: Element; className: string; flas... Remove this comment to see the full error message
                     flashcards={this.state.flashcards}
-                    key={this.state.flashcards.length + this.props.fullscreen}
+                    key={`${this.state.flashcards.length}${this.props.fullscreen}`}
                     ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
                     callback={this.onChangeCurrentSlide.bind(this)}
                     aria-labelledby="flashcards-listbox-label"
@@ -464,6 +548,7 @@ currentSlide: currentSlide
                     currentSlideContentType={this.state.currentSlideContentType}
                     nextSlide={this.nextSlide.bind(this)}
                     numberOfFlashcards={this.state.flashcards.length}
+                    // @ts-expect-error Property 'dataset' is missing in type 'EventTarget' but required in type
                     setupFlashCards={this.setupFlashCards.bind(this)}
                   />
 
