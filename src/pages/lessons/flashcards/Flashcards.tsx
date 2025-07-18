@@ -524,9 +524,19 @@ export class Flashcards extends Component<FlashcardsProps, State> {
       currentSlideNumber
     )[0];
     
+    // If the surveyLink ref is not null, then set the href attribute of the ref element to the correct URL and return the href:
     if (this.surveyLink) {
-      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
+      const href =
+        googleFormURL +
+        encodeURIComponent(prefillLesson) +
+        param +
+        encodeURIComponent(prefillFlashcard);
+      this.surveyLink.href = href;
+      return href;
     }
+
+    // If the surveyLink ref is null, return the default href:
+    return googleFormURL;
   }
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
@@ -565,9 +575,16 @@ export class Flashcards extends Component<FlashcardsProps, State> {
                   onClick={this.setupFlashCards.bind(this)}
                   className="heading-link table-cell mr2"
                   role="button"
+                >
+                  <h2
+                    ref={(heading) => {
+                      this.mainHeading = heading;
+                    }}
+                    tabIndex={-1}
+                    id="flashcards"
                   >
-                  {/* @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'. */}
-                  <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="flashcards">{flashcardsHeading}</h2>
+                    {flashcardsHeading}
+                  </h2>
                 </a>
               </header>
             </div>
@@ -643,15 +660,39 @@ export class Flashcards extends Component<FlashcardsProps, State> {
                   </Slider>
 
                   {/* Page left, previous flashcard */}
-                  <div className={"pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" + fullscreen}>
-                    {/* @ts-expect-error TS(2322) FIXME: Type '{ children: Element; className: string; type... Remove this comment to see the full error message */}
-                    <ButtonBack className="link-button" type="button" aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
+                  <div
+                    className={
+                      "pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" +
+                      fullscreen
+                    }
+                  >
+                    <ButtonBack
+                      className="link-button"
+                      // @ts-expect-error
+                      type="button"
+                      aria-label="Previous card"
+                    >
+                      <span className="pagination-nav-button--prev__icon">
+                        ◂
+                      </span>
+                    </ButtonBack>
                   </div>
 
                   {/* Page right, next flashcard */}
-                  <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
-                    {/* @ts-expect-error TS(2322) FIXME: Type '{ children: string; className: string; type:... Remove this comment to see the full error message */}
-                    <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
+                  <div
+                    className={
+                      "pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" +
+                      fullscreen
+                    }
+                  >
+                    <ButtonNext
+                      className="link-button"
+                      // @ts-expect-error
+                      type="button"
+                      aria-label="Next card"
+                    >
+                      ▸
+                    </ButtonNext>
                   </div>
 
                   <FlashcardsCarouselActionButtons
@@ -708,9 +749,27 @@ export class Flashcards extends Component<FlashcardsProps, State> {
                 />
               </div>
 
-              {/* @ts-expect-error TS(2322) FIXME: Type 'void' is not assignable to type 'string | un... Remove this comment to see the full error message */}
-              <p className={"text-small text-center mt1 pt6 hide-in-fullscreen" + fullscreen}><a href={this.prefillSurveyLink()} className="mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a>.</p>
-
+              <p
+                className={
+                  "text-small text-center mt1 pt6 hide-in-fullscreen" +
+                  fullscreen
+                }
+              >
+                <a
+                  href={this.prefillSurveyLink()}
+                  className="mt0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ref={(surveyLink) => {
+                    this.surveyLink = surveyLink;
+                  }}
+                  onClick={this.prefillSurveyLink.bind(this)}
+                  id="ga--flashcards--give-feedback"
+                >
+                  Give feedback on this flashcard (form opens in a new tab)
+                </a>
+                .
+              </p>
             </div>
           </div>
         </main>
