@@ -1,34 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import GoogleAnalytics from "react-ga4";
-import ReactModal from 'react-modal';
+import ReactModal from "react-modal";
 import { withAppMethods } from "../../../states/legacy/AppMethodsContext";
 import { userSettingsState } from "../../../states/userSettingsState";
 import { withAtomsCompat } from "../../../states/atomUtils";
-import { FlashcardsWrapper } from 'pages/lessons/flashcards/FlashcardsWrapper';
-import FlashcardsCarouselActionButtons from './components/FlashcardsCarouselActionButtons';
-import FlashcardsModal from './components/FlashcardsModal';
-import StrokesForWords from '../../../components/StrokesForWords';
+import { FlashcardsWrapper } from "pages/lessons/flashcards/FlashcardsWrapper";
+import FlashcardsCarouselActionButtons from "./components/FlashcardsCarouselActionButtons";
+import FlashcardsModal from "./components/FlashcardsModal";
+import StrokesForWords from "../../../components/StrokesForWords";
 import {
   chooseFlashcardsToShow,
   getCurrentSlideContentAndType,
   getFlashcardsRungThreshold,
   getStrokeForCurrentSlideContent,
   getWordForCurrentStrokeSlideIndex,
-} from './utilities';
-import * as Utils from '../../../utils/utils';
-import { parseLesson } from '../../../utils/parseLesson';
-import fetchLesson from '../../../utils/fetchLesson';
-import { CarouselProvider, Slider, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import SlideNodes from './components/SlideNodes';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-import { Link } from 'react-router-dom';
+} from "./utilities";
+import * as Utils from "../../../utils/utils";
+import { parseLesson } from "../../../utils/parseLesson";
+import fetchLesson from "../../../utils/fetchLesson";
+import {
+  CarouselProvider,
+  Slider,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import SlideNodes from "./components/SlideNodes";
+import "pure-react-carousel/dist/react-carousel.es.css";
+import { Link } from "react-router-dom";
 import Subheader from "../../../components/Subheader";
 import { flashcardsMetWordsState } from "../../../states/flashcardsMetWordsState";
 import {
   type FlashcardsProgressState,
   flashcardsProgressState,
   fullscreenState,
-  useUpdateFlashcardsProgress
+  useUpdateFlashcardsProgress,
 } from "../../../states/flashcardsProgressState";
 
 import type {
@@ -40,8 +45,8 @@ import type {
   Outline,
   PresentedMaterial,
   SourceMaterial,
-  UserSettings
-} from 'types';
+  UserSettings,
+} from "types";
 
 const shortestDimension = 3;
 const longestDimension = 4;
@@ -51,8 +56,8 @@ type FlashcardsMetWords = {
     phrase: MaterialText;
     stroke: Outline;
     rung: number;
-  }
-}
+  };
+};
 
 export type CurrentSlideContent = MaterialText | Outline | "Finished!";
 export type CurrentSlideType = "phrase" | "stroke" | "finished";
@@ -64,7 +69,11 @@ export type FlashcardsProps = {
   locationpathname: string;
   flashcardsProgress: FlashcardsProgressState;
   updateFlashcardsProgress: ReturnType<typeof useUpdateFlashcardsProgress>;
-  setFlashcardsMetWords: (word: string, show: string, currentSlideContent: CurrentSlideContent) => void;
+  setFlashcardsMetWords: (
+    word: string,
+    show: string,
+    currentSlideContent: CurrentSlideContent
+  ) => void;
   flashcardsMetWords: FlashcardsMetWords;
   fullscreen: boolean;
   changeFullscreen: React.ChangeEventHandler<HTMLInputElement>;
@@ -73,7 +82,7 @@ export type FlashcardsProps = {
   globalLookupDictionaryLoaded: boolean;
   personalDictionaries: ImportedPersonalDictionaries;
   userSettings: UserSettings;
-}
+};
 
 type State = {
   naturalSlideWidth: any;
@@ -81,25 +90,25 @@ type State = {
   currentSlide: any;
   showModal: boolean;
   slideNodes: any[];
-  flashcards: MaterialItem[]
+  flashcards: MaterialItem[];
   sourceMaterial: SourceMaterial;
   presentedMaterial: PresentedMaterial;
   currentSlideContent: CurrentSlideContent;
   currentSlideContentType: CurrentSlideType;
   title: string;
   subtitle: string;
-}
+};
 
 type SetupFlashcards = {
   target: {
     dataset: {
       unfocus: boolean;
       shuffle: any;
-      restart: any
-    }
+      restart: any;
+    };
   };
   preventDefault: () => void;
-}
+};
 
 export class Flashcards extends Component<FlashcardsProps, State> {
   mainHeading: any;
@@ -113,20 +122,20 @@ export class Flashcards extends Component<FlashcardsProps, State> {
       slideNodes: [],
       flashcards: [
         {
-          phrase: 'Loading flashcards…',
-          stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+          phrase: "Loading flashcards…",
+          stroke: "HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ",
         },
       ],
       sourceMaterial: [
         {
-          phrase: 'Loading flashcards…',
-          stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+          phrase: "Loading flashcards…",
+          stroke: "HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ",
         },
       ],
       presentedMaterial: [
         {
-          phrase: 'Loading flashcards…',
-          stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+          phrase: "Loading flashcards…",
+          stroke: "HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ",
         },
       ],
       naturalSlideWidth: shortestDimension,
@@ -134,32 +143,35 @@ export class Flashcards extends Component<FlashcardsProps, State> {
       currentSlide: 0,
       currentSlideContent: "",
       currentSlideContentType: "phrase", // "phrase" || "stroke" || "finished"
-      title: 'Steno',
-      subtitle: '',
-    }
+      title: "Steno",
+      subtitle: "",
+    };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
-    ReactModal.setAppElement('#js-app');
+    ReactModal.setAppElement("#js-app");
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
     this.fetchAndSetupFlashCards();
   }
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState) {
-    if ((prevProps.lessonpath !== this.props.lessonpath) && (this.props.locationpathname.endsWith('flashcards'))) {
+    if (
+      prevProps.lessonpath !== this.props.lessonpath &&
+      this.props.locationpathname.endsWith("flashcards")
+    ) {
       this.fetchAndSetupFlashCards();
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener("resize", this.handleResize);
   }
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
@@ -173,7 +185,7 @@ export class Flashcards extends Component<FlashcardsProps, State> {
         this.setState({
           naturalSlideWidth: longestDimension,
           naturalSlideHeight: shortestDimension,
-currentSlide: currentSlide
+          currentSlide: currentSlide,
         });
       }
     } else if (window.matchMedia("(orientation: portrait)").matches) {
@@ -185,39 +197,48 @@ currentSlide: currentSlide
         this.setState({
           naturalSlideWidth: shortestDimension,
           naturalSlideHeight: longestDimension,
-currentSlide: currentSlide
+          currentSlide: currentSlide,
         });
       }
     }
-  }
+  };
 
   fetchAndSetupFlashCards() {
-    let path = process.env.PUBLIC_URL + '/lessons/drills/top-1000-words/lesson.txt';
+    let path =
+      process.env.PUBLIC_URL + "/lessons/drills/top-1000-words/lesson.txt";
     if (this.props.lessonpath) {
       path = this.props.lessonpath;
-      if (path === 'flashcards') { path = process.env.PUBLIC_URL + '/lessons/drills/top-1000-words/lesson.txt'; }
+      if (path === "flashcards") {
+        path =
+          process.env.PUBLIC_URL + "/lessons/drills/top-1000-words/lesson.txt";
+      }
     }
 
-    fetchLesson(path).then((lessonText) => {
-      if (Utils.isLessonTextValid(lessonText)) {
-        let lesson = parseLesson(lessonText, path);
-        this.setState({
-          presentedMaterial: lesson.presentedMaterial,
-          sourceMaterial: lesson.sourceMaterial,
-          title: lesson.title,
-          subtitle: lesson.subtitle
-        }, () => {
-          this.setupFlashCards();
-        });
-      } else {
-        this.setState({title: "Flashcards not found"}, () => {
-          this.setupFlashCards();
-        });
-      }
-    }).catch((e) => {
-      console.log('Unable to load lesson for flashcards', e)
-    });
-  };
+    fetchLesson(path)
+      .then((lessonText) => {
+        if (Utils.isLessonTextValid(lessonText)) {
+          let lesson = parseLesson(lessonText, path);
+          this.setState(
+            {
+              presentedMaterial: lesson.presentedMaterial,
+              sourceMaterial: lesson.sourceMaterial,
+              title: lesson.title,
+              subtitle: lesson.subtitle,
+            },
+            () => {
+              this.setupFlashCards();
+            }
+          );
+        } else {
+          this.setState({ title: "Flashcards not found" }, () => {
+            this.setupFlashCards();
+          });
+        }
+      })
+      .catch((e) => {
+        console.log("Unable to load lesson for flashcards", e);
+      });
+  }
 
   setupFlashCards(event?: SetupFlashcards) {
     let shuffle = false;
@@ -225,10 +246,14 @@ currentSlide: currentSlide
     let unfocus = false;
     if (event) {
       unfocus = event.target.dataset.unfocus;
-      if (event.target.dataset.shuffle) { shuffle = true; }
-      if (event.target.dataset.restart) { restart = true; }
-      event.preventDefault()
-    };
+      if (event.target.dataset.shuffle) {
+        shuffle = true;
+      }
+      if (event.target.dataset.restart) {
+        restart = true;
+      }
+      event.preventDefault();
+    }
 
     let flashcards = [];
     let numberOfFlashcardsToShow = 100;
@@ -242,13 +267,26 @@ currentSlide: currentSlide
       newlesson = true;
     }
 
-    let timeAgoInMinutes = (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
+    let timeAgoInMinutes =
+      (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
     const baseUnitInMinutes = 30;
     const multiplier = 2;
-    let threshold = getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier);
-    if (newlesson === true) { threshold = 1; }
+    let threshold = getFlashcardsRungThreshold(
+      timeAgoInMinutes,
+      baseUnitInMinutes,
+      multiplier
+    );
+    if (newlesson === true) {
+      threshold = 1;
+    }
 
-    flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold, shuffle);
+    flashcards = chooseFlashcardsToShow(
+      this.state.sourceMaterial.slice(0),
+      this.props.flashcardsMetWords,
+      numberOfFlashcardsToShow,
+      threshold,
+      shuffle
+    );
 
     let currentSlide = 0;
     if (this.flashcardsCarousel) {
@@ -268,62 +306,64 @@ currentSlide: currentSlide
         this.setState({
           naturalSlideWidth: longestDimension,
           naturalSlideHeight: shortestDimension,
-currentSlide: currentSlide
+          currentSlide: currentSlide,
         });
       }
     }
 
     if (restart) {
       GoogleAnalytics.event({
-        category: 'Flashcards',
-        action: 'Restart',
-        label: 'True'
+        category: "Flashcards",
+        action: "Restart",
+        label: "True",
       });
     }
 
     if (shuffle) {
       GoogleAnalytics.event({
-        category: 'Flashcards',
-        action: 'Shuffle',
-        label: 'True'
+        category: "Flashcards",
+        action: "Shuffle",
+        label: "True",
       });
     }
 
-    this.setState({
-      flashcards: flashcards,
-      currentSlide: currentSlide
-    }, () => {
-      // A hack for returning focus to a sensible carousel action button
-      // This is used in 2 places
-      // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
-      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
-      window.setTimeout(function ()
+    this.setState(
       {
-        if (unfocus) {
-          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-          if (this.hardButton) {
-            let element = document.getElementById('hardButton');
-            if (element) {
-              element.focus();
+        flashcards: flashcards,
+        currentSlide: currentSlide,
+      },
+      () => {
+        // A hack for returning focus to a sensible carousel action button
+        // This is used in 2 places
+        // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
+        // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
+        window.setTimeout(function () {
+          if (unfocus) {
+            // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+            if (this.hardButton) {
+              let element = document.getElementById("hardButton");
+              if (element) {
+                element.focus();
+              }
+            }
+            // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+            else if (this.showButton) {
+              let element = document.getElementById("showButton");
+              if (element) {
+                element.focus();
+              }
+            }
+            // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+            else if (this.shuffleButton) {
+              let element = document.getElementById("shuffleButton");
+              if (element) {
+                element.focus();
+              }
             }
           }
-          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-          else if (this.showButton) {
-            let element = document.getElementById('showButton');
-            if (element) {
-              element.focus();
-            }
-          }
-          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-          else if (this.shuffleButton) {
-            let element = document.getElementById('shuffleButton');
-            if (element) {
-              element.focus();
-            }
-          }
-        }
-      }, 0);
-    });
+        }, 0);
+      }
+    );
   }
 
   // this happens automagically whenever a slide changes, including on Easy/Hard,
@@ -333,33 +373,46 @@ currentSlide: currentSlide
     let lessonpath = this.props.locationpathname;
     this.props.updateFlashcardsProgress(lessonpath);
 
-    let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
+    let [currentSlideContent, currentSlideContentType] =
+      getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
-      let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, slideIndex);
+      let word = getWordForCurrentStrokeSlideIndex(
+        this.state.flashcards,
+        slideIndex
+      );
       this.props.setFlashcardsMetWords(word, "show", currentSlideContent);
-    }
-    else if (currentSlideContentType === "phrase") {
-      let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
+    } else if (currentSlideContentType === "phrase") {
+      let stroke = getStrokeForCurrentSlideContent(
+        currentSlideContent,
+        this.state.sourceMaterial
+      );
       this.props.setFlashcardsMetWords(currentSlideContent, "show", stroke);
     }
 
     let labelString = currentSlideContent;
-    if (!labelString) { labelString = "BAD_INPUT"; } else { labelString = labelString.toString(); }
+    if (!labelString) {
+      labelString = "BAD_INPUT";
+    } else {
+      labelString = labelString.toString();
+    }
 
     GoogleAnalytics.event({
-      category: 'Flashcards',
-      action: 'Change slide',
-      label: labelString
+      category: "Flashcards",
+      action: "Change slide",
+      label: labelString,
     });
 
-      // this.nextSlide();
-    this.setState({
-      currentSlide: slideIndex,
-      currentSlideContent: currentSlideContent,
-      currentSlideContentType: currentSlideContentType,
-    }, () => {
-    // console.log(getCurrentSlideContentAndType(this.state.flashcards, slideIndex));
-    });
+    // this.nextSlide();
+    this.setState(
+      {
+        currentSlide: slideIndex,
+        currentSlideContent: currentSlideContent,
+        currentSlideContentType: currentSlideContentType,
+      },
+      () => {
+        // console.log(getCurrentSlideContentAndType(this.state.flashcards, slideIndex));
+      }
+    );
   }
 
   // this happens specifically when you click Easy/Hard and that feedback needs to be recorded
@@ -372,101 +425,133 @@ currentSlide: currentSlide
       unfocus = event.target.dataset.unfocus;
     }
     let slideIndex = 0;
-    if (this.flashcardsCarousel) { slideIndex = this.flashcardsCarousel.state.currentSlide; }
-    let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
-    if (currentSlideContentType === "stroke") {
-      let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, this.state.currentSlide);
-      this.props.setFlashcardsMetWords(word, feedback, currentSlideContent);
+    if (this.flashcardsCarousel) {
+      slideIndex = this.flashcardsCarousel.state.currentSlide;
     }
-    else if (currentSlideContentType === "phrase") {
-      let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
+    let [currentSlideContent, currentSlideContentType] =
+      getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
+    if (currentSlideContentType === "stroke") {
+      let word = getWordForCurrentStrokeSlideIndex(
+        this.state.flashcards,
+        this.state.currentSlide
+      );
+      this.props.setFlashcardsMetWords(word, feedback, currentSlideContent);
+    } else if (currentSlideContentType === "phrase") {
+      let stroke = getStrokeForCurrentSlideContent(
+        currentSlideContent,
+        this.state.sourceMaterial
+      );
       this.props.setFlashcardsMetWords(currentSlideContent, "show", stroke);
     }
 
     let actionString = feedback;
     let labelString = currentSlideContent;
 
-    if (!actionString) { actionString = "BAD_INPUT"; } else { actionString = actionString.toString(); }
-    if (!labelString) { labelString = "BAD_INPUT"; } else { labelString = labelString.toString(); }
+    if (!actionString) {
+      actionString = "BAD_INPUT";
+    } else {
+      actionString = actionString.toString();
+    }
+    if (!labelString) {
+      labelString = "BAD_INPUT";
+    } else {
+      labelString = labelString.toString();
+    }
 
     GoogleAnalytics.event({
-      category: 'Flashcards',
+      category: "Flashcards",
       action: actionString,
-      label: labelString
+      label: labelString,
     });
 
-    this.setState({
-      currentSlideContent: currentSlideContent,
-      currentSlideContentType: currentSlideContentType
-    }, () => {
-      // A hack for returning focus to a sensible carousel action button
-      // This is used in 2 places
-      // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
-      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
-      window.setTimeout(function ()
+    this.setState(
       {
-        if (unfocus) {
-          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-          if (this.hardButton) {
-            let element = document.getElementById('hardButton');
-            if (element) {
-              element.focus();
+        currentSlideContent: currentSlideContent,
+        currentSlideContentType: currentSlideContentType,
+      },
+      () => {
+        // A hack for returning focus to a sensible carousel action button
+        // This is used in 2 places
+        // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
+        // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
+        window.setTimeout(function () {
+          if (unfocus) {
+            // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+            if (this.hardButton) {
+              let element = document.getElementById("hardButton");
+              if (element) {
+                element.focus();
+              }
+            }
+            // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+            else if (this.showButton) {
+              let element = document.getElementById("showButton");
+              if (element) {
+                element.focus();
+              }
+            }
+            // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+            else if (this.shuffleButton) {
+              let element = document.getElementById("shuffleButton");
+              if (element) {
+                element.focus();
+              }
             }
           }
-          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-          else if (this.showButton) {
-            let element = document.getElementById('showButton');
-            if (element) {
-              element.focus();
-            }
-          }
-          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-          else if (this.shuffleButton) {
-            let element = document.getElementById('shuffleButton');
-            if (element) {
-              element.focus();
-            }
-          }
-        }
-      }, 0);
-    });
+        }, 0);
+      }
+    );
   }
 
   prefillSurveyLink() {
-    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSc3XqvJC2lwIRieR5NVoAI7nYa4fTFSZL4Ifk1YA7K7I-lnog/viewform?usp=pp_url&entry.1884511690=";
+    let googleFormURL =
+      "https://docs.google.com/forms/d/e/1FAIpQLSc3XqvJC2lwIRieR5NVoAI7nYa4fTFSZL4Ifk1YA7K7I-lnog/viewform?usp=pp_url&entry.1884511690=";
     let param = "&entry.1893816394=";
-    let prefillLesson = '';
-    let prefillFlashcard = '';
+    let prefillLesson = "";
+    let prefillFlashcard = "";
+
     if (this.props.locationpathname) {
       prefillLesson = this.props.locationpathname;
     }
+
     let currentSlideNumber = 0;
     if (this.flashcardsCarousel) {
       currentSlideNumber = this.flashcardsCarousel.state.currentSlide;
     }
-    prefillFlashcard = getCurrentSlideContentAndType(this.state.flashcards, currentSlideNumber)[0];
+
+    prefillFlashcard = getCurrentSlideContentAndType(
+      this.state.flashcards,
+      currentSlideNumber
+    )[0];
+    
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
     }
   }
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleOpenModal (event) {
+  handleOpenModal(event) {
     event.preventDefault();
     this.setState({ showModal: true });
   }
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleCloseModal (event) {
+  handleCloseModal(event) {
     event.preventDefault();
     this.setState({ showModal: false });
   }
 
-  render () {
+  render() {
     const fullscreen = this.props.fullscreen ? " fullscreen" : "";
-    const flashcardsSubtitle = this.state.subtitle ? ` ${this.state.subtitle}` : "";
-    const flashcardsHeading = this.state.title ? `${this.state.title}${flashcardsSubtitle} flashcards` : 'Flashcards';
-    const lessonpath = this.state.title.includes("Top 1000 words") ? '/lessons/drills/top-1000-words/' : this.props.locationpathname.replace('flashcards','');
+    const flashcardsSubtitle = this.state.subtitle
+      ? ` ${this.state.subtitle}`
+      : "";
+    const flashcardsHeading = this.state.title
+      ? `${this.state.title}${flashcardsSubtitle} flashcards`
+      : "Flashcards";
+    const lessonpath = this.state.title.includes("Top 1000 words")
+      ? "/lessons/drills/top-1000-words/"
+      : this.props.locationpathname.replace("flashcards", "");
 
     return (
       <div>
@@ -474,7 +559,8 @@ currentSlide: currentSlide
           <Subheader fullscreen={fullscreen}>
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <a href="./flashcards"
+                <a
+                  href="./flashcards"
                   // @ts-expect-error Property 'dataset' is missing in type 'EventTarget' but required in type
                   onClick={this.setupFlashCards.bind(this)}
                   className="heading-link table-cell mr2"
@@ -486,30 +572,54 @@ currentSlide: currentSlide
               </header>
             </div>
             <div className="flex mxn2">
-              <Link to={lessonpath} className="link-button link-button-ghost table-cell mr1">Back to lesson</Link>
+              <Link
+                to={lessonpath}
+                className="link-button link-button-ghost table-cell mr1"
+              >
+                Back to lesson
+              </Link>
               {/* Shuffle button */}
-              <a href="./flashcards"
+              <a
+                href="./flashcards"
                 // @ts-expect-error Property 'dataset' is missing in type 'EventTarget' but required in type
                 onClick={this.setupFlashCards.bind(this)}
                 className="button button--secondary table-cell mr2"
-                style={{lineHeight: 2}}
+                style={{ lineHeight: 2 }}
                 data-shuffle="true"
                 role="button"
-                >Shuffle</a>
+              >
+                Shuffle
+              </a>
             </div>
           </Subheader>
 
           <div className="p3 mx-auto mw-1024">
             <div className="flex flex-wrap justify-between">
-              <p className={"text-small self-center hide-in-fullscreen" + fullscreen}>Back to <Link to={lessonpath} className={"hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link>.</p>
+              <p
+                className={
+                  "text-small self-center hide-in-fullscreen" + fullscreen
+                }
+              >
+                Back to{" "}
+                <Link
+                  to={lessonpath}
+                  className={"hide-in-fullscreen" + fullscreen}
+                >
+                  {this.state.title} lesson
+                </Link>
+                .
+              </p>
               <FlashcardsModal fullscreen={this.props.fullscreen} />
             </div>
             <div>
-
               {/* Screenreader flashcard heading for context */}
-              <div className="visually-hidden"><h3 id="flashcards-listbox-label">Carousel of lesson words and their strokes</h3></div>
+              <div className="visually-hidden">
+                <h3 id="flashcards-listbox-label">
+                  Carousel of lesson words and their strokes
+                </h3>
+              </div>
 
-              <div className={ this.props.fullscreen ? "" : "ml4 mr4"}>
+              <div className={this.props.fullscreen ? "" : "ml4 mr4"}>
                 <CarouselProvider
                   naturalSlideWidth={this.state.naturalSlideWidth}
                   naturalSlideHeight={this.state.naturalSlideHeight}
@@ -522,7 +632,9 @@ currentSlide: currentSlide
                     // @ts-expect-error TS(2322) FIXME: Type '{ children: Element; className: string; flas... Remove this comment to see the full error message
                     flashcards={this.state.flashcards}
                     key={`${this.state.flashcards.length}${this.props.fullscreen}`}
-                    ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
+                    ref={(flashcardsCarousel) =>
+                      (this.flashcardsCarousel = flashcardsCarousel)
+                    }
                     callback={this.onChangeCurrentSlide.bind(this)}
                     aria-labelledby="flashcards-listbox-label"
                   >
@@ -579,13 +691,18 @@ currentSlide: currentSlide
                 </CarouselProvider>
               </div>
 
-
-
-              <div className={"pt6 mw-584 mx-auto text-center hide-in-fullscreen" + fullscreen}>
+              <div
+                className={
+                  "pt6 mw-584 mx-auto text-center hide-in-fullscreen" +
+                  fullscreen
+                }
+              >
                 <StrokesForWords
                   fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
                   globalLookupDictionary={this.props.globalLookupDictionary}
-                  globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
+                  globalLookupDictionaryLoaded={
+                    this.props.globalLookupDictionaryLoaded
+                  }
                   personalDictionaries={this.props.personalDictionaries}
                   userSettings={this.props.userSettings}
                 />
@@ -598,7 +715,7 @@ currentSlide: currentSlide
           </div>
         </main>
       </div>
-    )
+    );
   }
 }
 
