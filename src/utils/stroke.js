@@ -1,4 +1,4 @@
-import strokeBits from "utils/strokeBits"
+import strokeBits from "utils/strokeBits";
 
 const {
   HASH,
@@ -42,83 +42,85 @@ class Stroke {
     let raw = [];
 
     if (this.bits & HASH) {
-      raw.push('#')
+      raw.push("#");
     }
     if (this.bits & S) {
-      raw.push('S')
+      raw.push("S");
     }
     if (this.bits & T) {
-      raw.push('T')
+      raw.push("T");
     }
     if (this.bits & K) {
-      raw.push('K')
+      raw.push("K");
     }
     if (this.bits & P) {
-      raw.push('P')
+      raw.push("P");
     }
     if (this.bits & W) {
-      raw.push('W')
+      raw.push("W");
     }
     if (this.bits & H) {
-      raw.push('H')
+      raw.push("H");
     }
     if (this.bits & R) {
-      raw.push('R')
+      raw.push("R");
     }
     if (this.bits & A) {
-      raw.push('A')
+      raw.push("A");
     }
     if (this.bits & O) {
-      raw.push('O')
+      raw.push("O");
     }
     if (this.bits & STAR) {
-      raw.push('*')
+      raw.push("*");
     }
     if (this.requiresDisambiguation()) {
-      raw.push('-')
+      raw.push("-");
     }
     if (this.bits & E) {
-      raw.push('E')
+      raw.push("E");
     }
     if (this.bits & U) {
-      raw.push('U')
+      raw.push("U");
     }
     if (this.bits & F) {
-      raw.push('F')
+      raw.push("F");
     }
     if (this.bits & RR) {
-      raw.push('R')
+      raw.push("R");
     }
     if (this.bits & RP) {
-      raw.push('P')
+      raw.push("P");
     }
     if (this.bits & B) {
-      raw.push('B')
+      raw.push("B");
     }
     if (this.bits & L) {
-      raw.push('L')
+      raw.push("L");
     }
     if (this.bits & G) {
-      raw.push('G')
+      raw.push("G");
     }
     if (this.bits & RT) {
-      raw.push('T')
+      raw.push("T");
     }
     if (this.bits & RS) {
-      raw.push('S')
+      raw.push("S");
     }
     if (this.bits & D) {
-      raw.push('D')
+      raw.push("D");
     }
     if (this.bits & Z) {
-      raw.push('Z')
+      raw.push("Z");
     }
 
-    return raw.join('');
+    return raw.join("");
   }
 
   requiresDisambiguation() {
-    return (this.bits & RIGHT_KEYS) !== 0 && (this.bits & VOWELS_AND_STAR) === 0;
+    return (
+      (this.bits & RIGHT_KEYS) !== 0 && (this.bits & VOWELS_AND_STAR) === 0
+    );
   }
 }
 
