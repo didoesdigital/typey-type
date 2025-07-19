@@ -105,219 +105,17 @@ const Lessons = ({
   return (
     <Suspense fallback={<PageLoading pastDelay={true} />}>
       <Switch>
-        <Route path={`/lessons/:category/:subcategory/:lessonPath/flashcards`}>
-          <Lesson
-            actualText={actualText}
-            completedPhrases={completedPhrases}
-            currentLessonStrokes={currentLessonStrokes}
-            currentPhrase={currentPhrase}
-            currentPhraseID={currentPhraseID}
-            currentStroke={currentStroke}
-            disableUserSettings={disableUserSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            lesson={lesson}
-            lessonLength={lessonLength}
-            lessonSubTitle={lessonSubTitle}
-            lessonTitle={lessonTitle}
-            metWords={metWords}
-            personalDictionaries={personalDictionaries}
-            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-            repetitionsRemaining={repetitionsRemaining}
-            settings={settings}
-            showStrokesInLesson={showStrokesInLesson}
-            startTime={startTime}
-            targetStrokeCount={targetStrokeCount}
-            timer={timer}
-            totalNumberOfHintedWords={totalNumberOfHintedWords}
-            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-            totalWordCount={totalWordCount}
-            upcomingPhrases={upcomingPhrases}
-            focusTriggerInt={focusTriggerInt}
-          />
-        </Route>
-
-        <Route path={`/lessons/fundamentals/:lessonPath/flashcards`}>
-          <Lesson
-            actualText={actualText}
-            completedPhrases={completedPhrases}
-            currentLessonStrokes={currentLessonStrokes}
-            currentPhrase={currentPhrase}
-            currentPhraseID={currentPhraseID}
-            currentStroke={currentStroke}
-            disableUserSettings={disableUserSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            lesson={lesson}
-            lessonLength={lessonLength}
-            lessonSubTitle={lessonSubTitle}
-            lessonTitle={lessonTitle}
-            metWords={metWords}
-            personalDictionaries={personalDictionaries}
-            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-            repetitionsRemaining={repetitionsRemaining}
-            settings={settings}
-            showStrokesInLesson={showStrokesInLesson}
-            startTime={startTime}
-            targetStrokeCount={targetStrokeCount}
-            timer={timer}
-            totalNumberOfHintedWords={totalNumberOfHintedWords}
-            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-            totalWordCount={totalWordCount}
-            upcomingPhrases={upcomingPhrases}
-            focusTriggerInt={focusTriggerInt}
-          />
-        </Route>
-
-        <Route path={`/lessons/drills/:lessonPath/flashcards`}>
-          <Lesson
-            actualText={actualText}
-            completedPhrases={completedPhrases}
-            currentLessonStrokes={currentLessonStrokes}
-            currentPhrase={currentPhrase}
-            currentPhraseID={currentPhraseID}
-            currentStroke={currentStroke}
-            disableUserSettings={disableUserSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            lesson={lesson}
-            lessonLength={lessonLength}
-            lessonSubTitle={lessonSubTitle}
-            lessonTitle={lessonTitle}
-            metWords={metWords}
-            personalDictionaries={personalDictionaries}
-            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-            repetitionsRemaining={repetitionsRemaining}
-            settings={settings}
-            showStrokesInLesson={showStrokesInLesson}
-            startTime={startTime}
-            targetStrokeCount={targetStrokeCount}
-            timer={timer}
-            totalNumberOfHintedWords={totalNumberOfHintedWords}
-            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-            totalWordCount={totalWordCount}
-            upcomingPhrases={upcomingPhrases}
-            focusTriggerInt={focusTriggerInt}
-          />
-        </Route>
-
-        <Route path={`/lessons/:category/:subcategory/:lessonPath`}>
-          <Lesson
-            actualText={actualText}
-            completedPhrases={completedPhrases}
-            currentLessonStrokes={currentLessonStrokes}
-            currentPhrase={currentPhrase}
-            currentPhraseID={currentPhraseID}
-            currentStroke={currentStroke}
-            disableUserSettings={disableUserSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            lesson={lesson}
-            lessonLength={lessonLength}
-            lessonSubTitle={lessonSubTitle}
-            lessonTitle={lessonTitle}
-            metWords={metWords}
-            personalDictionaries={personalDictionaries}
-            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-            repetitionsRemaining={repetitionsRemaining}
-            settings={settings}
-            showStrokesInLesson={showStrokesInLesson}
-            startTime={startTime}
-            targetStrokeCount={targetStrokeCount}
-            timer={timer}
-            totalNumberOfHintedWords={totalNumberOfHintedWords}
-            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-            totalWordCount={totalWordCount}
-            upcomingPhrases={upcomingPhrases}
-            focusTriggerInt={focusTriggerInt}
-          />
-        </Route>
-
-        <Route path={`/lessons/fundamentals/:lessonPath`}>
-          <Lesson
-            actualText={actualText}
-            completedPhrases={completedPhrases}
-            currentLessonStrokes={currentLessonStrokes}
-            currentPhrase={currentPhrase}
-            currentPhraseID={currentPhraseID}
-            currentStroke={currentStroke}
-            disableUserSettings={disableUserSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            lesson={lesson}
-            lessonLength={lessonLength}
-            lessonSubTitle={lessonSubTitle}
-            lessonTitle={lessonTitle}
-            metWords={metWords}
-            personalDictionaries={personalDictionaries}
-            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-            repetitionsRemaining={repetitionsRemaining}
-            settings={settings}
-            showStrokesInLesson={showStrokesInLesson}
-            startTime={startTime}
-            targetStrokeCount={targetStrokeCount}
-            timer={timer}
-            totalNumberOfHintedWords={totalNumberOfHintedWords}
-            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-            totalWordCount={totalWordCount}
-            upcomingPhrases={upcomingPhrases}
-            focusTriggerInt={focusTriggerInt}
-          />
-        </Route>
-        <Route path={`/lessons/drills/:lessonPath`}>
-          <Lesson
-            actualText={actualText}
-            completedPhrases={completedPhrases}
-            currentLessonStrokes={currentLessonStrokes}
-            currentPhrase={currentPhrase}
-            currentPhraseID={currentPhraseID}
-            currentStroke={currentStroke}
-            disableUserSettings={disableUserSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            lesson={lesson}
-            lessonLength={lessonLength}
-            lessonSubTitle={lessonSubTitle}
-            lessonTitle={lessonTitle}
-            metWords={metWords}
-            personalDictionaries={personalDictionaries}
-            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-            repetitionsRemaining={repetitionsRemaining}
-            settings={settings}
-            showStrokesInLesson={showStrokesInLesson}
-            startTime={startTime}
-            targetStrokeCount={targetStrokeCount}
-            timer={timer}
-            totalNumberOfHintedWords={totalNumberOfHintedWords}
-            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-            totalWordCount={totalWordCount}
-            upcomingPhrases={upcomingPhrases}
-            focusTriggerInt={focusTriggerInt}
-          />
+        <Route
+          path={[
+            `/lessons/:category/:subcategory/:lessonPath/flashcards`,
+            `/lessons/fundamentals/:lessonPath/flashcards`,
+            `/lessons/drills/:lessonPath/flashcards`,
+            `/lessons/:category/:subcategory/:lessonPath`,
+            `/lessons/fundamentals/:lessonPath`,
+            `/lessons/drills/:lessonPath`,
+          ]}
+        >
+          <Lesson {...lessonProps} />
         </Route>
         <Route
           exact={true}
@@ -358,78 +156,13 @@ const Lessons = ({
           </DocumentTitle>
         </Route>
         <Route exact={true} path={`/lessons/custom`}>
-          {" "}
           <CustomLesson {...lessonProps} />
         </Route>
         <Route exact={true} path={`/lessons/flashcards`}>
-          <Lesson
-            actualText={actualText}
-            completedPhrases={completedPhrases}
-            currentLessonStrokes={currentLessonStrokes}
-            currentPhrase={currentPhrase}
-            currentPhraseID={currentPhraseID}
-            currentStroke={currentStroke}
-            disableUserSettings={disableUserSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            lesson={lesson}
-            lessonLength={lessonLength}
-            lessonSubTitle={lessonSubTitle}
-            lessonTitle={lessonTitle}
-            metWords={metWords}
-            personalDictionaries={personalDictionaries}
-            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-            repetitionsRemaining={repetitionsRemaining}
-            settings={settings}
-            showStrokesInLesson={showStrokesInLesson}
-            startTime={startTime}
-            targetStrokeCount={targetStrokeCount}
-            timer={timer}
-            totalNumberOfHintedWords={totalNumberOfHintedWords}
-            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-            totalWordCount={totalWordCount}
-            upcomingPhrases={upcomingPhrases}
-            focusTriggerInt={focusTriggerInt}
-          />
+          <Lesson {...lessonProps} />
         </Route>
         <Route exact={true} path={`/lessons/:notFound`}>
-          <Lesson
-            actualText={actualText}
-            completedPhrases={completedPhrases}
-            currentLessonStrokes={currentLessonStrokes}
-            currentPhrase={currentPhrase}
-            currentPhraseID={currentPhraseID}
-            currentStroke={currentStroke}
-            disableUserSettings={disableUserSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            lesson={lesson}
-            lessonLength={lessonLength}
-            lessonSubTitle={lessonSubTitle}
-            lessonTitle={lessonTitle}
-            metWords={metWords}
-            personalDictionaries={personalDictionaries}
-            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-            repetitionsRemaining={repetitionsRemaining}
-            settings={settings}
-            showStrokesInLesson={showStrokesInLesson}
-            startTime={startTime}
-            targetStrokeCount={targetStrokeCount}
-            timer={timer}
-            totalNumberOfHintedWords={totalNumberOfHintedWords}
-            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-            totalWordCount={totalWordCount}
-            upcomingPhrases={upcomingPhrases}
-            focusTriggerInt={focusTriggerInt}
-          />
+          <LessonNotFound />
         </Route>
         <Route exact={true} path={"/lessons"}>
           <Suspense fallback={<PageLoading pastDelay={true} />}>
