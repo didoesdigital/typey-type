@@ -3,11 +3,11 @@ import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
+import LessonNotFound from "./LessonNotFound";
 import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
 import Flashcards from "./flashcards/Flashcards";
-import { loadPersonalPreferences } from "utils/storage";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
 import type { LessonProps } from "./types";
@@ -22,7 +22,6 @@ import {
 } from "./components/UserSettings/updateUserSetting";
 import { useLessonIndex } from "../../states/lessonIndexState";
 import applyQueryParamsToUserSettings from "./components/UserSettings/applyQueryParamsToUserSettings";
-import getProgressRevisionUserSettings from "./components/UserSettings/getProgressRevisionUserSettings";
 import { revisionModeState } from "../../states/lessonState";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 import getChangesToRecentLessons from "../progress/RecentLessons/getChangesToRecentLessons";
@@ -42,6 +41,7 @@ const Lesson = ({
   globalLookupDictionaryLoaded,
   lesson,
   lessonLength,
+  lessonNotFound,
   lessonSubTitle: lessonSubTitleProp,
   lessonTitle,
   match,
@@ -63,19 +63,18 @@ const Lesson = ({
   totalWordCount,
   upcomingPhrases,
   focusTriggerInt,
-}: Omit<LessonProps, "lessonNotFound">) => {
+}: LessonProps) => {
   const location = useLocation();
   const history = useHistory();
 
   const {
     appFetchAndSetupGlobalDict,
-    customiseLesson,
     changeShowStrokesInLesson,
     restartLesson,
     reviseLesson,
     sayCurrentPhraseAgain,
-    setUpProgressRevisionLesson,
     setupLesson,
+    startCustomLesson,
     stopLesson,
     updateGlobalLookupDictionary,
     updateMarkup,
@@ -106,47 +105,7 @@ const Lesson = ({
     if (window.localStorage) {
       loadedLessonPath.current = match.url;
 
-      if (
-        location.pathname.startsWith("/lessons/progress/") &&
-        !location.pathname.includes("/lessons/progress/seen/") &&
-        !location.pathname.includes("/lessons/progress/memorised/")
-      ) {
-        let loadedPersonalPreferences = loadPersonalPreferences();
-        const newSeenOrMemorised = [false, true, true] as const;
-        const newUserSettings = getProgressRevisionUserSettings(
-          userSettings,
-          newSeenOrMemorised
-        );
-        setUserSettings(newUserSettings);
-        setUpProgressRevisionLesson(
-          loadedPersonalPreferences[0],
-          newSeenOrMemorised
-        );
-      } else if (location.pathname.startsWith("/lessons/progress/seen/")) {
-        let loadedPersonalPreferences = loadPersonalPreferences();
-        let newSeenOrMemorised = [false, true, false] as const;
-        const newUserSettings = getProgressRevisionUserSettings(
-          userSettings,
-          newSeenOrMemorised
-        );
-        setUserSettings(newUserSettings);
-        setUpProgressRevisionLesson(
-          loadedPersonalPreferences[0],
-          newSeenOrMemorised
-        );
-      } else if (location.pathname.startsWith("/lessons/progress/memorised/")) {
-        let loadedPersonalPreferences = loadPersonalPreferences();
-        let newSeenOrMemorised = [false, false, true] as const;
-        const newUserSettings = getProgressRevisionUserSettings(
-          userSettings,
-          newSeenOrMemorised
-        );
-        setUserSettings(newUserSettings);
-        setUpProgressRevisionLesson(
-          loadedPersonalPreferences[0],
-          newSeenOrMemorised
-        );
-      }
+      startCustomLesson();
 
       const parsedParams = queryString.parse(location.search);
 
@@ -172,7 +131,20 @@ const Lesson = ({
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setUpProgressRevisionLesson, setupLesson, userSettings]);
+  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setupLesson, startCustomLesson, userSettings]);
+
+  const hasZeroTotalWordCount = totalWordCount === 0;
+  const hasEmptyCurrentPhrase = currentPhrase === "";
+
+  // Focus on input when starting custom lesson
+  useEffect(() => {
+    if (!hasEmptyCurrentPhrase || !hasZeroTotalWordCount) {
+      const yourTypedText = document.getElementById("your-typed-text");
+      if (yourTypedText) {
+        yourTypedText.focus();
+      }
+    }
+  }, [hasEmptyCurrentPhrase, hasZeroTotalWordCount]);
 
   // Stop lesson (timer, etc. when lesson is unmounted)
   useEffect(() => {
@@ -202,11 +174,6 @@ const Lesson = ({
     updateMarkup(event);
   };
 
-  function stopAndCustomiseLesson() {
-    stopLesson();
-    customiseLesson();
-  }
-
   const setRevisionModeAndRestartLesson: React.MouseEventHandler<
     HTMLAnchorElement
   > = (event) => {
@@ -214,21 +181,33 @@ const Lesson = ({
     restartLesson(event);
   };
 
+  if (lessonNotFound) {
+    return <LessonNotFound />;
+  }
+
   const lessonSubTitle =
     lesson?.subtitle?.length > 0 ? `: ${lessonSubTitleProp}` : "";
 
   const createNewCustomLesson = (
     <Link
       to="/lessons/custom/setup"
-      onClick={stopAndCustomiseLesson.bind(this)}
+      onClick={stopLesson}
       className="link-button link-button-ghost table-cell mr1"
       role="button"
     >
-      Customise lesson
+      Edit custom lesson
     </Link>
   );
 
   const metadata = getLessonMetadata(lessonIndex, lesson.path);
+  const overviewLink = metadata?.overview ? (
+    <Link
+      to={location.pathname + "overview"}
+      className="link-button link-button-ghost table-cell"
+    >
+      Overview
+    </Link>
+  ) : undefined;
 
   if (lesson) {
     if (isFinished(lesson, currentPhraseID)) {
@@ -240,7 +219,7 @@ const Lesson = ({
               stopLesson={stopLesson}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
-              overviewLink={undefined}
+              overviewLink={overviewLink}
               path={lesson?.path}
               restartLesson={setRevisionModeAndRestartLesson}
               ref={mainHeading}
@@ -322,7 +301,7 @@ const Lesson = ({
             <MainLessonView
               createNewCustomLesson={createNewCustomLesson}
               lessonSubTitle={lessonSubTitle}
-              overviewLink={undefined}
+              overviewLink={overviewLink}
               actualText={actualText}
               changeShowStrokesInLesson={changeShowStrokesInLesson}
               chooseStudy={chooseStudy}

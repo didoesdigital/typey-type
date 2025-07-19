@@ -214,9 +214,7 @@ const MainLessonView = ({
                     />
                   </div>
                 </AnimateHeight>
-                <div
-                  className="lesson-canvas panel overflow-hidden flex relative bg-white dark:bg-coolgrey-1000 mx-auto mw-1440 p2 mb3 flex"
-                >
+                <div className="lesson-canvas panel overflow-hidden flex relative bg-white dark:bg-coolgrey-1000 mx-auto mw-1440 p2 mb3 flex">
                   {revisionMode && (
                     <div>
                       <Link

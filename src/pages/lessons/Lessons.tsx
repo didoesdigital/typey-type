@@ -8,6 +8,7 @@ import CustomLessonSetup from "./custom/CustomLessonSetup";
 import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import ProgressLesson from "pages/lessons/ProgressLesson";
+import CustomLesson from "pages/lessons/CustomLesson";
 
 export type LessonsRoutingProps = RouteComponentProps &
   ComponentPropsWithoutRef<typeof Lesson> &
@@ -383,43 +384,7 @@ const Lessons = ({
         <Route
           exact={true}
           path={`${match.url}/custom`}
-          render={(props) => (
-            <Lesson
-              actualText={actualText}
-              completedPhrases={completedPhrases}
-              currentLessonStrokes={currentLessonStrokes}
-              currentPhrase={currentPhrase}
-              currentPhraseID={currentPhraseID}
-              currentStroke={currentStroke}
-              disableUserSettings={disableUserSettings}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              lesson={lesson}
-              lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
-              lessonSubTitle={lessonSubTitle}
-              lessonTitle={lessonTitle}
-              metWords={metWords}
-              personalDictionaries={personalDictionaries}
-              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              repetitionsRemaining={repetitionsRemaining}
-              settings={settings}
-              showStrokesInLesson={showStrokesInLesson}
-              startTime={startTime}
-              targetStrokeCount={targetStrokeCount}
-              timer={timer}
-              totalNumberOfHintedWords={totalNumberOfHintedWords}
-              totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-              totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-              totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-              totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-              totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-              totalWordCount={totalWordCount}
-              upcomingPhrases={upcomingPhrases}
-              focusTriggerInt={focusTriggerInt}
-              {...props}
-            />
-          )}
+          render={(props) => <CustomLesson {...lessonProps} {...props} />}
         />
         <Route
           exact={true}

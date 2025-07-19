@@ -26,9 +26,6 @@ import { revisionModeState } from "../../states/lessonState";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 import getChangesToRecentLessons from "../progress/RecentLessons/getChangesToRecentLessons";
 
-const isCustom = (pathname: string) =>
-  pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
-
 const isFinished = (lesson: LessonType, currentPhraseID: number) =>
   currentPhraseID === lesson?.presentedMaterial?.length || 0;
 
@@ -85,7 +82,6 @@ const Lesson = ({
     reviseLesson,
     sayCurrentPhraseAgain,
     setupLesson,
-    startCustomLesson,
     stopLesson,
     updateGlobalLookupDictionary,
     updateMarkup,
@@ -116,12 +112,7 @@ const Lesson = ({
     if (window.localStorage) {
       loadedLessonPath.current = match.url;
 
-      if (
-        location.pathname.startsWith("/lessons/custom") &&
-        !location.pathname.startsWith("/lessons/custom/setup")
-      ) {
-        startCustomLesson();
-      } else if (isOverview(location.pathname)) {
+      if (isOverview(location.pathname)) {
         // do nothing
       } else if (isFlashcards(location.pathname)) {
         // do nothing
@@ -156,31 +147,13 @@ const Lesson = ({
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setupLesson, startCustomLesson, userSettings]);
-
-  const shouldStartCustomLesson =
-    location.pathname.startsWith("/lessons/custom") &&
-    !location.pathname.startsWith("/lessons/custom/setup") &&
-    lesson.title !== "Custom";
+  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setupLesson, userSettings]);
 
   const hasLessonChanged = match.url !== loadedLessonPath.current;
-
-  // Start custom lesson!
-  useEffect(() => {
-    if (shouldStartCustomLesson && hasLessonChanged) {
-      loadedLessonPath.current = match.url;
-      startCustomLesson();
-    }
-    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldStartCustomLesson, hasLessonChanged]);
-  // }, [shouldStartCustomLesson, hasLessonChanged, startCustomLesson, match.url]);
 
   // Load lesson file and start lesson!
   useEffect(() => {
     if (
-      !shouldStartCustomLesson &&
-      !isCustom(location.pathname) &&
       !isFlashcards(location.pathname) &&
       !isOverview(location.pathname) &&
       location.pathname.startsWith("/lessons") &&
@@ -191,24 +164,8 @@ const Lesson = ({
     }
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasLessonChanged, location.pathname, shouldStartCustomLesson]);
-  // }, [hasLessonChanged, location.pathname, shouldStartCustomLesson, handleLesson, match.url]);
-
-  const hasZeroTotalWordCount = totalWordCount === 0;
-  const hasEmptyCurrentPhrase = currentPhrase === "";
-
-  // Focus on input when starting custom lesson
-  useEffect(() => {
-    if (
-      location.pathname.startsWith("/lessons/custom") &&
-      (!hasEmptyCurrentPhrase || !hasZeroTotalWordCount)
-    ) {
-      const yourTypedText = document.getElementById("your-typed-text");
-      if (yourTypedText) {
-        yourTypedText.focus();
-      }
-    }
-  }, [location.pathname, hasEmptyCurrentPhrase, hasZeroTotalWordCount]);
+  }, [hasLessonChanged, location.pathname]);
+  // }, [hasLessonChanged, location.pathname, handleLesson, match.url]);
 
   // Stop lesson (timer, etc. when lesson is unmounted)
   useEffect(() => {
@@ -257,16 +214,7 @@ const Lesson = ({
   const lessonSubTitle =
     lesson?.subtitle?.length > 0 ? `: ${lessonSubTitleProp}` : "";
 
-  const createNewCustomLesson = isCustom(location.pathname) ? (
-    <Link
-      to="/lessons/custom/setup"
-      onClick={stopLesson}
-      className="link-button link-button-ghost table-cell mr1"
-      role="button"
-    >
-      Edit custom lesson
-    </Link>
-  ) : (
+  const createNewCustomLesson = (
     <Link
       to="/lessons/custom/setup"
       onClick={stopAndCustomiseLesson.bind(this)}
