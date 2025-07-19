@@ -32,17 +32,19 @@ function AppWrapper(props: object) {
   return <Analytics>{app}</Analytics>;
 }
 
+const AppWithAtomsCompat = withAtomsCompat(AppWrapper, [
+  ["revisionMode", revisionModeState],
+  ["userSettings", userSettingsState],
+  ["globalUserSettings", globalUserSettingsState],
+]);
+
 ReactDOM.render(
   <DocumentTitle title="Typey Type for Stenographers">
     <Router basename="/typey-type">
       <ErrorBoundary>
-        <Route
-          component={withAtomsCompat(AppWrapper, [
-            ["revisionMode", revisionModeState],
-            ["userSettings", userSettingsState],
-            ["globalUserSettings", globalUserSettingsState],
-          ])}
-        />
+        <Route>
+          <AppWithAtomsCompat />
+        </Route>
       </ErrorBoundary>
     </Router>
   </DocumentTitle>,
