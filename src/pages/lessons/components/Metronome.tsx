@@ -98,7 +98,7 @@ function playId(beatsPerMinute: number) {
   return `bpm${bpmBracket}`;
 }
 
-const Metronome: FC<Props> = (props) => {
+const Metronome: FC<Props> = () => {
   const beatsPerMinuteSetting = useAtomValue(beatsPerMinuteState);
   const prevBpmRef = useRef<number>(10);
 
