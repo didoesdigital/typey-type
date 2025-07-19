@@ -29,7 +29,6 @@ const Lessons = ({
   customLessonMaterial,
   customLessonMaterialValidationMessages,
   customLessonMaterialValidationState,
-
   actualText,
   completedPhrases,
   currentLessonStrokes,
@@ -110,7 +109,7 @@ const Lessons = ({
       <Switch>
         <Route
           path={`${match.url}/:category/:subcategory/:lessonPath/flashcards`}
-          render={(props) => (
+          render={() => (
             <Lesson
               actualText={actualText}
               completedPhrases={completedPhrases}
@@ -143,13 +142,12 @@ const Lessons = ({
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
               focusTriggerInt={focusTriggerInt}
-              {...props}
             />
           )}
         />
         <Route
           path={`${match.url}/fundamentals/:lessonPath/flashcards`}
-          render={(props) => (
+          render={() => (
             <Lesson
               actualText={actualText}
               completedPhrases={completedPhrases}
@@ -182,13 +180,12 @@ const Lessons = ({
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
               focusTriggerInt={focusTriggerInt}
-              {...props}
             />
           )}
         />
         <Route
           path={`${match.url}/drills/:lessonPath/flashcards`}
-          render={(props) => (
+          render={() => (
             <Lesson
               actualText={actualText}
               completedPhrases={completedPhrases}
@@ -221,13 +218,12 @@ const Lessons = ({
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
               focusTriggerInt={focusTriggerInt}
-              {...props}
             />
           )}
         />
         <Route
           path={`${match.url}/:category/:subcategory/:lessonPath`}
-          render={(props) => (
+          render={() => (
             <Lesson
               actualText={actualText}
               completedPhrases={completedPhrases}
@@ -260,13 +256,12 @@ const Lessons = ({
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
               focusTriggerInt={focusTriggerInt}
-              {...props}
             />
           )}
         />
         <Route
           path={`${match.url}/fundamentals/:lessonPath`}
-          render={(props) => (
+          render={() => (
             <Lesson
               actualText={actualText}
               completedPhrases={completedPhrases}
@@ -299,13 +294,12 @@ const Lessons = ({
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
               focusTriggerInt={focusTriggerInt}
-              {...props}
             />
           )}
         />
         <Route
           path={`${match.url}/drills/:lessonPath`}
-          render={(props) => (
+          render={() => (
             <Lesson
               actualText={actualText}
               completedPhrases={completedPhrases}
@@ -338,7 +332,6 @@ const Lessons = ({
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
               focusTriggerInt={focusTriggerInt}
-              {...props}
             />
           )}
         />
@@ -349,12 +342,12 @@ const Lessons = ({
             `${match.url}/progress/seen/`,
             `${match.url}/progress/memorised/`,
           ]}
-          render={(props) => <ProgressLesson {...lessonProps} {...props} />}
+          render={() => <ProgressLesson {...lessonProps} />}
         />
         <Route
           exact={true}
           path={`${match.url}/custom/setup`}
-          render={(props) => (
+          render={() => (
             <DocumentTitle title="Typey Type | Create a custom lesson">
               <CustomLessonSetup
                 customLessonMaterial={customLessonMaterial}
@@ -366,7 +359,6 @@ const Lessons = ({
                 }
                 globalLookupDictionary={globalLookupDictionary}
                 globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                {...props}
               />
             </DocumentTitle>
           )}
@@ -387,12 +379,12 @@ const Lessons = ({
         <Route
           exact={true}
           path={`${match.url}/custom`}
-          render={(props) => <CustomLesson {...lessonProps} {...props} />}
+          render={() => <CustomLesson {...lessonProps} />}
         />
         <Route
           exact={true}
           path={`${match.url}/flashcards`}
-          render={(props) => (
+          render={() => (
             <Lesson
               actualText={actualText}
               completedPhrases={completedPhrases}
@@ -425,14 +417,13 @@ const Lessons = ({
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
               focusTriggerInt={focusTriggerInt}
-              {...props}
             />
           )}
         />
         <Route
           exact={true}
           path={`${match.url}/:notFound`}
-          render={(props) => (
+          render={() => (
             <Lesson
               actualText={actualText}
               completedPhrases={completedPhrases}
@@ -465,7 +456,6 @@ const Lessons = ({
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
               focusTriggerInt={focusTriggerInt}
-              {...props}
             />
           )}
         />
