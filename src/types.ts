@@ -290,6 +290,17 @@ export type SpacedTypedWord = string;
 /**
  * Examples:
  *
+ * - "0"
+ * - "1"
+ * - "The"
+ * - "process"
+ * - "of the"
+ */
+export type NormalisedTypedWord = string;
+
+/**
+ * Examples:
+ *
  * ```
  * {
  *   "0": 1,

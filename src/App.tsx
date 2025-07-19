@@ -51,6 +51,7 @@ import type {
   LookupDictWithNamespacedDicts,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
+  NormalisedTypedWord,
   RevisionMaterial,
   RevisionMode,
   SpacedTypedWord,
@@ -334,15 +335,12 @@ class App extends Component<Props, AppState> {
     let seenAccumulator = 0;
     let memorisedAccumulator = 0;
 
-    let normalisedMetWords = {};
+    let normalisedMetWords: Record<NormalisedTypedWord, number> = {};
     Object.keys(metWords).forEach(function(key) {
-      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       if (normalisedMetWords[key.trim()]) {
-        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         normalisedMetWords[key.trim()] = metWords[key] + normalisedMetWords[key.trim()];
       }
       else {
-        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         normalisedMetWords[key.trim()] = metWords[key];
       }
     });
@@ -358,19 +356,16 @@ class App extends Component<Props, AppState> {
       sourceMaterialPhrase = sourceMaterialPhrase.trim();
 
       // have you seen this word?
-      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 0) {
 
         // console.log(sourceMaterialPhrase);
         // have you seen this word and seen it in this lesson already?
         if (!(alreadyChecked.indexOf(sourceMaterialPhrase) > -1)) {
           alreadyChecked.push(sourceMaterialPhrase);
-          // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           if (normalisedMetWords[sourceMaterialPhrase] < 30) {
             seenAccumulator = seenAccumulator + 1;
             // console.log("Seen: " + sourceMaterialPhrase);
           }
-          // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           if (normalisedMetWords[sourceMaterialPhrase] > 29) {
             memorisedAccumulator = memorisedAccumulator + 1;
             // console.log("Memorised: " + sourceMaterialPhrase);
