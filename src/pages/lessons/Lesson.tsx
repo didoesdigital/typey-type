@@ -108,11 +108,9 @@ const Lesson = ({
   const updatePreset = useUpdatePreset();
   const loadedLessonPath = useRef("");
 
-  // const mainHeading = useRef<HTMLHeadingElement>(null);
-  const mainHeading = useRef(null);
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (mainHeading) {
-      // @ts-expect-error TS(2339) FIXME: Property 'focus' does not exist on type 'never'.
       mainHeading.current?.focus();
     }
   }, []);
