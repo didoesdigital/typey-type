@@ -1,6 +1,8 @@
 import React from "react";
 import FinishedPossibleStrokeImprovements from "./FinishedPossibleStrokeImprovements";
 import type {
+  CurrentLessonStrokes,
+  MetWords,
   RevisionMaterial,
   SourceMaterial,
   SourceMaterialItem,
@@ -9,8 +11,8 @@ import { useSetAtom } from "jotai";
 import { revisionModeState } from "../../../states/lessonState";
 
 type FinishedMisstrokesSummaryProps = {
-  currentLessonStrokes: any;
-  metWords: any;
+  currentLessonStrokes: CurrentLessonStrokes[];
+  metWords: MetWords;
   path: string;
   reviseLesson: (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -69,13 +71,11 @@ const FinishedMisstrokesSummary = ({
             <u style={{ textDecorationStyle: "double" }}>R</u>evise these words
           </a>
         </p>
-        <ol className="mb0 unstyled-list">
-          <FinishedPossibleStrokeImprovements
-            currentLessonStrokes={currentLessonStrokes}
-            metWords={metWords}
-            updateRevisionMaterial={updateRevisionMaterial}
-          />
-        </ol>
+        <FinishedPossibleStrokeImprovements
+          currentLessonStrokes={currentLessonStrokes}
+          metWords={metWords}
+          updateRevisionMaterial={updateRevisionMaterial}
+        />
       </div>
       <p>
         <a

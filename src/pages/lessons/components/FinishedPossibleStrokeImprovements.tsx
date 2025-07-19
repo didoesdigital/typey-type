@@ -2,11 +2,14 @@ import React from "react";
 import { useAtomValue } from "jotai";
 import { spacePlacementState } from "../../../states/userSettingsState";
 import { globalUserSettingsState } from "../../../states/globalUserSettingsState";
+import type { CurrentLessonStrokes, MetWords } from "types";
 
 type FinishedPossibleStrokeImprovementsProps = {
-  currentLessonStrokes: any;
-  metWords: any;
-  updateRevisionMaterial: (event: React.ChangeEvent<HTMLInputElement>) => boolean;
+  currentLessonStrokes: CurrentLessonStrokes[];
+  metWords: MetWords;
+  updateRevisionMaterial: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => boolean;
 };
 
 const getWordWithSpacing = (
@@ -26,14 +29,17 @@ const FinishedPossibleStrokeImprovements = ({
 }: FinishedPossibleStrokeImprovementsProps) => {
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const spacePlacement = useAtomValue(spacePlacementState);
-  return currentLessonStrokes.length > 0
-    ? currentLessonStrokes.map((phrase: any, i: number) => {
+  return currentLessonStrokes.length > 0 ? (
+    <ol className="mb0 unstyled-list">
+      {currentLessonStrokes.map((phrase: any, i: number) => {
         let strokeAttemptsPresentation;
         let strokeAttempts = phrase.attempts.map(
           ({ text }: { text: string }, j: any) => {
             return (
               <li key={j} className="whitespace-nowrap di ml1">
-                <span className="bg-warning px1 dark:text-coolgrey-900">{text}</span>
+                <span className="bg-warning px1 dark:text-coolgrey-900">
+                  {text}
+                </span>
               </li>
             );
           }
@@ -57,9 +63,7 @@ const FinishedPossibleStrokeImprovements = ({
           globalUserSettings?.experiments &&
           !!globalUserSettings?.experiments?.timesSeen;
         const timesSeen =
-          metWords[
-            getWordWithSpacing(phrase.word, spacePlacement)
-          ];
+          metWords[getWordWithSpacing(phrase.word, spacePlacement)];
 
         return (
           <li
@@ -101,8 +105,9 @@ const FinishedPossibleStrokeImprovements = ({
             </p>
           </li>
         );
-      })
-    : null;
+      })}
+    </ol>
+  ) : null;
 };
 
 export default FinishedPossibleStrokeImprovements;
