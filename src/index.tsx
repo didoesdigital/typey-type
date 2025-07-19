@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "./components/ErrorBoundary";
 import App from "./App";
-import withAnalyticsTracker from "./utils/withAnalyticsTracker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.scss";
 import { withAtomsCompat } from "states/atomUtils";
@@ -12,6 +11,7 @@ import { userSettingsState } from "./states/userSettingsState";
 import { globalUserSettingsState } from "./states/globalUserSettingsState";
 import { useLessonIndexWithFallback } from "./states/lessonIndexState";
 import { revisionModeState } from "./states/lessonState";
+import Analytics from "components/Analytics";
 
 if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
   init({
@@ -28,7 +28,8 @@ if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
 function AppWrapper(props: object) {
   const lessonIndex = useLessonIndexWithFallback();
   // @ts-expect-error TS(2740) FIXME: Type '{ lessonIndex: LessonIndexEntry[]; }' is mis... Remove this comment to see the full error message
-  return <App {...props} {...{ lessonIndex }} />;
+  const app = <App {...props} {...{ lessonIndex }} />;
+  return <Analytics>{app}</Analytics>;
 }
 
 ReactDOM.render(
@@ -36,7 +37,7 @@ ReactDOM.render(
     <Router basename="/typey-type">
       <ErrorBoundary>
         <Route
-          component={withAtomsCompat(withAnalyticsTracker(AppWrapper), [
+          component={withAtomsCompat(AppWrapper, [
             ["revisionMode", revisionModeState],
             ["userSettings", userSettingsState],
             ["globalUserSettings", globalUserSettingsState],
