@@ -474,6 +474,9 @@ const Lessons = ({
             <LessonsIndex customLesson={customLesson} />
           </Suspense>
         </Route>
+        <Route path={"*"}>
+          <LessonNotFound />
+        </Route>
       </Switch>
     </Suspense>
   );

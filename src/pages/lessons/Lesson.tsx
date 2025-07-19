@@ -24,6 +24,7 @@ import applyQueryParamsToUserSettings from "./components/UserSettings/applyQuery
 import { revisionModeState } from "../../states/lessonState";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 import getChangesToRecentLessons from "../progress/RecentLessons/getChangesToRecentLessons";
+import LessonNotFound from "pages/lessons/LessonNotFound";
 
 const isFinished = (lesson: LessonType, currentPhraseID: number) =>
   currentPhraseID === lesson?.presentedMaterial?.length || 0;
@@ -356,6 +357,9 @@ const Lesson = ({
               updateMarkup={updateRecentLessonsAndUpdateMarkup}
               focusTriggerInt={focusTriggerInt}
             />
+          </Route>
+          <Route path={"*"}>
+            <LessonNotFound />
           </Route>
         </Switch>
       );
