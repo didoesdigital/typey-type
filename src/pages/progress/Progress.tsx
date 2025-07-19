@@ -37,7 +37,7 @@ let particles: Confetti.ConfettiParticle[] = [];
 type Props = {
   lessonsProgress: LessonsProgressIndex;
   metWords: MetWords;
-  startingMetWordsToday: any;
+  startingMetWordsToday: MetWords;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
 };

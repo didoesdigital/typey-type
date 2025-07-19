@@ -9,8 +9,8 @@ export type CustomLessonMaterialValidationState =
   | null;
 
 type Props = {
-  createCustomLesson: any;
-  customLessonMaterial: any;
+  createCustomLesson: React.ChangeEventHandler<HTMLTextAreaElement>;
+  customLessonMaterial: string;
   customLessonMaterialValidationState: CustomLessonMaterialValidationState;
   customLessonMaterialValidationMessages: string[];
 };

@@ -1,10 +1,18 @@
 import React from "react";
+import type { RuleStatus } from "pages/lessons/custom/generator/types";
+
+// This could one day be something like `type RuleName = keyof Required<Rules>;`
+/** e.g. "hasOneOrMoreSpaces" */
+type RuleName = string;
+
+/** e.g. "has one or more spaces" */
+type RulePrettyName = string;
 
 type Props = {
-  ruleName: any;
-  prettyName: any;
-  onChangeRuleStatus: any;
-  rulesState: any;
+  ruleName: RuleName;
+  prettyName: RulePrettyName;
+  onChangeRuleStatus: React.ChangeEventHandler<HTMLSelectElement>;
+  rulesState: Record<RuleName, RuleStatus>;
 };
 
 const RuleOptions = ({
