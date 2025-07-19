@@ -202,7 +202,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
           />
           <Route
             path="/games"
-            render={(props) => (
+            render={() => (
               <div>
                 <Header />
                 <DocumentTitle title={"Typey Type | Games"}>
@@ -215,7 +215,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                       metWords={appState.metWords}
                       personalDictionaries={appState.personalDictionaries}
                       startingMetWordsToday={appState.startingMetWordsToday}
-                      {...props}
                     />
                   </ErrorBoundary>
                 </DocumentTitle>

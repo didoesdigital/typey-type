@@ -57,7 +57,6 @@ const AsyncTPEURPBGS = Loadable({
 });
 
 type Props = {
-  match: any;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   personalDictionaries?: ImportedPersonalDictionaries;
@@ -66,7 +65,6 @@ type Props = {
 };
 
 const Games = ({
-  match,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
@@ -75,23 +73,24 @@ const Games = ({
 }: Props) => {
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
+
   return (
     <Switch>
-      <Route exact={true} path={`${match.url}/KAOES`}>
+      <Route exact={true} path={`/games/KAOES`}>
         <DocumentTitle title={"Typey Type | KAOES game"}>
           <ErrorBoundary>
             <AsyncKAOES inputForKAOES={globalUserSettings.inputForKAOES} />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
-      <Route exact={true} path={`${match.url}/KHAERT`}>
+      <Route exact={true} path={`/games/KHAERT`}>
         <DocumentTitle title={"Typey Type | KHAERT"}>
           <ErrorBoundary>
             <AsyncKHAERT globalLookupDictionary={globalLookupDictionary} />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
-      <Route exact={true} path={`${match.url}/SHUFL`}>
+      <Route exact={true} path={`/games/SHUFL`}>
         <DocumentTitle title={"Typey Type | SHUFL game"}>
           <ErrorBoundary>
             <AsyncSHUFL
@@ -102,21 +101,21 @@ const Games = ({
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
-      <Route exact={true} path={`${match.url}/TPEUBGSZ`}>
+      <Route exact={true} path={`/games/TPEUBGSZ`}>
         <DocumentTitle title={"Typey Type | TPEUBGSZ game"}>
           <ErrorBoundary>
             <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
-      <Route exact={true} path={`${match.url}/TPEURPBGS`}>
+      <Route exact={true} path={`/games/TPEURPBGS`}>
         <DocumentTitle title={"Typey Type | TPEURPBGS game"}>
           <ErrorBoundary>
             <AsyncTPEURPBGS />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
-      <Route exact={true} path={`${match.url}/KPOES`}>
+      <Route exact={true} path={`/games/KPOES`}>
         <DocumentTitle title={"Typey Type | KPOES game"}>
           <ErrorBoundary>
             <AsyncKPOES
@@ -129,7 +128,7 @@ const Games = ({
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
-      <Route exact={true} path={`${match.url}`}>
+      <Route exact={true} path={`/games/`}>
         <AsyncGamesIndex />
       </Route>
     </Switch>
