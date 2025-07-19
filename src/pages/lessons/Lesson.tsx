@@ -315,7 +315,7 @@ const Lesson = ({
               </DocumentTitle>
             </div>
           </Route>
-          <Route exact={true} path={`${match.url}`}>
+          <Route exact={true} path={`${location.pathname}`}>
             <MainLessonView
               createNewCustomLesson={createNewCustomLesson}
               lessonSubTitle={lessonSubTitle}
