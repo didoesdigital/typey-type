@@ -392,10 +392,10 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
             )}
           />
           <Route
-            render={(props) => (
+            render={() => (
               <div>
                 <DocumentTitle title={"Typey Type | Page not found"}>
-                  <AsyncPageNotFound location={props.location} />
+                  <AsyncPageNotFound />
                 </DocumentTitle>
               </div>
             )}

@@ -2,16 +2,13 @@ import React, { useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../components/OutboundLink";
 import * as Sentry from "@sentry/browser";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import TypeyTypeIcon from "../../components/Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "../../components/Icons/Icon";
 
-type Props = {
-  location: any;
-};
-
-const PageNotFound = ({ location }: Props) => {
+const PageNotFound = () => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     if (mainHeading) {

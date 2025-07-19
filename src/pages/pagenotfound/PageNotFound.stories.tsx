@@ -1,18 +1,14 @@
-import React from "react";
 import PageNotFound from "./PageNotFound";
 
-export default {
+import type { Meta, StoryObj } from "@storybook/react";
+
+const meta: Meta<typeof PageNotFound> = {
   title: "Pages/PageNotFound",
   component: PageNotFound,
 };
 
-const testLocation = {
-  pathname: "404 story",
-};
+export default meta;
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
-const Template = (args) => {
-  return <PageNotFound location={testLocation} {...args} />;
-};
+type Story = StoryObj<typeof PageNotFound>;
 
-export const PageNotFoundStory = Template.bind({});
+export const PageNotFoundStory: Story = {};
