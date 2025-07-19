@@ -58,7 +58,7 @@ const Lesson = ({
   totalWordCount,
   upcomingPhrases,
   focusTriggerInt,
-}: Omit<LessonProps, "match" | "personalDictionaries">) => {
+}: Omit<LessonProps, "personalDictionaries">) => {
   const location = useLocation();
   const history = useHistory();
 

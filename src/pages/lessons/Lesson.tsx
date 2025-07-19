@@ -49,7 +49,6 @@ const Lesson = ({
   lessonLength,
   lessonSubTitle: lessonSubTitleProp,
   lessonTitle,
-  match,
   metWords,
   personalDictionaries,
   previousCompletedPhraseAsTyped,

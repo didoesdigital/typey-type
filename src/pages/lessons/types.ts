@@ -68,7 +68,6 @@ export type LessonProps = Pick<
   | "timer"
   | "focusTriggerInt"
 > & {
-  match: any;
   metWords: MetWords; // For Finished props
   personalDictionaries?: ImportedPersonalDictionaries; // For Flashcards props
   startTime: number | null;
