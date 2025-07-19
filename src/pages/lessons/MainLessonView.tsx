@@ -42,7 +42,6 @@ export type MainLessonViewProps = {
   createNewCustomLesson: JSX.Element | undefined;
   lessonSubTitle: string;
   overviewLink: JSX.Element | undefined;
-  propsLesson: Lesson;
   actualText: string;
   changeShowStrokesInLesson: (
     event: React.ChangeEvent<HTMLInputElement>
@@ -87,7 +86,6 @@ const MainLessonView = ({
   createNewCustomLesson,
   lessonSubTitle,
   overviewLink,
-  propsLesson,
   actualText,
   changeShowStrokesInLesson,
   chooseStudy,
@@ -297,7 +295,7 @@ const MainLessonView = ({
                     <LessonLengthPreview
                       lessonStarted={disableUserSettings}
                       speed={userSettings?.beatsPerMinute || 10}
-                      totalWords={propsLesson.presentedMaterial.length}
+                      totalWords={lesson.presentedMaterial.length}
                     />
                   </div>
                 </div>

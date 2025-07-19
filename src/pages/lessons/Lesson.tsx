@@ -13,7 +13,6 @@ import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
 import type { LessonProps } from "./types";
 import type { Lesson as LessonType } from "../../types";
-import Zipper from "../../utils/zipper";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtom } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
@@ -335,24 +334,6 @@ const Lesson = ({
     </Link>
   ) : undefined;
 
-  let propsLesson = lesson;
-  if (
-    (Object.keys(propsLesson).length === 0 &&
-      propsLesson.constructor === Object) ||
-    !propsLesson
-  ) {
-    propsLesson = {
-      sourceMaterial: [{ phrase: "The", stroke: "-T" }],
-      presentedMaterial: [{ phrase: "The", stroke: "-T" }],
-      // possibly incorrect `newPresentedMaterial`?
-      newPresentedMaterial: new Zipper([{ phrase: "The", stroke: "-T" }]),
-      settings: { ignoredChars: "" },
-      title: "Steno",
-      subtitle: "",
-      path: "",
-    };
-  }
-
   if (lesson) {
     if (
       isFinished(lesson, currentPhraseID) &&
@@ -450,7 +431,6 @@ const Lesson = ({
               createNewCustomLesson={createNewCustomLesson}
               lessonSubTitle={lessonSubTitle}
               overviewLink={overviewLink}
-              propsLesson={propsLesson}
               actualText={actualText}
               changeShowStrokesInLesson={changeShowStrokesInLesson}
               chooseStudy={chooseStudy}
