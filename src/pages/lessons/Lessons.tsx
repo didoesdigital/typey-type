@@ -1,5 +1,5 @@
 import React, { ComponentPropsWithoutRef, Suspense } from "react";
-import { Route, RouteComponentProps, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import Lesson from "./Lesson";
@@ -11,8 +11,7 @@ import ProgressLesson from "pages/lessons/ProgressLesson";
 import CustomLesson from "pages/lessons/CustomLesson";
 import LessonNotFound from "pages/lessons/LessonNotFound";
 
-export type LessonsRoutingProps = RouteComponentProps &
-  ComponentPropsWithoutRef<typeof Lesson> &
+export type LessonsRoutingProps = ComponentPropsWithoutRef<typeof Lesson> &
   ComponentPropsWithoutRef<typeof CustomLessonSetup> &
   ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator> & {
     lessonNotFound: boolean;
@@ -43,7 +42,6 @@ const Lessons = ({
   lessonNotFound,
   lessonSubTitle,
   lessonTitle,
-  match,
   metWords,
   personalDictionaries,
   previousCompletedPhraseAsTyped,
@@ -108,7 +106,7 @@ const Lessons = ({
     <Suspense fallback={<PageLoading pastDelay={true} />}>
       <Switch>
         <Route
-          path={`${match.url}/:category/:subcategory/:lessonPath/flashcards`}
+          path={`/lessons/:category/:subcategory/:lessonPath/flashcards`}
           render={() => (
             <Lesson
               actualText={actualText}
@@ -146,7 +144,7 @@ const Lessons = ({
           )}
         />
         <Route
-          path={`${match.url}/fundamentals/:lessonPath/flashcards`}
+          path={`/lessons/fundamentals/:lessonPath/flashcards`}
           render={() => (
             <Lesson
               actualText={actualText}
@@ -184,7 +182,7 @@ const Lessons = ({
           )}
         />
         <Route
-          path={`${match.url}/drills/:lessonPath/flashcards`}
+          path={`/lessons/drills/:lessonPath/flashcards`}
           render={() => (
             <Lesson
               actualText={actualText}
@@ -222,7 +220,7 @@ const Lessons = ({
           )}
         />
         <Route
-          path={`${match.url}/:category/:subcategory/:lessonPath`}
+          path={`/lessons/:category/:subcategory/:lessonPath`}
           render={() => (
             <Lesson
               actualText={actualText}
@@ -260,7 +258,7 @@ const Lessons = ({
           )}
         />
         <Route
-          path={`${match.url}/fundamentals/:lessonPath`}
+          path={`/lessons/fundamentals/:lessonPath`}
           render={() => (
             <Lesson
               actualText={actualText}
@@ -298,7 +296,7 @@ const Lessons = ({
           )}
         />
         <Route
-          path={`${match.url}/drills/:lessonPath`}
+          path={`/lessons/drills/:lessonPath`}
           render={() => (
             <Lesson
               actualText={actualText}
@@ -338,15 +336,15 @@ const Lessons = ({
         <Route
           exact={true}
           path={[
-            `${match.url}/progress/`,
-            `${match.url}/progress/seen/`,
-            `${match.url}/progress/memorised/`,
+            `/lessons/progress/`,
+            `/lessons/progress/seen/`,
+            `/lessons/progress/memorised/`,
           ]}
           render={() => <ProgressLesson {...lessonProps} />}
         />
         <Route
           exact={true}
-          path={`${match.url}/custom/setup`}
+          path={`/lessons/custom/setup`}
           render={() => (
             <DocumentTitle title="Typey Type | Create a custom lesson">
               <CustomLessonSetup
@@ -363,7 +361,7 @@ const Lessons = ({
             </DocumentTitle>
           )}
         />
-        <Route exact={true} path={`${match.url}/custom/generator`}>
+        <Route exact={true} path={`/lessons/custom/generator`}>
           <DocumentTitle title="Typey Type | Lesson generator">
             <ErrorBoundary>
               <AsyncCustomLessonGenerator
@@ -378,12 +376,12 @@ const Lessons = ({
         </Route>
         <Route
           exact={true}
-          path={`${match.url}/custom`}
+          path={`/lessons/custom`}
           render={() => <CustomLesson {...lessonProps} />}
         />
         <Route
           exact={true}
-          path={`${match.url}/flashcards`}
+          path={`/lessons/flashcards`}
           render={() => (
             <Lesson
               actualText={actualText}
@@ -422,7 +420,7 @@ const Lessons = ({
         />
         <Route
           exact={true}
-          path={`${match.url}/:notFound`}
+          path={`/lessons/:notFound`}
           render={() => (
             <Lesson
               actualText={actualText}
@@ -459,7 +457,7 @@ const Lessons = ({
             />
           )}
         />
-        <Route exact={true} path={match.url}>
+        <Route exact={true} path={"/lessons"}>
           <Suspense fallback={<PageLoading pastDelay={true} />}>
             <LessonsIndex customLesson={customLesson} />
           </Suspense>
