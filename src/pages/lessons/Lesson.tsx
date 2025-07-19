@@ -3,7 +3,6 @@ import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
-import LessonNotFound from "./LessonNotFound";
 import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
@@ -47,7 +46,6 @@ const Lesson = ({
   globalLookupDictionaryLoaded,
   lesson,
   lessonLength,
-  lessonNotFound,
   lessonSubTitle: lessonSubTitleProp,
   lessonTitle,
   match,
@@ -199,10 +197,6 @@ const Lesson = ({
     setRevisionMode(false);
     restartLesson(event);
   };
-
-  if (lessonNotFound) {
-    return <LessonNotFound />;
-  }
 
   const lessonSubTitle =
     lesson?.subtitle?.length > 0 ? `: ${lessonSubTitleProp}` : "";

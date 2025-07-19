@@ -68,7 +68,6 @@ export type LessonProps = Pick<
   | "timer"
   | "focusTriggerInt"
 > & {
-  lessonNotFound: boolean; // To show <LessonNotFound />
   match: any;
   metWords: MetWords; // For Finished props
   personalDictionaries?: ImportedPersonalDictionaries; // For Flashcards props

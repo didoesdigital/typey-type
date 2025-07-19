@@ -9,11 +9,14 @@ import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import ProgressLesson from "pages/lessons/ProgressLesson";
 import CustomLesson from "pages/lessons/CustomLesson";
+import LessonNotFound from "pages/lessons/LessonNotFound";
 
 export type LessonsRoutingProps = RouteComponentProps &
   ComponentPropsWithoutRef<typeof Lesson> &
   ComponentPropsWithoutRef<typeof CustomLessonSetup> &
-  ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>;
+  ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator> & {
+    lessonNotFound: boolean;
+  };
 
 const AsyncCustomLessonGenerator = Loadable({
   loader: () => import("./custom/CustomLessonGenerator"),
@@ -96,6 +99,12 @@ const Lessons = ({
     focusTriggerInt,
   };
 
+  // This would happen if we try to load a specific lesson's data and the
+  // route is sensible but we fail to fetch valid lesson text:
+  if (lessonNotFound) {
+    return <LessonNotFound />;
+  }
+
   return (
     <Suspense fallback={<PageLoading pastDelay={true} />}>
       <Switch>
@@ -114,7 +123,6 @@ const Lessons = ({
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
               lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               metWords={metWords}
@@ -154,7 +162,6 @@ const Lessons = ({
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
               lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               metWords={metWords}
@@ -194,7 +201,6 @@ const Lessons = ({
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
               lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               metWords={metWords}
@@ -234,7 +240,6 @@ const Lessons = ({
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
               lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               metWords={metWords}
@@ -274,7 +279,6 @@ const Lessons = ({
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
               lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               metWords={metWords}
@@ -314,7 +318,6 @@ const Lessons = ({
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
               lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               metWords={metWords}
@@ -402,7 +405,6 @@ const Lessons = ({
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
               lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               metWords={metWords}
@@ -443,7 +445,6 @@ const Lessons = ({
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
               lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               metWords={metWords}

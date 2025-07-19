@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
-import LessonNotFound from "./LessonNotFound";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
 import getLessonMetadata from "./utilities/getLessonMetadata";
@@ -38,7 +37,6 @@ const Lesson = ({
   globalLookupDictionaryLoaded,
   lesson,
   lessonLength,
-  lessonNotFound,
   lessonSubTitle: lessonSubTitleProp,
   lessonTitle,
   metWords,
@@ -169,10 +167,6 @@ const Lesson = ({
     setRevisionMode(false);
     restartLesson(event);
   };
-
-  if (lessonNotFound) {
-    return <LessonNotFound />;
-  }
 
   const lessonSubTitle =
     lesson?.subtitle?.length > 0 ? `: ${lessonSubTitleProp}` : "";
