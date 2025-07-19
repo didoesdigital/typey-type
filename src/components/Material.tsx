@@ -4,15 +4,21 @@ import MultiLineMaterial from "./Material/MultiLineMaterial";
 import OnePhraseMaterial from "./Material/OnePhraseMaterial";
 import { useAtomValue } from "jotai";
 import { upcomingWordsLayoutState } from "../states/userSettingsState";
+import type {
+  ActualTypedText,
+  Lesson,
+  LessonSettings,
+  MaterialText,
+} from "types";
 
-type Props = {
-  actualText: any;
-  completedPhrases: any;
-  currentPhrase: string;
+export type MaterialProps = {
+  actualText: ActualTypedText;
+  completedPhrases: MaterialText[];
+  currentPhrase: MaterialText;
   currentPhraseID: number;
-  lesson: any;
-  settings: any;
-  upcomingPhrases: any;
+  lesson: Lesson;
+  settings: LessonSettings;
+  upcomingPhrases: MaterialText[];
 };
 
 const Material = ({
@@ -23,7 +29,7 @@ const Material = ({
   lesson,
   settings,
   upcomingPhrases,
-}: Props) => {
+}: MaterialProps) => {
   const upcomingWordsLayout = useAtomValue(upcomingWordsLayoutState);
   return upcomingWordsLayout === "multiline" ? (
     <MultiLineMaterial

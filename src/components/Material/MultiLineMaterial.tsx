@@ -4,13 +4,15 @@ import EntireMaterial from "./EntireMaterial";
 
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import type { MaterialProps } from "components/Material";
+import type { LessonSettings, PresentedMaterial } from "types";
 
 type Props = {
-  actualText: any;
-  currentPhrase: string;
-  currentPhraseID: number;
-  presentedMaterial: any;
-  settings: any;
+  actualText: MaterialProps["actualText"];
+  currentPhrase: MaterialProps["currentPhrase"];
+  currentPhraseID: MaterialProps["currentPhraseID"];
+  presentedMaterial: PresentedMaterial;
+  settings: LessonSettings;
 };
 
 export default React.memo(function MultiLineMaterial({
@@ -20,7 +22,7 @@ export default React.memo(function MultiLineMaterial({
   presentedMaterial,
   settings,
 }: Props) {
-  const {spacePlacement, blurMaterial} = useAtomValue(userSettingsState);
+  const { spacePlacement, blurMaterial } = useAtomValue(userSettingsState);
   return (
     <div className="mb1 nt1 mx-auto mw-844">
       <div className="expected">

@@ -3,13 +3,15 @@ import { matchSplitText } from "utils/matchSplitText";
 
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import type { MaterialProps } from "components/Material";
+import type { LessonSettings } from "types";
 
 type Props = {
-  actualText: any;
-  completedPhrases: any;
-  currentPhrase: string;
-  settings: any;
-  upcomingPhrases: any;
+  actualText: MaterialProps["actualText"];
+  completedPhrases: MaterialProps["completedPhrases"];
+  currentPhrase: MaterialProps["currentPhrase"];
+  settings: LessonSettings;
+  upcomingPhrases: MaterialProps["upcomingPhrases"];
 };
 
 export default function SingleLineMaterial({
@@ -57,7 +59,10 @@ export default function SingleLineMaterial({
               {completedPhrases.join(" ")}&#8203;
               {userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " "}
             </span>
-            <div className={currentAndUpcomingPhrasesClasses} data-testid="current-and-upcoming-phrases">
+            <div
+              className={currentAndUpcomingPhrasesClasses}
+              data-testid="current-and-upcoming-phrases"
+            >
               <strong className="fw7" tabIndex={0} data-testid="current-phrase">
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>

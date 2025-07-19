@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Subheader from "../../../components/Subheader";
+import type { PrettyLessonTitle } from "types";
 
 type LessonSubheaderProps = {
   createNewCustomLesson: JSX.Element | undefined;
   stopLesson: () => void;
-  lessonSubTitle: any;
-  lessonTitle: any;
+  lessonSubTitle: string;
+  lessonTitle: PrettyLessonTitle;
   overviewLink: JSX.Element | undefined;
   path: string;
   restartLesson: (event: React.MouseEvent<HTMLAnchorElement>) => void;

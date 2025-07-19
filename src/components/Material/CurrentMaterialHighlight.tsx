@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { matchSplitText } from "utils/matchSplitText";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import type { MaterialProps } from "components/Material";
+import type { LessonSettings } from "types";
 
 type Props = {
-  actualText: any;
-  currentPhrase: string;
-  settings: any;
+  actualText: MaterialProps["actualText"];
+  currentPhrase: MaterialProps["currentPhrase"];
+  settings: LessonSettings;
   currentPhraseID: number;
 };
 
