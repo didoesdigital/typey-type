@@ -69,7 +69,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
     valueQWERTYSteno: ''
   }
 
-  updateRawSteno(event: any) {
+  updateRawSteno(event: React.ChangeEvent<HTMLInputElement>) {
     let currentValue: string;
 
     if (event && event.target && event.target.value) {
