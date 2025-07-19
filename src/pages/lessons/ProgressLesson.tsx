@@ -169,7 +169,7 @@ const Lesson = ({
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setUpProgressRevisionLesson, setupLesson, userSettings]);
+  // }, [handleLesson, lesson.path, location.pathname, location.search, setUpProgressRevisionLesson, setupLesson, userSettings]);
 
   // Stop lesson (timer, etc. when lesson is unmounted)
   useEffect(() => {

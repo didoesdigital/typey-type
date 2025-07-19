@@ -128,7 +128,7 @@ const Lesson = ({
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setupLesson, startCustomLesson, userSettings]);
+  // }, [handleLesson, lesson.path, location.pathname, location.search, setupLesson, startCustomLesson, userSettings]);
 
   const hasZeroTotalWordCount = totalWordCount === 0;
   const hasEmptyCurrentPhrase = currentPhrase === "";

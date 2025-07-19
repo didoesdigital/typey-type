@@ -95,7 +95,6 @@ const Lesson = ({
   const chooseStudy = useChooseStudy();
   const toggleHideOtherSettings = useToggleHideOtherSettings();
   const updatePreset = useUpdatePreset();
-  const loadedLessonPath = useRef("");
 
   const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
@@ -110,8 +109,6 @@ const Lesson = ({
     // Wrapping this in a try/catch or removing the conditional would fail silently.
     // By checking here, we let people use the rest of the app but not lessons.
     if (window.localStorage) {
-      loadedLessonPath.current = match.url;
-
       if (isOverview(location.pathname)) {
         // do nothing
       } else if (isFlashcards(location.pathname)) {
@@ -147,25 +144,21 @@ const Lesson = ({
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setupLesson, userSettings]);
-
-  const hasLessonChanged = match.url !== loadedLessonPath.current;
+  // }, [handleLesson, lesson.path, location.pathname, location.search, setupLesson, userSettings]);
 
   // Load lesson file and start lesson!
   useEffect(() => {
     if (
       !isFlashcards(location.pathname) &&
       !isOverview(location.pathname) &&
-      location.pathname.startsWith("/lessons") &&
-      hasLessonChanged
+      location.pathname.startsWith("/lessons")
     ) {
-      loadedLessonPath.current = match.url;
       handleLesson(process.env.PUBLIC_URL + location.pathname + "lesson.txt");
     }
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasLessonChanged, location.pathname]);
-  // }, [hasLessonChanged, location.pathname, handleLesson, match.url]);
+  }, [location.pathname]);
+  // }, [location.pathname, handleLesson]);
 
   // Stop lesson (timer, etc. when lesson is unmounted)
   useEffect(() => {
