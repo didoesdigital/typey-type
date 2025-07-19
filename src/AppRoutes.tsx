@@ -188,13 +188,13 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
           </Route>
           <Route
             path="/writer"
-            render={(props) => (
+            render={() => (
               <div>
                 <Header />
 
                 <DocumentTitle title={"Typey Type | Writer"}>
                   <ErrorBoundary>
-                    <AsyncWriter {...props} />
+                    <AsyncWriter />
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -277,7 +277,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
           </Route>
           <Route
             path="/lookup"
-            render={(props) => (
+            render={() => (
               <div>
                 <Header />
                 <DocumentTitle title={"Typey Type | Lookup"}>
@@ -288,7 +288,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                         appState.globalLookupDictionaryLoaded
                       }
                       personalDictionaries={appState.personalDictionaries}
-                      {...props}
                     />
                   </ErrorBoundary>
                 </DocumentTitle>
@@ -297,7 +296,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
           />
           <Route
             path="/dictionaries"
-            render={(props) => (
+            render={() => (
               <div>
                 <Header />
                 <DocumentTitle title={"Typey Type | Dictionaries"}>
@@ -308,7 +307,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                         appState.globalLookupDictionaryLoaded
                       }
                       personalDictionaries={appState.personalDictionaries}
-                      {...props}
                     />
                   </ErrorBoundary>
                 </DocumentTitle>
@@ -317,7 +315,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
           />
           <Route
             path="/lessons"
-            render={(props) => (
+            render={() => (
               <div>
                 <Header />
                 <DocumentTitle title={"Typey Type | Lessons"}>
@@ -387,7 +385,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                       }
                       upcomingPhrases={appProps.upcomingMaterial}
                       focusTriggerInt={appState.focusTriggerInt}
-                      {...props}
                     />
                   </ErrorBoundary>
                 </DocumentTitle>
