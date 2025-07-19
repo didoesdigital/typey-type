@@ -7,6 +7,7 @@ import LessonsIndex from "./LessonsIndex";
 import CustomLessonSetup from "./custom/CustomLessonSetup";
 import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
+import ProgressLesson from "pages/lessons/ProgressLesson";
 
 export type LessonsRoutingProps = RouteComponentProps &
   ComponentPropsWithoutRef<typeof Lesson> &
@@ -59,6 +60,41 @@ const Lessons = ({
   upcomingPhrases,
   focusTriggerInt,
 }: LessonsRoutingProps) => {
+  const lessonProps = {
+    actualText,
+    completedPhrases,
+    currentLessonStrokes,
+    currentPhrase,
+    currentPhraseID,
+    currentStroke,
+    disableUserSettings,
+    globalLookupDictionary,
+    globalLookupDictionaryLoaded,
+    lesson,
+    lessonLength,
+    lessonNotFound,
+    lessonSubTitle,
+    lessonTitle,
+    metWords,
+    personalDictionaries,
+    previousCompletedPhraseAsTyped,
+    repetitionsRemaining,
+    settings,
+    showStrokesInLesson,
+    startTime,
+    targetStrokeCount,
+    timer,
+    totalNumberOfHintedWords,
+    totalNumberOfLowExposuresSeen,
+    totalNumberOfMatchedWords,
+    totalNumberOfMistypedWords,
+    totalNumberOfNewWordsMet,
+    totalNumberOfRetainedWords,
+    totalWordCount,
+    upcomingPhrases,
+    focusTriggerInt,
+  };
+
   return (
     <Suspense fallback={<PageLoading pastDelay={true} />}>
       <Switch>
@@ -304,126 +340,12 @@ const Lessons = ({
         />
         <Route
           exact={true}
-          path={`${match.url}/progress/`}
-          render={(props) => (
-            <Lesson
-              actualText={actualText}
-              completedPhrases={completedPhrases}
-              currentLessonStrokes={currentLessonStrokes}
-              currentPhrase={currentPhrase}
-              currentPhraseID={currentPhraseID}
-              currentStroke={currentStroke}
-              disableUserSettings={disableUserSettings}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              lesson={lesson}
-              lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
-              lessonSubTitle={lessonSubTitle}
-              lessonTitle={lessonTitle}
-              metWords={metWords}
-              personalDictionaries={personalDictionaries}
-              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              repetitionsRemaining={repetitionsRemaining}
-              settings={settings}
-              showStrokesInLesson={showStrokesInLesson}
-              startTime={startTime}
-              targetStrokeCount={targetStrokeCount}
-              timer={timer}
-              totalNumberOfHintedWords={totalNumberOfHintedWords}
-              totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-              totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-              totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-              totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-              totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-              totalWordCount={totalWordCount}
-              upcomingPhrases={upcomingPhrases}
-              focusTriggerInt={focusTriggerInt}
-              {...props}
-            />
-          )}
-        />
-        <Route
-          exact={true}
-          path={`${match.url}/progress/seen/`}
-          render={(props) => (
-            <Lesson
-              actualText={actualText}
-              completedPhrases={completedPhrases}
-              currentLessonStrokes={currentLessonStrokes}
-              currentPhrase={currentPhrase}
-              currentPhraseID={currentPhraseID}
-              currentStroke={currentStroke}
-              disableUserSettings={disableUserSettings}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              lesson={lesson}
-              lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
-              lessonSubTitle={lessonSubTitle}
-              lessonTitle={lessonTitle}
-              metWords={metWords}
-              personalDictionaries={personalDictionaries}
-              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              repetitionsRemaining={repetitionsRemaining}
-              settings={settings}
-              showStrokesInLesson={showStrokesInLesson}
-              startTime={startTime}
-              targetStrokeCount={targetStrokeCount}
-              timer={timer}
-              totalNumberOfHintedWords={totalNumberOfHintedWords}
-              totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-              totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-              totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-              totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-              totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-              totalWordCount={totalWordCount}
-              upcomingPhrases={upcomingPhrases}
-              focusTriggerInt={focusTriggerInt}
-              {...props}
-            />
-          )}
-        />
-        <Route
-          exact={true}
-          path={`${match.url}/progress/memorised/`}
-          render={(props) => (
-            <Lesson
-              actualText={actualText}
-              completedPhrases={completedPhrases}
-              currentLessonStrokes={currentLessonStrokes}
-              currentPhrase={currentPhrase}
-              currentPhraseID={currentPhraseID}
-              currentStroke={currentStroke}
-              disableUserSettings={disableUserSettings}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              lesson={lesson}
-              lessonLength={lessonLength}
-              lessonNotFound={lessonNotFound}
-              lessonSubTitle={lessonSubTitle}
-              lessonTitle={lessonTitle}
-              metWords={metWords}
-              personalDictionaries={personalDictionaries}
-              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              repetitionsRemaining={repetitionsRemaining}
-              settings={settings}
-              showStrokesInLesson={showStrokesInLesson}
-              startTime={startTime}
-              targetStrokeCount={targetStrokeCount}
-              timer={timer}
-              totalNumberOfHintedWords={totalNumberOfHintedWords}
-              totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-              totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-              totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-              totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-              totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-              totalWordCount={totalWordCount}
-              upcomingPhrases={upcomingPhrases}
-              focusTriggerInt={focusTriggerInt}
-              {...props}
-            />
-          )}
+          path={[
+            `${match.url}/progress/`,
+            `${match.url}/progress/seen/`,
+            `${match.url}/progress/memorised/`,
+          ]}
+          render={(props) => <ProgressLesson {...lessonProps} {...props} />}
         />
         <Route
           exact={true}

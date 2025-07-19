@@ -3,11 +3,11 @@ import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
-import LessonNotFound from "./LessonNotFound";
 import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
 import Flashcards from "./flashcards/Flashcards";
+import { loadPersonalPreferences } from "utils/storage";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
 import type { LessonProps } from "./types";
@@ -22,21 +22,13 @@ import {
 } from "./components/UserSettings/updateUserSetting";
 import { useLessonIndex } from "../../states/lessonIndexState";
 import applyQueryParamsToUserSettings from "./components/UserSettings/applyQueryParamsToUserSettings";
+import getProgressRevisionUserSettings from "./components/UserSettings/getProgressRevisionUserSettings";
 import { revisionModeState } from "../../states/lessonState";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 import getChangesToRecentLessons from "../progress/RecentLessons/getChangesToRecentLessons";
 
-const isCustom = (pathname: string) =>
-  pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
-
 const isFinished = (lesson: LessonType, currentPhraseID: number) =>
   currentPhraseID === lesson?.presentedMaterial?.length || 0;
-
-const isFlashcards = (pathname: string) =>
-  pathname.startsWith("/lessons/") && pathname.endsWith("/flashcards");
-
-const isOverview = (pathname: string) =>
-  pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
 
 const Lesson = ({
   actualText,
@@ -50,7 +42,6 @@ const Lesson = ({
   globalLookupDictionaryLoaded,
   lesson,
   lessonLength,
-  lessonNotFound,
   lessonSubTitle: lessonSubTitleProp,
   lessonTitle,
   match,
@@ -72,20 +63,19 @@ const Lesson = ({
   totalWordCount,
   upcomingPhrases,
   focusTriggerInt,
-}: LessonProps) => {
+}: Omit<LessonProps, "lessonNotFound">) => {
   const location = useLocation();
   const history = useHistory();
 
   const {
     appFetchAndSetupGlobalDict,
     customiseLesson,
-    handleLesson,
     changeShowStrokesInLesson,
     restartLesson,
     reviseLesson,
     sayCurrentPhraseAgain,
+    setUpProgressRevisionLesson,
     setupLesson,
-    startCustomLesson,
     stopLesson,
     updateGlobalLookupDictionary,
     updateMarkup,
@@ -117,19 +107,45 @@ const Lesson = ({
       loadedLessonPath.current = match.url;
 
       if (
-        location.pathname.startsWith("/lessons/custom") &&
-        !location.pathname.startsWith("/lessons/custom/setup")
+        location.pathname.startsWith("/lessons/progress/") &&
+        !location.pathname.includes("/lessons/progress/seen/") &&
+        !location.pathname.includes("/lessons/progress/memorised/")
       ) {
-        startCustomLesson();
-      } else if (isOverview(location.pathname)) {
-        // do nothing
-      } else if (isFlashcards(location.pathname)) {
-        // do nothing
-      } else if (
-        lesson.path !== location.pathname + "lesson.txt" &&
-        location.pathname.startsWith("/lessons")
-      ) {
-        handleLesson(process.env.PUBLIC_URL + location.pathname + "lesson.txt");
+        let loadedPersonalPreferences = loadPersonalPreferences();
+        const newSeenOrMemorised = [false, true, true] as const;
+        const newUserSettings = getProgressRevisionUserSettings(
+          userSettings,
+          newSeenOrMemorised
+        );
+        setUserSettings(newUserSettings);
+        setUpProgressRevisionLesson(
+          loadedPersonalPreferences[0],
+          newSeenOrMemorised
+        );
+      } else if (location.pathname.startsWith("/lessons/progress/seen/")) {
+        let loadedPersonalPreferences = loadPersonalPreferences();
+        let newSeenOrMemorised = [false, true, false] as const;
+        const newUserSettings = getProgressRevisionUserSettings(
+          userSettings,
+          newSeenOrMemorised
+        );
+        setUserSettings(newUserSettings);
+        setUpProgressRevisionLesson(
+          loadedPersonalPreferences[0],
+          newSeenOrMemorised
+        );
+      } else if (location.pathname.startsWith("/lessons/progress/memorised/")) {
+        let loadedPersonalPreferences = loadPersonalPreferences();
+        let newSeenOrMemorised = [false, false, true] as const;
+        const newUserSettings = getProgressRevisionUserSettings(
+          userSettings,
+          newSeenOrMemorised
+        );
+        setUserSettings(newUserSettings);
+        setUpProgressRevisionLesson(
+          loadedPersonalPreferences[0],
+          newSeenOrMemorised
+        );
       }
 
       const parsedParams = queryString.parse(location.search);
@@ -156,59 +172,7 @@ const Lesson = ({
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setupLesson, startCustomLesson, userSettings]);
-
-  const shouldStartCustomLesson =
-    location.pathname.startsWith("/lessons/custom") &&
-    !location.pathname.startsWith("/lessons/custom/setup") &&
-    lesson.title !== "Custom";
-
-  const hasLessonChanged = match.url !== loadedLessonPath.current;
-
-  // Start custom lesson!
-  useEffect(() => {
-    if (shouldStartCustomLesson && hasLessonChanged) {
-      loadedLessonPath.current = match.url;
-      startCustomLesson();
-    }
-    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldStartCustomLesson, hasLessonChanged]);
-  // }, [shouldStartCustomLesson, hasLessonChanged, startCustomLesson, match.url]);
-
-  // Load lesson file and start lesson!
-  useEffect(() => {
-    if (
-      !shouldStartCustomLesson &&
-      !isCustom(location.pathname) &&
-      !isFlashcards(location.pathname) &&
-      !isOverview(location.pathname) &&
-      location.pathname.startsWith("/lessons") &&
-      hasLessonChanged
-    ) {
-      loadedLessonPath.current = match.url;
-      handleLesson(process.env.PUBLIC_URL + location.pathname + "lesson.txt");
-    }
-    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasLessonChanged, location.pathname, shouldStartCustomLesson]);
-  // }, [hasLessonChanged, location.pathname, shouldStartCustomLesson, handleLesson, match.url]);
-
-  const hasZeroTotalWordCount = totalWordCount === 0;
-  const hasEmptyCurrentPhrase = currentPhrase === "";
-
-  // Focus on input when starting custom lesson
-  useEffect(() => {
-    if (
-      location.pathname.startsWith("/lessons/custom") &&
-      (!hasEmptyCurrentPhrase || !hasZeroTotalWordCount)
-    ) {
-      const yourTypedText = document.getElementById("your-typed-text");
-      if (yourTypedText) {
-        yourTypedText.focus();
-      }
-    }
-  }, [location.pathname, hasEmptyCurrentPhrase, hasZeroTotalWordCount]);
+  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setUpProgressRevisionLesson, setupLesson, startCustomLesson, userSettings]);
 
   // Stop lesson (timer, etc. when lesson is unmounted)
   useEffect(() => {
@@ -250,23 +214,10 @@ const Lesson = ({
     restartLesson(event);
   };
 
-  if (lessonNotFound) {
-    return <LessonNotFound />;
-  }
-
   const lessonSubTitle =
     lesson?.subtitle?.length > 0 ? `: ${lessonSubTitleProp}` : "";
 
-  const createNewCustomLesson = isCustom(location.pathname) ? (
-    <Link
-      to="/lessons/custom/setup"
-      onClick={stopLesson}
-      className="link-button link-button-ghost table-cell mr1"
-      role="button"
-    >
-      Edit custom lesson
-    </Link>
-  ) : (
+  const createNewCustomLesson = (
     <Link
       to="/lessons/custom/setup"
       onClick={stopAndCustomiseLesson.bind(this)}
@@ -278,21 +229,9 @@ const Lesson = ({
   );
 
   const metadata = getLessonMetadata(lessonIndex, lesson.path);
-  const overviewLink = metadata?.overview ? (
-    <Link
-      to={location.pathname + "overview"}
-      className="link-button link-button-ghost table-cell"
-    >
-      Overview
-    </Link>
-  ) : undefined;
 
   if (lesson) {
-    if (
-      isFinished(lesson, currentPhraseID) &&
-      !isOverview(location.pathname) &&
-      !isFlashcards(location.pathname)
-    ) {
+    if (isFinished(lesson, currentPhraseID)) {
       return (
         <DocumentTitle title={"Typey Type | Lesson: " + lesson.title}>
           <main id="main">
@@ -301,7 +240,7 @@ const Lesson = ({
               stopLesson={stopLesson}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
-              overviewLink={overviewLink}
+              overviewLink={undefined}
               path={lesson?.path}
               restartLesson={setRevisionModeAndRestartLesson}
               ref={mainHeading}
@@ -383,7 +322,7 @@ const Lesson = ({
             <MainLessonView
               createNewCustomLesson={createNewCustomLesson}
               lessonSubTitle={lessonSubTitle}
-              overviewLink={overviewLink}
+              overviewLink={undefined}
               actualText={actualText}
               changeShowStrokesInLesson={changeShowStrokesInLesson}
               chooseStudy={chooseStudy}
