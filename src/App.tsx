@@ -47,6 +47,7 @@ import type {
   ImportedPersonalDictionaries,
   Lesson,
   LessonPathWithBasenameAndFilename,
+  LessonsProgressIndex,
   LookupDictWithNamespacedDicts,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
@@ -65,6 +66,14 @@ import type {
 
 import type { LessonProps } from 'pages/lessons/types';
 import type { LessonsRoutingProps } from 'pages/lessons/Lessons';
+
+type GetUpdatedLessonsProgress = {
+  lessonPath: string;
+  lesson: Lesson;
+  userSettings: UserSettings;
+  prevLessonsProgress: LessonsProgressIndex;
+  metWords: MetWords;
+}
 
 type Props = AppProps & {
   userSettings: UserSettings;
@@ -178,8 +187,7 @@ class App extends Component<Props, AppState> {
   }
 
   /* anything that needs to be done when stopping the lesson, excluding the state update */
-  // @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-  applyStopLessonSideEffects(state) {
+  applyStopLessonSideEffects(state: AppState) {
     this.stopTimer();
     synth?.cancel();
     writePersonalPreferences('metWords', state.metWords);
@@ -194,9 +202,7 @@ class App extends Component<Props, AppState> {
     this.setState(newState);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'prevState' implicitly has an 'any' type... Remove this comment to see the full error message
-  getFutureStateToStopLesson(prevState) {
-    // @ts-expect-error TS(7006) FIXME: Parameter 'copy' implicitly has an 'any' type.
+  getFutureStateToStopLesson(prevState: AppState) {
     const currentLessonStrokes = prevState.currentLessonStrokes.map(copy => ({...copy}));
     for (let i = 0; i < currentLessonStrokes.length; i++) {
       if (currentLessonStrokes[i].accuracy === true) {
@@ -299,8 +305,13 @@ class App extends Component<Props, AppState> {
     });
   }
 
-  // @ts-expect-error TS(7031) FIXME: Binding element 'lessonPath' implicitly has an 'an... Remove this comment to see the full error message
-  getUpdatedLessonsProgress({lessonPath, lesson, userSettings, prevLessonsProgress, metWords}) {
+  getUpdatedLessonsProgress({
+    lessonPath,
+    lesson,
+    userSettings,
+    prevLessonsProgress,
+    metWords
+  }: GetUpdatedLessonsProgress) {
     const lessonsProgress = {...prevLessonsProgress};
     // This is actually UNIQUE numberOfWordsSeen.
     // It seems low value to update localStorage data to rename it only for readability.
@@ -314,7 +325,6 @@ class App extends Component<Props, AppState> {
       numberOfWordsSeen = lessonsProgress[lessonPath].numberOfWordsSeen;
     }
 
-    // @ts-expect-error TS(7006) FIXME: Parameter 'copy' implicitly has an 'any' type.
     let material = lesson?.sourceMaterial ? lesson.sourceMaterial.map(copy => ({...copy})) : [{phrase: "the", stroke: "-T"}];
     if (userSettings.simpleTypography) {
       material = replaceSmartTypographyInPresentedMaterial.call(this, material, userSettings);

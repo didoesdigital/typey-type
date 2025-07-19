@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AnnouncerController from "./components/Announcer/AnnouncerController";
 import Announcer from "./components/Announcer/Announcer";
-import {
+import type {
   MaterialItem,
   MaterialText,
   Lesson,
@@ -18,6 +18,7 @@ import {
   CurrentLessonStrokes,
   ActualTypedText,
   ImportedPersonalDictionaries,
+  LessonsProgressIndex,
 } from "./types";
 import { Location } from "history";
 import { CustomLessonMaterialValidationState } from "./pages/lessons/custom/components/CustomLessonIntro";
@@ -118,7 +119,7 @@ export type AppStateForDescendants = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   lessonNotFound: boolean;
-  lessonsProgress: unknown;
+  lessonsProgress: LessonsProgressIndex;
   // isGlobalLookupDictionaryLoaded: false,
   personalDictionaries?: ImportedPersonalDictionaries;
   previousCompletedPhraseAsTyped: ActualTypedText;

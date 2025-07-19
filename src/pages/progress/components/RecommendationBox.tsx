@@ -5,7 +5,11 @@ import RecommendationDescription from "./RecommendationDescription";
 import { Link, Redirect } from "react-router-dom";
 import { useAnnouncerApi } from "../../../components/Announcer/useAnnouncer";
 
-import type { FullRecommendationsStudyType, MetWords } from "../../../types";
+import type {
+  FullRecommendationsStudyType,
+  LessonsProgressIndex,
+  MetWords,
+} from "../../../types";
 import { useAtom, useSetAtom } from "jotai";
 import { revisionModeState } from "../../../states/lessonState";
 import { useLessonIndex } from "../../../states/lessonIndexState";
@@ -44,7 +48,7 @@ export type RecommendationHistory = {
 };
 
 type Props = {
-  lessonsProgress: any;
+  lessonsProgress: LessonsProgressIndex;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
   metWords: MetWords;
@@ -139,7 +143,7 @@ const RecommendationBox = ({
       newRecommendationHistory,
       yourSeenWordCount,
       yourMemorisedWordCount,
-      lessonIndex,
+      lessonIndex
     );
 
     const typedNextRecommendedLesson =

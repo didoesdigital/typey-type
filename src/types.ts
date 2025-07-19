@@ -608,9 +608,10 @@ export type LessonsProgressEntry = {
   numberOfWordsToDiscover: number;
 };
 
-export type LessonsProgressIndex = {
-  [lesson: LessonPathWithBasenameAndFilename]: LessonsProgressEntry;
-};
+export type LessonsProgressIndex = Record<
+  LessonPathWithBasenameAndFilename,
+  LessonsProgressEntry
+>;
 
 export type FlashcardsCourseLevel =
   | "noviceCourse"

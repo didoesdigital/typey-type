@@ -14,7 +14,7 @@ import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 import DownloadProgressButton from "./components/DownloadProgressButton";
 import Subheader from "../../components/Subheader";
-import { MetWords } from "../../types";
+import type { LessonsProgressIndex, MetWords } from "../../types";
 import BackupBanner from "./components/BackupBanner";
 import BackupModal from "./components/BackupModal";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
@@ -35,7 +35,7 @@ const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
 let particles: Confetti.ConfettiParticle[] = [];
 
 type Props = {
-  lessonsProgress: any;
+  lessonsProgress: LessonsProgressIndex;
   metWords: MetWords;
   startingMetWordsToday: any;
   yourMemorisedWordCount: number;
