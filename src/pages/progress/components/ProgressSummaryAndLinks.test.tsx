@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import ProgressSummaryAndLinks from "./ProgressSummaryAndLinks";
 import metWordsNovice from "../../../fixtures/metWordsNovice.json";
@@ -266,17 +266,19 @@ describe("progress summary and links", () => {
   it("has 0 seen and 0 memorised", () => {
     render(
       <Router basename="/">
-        <Route>
-          <div data-testid="test-wrapper">
-            <ProgressSummaryAndLinks
-              metWords={{}}
-              restartConfetti={() => undefined}
-              userSettings={userSettings}
-              yourMemorisedWordCount={0}
-              yourSeenWordCount={0}
-            />
-          </div>
-        </Route>
+        <Switch>
+          <Route>
+            <div data-testid="test-wrapper">
+              <ProgressSummaryAndLinks
+                metWords={{}}
+                restartConfetti={() => undefined}
+                userSettings={userSettings}
+                yourMemorisedWordCount={0}
+                yourSeenWordCount={0}
+              />
+            </div>
+          </Route>
+        </Switch>
       </Router>
     );
 
