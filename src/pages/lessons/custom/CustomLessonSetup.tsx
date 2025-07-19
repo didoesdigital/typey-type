@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CustomJSONLesson from "./components/CustomJSONLesson";
 import CustomLessonIntro from "./components/CustomLessonIntro";
 import CustomShareLessons from "./components/CustomShareLessons";
@@ -24,10 +24,7 @@ const CustomLessonSetup = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
 }: Props) => {
-  const {
-    createCustomLesson,
-    appFetchAndSetupGlobalDict,
-  } = useAppMethods()
+  const { createCustomLesson, appFetchAndSetupGlobalDict } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -51,13 +48,6 @@ const CustomLessonSetup = ({
     globalLookupDictionaryLoaded,
   ]);
 
-  const match = useRouteMatch({
-    path: "/lessons",
-    strict: true,
-    sensitive: true,
-  });
-  const url = match?.url ?? "";
-
   return (
     <main id="main">
       <Subheader>
@@ -74,7 +64,7 @@ const CustomLessonSetup = ({
         </div>
         <div className="flex flex-wrap mxn2">
           <Link
-            to={`${url}/custom/generator`.replace(/\/{2,}/g, "/")}
+            to={`/lessons/custom/generator`.replace(/\/{2,}/g, "/")}
             className="link-button link-button-ghost table-cell mr1"
             style={{ lineHeight: 2 }}
             id="ga--lesson-index--create-a-custom-lesson"
@@ -114,7 +104,7 @@ const CustomLessonSetup = ({
           </p>
           <div className="text-center">
             <Link
-              to={`${url}/custom/generator`.replace(/\/{2,}/g, "/")}
+              to={`/lessons/custom/generator`.replace(/\/{2,}/g, "/")}
               className="link-button dib mt3"
               style={{ lineHeight: 2 }}
               id="ga--lesson-index--create-a-custom-lesson"
