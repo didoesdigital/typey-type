@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import Loadable from "react-loadable";
 import PageLoading from "./components/PageLoading";
@@ -20,7 +20,6 @@ import type {
   ImportedPersonalDictionaries,
   LessonsProgressIndex,
 } from "./types";
-import { Location } from "history";
 import { CustomLessonMaterialValidationState } from "./pages/lessons/custom/components/CustomLessonIntro";
 
 const AsyncBreak = Loadable({
@@ -153,7 +152,6 @@ type Props = {
 };
 
 export type AppProps = {
-  location: Location;
   completedMaterial: MaterialText[];
   presentedMaterialCurrentItem: MaterialItem;
   stateLesson: Lesson;
@@ -161,6 +159,7 @@ export type AppProps = {
 };
 
 const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
+  const location = useLocation();
   return (
     <AnnouncerController>
       <Announcer />
@@ -269,7 +268,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                     appState.globalLookupDictionaryLoaded
                   }
                   lessonpath="flashcards"
-                  locationpathname={appProps.location.pathname}
+                  locationpathname={location.pathname}
                   personalDictionaries={appState.personalDictionaries}
                 />
               </DocumentTitle>

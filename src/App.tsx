@@ -1009,7 +1009,6 @@ class App extends Component<Props, AppState> {
           }>
             <AppRoutes
               appProps={{
-                location: this.props.location,
                 completedMaterial,
                 presentedMaterialCurrentItem,
                 stateLesson,
