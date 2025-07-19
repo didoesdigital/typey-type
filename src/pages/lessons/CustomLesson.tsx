@@ -1,13 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
-import ErrorBoundary from "../../components/ErrorBoundary";
 import LessonNotFound from "./LessonNotFound";
-import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
-import Flashcards from "./flashcards/Flashcards";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
 import type { LessonProps } from "./types";
@@ -44,9 +41,7 @@ const Lesson = ({
   lessonNotFound,
   lessonSubTitle: lessonSubTitleProp,
   lessonTitle,
-  match,
   metWords,
-  personalDictionaries,
   previousCompletedPhraseAsTyped,
   repetitionsRemaining,
   settings,
@@ -63,12 +58,11 @@ const Lesson = ({
   totalWordCount,
   upcomingPhrases,
   focusTriggerInt,
-}: LessonProps) => {
+}: Omit<LessonProps, "match" | "personalDictionaries">) => {
   const location = useLocation();
   const history = useHistory();
 
   const {
-    appFetchAndSetupGlobalDict,
     changeShowStrokesInLesson,
     restartLesson,
     reviseLesson,
@@ -76,9 +70,7 @@ const Lesson = ({
     setupLesson,
     startCustomLesson,
     stopLesson,
-    updateGlobalLookupDictionary,
     updateMarkup,
-    updatePersonalDictionaries,
     updateRevisionMaterial,
   } = useAppMethods();
   const lessonIndex = useLessonIndex();
@@ -253,91 +245,47 @@ const Lesson = ({
       );
     } else {
       return (
-        <Switch>
-          <Route path={`/lessons/:category/:subcategory?/:lessonPath/overview`}>
-            <div>
-              <ErrorBoundary>
-                <DocumentTitle title={"Typey Type | Lesson overview"}>
-                  <LessonOverview
-                    lessonIndex={lessonIndex}
-                    lessonMetadata={metadata}
-                    lessonPath={location.pathname.replace("overview", "")}
-                    lessonTxtPath={location.pathname.replace(
-                      "overview",
-                      "lesson.txt"
-                    )}
-                    lessonTitle={lesson.title}
-                  />
-                </DocumentTitle>
-              </ErrorBoundary>
-            </div>
-          </Route>
-          <Route
-            path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`}
-          >
-            <div>
-              <DocumentTitle title={"Typey Type | Flashcards"}>
-                <Flashcards
-                  fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-                  globalLookupDictionary={globalLookupDictionary}
-                  globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                  personalDictionaries={personalDictionaries}
-                  updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-                  updatePersonalDictionaries={updatePersonalDictionaries}
-                  lessonpath={
-                    process.env.PUBLIC_URL +
-                    location.pathname.replace(/flashcards/, "") +
-                    "lesson.txt"
-                  }
-                  locationpathname={location.pathname}
-                />
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route exact={true} path={`${match.url}`}>
-            <MainLessonView
-              createNewCustomLesson={createNewCustomLesson}
-              lessonSubTitle={lessonSubTitle}
-              overviewLink={overviewLink}
-              actualText={actualText}
-              changeShowStrokesInLesson={changeShowStrokesInLesson}
-              chooseStudy={chooseStudy}
-              completedPhrases={completedPhrases}
-              currentLessonStrokes={currentLessonStrokes}
-              currentPhrase={currentPhrase}
-              currentPhraseID={currentPhraseID}
-              currentStroke={currentStroke}
-              disableUserSettings={disableUserSettings}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              stopLesson={stopLesson}
-              toggleHideOtherSettings={toggleHideOtherSettings}
-              lesson={lesson}
-              lessonLength={lessonLength}
-              lessonTitle={lessonTitle}
-              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              repetitionsRemaining={repetitionsRemaining}
-              restartLesson={setRevisionModeAndRestartLesson}
-              revisionMode={revisionMode}
-              sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-              settings={settings}
-              showStrokesInLesson={showStrokesInLesson}
-              targetStrokeCount={targetStrokeCount}
-              timer={timer}
-              totalNumberOfHintedWords={totalNumberOfHintedWords}
-              totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-              totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-              totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-              totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-              totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-              totalWordCount={totalWordCount}
-              upcomingPhrases={upcomingPhrases}
-              updatePreset={updatePreset}
-              updateMarkup={updateRecentLessonsAndUpdateMarkup}
-              focusTriggerInt={focusTriggerInt}
-            />
-          </Route>
-        </Switch>
+        <MainLessonView
+          createNewCustomLesson={createNewCustomLesson}
+          lessonSubTitle={lessonSubTitle}
+          overviewLink={overviewLink}
+          actualText={actualText}
+          changeShowStrokesInLesson={changeShowStrokesInLesson}
+          chooseStudy={chooseStudy}
+          completedPhrases={completedPhrases}
+          currentLessonStrokes={currentLessonStrokes}
+          currentPhrase={currentPhrase}
+          currentPhraseID={currentPhraseID}
+          currentStroke={currentStroke}
+          disableUserSettings={disableUserSettings}
+          globalLookupDictionary={globalLookupDictionary}
+          globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+          stopLesson={stopLesson}
+          toggleHideOtherSettings={toggleHideOtherSettings}
+          lesson={lesson}
+          lessonLength={lessonLength}
+          lessonTitle={lessonTitle}
+          previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
+          repetitionsRemaining={repetitionsRemaining}
+          restartLesson={setRevisionModeAndRestartLesson}
+          revisionMode={revisionMode}
+          sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+          settings={settings}
+          showStrokesInLesson={showStrokesInLesson}
+          targetStrokeCount={targetStrokeCount}
+          timer={timer}
+          totalNumberOfHintedWords={totalNumberOfHintedWords}
+          totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+          totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+          totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+          totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+          totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+          totalWordCount={totalWordCount}
+          upcomingPhrases={upcomingPhrases}
+          updatePreset={updatePreset}
+          updateMarkup={updateRecentLessonsAndUpdateMarkup}
+          focusTriggerInt={focusTriggerInt}
+        />
       );
     }
   } else {
