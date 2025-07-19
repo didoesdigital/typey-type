@@ -89,7 +89,6 @@ const Lesson = ({
   const chooseStudy = useChooseStudy();
   const toggleHideOtherSettings = useToggleHideOtherSettings();
   const updatePreset = useUpdatePreset();
-  const loadedLessonPath = useRef("");
 
   const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
@@ -104,8 +103,6 @@ const Lesson = ({
     // Wrapping this in a try/catch or removing the conditional would fail silently.
     // By checking here, we let people use the rest of the app but not lessons.
     if (window.localStorage) {
-      loadedLessonPath.current = match.url;
-
       if (
         location.pathname.startsWith("/lessons/progress/") &&
         !location.pathname.includes("/lessons/progress/seen/") &&
