@@ -44,11 +44,15 @@ import { synth, synthesizeSpeech } from "./utils/speechSynthesis";
 import type {
   DictionaryConfig,
   GlobalUserSettings,
+  ImportedPersonalDictionaries,
+  Lesson,
   LessonPathWithBasenameAndFilename,
   LookupDictWithNamespacedDicts,
   LookupDictWithNamespacedDictsAndConfig,
+  MetWords,
   RevisionMaterial,
   RevisionMode,
+  SpacedTypedWord,
   UserSettings,
 } from 'types';
 
@@ -148,8 +152,7 @@ class App extends Component<Props, AppState> {
    * this should probably be moved inside the Lesson component
    * when and if the lesson state is moved into the Lesson component
    */
-  // @ts-expect-error TS(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     const curUserSettings = this.props.userSettings;
     const prevUserSettings = prevProps.userSettings;
     if (
@@ -170,9 +173,8 @@ class App extends Component<Props, AppState> {
     }
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-  shouldUpdateLessonsProgress(state) {
-    return state.lesson.path && !state.lesson.path.endsWith("/lessons/custom");
+  shouldUpdateLessonsProgress(lesson: Lesson) {
+    return lesson.path && !lesson.path.endsWith("/lessons/custom");
   }
 
   /* anything that needs to be done when stopping the lesson, excluding the state update */
@@ -181,7 +183,7 @@ class App extends Component<Props, AppState> {
     this.stopTimer();
     synth?.cancel();
     writePersonalPreferences('metWords', state.metWords);
-    if (this.shouldUpdateLessonsProgress(state)) {
+    if (this.shouldUpdateLessonsProgress(state.lesson)) {
       writePersonalPreferences('lessonsProgress', state.lessonsProgress);
     }
   }
@@ -217,7 +219,7 @@ class App extends Component<Props, AppState> {
       yourMemorisedWordCount: calculateMemorisedWordCount(prevState.metWords)
     };
 
-    if (this.shouldUpdateLessonsProgress(newState)) {
+    if (this.shouldUpdateLessonsProgress(newState.lesson)) {
       let lessonsProgress = this.getUpdatedLessonsProgress({lessonPath: prevState.lesson.path,
                                                             lesson: prevState.lesson,
                                                             userSettings: this.props.userSettings,
@@ -246,8 +248,7 @@ class App extends Component<Props, AppState> {
     });
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'newMetWord' implicitly has an 'any' typ... Remove this comment to see the full error message
-  updateMetWords(newMetWord) {
+  updateMetWords(newMetWord: SpacedTypedWord) {
     const newMetWordsState = Object.assign({}, this.state.metWords);
     const phraseText =
       this.props.userSettings.spacePlacement === "spaceBeforeOutput"
@@ -389,8 +390,7 @@ class App extends Component<Props, AppState> {
     return lessonsProgress;
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'providedMetWords' implicitly has an 'an... Remove this comment to see the full error message
-  updateStartingMetWordsAndCounts(providedMetWords) {
+  updateStartingMetWordsAndCounts(providedMetWords: MetWords) {
     this.setState({
       startingMetWordsToday: providedMetWords,
       yourSeenWordCount: calculateSeenWordCount(providedMetWords),
@@ -399,8 +399,10 @@ class App extends Component<Props, AppState> {
   }
 
   // set user settings
-  // @ts-expect-error TS(7006) FIXME: Parameter 'metWordsFromStorage' implicitly has an ... Remove this comment to see the full error message
-  setUpProgressRevisionLesson(metWordsFromStorage, newSeenOrMemorised) {
+  setUpProgressRevisionLesson(
+    metWordsFromStorage: MetWords,
+    newSeenOrMemorised: readonly [boolean, boolean, boolean]
+  ) {
     let lesson = fallbackLesson;
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
@@ -631,8 +633,7 @@ class App extends Component<Props, AppState> {
     });
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  createCustomLesson(event) {
+  createCustomLesson(event: React.ChangeEvent<HTMLTextAreaElement>) {
     if (event && event.target) {
       let providedText = event.target.value || '';
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
@@ -679,22 +680,18 @@ class App extends Component<Props, AppState> {
     });
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'personalDictionaries' implicitly has an... Remove this comment to see the full error message
-  updatePersonalDictionaries(personalDictionaries) {
+  updatePersonalDictionaries(personalDictionaries: ImportedPersonalDictionaries) {
     this.setState({personalDictionaries: personalDictionaries});
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'combinedLookupDictionary' implicitly ha... Remove this comment to see the full error message
-  updateGlobalLookupDictionary(combinedLookupDictionary) {
+  updateGlobalLookupDictionary(combinedLookupDictionary: LookupDictWithNamespacedDictsAndConfig) {
     this.setState({globalLookupDictionary: combinedLookupDictionary});
   }
-
 
   markupBuffer = [];
   updateBufferTimer = null;
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  updateMarkup(event) {
+  updateMarkup(event: React.ChangeEvent<HTMLTextAreaElement>) {
     let actualText = event.target.value;
     // TODO: once we're happy that this will be the permanent new default behaviour, remove all the `batchUpdate`-specific branching code and tests:
     // const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
@@ -912,7 +909,7 @@ class App extends Component<Props, AppState> {
       }
     }
 
-    if (this.isFinished(state)) {
+    if (this.isFinished(state.lesson, state.currentPhraseID)) {
       const newState = this.getFutureStateToStopLesson(state);
       sideEffects.push(() => this.applyStopLessonSideEffects({...newState}));
       return [newState, sideEffects];
@@ -946,10 +943,9 @@ class App extends Component<Props, AppState> {
     }
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'currentState' implicitly has an 'any' t... Remove this comment to see the full error message
-  isFinished(currentState) {
-    const presentedMaterialLength = currentState.lesson?.presentedMaterial?.length || 0;
-    return currentState.currentPhraseID === presentedMaterialLength;
+  isFinished(lesson: Lesson, currentPhraseID: number) {
+    const presentedMaterialLength = lesson?.presentedMaterial?.length || 0;
+    return currentPhraseID === presentedMaterialLength;
   }
 
   presentCompletedMaterial() {

@@ -276,6 +276,21 @@ export type AffixObject = {
 
 /**
  * Examples:
+ *
+ * - "0"
+ * - "1"
+ * - " The"
+ * - " process"
+ * - " of"
+ * - " writing"
+ * - " shorthand"
+ */
+export type SpacedTypedWord = string;
+
+/**
+ * Examples:
+ *
+ * ```
  * {
  *   "0": 1,
  *   "1": 1,
@@ -285,10 +300,9 @@ export type AffixObject = {
  *   " writing": 17,
  *   " shorthand": 6,
  * }
+ * ```
  */
-export type MetWords = {
-  [spacedTypedWords: string]: number;
-};
+export type MetWords = Record<SpacedTypedWord, number>;
 
 export type Attempt = {
   /**

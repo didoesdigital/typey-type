@@ -3,7 +3,10 @@ import { AppMethods } from "../../states/legacy/AppMethodsContext";
 const appMethods: AppMethods = {
   appFetchAndSetupGlobalDict: () => Promise.resolve(true),
   changeShowStrokesInLesson: () => false,
-  createCustomLesson: () => console.log("create custom lesson"),
+  createCustomLesson: (event) => {
+    console.log("create custom lesson");
+    return event;
+  },
   customiseLesson: () => undefined,
   generateCustomLesson: () => console.log("generate custom lesson"),
   handleLesson: () => undefined,
