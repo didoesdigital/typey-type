@@ -6,6 +6,7 @@ import type {
   ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
+  UserSettings,
 } from "../../../types";
 import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 
@@ -14,7 +15,7 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   personalDictionaries?: ImportedPersonalDictionaries;
-  userSettings: any;
+  userSettings: UserSettings;
 };
 
 export default function Index({

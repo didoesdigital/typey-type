@@ -4,9 +4,10 @@ import OutboundLink from "../../components/OutboundLink";
 import LessonList from "./components/LessonList";
 import Subheader from "../../components/Subheader";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
+import type { CustomLesson } from "types";
 
 type LessonsIndexProps = {
-  customLesson: any;
+  customLesson: CustomLesson;
 };
 
 const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {

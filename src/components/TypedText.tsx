@@ -1,19 +1,23 @@
 import React, { useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import GoogleAnalytics from "react-ga4";
-import { CurrentLessonStrokes } from "../types";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../states/userSettingsState";
+import type {
+  ActualTypedText,
+  CurrentLessonStrokes,
+  PresentedMaterial,
+} from "../types";
 
 type Props = {
-  actualText: string;
-  completedPhrases: any;
+  actualText: ActualTypedText;
+  completedPhrases: PresentedMaterial;
   currentPhraseID: number;
   currentLessonStrokes: CurrentLessonStrokes[];
   currentPhrase: string;
   previousCompletedPhraseAsTyped: string;
   sayCurrentPhraseAgain: () => void;
-  updateMarkup: (event: any) => void;
+  updateMarkup: React.ChangeEventHandler<HTMLTextAreaElement>;
   focusTriggerInt: number;
 };
 

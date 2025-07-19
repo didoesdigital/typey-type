@@ -12,6 +12,7 @@ import type {
   ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
+  UserSettings,
 } from "../../../types";
 
 type Props = {
@@ -20,7 +21,7 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   personalDictionaries?: ImportedPersonalDictionaries;
-  userSettings: any;
+  userSettings: UserSettings;
   updateMultipleMetWords: typeof updateMultipleMetWords;
 };
 

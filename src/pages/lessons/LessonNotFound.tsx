@@ -7,7 +7,7 @@ import Subheader from "../../components/Subheader";
 import { useLessonIndex } from "states/lessonIndexState";
 
 type LessonNotFoundProps = {
-  restartLesson?: any;
+  restartLesson?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";

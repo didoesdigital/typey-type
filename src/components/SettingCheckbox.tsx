@@ -6,7 +6,7 @@ type Props = {
   label: string;
   modalAndButton?: React.ReactNode;
   nameAndId: string;
-  onChange: any;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
   wrapperClasses?: string;
 };
 
