@@ -12,6 +12,7 @@ import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import { useToggleExperiment } from "../lessons/components/UserSettings/updateGlobalUserSetting";
+import DictionaryNotFound from "pages/dictionaries/DictionaryNotFound";
 
 const AsyncDictionary = Loadable({
   loader: () => import("./Dictionary"),
@@ -87,6 +88,9 @@ const Dictionaries = ({
               {...dictionaryProps}
             />
           </Suspense>
+        </Route>
+        <Route path={"*"}>
+          <DictionaryNotFound />
         </Route>
       </Switch>
     </div>
