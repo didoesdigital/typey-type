@@ -5674,13 +5674,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/history@npm:^4.7.11":
-  version: 4.7.11
-  resolution: "@types/history@npm:4.7.11"
-  checksum: 10c0/3facf37c2493d1f92b2e93a22cac7ea70b06351c2ab9aaceaa3c56aa6099fb63516f6c4ec1616deb5c56b4093c026a043ea2d3373e6c0644d55710364d02c934
-  languageName: node
-  linkType: hard
-
 "@types/howler@npm:^2.2.7":
   version: 2.2.7
   resolution: "@types/howler@npm:2.2.7"
@@ -5904,27 +5897,6 @@ __metadata:
   dependencies:
     "@types/react": "npm:*"
   checksum: 10c0/49268a0d999eb6683e272e0fd0f58c6932455ae0eca37efea3294fc04885b40f7094edd3dd3edcd662bb533b521225056c7eb6708e246eaed1f8ec3d81dfe44b
-  languageName: node
-  linkType: hard
-
-"@types/react-router-dom@npm:^5.3.3":
-  version: 5.3.3
-  resolution: "@types/react-router-dom@npm:5.3.3"
-  dependencies:
-    "@types/history": "npm:^4.7.11"
-    "@types/react": "npm:*"
-    "@types/react-router": "npm:*"
-  checksum: 10c0/a9231a16afb9ed5142678147eafec9d48582809295754fb60946e29fcd3757a4c7a3180fa94b45763e4c7f6e3f02379e2fcb8dd986db479dcab40eff5fc62a91
-  languageName: node
-  linkType: hard
-
-"@types/react-router@npm:*":
-  version: 5.1.18
-  resolution: "@types/react-router@npm:5.1.18"
-  dependencies:
-    "@types/history": "npm:^4.7.11"
-    "@types/react": "npm:*"
-  checksum: 10c0/cc0c900b6c06597a963cc1bf4b541d51edd59f820741ee754b8539340b2247c391b9ea0c113938a7038680e3b58e9c290f0318657cfd1abe9d5b238b4829f0c2
   languageName: node
   linkType: hard
 
@@ -18241,7 +18213,6 @@ __metadata:
     "@types/react-loadable": "npm:^5.5.6"
     "@types/react-modal": "npm:^3.13.1"
     "@types/react-numeric-input": "npm:^2.2.4"
-    "@types/react-router-dom": "npm:^5.3.3"
     "@types/react-transition-group": "npm:^4.4.5"
     chromatic: "npm:^12.2.0"
     clipboard: "npm:^1.7.1"
