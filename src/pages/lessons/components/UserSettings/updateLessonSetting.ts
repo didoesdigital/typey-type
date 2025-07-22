@@ -14,8 +14,12 @@ export function changeShowStrokesInLesson(
     yourTypedText.focus();
   }
 
-  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-  if (this.props.location.pathname.includes("custom")) {
+  if (
+    // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+    this.state.lesson.title === "Custom" ||
+    // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+    this.state.lesson.title === this.state.customLesson.title
+  ) {
     GoogleAnalytics.event({
       category: "Stroke hint",
       action: "Reveal",
