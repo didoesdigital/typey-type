@@ -122,7 +122,7 @@ function generateCustomLesson(
     sourceMaterial: rulesFilteredMaterial,
     presentedMaterial: rulesFilteredMaterial,
     settings: { ignoredChars: "" },
-    title: "Generated lesson",
+    title: "Custom",
     subtitle: "Generated lesson",
     newPresentedMaterial: new Zipper(rulesFilteredMaterial),
     path: process.env.PUBLIC_URL + "/lessons/custom",
