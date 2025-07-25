@@ -12,7 +12,7 @@ import {
   defaultState as defaultRulesWithData,
   rulesWithDataReducer,
 } from "./generator/rulesWithDataReducer";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import RuleOptions from "./generator/components/RuleOptions";
 import RegexRuleSetting from "./generator/components/RegexRuleSetting";
 import availableRulePrettyNames from "./generator/utilities/availableRulePrettyNames";
@@ -168,12 +168,12 @@ const CustomLessonGenerator = ({
     });
   };
 
-  const match = useRouteMatch({
+  const match = useMatch({
     path: "/lessons",
-    strict: true,
-    sensitive: true,
+    end: true,
+    caseSensitive: true,
   });
-  const url = match?.url ?? "";
+  const url = match?.pathname ?? "";
 
   return (
     <main id="main">

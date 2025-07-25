@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
 import LessonList from "./components/LessonList";
 import Subheader from "../../components/Subheader";
@@ -18,12 +18,12 @@ const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
     mainHeading.current?.focus();
   }, []);
 
-  const match = useRouteMatch({
+  const match = useMatch({
     path: "/lessons",
-    strict: true,
-    sensitive: true,
+    end: true,
+    caseSensitive: true,
   });
-  const url = match?.url ?? "";
+  const url = match?.pathname ?? "";
 
   return (
     <main id="main">

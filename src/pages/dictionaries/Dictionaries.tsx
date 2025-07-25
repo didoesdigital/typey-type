@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Routes, useRouteMatch } from "react-router-dom";
+import { Route, Routes, useMatch } from "react-router-dom";
 import Loadable from "react-loadable";
 import DictionariesIndex from "./DictionariesIndex";
 import PageLoading from "../../components/PageLoading";
@@ -43,12 +43,12 @@ const Dictionaries = ({
   const { updatePersonalDictionaries, appFetchAndSetupGlobalDict } =
     useAppMethods();
   const toggleExperiment = useToggleExperiment();
-  const match = useRouteMatch({
+  const match = useMatch({
     path: "/dictionaries",
-    strict: true,
-    sensitive: true,
+    end: true,
+    caseSensitive: true,
   });
-  const url = match?.url ?? "";
+  const url = match?.pathname ?? "";
 
   return (
     <div>
