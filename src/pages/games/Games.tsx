@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import Loadable from "react-loadable";
@@ -75,7 +75,7 @@ const Games = ({
   const userSettings = useAtomValue(userSettingsState);
 
   return (
-    <Switch>
+    <Routes>
       <Route exact={true} path={`/games/KAOES`}>
         <DocumentTitle title={"Typey Type | KAOES game"}>
           <ErrorBoundary>
@@ -131,7 +131,7 @@ const Games = ({
       <Route exact={true} path={`/games/`}>
         <AsyncGamesIndex />
       </Route>
-    </Switch>
+    </Routes>
   );
 };
 

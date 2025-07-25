@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "./components/ErrorBoundary";
 import App from "./App";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.scss";
 import { withAtomsCompat } from "states/atomUtils";
 import { userSettingsState } from "./states/userSettingsState";
@@ -42,11 +42,11 @@ ReactDOM.render(
   <DocumentTitle title="Typey Type for Stenographers">
     <Router basename="/typey-type">
       <ErrorBoundary>
-        <Switch>
+        <Routes>
           <Route>
             <AppWithAtomsCompat />
           </Route>
-        </Switch>
+        </Routes>
       </ErrorBoundary>
     </Router>
   </DocumentTitle>,

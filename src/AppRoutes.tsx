@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import Loadable from "react-loadable";
 import PageLoading from "./components/PageLoading";
@@ -164,7 +164,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
     <AnnouncerController>
       <Announcer />
       <div>
-        <Switch>
+        <Routes>
           <Route exact={true} path="/">
             <div>
               <Header />
@@ -372,7 +372,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
               </DocumentTitle>
             </div>
           </Route>
-        </Switch>
+        </Routes>
       </div>
       <Footer />
     </AnnouncerController>

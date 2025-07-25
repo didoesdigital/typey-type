@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Flashcards from "./Flashcards";
 import { useHydrateAtoms } from "jotai/utils";
@@ -28,7 +28,7 @@ const Template = (args) => {
   useHydrateAtoms([[flashcardsProgressState, flashcardsProgress]]);
   return (
     <div className="p3">
-      <Switch>
+      <Routes>
         <Route path={`/`}>
           <div>
             <AppMethodsContext.Provider
@@ -56,7 +56,7 @@ const Template = (args) => {
             </AppMethodsContext.Provider>
           </div>
         </Route>
-      </Switch>
+      </Routes>
     </div>
   );
 };

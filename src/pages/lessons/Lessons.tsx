@@ -1,5 +1,5 @@
 import React, { ComponentPropsWithoutRef, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import Lesson from "./Lesson";
@@ -104,7 +104,7 @@ const Lessons = ({
 
   return (
     <Suspense fallback={<PageLoading pastDelay={true} />}>
-      <Switch>
+      <Routes>
         <Route
           path={[
             `/lessons/:category/:subcategory/:lessonPath/flashcards`,
@@ -172,7 +172,7 @@ const Lessons = ({
         <Route path={"*"}>
           <LessonNotFound />
         </Route>
-      </Switch>
+      </Routes>
     </Suspense>
   );
 };

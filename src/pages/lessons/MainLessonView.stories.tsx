@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { useHydrateAtoms } from "jotai/utils";
 import { userSettingsState } from "../../states/userSettingsState";
 import MainLessonView from "./MainLessonView";
@@ -72,7 +72,7 @@ const Template = (args: any) => {
   useHydrateAtoms([[userSettingsState, userSettings]]);
   return (
     <AppMethodsContext.Provider value={appMethods}>
-      <Switch>
+      <Routes>
         <Route>
           <div>
             <MainLessonView
@@ -133,7 +133,7 @@ const Template = (args: any) => {
             />
           </div>
         </Route>
-      </Switch>
+      </Routes>
     </AppMethodsContext.Provider>
   );
 };

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import type { Preview } from "@storybook/react";
 
 import "../src/index.scss";
@@ -39,13 +39,13 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <Router basename="/typey-type">
-        <Switch>
+        <Routes>
           <Route>
             <div id="js-app" className="app">
               <Story />
             </div>
           </Route>
-        </Switch>
+        </Routes>
       </Router>
     ),
   ],

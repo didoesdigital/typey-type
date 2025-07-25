@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Route, Routes, useRouteMatch } from "react-router-dom";
 import Loadable from "react-loadable";
 import DictionariesIndex from "./DictionariesIndex";
 import PageLoading from "../../components/PageLoading";
@@ -52,7 +52,7 @@ const Dictionaries = ({
 
   return (
     <div>
-      <Switch>
+      <Routes>
         <Route
           path={[
             `${url}/lessons/:category/:subcategory/:dictionaryPath`,
@@ -92,7 +92,7 @@ const Dictionaries = ({
         <Route path={"*"}>
           <DictionaryNotFound />
         </Route>
-      </Switch>
+      </Routes>
     </div>
   );
 };

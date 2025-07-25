@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Link, Route, Routes, useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
@@ -273,7 +273,7 @@ const Lesson = ({
       );
     } else {
       return (
-        <Switch>
+        <Routes>
           <Route path={`/lessons/:category/:subcategory?/:lessonPath/overview`}>
             <div>
               <ErrorBoundary>
@@ -360,7 +360,7 @@ const Lesson = ({
           <Route path={"*"}>
             <LessonNotFound />
           </Route>
-        </Switch>
+        </Routes>
       );
     }
   } else {
