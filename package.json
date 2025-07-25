@@ -47,7 +47,7 @@
     "react-loadable": "^5.5.0",
     "react-modal": "^3.14.4",
     "react-numeric-input": "^2.2.3",
-    "react-router-dom": "5.3.4",
+    "react-router-dom": "^6.30.1",
     "react-tooltip": "^5.28.0",
     "react-transition-group": "^2.4.0",
     "sass": "^1.49.8",
