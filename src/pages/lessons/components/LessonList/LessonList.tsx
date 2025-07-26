@@ -12,7 +12,7 @@ const mungeHash = (hash: string) => {
   return decodeURIComponent(hash);
 };
 
-const scrollToHeading = (hash: string) => {
+const scrollToHeading = (hash: Location["hash"]) => {
   // Given #gerard-nolst-trenit%C3%A9, decode it to #gerard-nolst-trenité
   const el = document.querySelector<HTMLAnchorElement>(
     window.decodeURIComponent(hash)
