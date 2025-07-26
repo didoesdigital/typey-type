@@ -68,7 +68,7 @@ export const CustomLessonGeneratorHelp = Template.bind({});
 CustomLessonGeneratorHelp.storyName = "Show generator help";
 // @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
 CustomLessonGeneratorHelp.play = async ({ canvasElement }) => {
-  const canvas = await within(canvasElement);
+  const canvas = within(canvasElement);
 
   const submitButton = canvas.getByRole("button", { name: "Show help" });
   await userEvent.click(submitButton);
