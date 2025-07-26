@@ -7,10 +7,6 @@ import debounce from "../../../../utils/debounce";
 import filterLessons from "pages/lessons/components/LessonList/filterLessonsBySearchTerm";
 import { InnerLessonList } from "pages/lessons/components/LessonList/InnerLessonList";
 
-export type LessonListProps = {
-  url: string;
-};
-
 const wrangleId = (id: string) => {
   return id.toLowerCase().replace(/[ ,’()]/g, "-");
 };
@@ -38,7 +34,7 @@ const scrollToHeading = (hash: string) => {
   }
 };
 
-export default function LessonList({ url }: LessonListProps) {
+export default function LessonList() {
   const location = useLocation();
   const navigate = useNavigate();
   const lessonIndex = useLessonIndex();
@@ -201,13 +197,13 @@ export default function LessonList({ url }: LessonListProps) {
                     >
                       <h5 className="h4">{subcategory}</h5>
                     </a>
-                    <InnerLessonList lessonIndex={lessons} url={url} />
+                    <InnerLessonList lessonIndex={lessons} />
                   </div>
                 );
               } else {
                 return (
                   <div key={subcategory}>
-                    <InnerLessonList lessonIndex={lessons} url={url} />
+                    <InnerLessonList lessonIndex={lessons} />
                   </div>
                 );
               }

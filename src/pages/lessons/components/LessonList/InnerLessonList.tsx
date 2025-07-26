@@ -2,23 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import type { LessonIndexEntry } from "types";
-import type { LessonListProps } from "pages/lessons/components/LessonList/LessonList";
+
+type InnerLessonListProps = {
+  lessonIndex: LessonIndexEntry[];
+};
 
 const WordCount = ({ lesson }: { lesson: LessonIndexEntry }) => (
   <>{lesson.wordCount > 0 && ` · ${lesson.wordCount} words`}</>
 );
 
-const LessonLink = ({
-  lesson,
-  url,
-}: {
-  lesson: LessonIndexEntry;
-  url: string;
-}) => (
+const LessonLink = ({ lesson }: { lesson: LessonIndexEntry }) => (
   <Link
-    to={`${url}${lesson.path}`
-      .replace(/lesson\.txt$/, "")
-      .replace(/\/{2,}/g, "/")}
+    to={`../${lesson.path}`.replace(/lesson\.txt$/, "").replace(/\/{2,}/g, "/")}
     id={
       "ga--lesson-index-" +
       lesson.path.replace(/\/lesson\.txt/g, "").replace(/[/.]/g, "-")
@@ -29,14 +24,11 @@ const LessonLink = ({
   </Link>
 );
 
-export const InnerLessonList = ({
-  lessonIndex,
-  url,
-}: LessonListProps & { lessonIndex: LessonIndexEntry[] }) => (
+export const InnerLessonList = ({ lessonIndex }: InnerLessonListProps) => (
   <ul className="unstyled-list">
     {lessonIndex.map((lesson) => (
       <li className="unstyled-list-item mb1" key={lesson.path}>
-        <LessonLink lesson={lesson} url={url} />
+        <LessonLink lesson={lesson} />
         <WordCount lesson={lesson} />
       </li>
     ))}

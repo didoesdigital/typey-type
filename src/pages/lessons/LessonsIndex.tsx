@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, useMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
 import LessonList from "./components/LessonList/LessonList";
 import Subheader from "../../components/Subheader";
@@ -18,13 +18,6 @@ const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
     mainHeading.current?.focus();
   }, []);
 
-  const match = useMatch({
-    path: "/lessons",
-    end: true,
-    caseSensitive: true,
-  });
-  const url = match?.pathname ?? "";
-
   return (
     <main id="main">
       <Subheader>
@@ -38,7 +31,7 @@ const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
         <div className="flex flex-wrap mxn2">
           {customLesson.title !== "Steno" ? (
             <Link
-              to={`${url}/custom?study=discover&newWords=1&seenWords=1&retainedWords=1&startFromWord=1`.replace(
+              to={`../custom?study=discover&newWords=1&seenWords=1&retainedWords=1&startFromWord=1`.replace(
                 /\/{2,}/g,
                 "/"
               )}
@@ -49,7 +42,7 @@ const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
             </Link>
           ) : null}
           <Link
-            to={`${url}/custom/setup`.replace(/\/{2,}/g, "/")}
+            to={`../custom/setup`.replace(/\/{2,}/g, "/")}
             className="link-button button button--secondary table-cell mr2 ml1"
             style={{ lineHeight: 2 }}
             id="ga--lesson-index--create-a-custom-lesson"
@@ -60,7 +53,7 @@ const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
       </Subheader>
       <div className="p3 mx-auto mw-1024">
         <h3>Typey&nbsp;Type lessons</h3>
-        <LessonList url={url} />
+        <LessonList />
         <div className="mw-584">
           <h3 className="mt3 pt6">Community lessons</h3>
           <p className="text-balance">
