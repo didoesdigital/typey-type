@@ -1,5 +1,5 @@
 import React from "react";
-import { wrangleId } from "pages/lessons/components/LessonList/LessonList";
+import { wrangleId } from "./wrangleId";
 import type { Category, LessonIndexEntry } from "types";
 
 type TableOfContentsItemProps = {

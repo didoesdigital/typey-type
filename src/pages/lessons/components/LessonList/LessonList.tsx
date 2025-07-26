@@ -8,10 +8,6 @@ import filterLessons from "pages/lessons/components/LessonList/filterLessonsBySe
 import GroupedLessons from "pages/lessons/components/LessonList/GroupedLessons";
 import TableOfContentsItem from "pages/lessons/components/LessonList/TableOfContentsItem";
 
-export const wrangleId = (id: string) => {
-  return id.toLowerCase().replace(/[ ,’()]/g, "-");
-};
-
 const mungeHash = (hash: string) => {
   return decodeURIComponent(hash);
 };

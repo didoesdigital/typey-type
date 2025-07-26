@@ -1,5 +1,5 @@
 import React from "react";
-import { wrangleId } from "pages/lessons/components/LessonList/LessonList";
+import { wrangleId } from "./wrangleId";
 import { InnerLessonList } from "pages/lessons/components/LessonList/InnerLessonList";
 import type { Category, LessonIndexEntry } from "types";
 
