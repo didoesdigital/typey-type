@@ -3,7 +3,7 @@ import type { LessonIndexEntry } from "types";
 export default function filterLessons(
   searchTerm: string,
   lessonIndex: LessonIndexEntry[]
-) {
+): LessonIndexEntry[] {
   const cleanedSearchTerm = searchTerm
     .trim()
     .toLowerCase()
