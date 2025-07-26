@@ -114,13 +114,14 @@ function filterLessons(searchTerm: string, lessonIndex: LessonIndexEntry[]) {
 
 export default function LessonList({ url }: LessonListProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const lessonIndex = useLessonIndex();
   const [searchFilter, setSearchFilter] = useState(
     () => new URLSearchParams(location.search).get("q") ?? ""
   );
+
   const filteredLessonIndex = filterLessons(searchFilter, lessonIndex);
 
-  const navigate = useNavigate();
   const updateSearchParams = useMemo(
     () =>
       debounce((q: string) => {
