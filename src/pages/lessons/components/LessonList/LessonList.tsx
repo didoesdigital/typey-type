@@ -71,8 +71,6 @@ export default function LessonList() {
       }, 0);
     };
     scrollToAnchor();
-
-    window.onhashchange = scrollToAnchor;
   }, [location.hash, navigate]);
 
   const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
