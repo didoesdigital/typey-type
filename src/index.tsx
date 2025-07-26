@@ -40,7 +40,13 @@ const AppWithAtomsCompat = withAtomsCompat(AppWrapper, [
 
 ReactDOM.render(
   <DocumentTitle title="Typey Type for Stenographers">
-    <Router basename="/typey-type">
+    <Router
+      basename="/typey-type"
+      future={{
+        v7_relativeSplatPath: false,
+        v7_startTransition: false,
+      }}
+    >
       <ErrorBoundary>
         <Routes>
           <Route path={"*"} element={<AppWithAtomsCompat />} />

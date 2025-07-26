@@ -128,7 +128,13 @@ describe(App, () => {
       );
     const loadPage = async ({ path, expectedFirstPhrase, settings }: Page) => {
       render(
-        <MemoryRouter initialEntries={[path]}>
+        <MemoryRouter
+          initialEntries={[path]}
+          future={{
+            v7_relativeSplatPath: false,
+            v7_startTransition: false,
+          }}
+        >
           <AppWithRouterInfo />
         </MemoryRouter>
       );

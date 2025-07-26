@@ -38,7 +38,14 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <Router basename="/typey-type" initialEntries={["/typey-type"]}>
+      <Router
+        basename="/typey-type"
+        initialEntries={["/typey-type"]}
+        future={{
+          v7_relativeSplatPath: false,
+          v7_startTransition: false,
+        }}
+      >
         <Routes>
           <Route
             path="/"
