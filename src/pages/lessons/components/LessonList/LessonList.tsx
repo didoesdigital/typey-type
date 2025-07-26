@@ -13,7 +13,9 @@ const mungeHash = (hash: string) => {
 };
 
 const scrollToHeading = (hash: string) => {
-  const el = document.querySelector<HTMLAnchorElement>(mungeHash(hash));
+  const el = document.querySelector<HTMLAnchorElement>(
+    window.decodeURIComponent(hash)
+  );
   let top = 0;
   if (el && el.getBoundingClientRect().top) {
     top = el.getBoundingClientRect().top;
