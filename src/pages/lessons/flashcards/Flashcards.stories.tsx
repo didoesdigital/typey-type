@@ -1,6 +1,4 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-
 import Flashcards from "./Flashcards";
 import { useHydrateAtoms } from "jotai/utils";
 import { flashcardsProgressState } from "../../../states/flashcardsProgressState";
@@ -28,35 +26,29 @@ const Template = (args) => {
   useHydrateAtoms([[flashcardsProgressState, flashcardsProgress]]);
   return (
     <div className="p3">
-      <Routes>
-        <Route path={`/`}>
-          <div>
-            <AppMethodsContext.Provider
-              // @ts-expect-error TS(2740) FIXME: Type '{ appFetchAndSetupGlobalDict: () => Promise<... Remove this comment to see the full error message
-              value={{
-                appFetchAndSetupGlobalDict: () => Promise.resolve(true),
-              }}
-            >
-              <Flashcards
-                fetchAndSetupGlobalDict={() => Promise.resolve(true)}
-                globalLookupDictionary={globalLookupDictionary}
-                globalLookupDictionaryLoaded={true}
-                personalDictionaries={{}}
-                updateGlobalLookupDictionary={() => undefined}
-                updatePersonalDictionaries={() => undefined}
-                userSettings={{}}
-                changeFullscreen={() => undefined}
-                lessonpath={
-                  process.env.PUBLIC_URL +
-                  lessonPath.replace(/flashcards/, "") +
-                  "lesson.txt"
-                }
-                locationpathname={lessonPath}
-              />
-            </AppMethodsContext.Provider>
-          </div>
-        </Route>
-      </Routes>
+      <AppMethodsContext.Provider
+        // @ts-expect-error TS(2740) FIXME: Type '{ appFetchAndSetupGlobalDict: () => Promise<... Remove this comment to see the full error message
+        value={{
+          appFetchAndSetupGlobalDict: () => Promise.resolve(true),
+        }}
+      >
+        <Flashcards
+          fetchAndSetupGlobalDict={() => Promise.resolve(true)}
+          globalLookupDictionary={globalLookupDictionary}
+          globalLookupDictionaryLoaded={true}
+          personalDictionaries={{}}
+          updateGlobalLookupDictionary={() => undefined}
+          updatePersonalDictionaries={() => undefined}
+          userSettings={{}}
+          changeFullscreen={() => undefined}
+          lessonpath={
+            process.env.PUBLIC_URL +
+            lessonPath.replace(/flashcards/, "") +
+            "lesson.txt"
+          }
+          locationpathname={lessonPath}
+        />
+      </AppMethodsContext.Provider>
     </div>
   );
 };

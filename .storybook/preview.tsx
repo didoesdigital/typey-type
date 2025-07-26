@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { MemoryRouter as Router, Route, Routes } from "react-router-dom";
 import type { Preview } from "@storybook/react";
 
 import "../src/index.scss";
@@ -38,13 +38,16 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <Router basename="/typey-type">
+      <Router basename="/typey-type" initialEntries={["/typey-type"]}>
         <Routes>
-          <Route>
-            <div id="js-app" className="app">
-              <Story />
-            </div>
-          </Route>
+          <Route
+            path="/"
+            element={
+              <div id="js-app" className="app">
+                <Story />
+              </div>
+            }
+          />
         </Routes>
       </Router>
     ),

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useHydrateAtoms } from "jotai/utils";
 import { userSettingsState } from "../../states/userSettingsState";
 import MainLessonView from "./MainLessonView";
@@ -72,68 +72,62 @@ const Template = (args: any) => {
   useHydrateAtoms([[userSettingsState, userSettings]]);
   return (
     <AppMethodsContext.Provider value={appMethods}>
-      <Routes>
-        <Route>
-          <div>
-            <MainLessonView
-              createNewCustomLesson={createNewCustomLesson}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={true}
-              lesson={lesson}
-              lessonLength={1}
-              lessonSubTitle={""}
-              lessonTitle={"Test lesson"}
-              actualText={""}
-              currentLessonStrokes={[]}
-              currentPhraseID={0}
-              disableUserSettings={false}
-              previousCompletedPhraseAsTyped={""}
-              repetitionsRemaining={1}
-              revisionMode={false}
-              settings={{ ignoredChars: "" }}
-              showStrokesInLesson={false}
-              targetStrokeCount={1}
-              timer={1}
-              totalNumberOfMatchedWords={0}
-              totalNumberOfNewWordsMet={0}
-              totalNumberOfLowExposuresSeen={0}
-              totalNumberOfRetainedWords={0}
-              totalNumberOfMistypedWords={0}
-              totalNumberOfHintedWords={0}
-              restartLesson={() => undefined}
-              stopLesson={() => undefined}
-              changeShowStrokesAsList={() => undefined}
-              changeShowStrokesInLesson={() => undefined}
-              changeShowStrokesOnMisstroke={() => undefined}
-              changeSortOrderUserSetting={() => undefined}
-              changeStenoLayout={() => undefined}
-              changeShowScoresWhileTyping={() => undefined}
-              changeShowStrokesAs={() => undefined}
-              changeUserSetting={() => undefined}
-              changeVoiceUserSetting={() => undefined}
-              chooseStudy={() => undefined}
-              completedPhrases={[]}
-              propsLesson={lesson}
-              currentPhrase={presentedMaterialCurrentItem.phrase}
-              currentStroke={presentedMaterialCurrentItem.stroke}
-              handleBeatsPerMinute={() => undefined}
-              handleDiagramSize={() => undefined}
-              handleLimitWordsChange={() => undefined}
-              handleStartFromWordChange={() => undefined}
-              handleRepetitionsChange={() => undefined}
-              handleUpcomingWordsLayout={() => undefined}
-              toggleHideOtherSettings={() => undefined}
-              sayCurrentPhraseAgain={() => undefined}
-              totalWordCount={1}
-              upcomingPhrases={["and the"]}
-              updatePreset={() => undefined}
-              updateMarkup={() => undefined}
-              overviewLink={undefined}
-              {...args}
-            />
-          </div>
-        </Route>
-      </Routes>
+      <MainLessonView
+        createNewCustomLesson={createNewCustomLesson}
+        globalLookupDictionary={globalLookupDictionary}
+        globalLookupDictionaryLoaded={true}
+        lesson={lesson}
+        lessonLength={1}
+        lessonSubTitle={""}
+        lessonTitle={"Test lesson"}
+        actualText={""}
+        currentLessonStrokes={[]}
+        currentPhraseID={0}
+        disableUserSettings={false}
+        previousCompletedPhraseAsTyped={""}
+        repetitionsRemaining={1}
+        revisionMode={false}
+        settings={{ ignoredChars: "" }}
+        showStrokesInLesson={false}
+        targetStrokeCount={1}
+        timer={1}
+        totalNumberOfMatchedWords={0}
+        totalNumberOfNewWordsMet={0}
+        totalNumberOfLowExposuresSeen={0}
+        totalNumberOfRetainedWords={0}
+        totalNumberOfMistypedWords={0}
+        totalNumberOfHintedWords={0}
+        restartLesson={() => undefined}
+        stopLesson={() => undefined}
+        changeShowStrokesAsList={() => undefined}
+        changeShowStrokesInLesson={() => undefined}
+        changeShowStrokesOnMisstroke={() => undefined}
+        changeSortOrderUserSetting={() => undefined}
+        changeStenoLayout={() => undefined}
+        changeShowScoresWhileTyping={() => undefined}
+        changeShowStrokesAs={() => undefined}
+        changeUserSetting={() => undefined}
+        changeVoiceUserSetting={() => undefined}
+        chooseStudy={() => undefined}
+        completedPhrases={[]}
+        propsLesson={lesson}
+        currentPhrase={presentedMaterialCurrentItem.phrase}
+        currentStroke={presentedMaterialCurrentItem.stroke}
+        handleBeatsPerMinute={() => undefined}
+        handleDiagramSize={() => undefined}
+        handleLimitWordsChange={() => undefined}
+        handleStartFromWordChange={() => undefined}
+        handleRepetitionsChange={() => undefined}
+        handleUpcomingWordsLayout={() => undefined}
+        toggleHideOtherSettings={() => undefined}
+        sayCurrentPhraseAgain={() => undefined}
+        totalWordCount={1}
+        upcomingPhrases={["and the"]}
+        updatePreset={() => undefined}
+        updateMarkup={() => undefined}
+        overviewLink={undefined}
+        {...args}
+      />
     </AppMethodsContext.Provider>
   );
 };
