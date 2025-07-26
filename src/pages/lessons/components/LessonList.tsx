@@ -122,7 +122,7 @@ export default function LessonList({ url }: LessonListProps) {
 
   const filteredLessonIndex = filterLessons(searchFilter, lessonIndex);
 
-  const updateSearchParams = useMemo(
+  const memoisedUpdateSearchParams = useMemo(
     () =>
       debounce((q: string) => {
         const search = q === "" ? undefined : `?q=${q}`;
@@ -131,9 +131,10 @@ export default function LessonList({ url }: LessonListProps) {
     [navigate]
   );
 
+  // When search filter input value changes, update search params in URL with debounce:
   useEffect(() => {
-    updateSearchParams(searchFilter);
-  }, [searchFilter, updateSearchParams]);
+    memoisedUpdateSearchParams(searchFilter);
+  }, [searchFilter, memoisedUpdateSearchParams]);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
