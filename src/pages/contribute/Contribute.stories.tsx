@@ -1,14 +1,13 @@
-import React from "react";
 import Contribute from "./Contribute";
 
-export default {
+import type { Meta, StoryObj } from "@storybook/react";
+
+const meta: Meta<typeof Contribute> = {
   title: "Pages/Contribute",
   component: Contribute,
 };
+export default meta;
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
-const Template = (args) => {
-  return <Contribute {...args} />;
-};
+type Story = StoryObj<typeof Contribute>;
 
-export const ContributeStory = Template.bind({});
+export const ContributeStory: Story = {};
