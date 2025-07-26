@@ -37,7 +37,6 @@ const Dictionaries = ({
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
   personalDictionaries,
-  ...dictionaryProps
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
   const { updatePersonalDictionaries, appFetchAndSetupGlobalDict } =
@@ -74,7 +73,6 @@ const Dictionaries = ({
               globalLookupDictionary={globalLookupDictionary}
               toggleExperiment={toggleExperiment}
               updatePersonalDictionaries={updatePersonalDictionaries}
-              {...dictionaryProps}
             />
           }
         />
@@ -88,7 +86,6 @@ const Dictionaries = ({
                 globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
                 personalDictionaries={personalDictionaries}
                 fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-                {...dictionaryProps}
               />
             </Suspense>
           }
