@@ -47,10 +47,11 @@ export default function LessonList() {
   const memoisedUpdateSearchParams = useMemo(
     () =>
       debounce((q: string) => {
-        const search = q === "" ? undefined : `?q=${q}`;
-        navigate({ search }, { replace: true });
+        const search = q === "" ? "" : `?q=${q}`;
+        const hash = location.hash.length > 1 ? `${location.hash}` : "";
+        navigate(`${search}${hash}`, { replace: true });
       }, 100),
-    [navigate]
+    [location.hash, navigate]
   );
 
   // When search filter input value changes, update search params in URL with debounce:
