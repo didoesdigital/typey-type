@@ -5,6 +5,11 @@ import { expect, within, userEvent } from "@storybook/test";
 import CustomWordListLesson from "./CustomWordListLesson";
 
 import type { Meta, StoryObj } from "@storybook/react";
+import type {
+  DictionaryConfig,
+  LookupDictWithNamespacedDicts,
+  LookupDictWithNamespacedDictsAndConfig,
+} from "types";
 
 const meta: Meta<typeof CustomWordListLesson> = {
   title: "Lessons/Custom/CustomWordListLesson",
@@ -33,13 +38,22 @@ export const CustomWordListLessonEmptyState: Story = {
   },
 };
 
+const dict: LookupDictWithNamespacedDicts = new Map([
+  ["hello", [["H-L", "typey:typey-type.json"]]],
+  ["world", [["WORLD", "typey:typey-type.json"]]],
+]);
+let config: DictionaryConfig = {
+  configuration: [],
+};
+dict.configuration = config.configuration;
+
+let globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
+  dict as LookupDictWithNamespacedDictsAndConfig;
+
 export const CustomWordListLessonFilled: Story = {
   name: "Dictionary filled",
   args: {
-    globalLookupDictionary: new Map([
-      ["hello", [["H-L", "typey:typey-type.json"]]],
-      ["world", [["WORLD", "typey:typey-type.json"]]],
-    ]),
+    globalLookupDictionary,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

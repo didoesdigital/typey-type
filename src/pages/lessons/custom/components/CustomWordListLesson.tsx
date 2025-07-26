@@ -1,13 +1,14 @@
 import React, { useCallback, useMemo, useState } from "react";
 import PseudoContentButton from "../../../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
-import { parseWordList } from 'utils/parseWordList';
+import { parseWordList } from "utils/parseWordList";
 import { generateListOfWordsAndStrokes } from "../../../../utils/transformingDictionaries/transformingDictionaries";
+import type { LookupDictWithNamespacedDictsAndConfig } from "types";
 
 type PhraseAndStroke = { phrase: string; stroke: string };
 
 type Props = {
-  globalLookupDictionary: any;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
 };
 
 const CustomWordListLesson = ({ globalLookupDictionary }: Props) => {
