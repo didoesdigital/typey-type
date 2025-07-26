@@ -6,17 +6,6 @@ import DescriptionTerm from "../../components/DescriptionTerm";
 import DescriptionDetails from "../../components/DescriptionDetails";
 import Subheader from "../../components/Subheader";
 
-function hashToQuery(hash: Location["hash"]) {
-  if (hash.includes(":~:text")) {
-    const trimmedHashText = hash.replace(":~:text=", "");
-    if (trimmedHashText.includes(encodeURIComponent("How long"))) {
-      return "#time-to-learn";
-    }
-  }
-
-  return hash;
-}
-
 const dictionaryEntryForTabSpace = '"STA*PB": "{#Tab}{#space}",';
 const dictionaryEntryForWinNextLessonAccessKey =
   '"HR*FPB": "{#alt(shift(o))}",';
@@ -38,9 +27,7 @@ const Support = () => {
     const scrollToAnchor = () => {
       if (hash && hash.length > 0) {
         try {
-          const el = document.querySelector<HTMLAnchorElement>(
-            hashToQuery(hash)
-          );
+          const el = document.querySelector<HTMLAnchorElement>(hash);
           let top = 0;
           if (el && el.getBoundingClientRect().top) {
             top = el.getBoundingClientRect().top;
