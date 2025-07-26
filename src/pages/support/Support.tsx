@@ -63,8 +63,6 @@ const Support = () => {
     };
     scrollToAnchor();
 
-    window.onhashchange = scrollToAnchor;
-
     if (mainHeading.current && !location.hash) {
       mainHeading.current?.focus();
     }
