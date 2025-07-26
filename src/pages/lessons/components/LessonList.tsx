@@ -125,9 +125,9 @@ export default function LessonList({ url }: LessonListProps) {
     () =>
       debounce((q: string) => {
         const search = q === "" ? undefined : `?q=${q}`;
-        navigate({ search, hash: location.hash }, { replace: true });
+        navigate({ search }, { replace: true });
       }, 100),
-    [location.hash, navigate]
+    [navigate]
   );
 
   useEffect(() => {
