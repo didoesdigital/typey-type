@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import OutboundLink from "../../components/OutboundLink";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import DescriptionList from "../../components/DescriptionList";
 import DescriptionTerm from "../../components/DescriptionTerm";
 import DescriptionDetails from "../../components/DescriptionDetails";
@@ -31,11 +31,11 @@ const dictionaryEntryForMacReviseAccessKey =
 
 const Support = () => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
-    window.location.hash = window.decodeURIComponent(window.location.hash);
+    const hash = window.decodeURIComponent(location.hash);
     const scrollToAnchor = () => {
-      const hash = window.location.hash;
       if (hash && hash.length > 0) {
         try {
           const el = document.querySelector<HTMLAnchorElement>(
@@ -65,10 +65,10 @@ const Support = () => {
 
     window.onhashchange = scrollToAnchor;
 
-    if (mainHeading.current && !window.location.hash) {
+    if (mainHeading.current && !location.hash) {
       mainHeading.current?.focus();
     }
-  }, []);
+  }, [location.hash]);
 
   return (
     <main id="main">
