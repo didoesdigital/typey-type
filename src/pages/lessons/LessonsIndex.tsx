@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useMatch } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
-import LessonList from "./components/LessonList";
+import LessonList from "./components/LessonList/LessonList";
 import Subheader from "../../components/Subheader";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import type { CustomLesson } from "types";

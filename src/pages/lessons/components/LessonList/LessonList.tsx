@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { groups } from "d3-array";
-import { useLessonIndex } from "../../../states/lessonIndexState";
-import debounce from "../../../utils/debounce";
+import { useLessonIndex } from "../../../../states/lessonIndexState";
+import debounce from "../../../../utils/debounce";
 import filterLessons from "pages/lessons/components/LessonList/filterLessonsBySearchTerm";
-import type { LessonIndexEntry } from "../../../types";
+import type { LessonIndexEntry } from "../../../../types";
 
 type LessonListProps = {
   url: string;
