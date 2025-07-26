@@ -6,7 +6,7 @@ import { useLessonIndex } from "../../../../states/lessonIndexState";
 import debounce from "../../../../utils/debounce";
 import filterLessons from "pages/lessons/components/LessonList/filterLessonsBySearchTerm";
 import GroupedLessons from "pages/lessons/components/LessonList/GroupedLessons";
-import TableOfContentsItem from "pages/lessons/components/LessonList/TableOfContentsItem";
+import TableOfContents from "pages/lessons/components/LessonList/TableOfContents";
 
 const mungeHash = (hash: string) => {
   return decodeURIComponent(hash);
@@ -131,6 +131,7 @@ export default function LessonList() {
           value={searchFilter}
         ></input>
       </div>
+
       {searchFilter.trim().toLowerCase().includes("custom") && (
         <p className="py05">
           <Link
@@ -141,9 +142,11 @@ export default function LessonList() {
           </Link>
         </p>
       )}
+
       {filteredLessonIndex.length === 0 && (
         <p>No results. Try changing your search.</p>
       )}
+
       <p aria-live="polite" aria-atomic="true">
         {searchFilter.length > 0 && filteredLessonIndex.length > 0 && (
           <>
@@ -152,20 +155,12 @@ export default function LessonList() {
           </>
         )}
       </p>
-      {searchFilter.length === 0 && (
-        <>
-          <p className="mb0">Jump to:</p>
-          <ul>
-            {groupedLessons.map(([category, subcategories]) => (
-              <TableOfContentsItem
-                key={category}
-                category={category}
-                subcategories={subcategories}
-              />
-            ))}
-          </ul>
-        </>
-      )}
+
+      <TableOfContents
+        groupedLessons={groupedLessons}
+        searchFilter={searchFilter}
+      />
+
       <GroupedLessons groupedLessons={groupedLessons} />
     </div>
   );
