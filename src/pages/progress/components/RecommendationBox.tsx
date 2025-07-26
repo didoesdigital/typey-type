@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../../components/OutboundLink";
 import RecommendationDescription from "./RecommendationDescription";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useAnnouncerApi } from "../../../components/Announcer/useAnnouncer";
 
 import type {
@@ -206,7 +206,7 @@ const RecommendationBox = ({
       updateRecommendationHistory(recommendationHistory);
     } else {
       setToRecommendedNextLesson(true);
-      // does not navigate using link but instead allows Router Redirect
+      // does not navigate using link but instead allows Router Navigate
       e.preventDefault();
     }
   }
@@ -436,7 +436,7 @@ const RecommendationBox = ({
   }
 
   if (toRecommendedNextLesson === true) {
-    return <Redirect push to={recommendedNextLesson.link} />;
+    return <Navigate to={recommendedNextLesson.link} />;
   }
 
   return <React.Fragment>{recommendedNextLessonBox}</React.Fragment>;
