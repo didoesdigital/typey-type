@@ -65,9 +65,9 @@ export default function LessonList() {
     const scrollToAnchor = () => {
       // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(() => {
-        const hash = window.location.hash;
         if (hash && hash.length > 0) {
           scrollToHeading(mungeHash(hash));
+        const hash = location.hash;
         } else {
           searchInputRef?.current?.focus();
         }
