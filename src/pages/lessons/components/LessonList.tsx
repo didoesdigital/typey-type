@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { groups } from "d3-array";
 import { useLessonIndex } from "../../../states/lessonIndexState";
 import debounce from "../../../utils/debounce";
@@ -120,14 +120,14 @@ export default function LessonList({ url }: LessonListProps) {
   );
   const filteredLessonIndex = filterLessons(searchFilter, lessonIndex);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const updateSearchParams = useMemo(
     () =>
       debounce((q: string) => {
         const search = q === "" ? undefined : `?q=${q}`;
-        history.replace({ search, hash: history.location.hash });
+        navigate({ search, hash: location.hash }, { replace: true });
       }, 100),
-    [history]
+    [location.hash, navigate]
   );
 
   useEffect(() => {
@@ -138,10 +138,13 @@ export default function LessonList({ url }: LessonListProps) {
 
   useEffect(() => {
     if (window.location.hash.length > 0) {
-      history.replace({
-        search: history.location.search,
-        hash: window.decodeURIComponent(window.location.hash),
-      });
+      navigate(
+        {
+          search: location.search,
+          hash: window.decodeURIComponent(window.location.hash),
+        },
+        { replace: true }
+      );
     }
 
     const scrollToAnchor = () => {
@@ -158,7 +161,7 @@ export default function LessonList({ url }: LessonListProps) {
     scrollToAnchor();
 
     window.onhashchange = scrollToAnchor;
-  }, [lessonIndex, history]);
+  }, [lessonIndex, location.search, navigate]);
 
   const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;

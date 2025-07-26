@@ -1,5 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { Link, Route, Routes, useHistory, useLocation } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
@@ -69,7 +75,7 @@ const Lesson = ({
   focusTriggerInt,
 }: LessonProps) => {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const {
     appFetchAndSetupGlobalDict,
@@ -136,7 +142,7 @@ const Lesson = ({
       const urlSearchParams = new URLSearchParams(location.search);
       const needsSetupLesson = [...urlSearchParams].length > 0;
       if (needsSetupLesson) {
-        history.replace({ search: "", hash: history.location.hash });
+        navigate({ search: "", hash: location.hash }, { replace: true });
       }
     }
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component

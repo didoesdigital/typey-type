@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import StrokesForWords from "../../components/StrokesForWords";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import Subheader from "../../components/Subheader";
@@ -23,7 +23,7 @@ const Lookup = ({
   personalDictionaries,
 }: Props) => {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [lookupTerm, setLookupTerm] = useState(
     () => new URLSearchParams(location.search).get("q") ?? ""
@@ -33,9 +33,9 @@ const Lookup = ({
     () =>
       debounce((q: string) => {
         const search = q === "" ? undefined : `?q=${q}`;
-        history.replace({ search, hash: history.location.hash });
+        navigate({ search, hash: location.hash }, { replace: true });
       }, 100),
-    [history]
+    [location.hash, navigate]
   );
 
   const userSettings = useAtomValue(userSettingsState);

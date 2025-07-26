@@ -1,6 +1,6 @@
 import App from "./App";
 import { render, screen, waitFor } from "@testing-library/react";
-import { MemoryRouter, useHistory, useLocation } from "react-router-dom";
+import { MemoryRouter, useNavigate, useLocation } from "react-router-dom";
 import React from "react";
 import fs from "node:fs/promises";
 import userEvent from "@testing-library/user-event";
@@ -75,14 +75,14 @@ describe(App, () => {
 
   function AppWithRouterInfo() {
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [userSettings, setUserSettings] = useAtom(userSettingsState)
     const [globalUserSettings, setGlobalUserSettings] = useAtom(globalUserSettingsState)
     const lessonIndex = useLessonIndexWithFallback()
-    // @ts-expect-error TS(2739) FIXME: Type '{ location: Location<unknown>; history: Hist... Remove this comment to see the full error message
+    // @ts-expect-error TS(2739) FIXME: Type '{ location: Location<unknown>; navigate: Hist... Remove this comment to see the full error message
     return <StateLoggingApp {...{
       location,
-      history,
+      navigate,
       userSettings,
       setUserSettings,
       globalUserSettings,
