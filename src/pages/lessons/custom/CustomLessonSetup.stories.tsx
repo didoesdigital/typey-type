@@ -3,10 +3,22 @@ import CustomLessonSetup from "./CustomLessonSetup";
 import AppMethodsContext from "../../../states/legacy/AppMethodsContext";
 import appMethods from "../../../stories/fixtures/appMethods";
 
-export default {
+import type { Meta, StoryObj } from "@storybook/react";
+
+const meta: Meta<typeof CustomLessonSetup> = {
   title: "Pages/CustomLessonSetup",
   component: CustomLessonSetup,
+  decorators: [
+    (Story) => (
+      <AppMethodsContext.Provider value={appMethods}>
+        <Story />
+      </AppMethodsContext.Provider>
+    ),
+  ],
 };
+export default meta;
+
+type Story = StoryObj<typeof CustomLessonSetup>;
 
 const globalLookupDictionary = new Map([
   ["huh", [["H*U", "typey:typey-type.json"]]],
@@ -22,21 +34,12 @@ const globalLookupDictionary = new Map([
   ],
 ]);
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
-const Template = (args) => {
-  return (
-    <AppMethodsContext.Provider value={appMethods}>
-      <CustomLessonSetup
-        customLessonMaterial={""}
-        customLessonMaterialValidationMessages={[]}
-        customLessonMaterialValidationState={"success"}
-        globalLookupDictionary={globalLookupDictionary}
-        globalLookupDictionaryLoaded={true}
-        personalDictionaries={{ dictionariesNamesAndContents: null }}
-        {...args}
-      />
-    </AppMethodsContext.Provider>
-  );
+export const CustomLessonSetupStory: Story = {
+  args: {
+    customLessonMaterial: "",
+    customLessonMaterialValidationMessages: [],
+    customLessonMaterialValidationState: "success",
+    globalLookupDictionary: globalLookupDictionary,
+    globalLookupDictionaryLoaded: true,
+  },
 };
-
-export const CustomLessonSetupStory = Template.bind({});
