@@ -8,10 +8,6 @@ import filterLessons from "pages/lessons/components/LessonList/filterLessonsBySe
 import GroupedLessons from "pages/lessons/components/LessonList/GroupedLessons";
 import TableOfContents from "pages/lessons/components/LessonList/TableOfContents";
 
-const mungeHash = (hash: string) => {
-  return decodeURIComponent(hash);
-};
-
 const scrollToHeading = (hash: Location["hash"]) => {
   // Given #gerard-nolst-trenit%C3%A9, decode it to #gerard-nolst-trenité
   const el = document.querySelector<HTMLAnchorElement>(
