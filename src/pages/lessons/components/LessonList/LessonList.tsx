@@ -62,16 +62,6 @@ export default function LessonList() {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (window.location.hash.length > 0) {
-      navigate(
-        {
-          search: location.search,
-          hash: window.decodeURIComponent(window.location.hash),
-        },
-        { replace: true }
-      );
-    }
-
     const scrollToAnchor = () => {
       // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(() => {
@@ -86,7 +76,7 @@ export default function LessonList() {
     scrollToAnchor();
 
     window.onhashchange = scrollToAnchor;
-  }, [lessonIndex, location.search, navigate]);
+  }, [location.hash, navigate]);
 
   const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
