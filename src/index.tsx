@@ -43,9 +43,7 @@ ReactDOM.render(
     <Router basename="/typey-type">
       <ErrorBoundary>
         <Routes>
-          <Route>
-            <AppWithAtomsCompat />
-          </Route>
+          <Route path={"*"} element={<AppWithAtomsCompat />} />
         </Routes>
       </ErrorBoundary>
     </Router>

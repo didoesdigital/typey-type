@@ -165,213 +165,259 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
       <Announcer />
       <div>
         <Routes>
-          <Route exact={true} path="/">
-            <div>
-              <Header />
+          <Route
+            path="/"
+            element={
+              <div>
+                <Header />
 
-              <DocumentTitle title="Typey Type for Stenographers">
-                <AsyncHome />
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/support">
-            <div>
-              <Header />
+                <DocumentTitle title="Typey Type for Stenographers">
+                  <AsyncHome />
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="support"
+            element={
+              <div>
+                <Header />
 
-              <DocumentTitle title={"Typey Type | About"}>
-                <ErrorBoundary>
-                  <AsyncSupport />
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/writer">
-            <div>
-              <Header />
+                <DocumentTitle title={"Typey Type | About"}>
+                  <ErrorBoundary>
+                    <AsyncSupport />
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="writer"
+            element={
+              <div>
+                <Header />
 
-              <DocumentTitle title={"Typey Type | Writer"}>
-                <ErrorBoundary>
-                  <AsyncWriter />
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/games">
-            <div>
-              <Header />
-              <DocumentTitle title={"Typey Type | Games"}>
-                <ErrorBoundary>
-                  <AsyncGames
-                    globalLookupDictionary={appState.globalLookupDictionary}
-                    globalLookupDictionaryLoaded={
-                      appState.globalLookupDictionaryLoaded
-                    }
-                    metWords={appState.metWords}
-                    personalDictionaries={appState.personalDictionaries}
-                    startingMetWordsToday={appState.startingMetWordsToday}
-                  />
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/break">
-            <div>
-              <Header />
-              <DocumentTitle title={"Typey Type | Take a break"}>
-                <ErrorBoundary>
-                  <AsyncBreak />
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/contribute">
-            <div>
-              <Header />
-              <DocumentTitle title={"Typey Type | Contribute"}>
-                <ErrorBoundary>
-                  <AsyncContribute />
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/progress">
-            <div>
-              <Header />
-              <DocumentTitle title={"Typey Type | Progress"}>
-                <ErrorBoundary>
-                  <Suspense fallback={<PageLoading pastDelay={true} />}>
-                    <AsyncProgress
+                <DocumentTitle title={"Typey Type | Writer"}>
+                  <ErrorBoundary>
+                    <AsyncWriter />
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="games/*"
+            element={
+              <div>
+                <Header />
+                <DocumentTitle title={"Typey Type | Games"}>
+                  <ErrorBoundary>
+                    <AsyncGames
+                      globalLookupDictionary={appState.globalLookupDictionary}
+                      globalLookupDictionaryLoaded={
+                        appState.globalLookupDictionaryLoaded
+                      }
                       metWords={appState.metWords}
-                      lessonsProgress={appState.lessonsProgress}
+                      personalDictionaries={appState.personalDictionaries}
                       startingMetWordsToday={appState.startingMetWordsToday}
-                      yourSeenWordCount={appState.yourSeenWordCount}
-                      yourMemorisedWordCount={appState.yourMemorisedWordCount}
                     />
-                  </Suspense>
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/flashcards">
-            <div>
-              <Header />
-              <DocumentTitle title={"Typey Type | Flashcards"}>
-                <AsyncFlashcards
-                  globalLookupDictionary={appState.globalLookupDictionary}
-                  globalLookupDictionaryLoaded={
-                    appState.globalLookupDictionaryLoaded
-                  }
-                  lessonpath="flashcards"
-                  locationpathname={location.pathname}
-                  personalDictionaries={appState.personalDictionaries}
-                />
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/lookup">
-            <div>
-              <Header />
-              <DocumentTitle title={"Typey Type | Lookup"}>
-                <ErrorBoundary>
-                  <AsyncLookup
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="break"
+            element={
+              <div>
+                <Header />
+                <DocumentTitle title={"Typey Type | Take a break"}>
+                  <ErrorBoundary>
+                    <AsyncBreak />
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="contribute"
+            element={
+              <div>
+                <Header />
+                <DocumentTitle title={"Typey Type | Contribute"}>
+                  <ErrorBoundary>
+                    <AsyncContribute />
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="progress"
+            element={
+              <div>
+                <Header />
+                <DocumentTitle title={"Typey Type | Progress"}>
+                  <ErrorBoundary>
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <AsyncProgress
+                        metWords={appState.metWords}
+                        lessonsProgress={appState.lessonsProgress}
+                        startingMetWordsToday={appState.startingMetWordsToday}
+                        yourSeenWordCount={appState.yourSeenWordCount}
+                        yourMemorisedWordCount={appState.yourMemorisedWordCount}
+                      />
+                    </Suspense>
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="flashcards"
+            element={
+              <div>
+                <Header />
+                <DocumentTitle title={"Typey Type | Flashcards"}>
+                  <AsyncFlashcards
                     globalLookupDictionary={appState.globalLookupDictionary}
                     globalLookupDictionaryLoaded={
                       appState.globalLookupDictionaryLoaded
                     }
+                    lessonpath="flashcards"
+                    locationpathname={location.pathname}
                     personalDictionaries={appState.personalDictionaries}
                   />
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/dictionaries">
-            <div>
-              <Header />
-              <DocumentTitle title={"Typey Type | Dictionaries"}>
-                <ErrorBoundary>
-                  <AsyncDictionaries
-                    globalLookupDictionary={appState.globalLookupDictionary}
-                    globalLookupDictionaryLoaded={
-                      appState.globalLookupDictionaryLoaded
-                    }
-                    personalDictionaries={appState.personalDictionaries}
-                  />
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route path="/lessons">
-            <div>
-              <Header />
-              <DocumentTitle title={"Typey Type | Lessons"}>
-                <ErrorBoundary>
-                  <Lessons
-                    customLesson={appState.customLesson}
-                    customLessonMaterial={appState.customLessonMaterial}
-                    customLessonMaterialValidationState={
-                      appState.customLessonMaterialValidationState
-                    }
-                    customLessonMaterialValidationMessages={
-                      appState.customLessonMaterialValidationMessages
-                    }
-                    globalLookupDictionary={appState.globalLookupDictionary}
-                    globalLookupDictionaryLoaded={
-                      appState.globalLookupDictionaryLoaded
-                    }
-                    personalDictionaries={appState.personalDictionaries}
-                    lessonNotFound={appState.lessonNotFound}
-                    lessonSubTitle={appState.lesson.subtitle}
-                    lessonTitle={appState.lesson.title}
-                    lessonLength={appProps.stateLesson.presentedMaterial.length}
-                    lesson={appState.lesson}
-                    actualText={appState.actualText}
-                    completedPhrases={appProps.completedMaterial}
-                    currentLessonStrokes={appState.currentLessonStrokes}
-                    currentPhraseID={appState.currentPhraseID}
-                    currentPhrase={appProps.presentedMaterialCurrentItem.phrase}
-                    currentStroke={appProps.presentedMaterialCurrentItem.stroke}
-                    disableUserSettings={appState.disableUserSettings}
-                    metWords={appState.metWords}
-                    previousCompletedPhraseAsTyped={
-                      appState.previousCompletedPhraseAsTyped
-                    }
-                    repetitionsRemaining={appState.repetitionsRemaining}
-                    startTime={appState.startTime}
-                    settings={appState.lesson.settings}
-                    showStrokesInLesson={appState.showStrokesInLesson}
-                    targetStrokeCount={appState.targetStrokeCount}
-                    timer={appState.timer}
-                    totalNumberOfMatchedWords={
-                      appState.totalNumberOfMatchedWords
-                    }
-                    totalNumberOfNewWordsMet={appState.totalNumberOfNewWordsMet}
-                    totalNumberOfLowExposuresSeen={
-                      appState.totalNumberOfLowExposuresSeen
-                    }
-                    totalNumberOfRetainedWords={
-                      appState.totalNumberOfRetainedWords
-                    }
-                    totalNumberOfMistypedWords={
-                      appState.totalNumberOfMistypedWords
-                    }
-                    totalNumberOfHintedWords={appState.totalNumberOfHintedWords}
-                    totalWordCount={
-                      appProps.stateLesson.presentedMaterial.length
-                    }
-                    upcomingPhrases={appProps.upcomingMaterial}
-                    focusTriggerInt={appState.focusTriggerInt}
-                  />
-                </ErrorBoundary>
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route>
-            <div>
-              <DocumentTitle title={"Typey Type | Page not found"}>
-                <AsyncPageNotFound />
-              </DocumentTitle>
-            </div>
-          </Route>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="lookup"
+            element={
+              <div>
+                <Header />
+                <DocumentTitle title={"Typey Type | Lookup"}>
+                  <ErrorBoundary>
+                    <AsyncLookup
+                      globalLookupDictionary={appState.globalLookupDictionary}
+                      globalLookupDictionaryLoaded={
+                        appState.globalLookupDictionaryLoaded
+                      }
+                      personalDictionaries={appState.personalDictionaries}
+                    />
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="dictionaries/*"
+            element={
+              <div>
+                <Header />
+                <DocumentTitle title={"Typey Type | Dictionaries"}>
+                  <ErrorBoundary>
+                    <AsyncDictionaries
+                      globalLookupDictionary={appState.globalLookupDictionary}
+                      globalLookupDictionaryLoaded={
+                        appState.globalLookupDictionaryLoaded
+                      }
+                      personalDictionaries={appState.personalDictionaries}
+                    />
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path="lessons/*"
+            element={
+              <div>
+                <Header />
+                <DocumentTitle title={"Typey Type | Lessons"}>
+                  <ErrorBoundary>
+                    <Lessons
+                      customLesson={appState.customLesson}
+                      customLessonMaterial={appState.customLessonMaterial}
+                      customLessonMaterialValidationState={
+                        appState.customLessonMaterialValidationState
+                      }
+                      customLessonMaterialValidationMessages={
+                        appState.customLessonMaterialValidationMessages
+                      }
+                      globalLookupDictionary={appState.globalLookupDictionary}
+                      globalLookupDictionaryLoaded={
+                        appState.globalLookupDictionaryLoaded
+                      }
+                      personalDictionaries={appState.personalDictionaries}
+                      lessonNotFound={appState.lessonNotFound}
+                      lessonSubTitle={appState.lesson.subtitle}
+                      lessonTitle={appState.lesson.title}
+                      lessonLength={
+                        appProps.stateLesson.presentedMaterial.length
+                      }
+                      lesson={appState.lesson}
+                      actualText={appState.actualText}
+                      completedPhrases={appProps.completedMaterial}
+                      currentLessonStrokes={appState.currentLessonStrokes}
+                      currentPhraseID={appState.currentPhraseID}
+                      currentPhrase={
+                        appProps.presentedMaterialCurrentItem.phrase
+                      }
+                      currentStroke={
+                        appProps.presentedMaterialCurrentItem.stroke
+                      }
+                      disableUserSettings={appState.disableUserSettings}
+                      metWords={appState.metWords}
+                      previousCompletedPhraseAsTyped={
+                        appState.previousCompletedPhraseAsTyped
+                      }
+                      repetitionsRemaining={appState.repetitionsRemaining}
+                      startTime={appState.startTime}
+                      settings={appState.lesson.settings}
+                      showStrokesInLesson={appState.showStrokesInLesson}
+                      targetStrokeCount={appState.targetStrokeCount}
+                      timer={appState.timer}
+                      totalNumberOfMatchedWords={
+                        appState.totalNumberOfMatchedWords
+                      }
+                      totalNumberOfNewWordsMet={
+                        appState.totalNumberOfNewWordsMet
+                      }
+                      totalNumberOfLowExposuresSeen={
+                        appState.totalNumberOfLowExposuresSeen
+                      }
+                      totalNumberOfRetainedWords={
+                        appState.totalNumberOfRetainedWords
+                      }
+                      totalNumberOfMistypedWords={
+                        appState.totalNumberOfMistypedWords
+                      }
+                      totalNumberOfHintedWords={
+                        appState.totalNumberOfHintedWords
+                      }
+                      totalWordCount={
+                        appProps.stateLesson.presentedMaterial.length
+                      }
+                      upcomingPhrases={appProps.upcomingMaterial}
+                      focusTriggerInt={appState.focusTriggerInt}
+                    />
+                  </ErrorBoundary>
+                </DocumentTitle>
+              </div>
+            }
+          />
+          <Route
+            path={":notfound"}
+            element={
+              <div>
+                <DocumentTitle title={"Typey Type | Page not found"}>
+                  <AsyncPageNotFound />
+                </DocumentTitle>
+              </div>
+            }
+          />
         </Routes>
       </div>
       <Footer />

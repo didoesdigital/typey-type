@@ -76,61 +76,77 @@ const Games = ({
 
   return (
     <Routes>
-      <Route exact={true} path={`/games/KAOES`}>
-        <DocumentTitle title={"Typey Type | KAOES game"}>
-          <ErrorBoundary>
-            <AsyncKAOES inputForKAOES={globalUserSettings.inputForKAOES} />
-          </ErrorBoundary>
-        </DocumentTitle>
-      </Route>
-      <Route exact={true} path={`/games/KHAERT`}>
-        <DocumentTitle title={"Typey Type | KHAERT"}>
-          <ErrorBoundary>
-            <AsyncKHAERT globalLookupDictionary={globalLookupDictionary} />
-          </ErrorBoundary>
-        </DocumentTitle>
-      </Route>
-      <Route exact={true} path={`/games/SHUFL`}>
-        <DocumentTitle title={"Typey Type | SHUFL game"}>
-          <ErrorBoundary>
-            <AsyncSHUFL
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              startingMetWordsToday={startingMetWordsToday}
-            />
-          </ErrorBoundary>
-        </DocumentTitle>
-      </Route>
-      <Route exact={true} path={`/games/TPEUBGSZ`}>
-        <DocumentTitle title={"Typey Type | TPEUBGSZ game"}>
-          <ErrorBoundary>
-            <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
-          </ErrorBoundary>
-        </DocumentTitle>
-      </Route>
-      <Route exact={true} path={`/games/TPEURPBGS`}>
-        <DocumentTitle title={"Typey Type | TPEURPBGS game"}>
-          <ErrorBoundary>
-            <AsyncTPEURPBGS />
-          </ErrorBoundary>
-        </DocumentTitle>
-      </Route>
-      <Route exact={true} path={`/games/KPOES`}>
-        <DocumentTitle title={"Typey Type | KPOES game"}>
-          <ErrorBoundary>
-            <AsyncKPOES
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              metWords={metWords}
-              personalDictionaries={personalDictionaries}
-              userSettings={userSettings}
-            />
-          </ErrorBoundary>
-        </DocumentTitle>
-      </Route>
-      <Route exact={true} path={`/games/`}>
-        <AsyncGamesIndex />
-      </Route>
+      <Route
+        path={"KAOES"}
+        element={
+          <DocumentTitle title={"Typey Type | KAOES game"}>
+            <ErrorBoundary>
+              <AsyncKAOES inputForKAOES={globalUserSettings.inputForKAOES} />
+            </ErrorBoundary>
+          </DocumentTitle>
+        }
+      />
+      <Route
+        path={"KHAERT"}
+        element={
+          <DocumentTitle title={"Typey Type | KHAERT"}>
+            <ErrorBoundary>
+              <AsyncKHAERT globalLookupDictionary={globalLookupDictionary} />
+            </ErrorBoundary>
+          </DocumentTitle>
+        }
+      />
+      <Route
+        path={"SHUFL"}
+        element={
+          <DocumentTitle title={"Typey Type | SHUFL game"}>
+            <ErrorBoundary>
+              <AsyncSHUFL
+                globalLookupDictionary={globalLookupDictionary}
+                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                startingMetWordsToday={startingMetWordsToday}
+              />
+            </ErrorBoundary>
+          </DocumentTitle>
+        }
+      />
+      <Route
+        path={"TPEUBGSZ"}
+        element={
+          <DocumentTitle title={"Typey Type | TPEUBGSZ game"}>
+            <ErrorBoundary>
+              <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
+            </ErrorBoundary>
+          </DocumentTitle>
+        }
+      />
+      <Route
+        path={"TPEURPBGS"}
+        element={
+          <DocumentTitle title={"Typey Type | TPEURPBGS game"}>
+            <ErrorBoundary>
+              <AsyncTPEURPBGS />
+            </ErrorBoundary>
+          </DocumentTitle>
+        }
+      />
+      <Route
+        path={"KPOES"}
+        element={
+          <DocumentTitle title={"Typey Type | KPOES game"}>
+            <ErrorBoundary>
+              <AsyncKPOES
+                globalLookupDictionary={globalLookupDictionary}
+                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                metWords={metWords}
+                personalDictionaries={personalDictionaries}
+                userSettings={userSettings}
+              />
+            </ErrorBoundary>
+          </DocumentTitle>
+        }
+      />
+      <Route path={`/`} element={<AsyncGamesIndex />} />
     </Routes>
   );
 };
