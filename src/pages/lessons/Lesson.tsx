@@ -55,6 +55,7 @@ const Lesson = ({
   lessonLength,
   lessonSubTitle: lessonSubTitleProp,
   lessonTitle,
+  lessonNotFound,
   metWords,
   personalDictionaries,
   previousCompletedPhraseAsTyped,
@@ -228,6 +229,10 @@ const Lesson = ({
     </Link>
   ) : undefined;
 
+  if (lessonNotFound) {
+    return <LessonNotFound />;
+  }
+
   if (lesson) {
     if (
       isFinished(lesson, currentPhraseID) &&
@@ -280,92 +285,97 @@ const Lesson = ({
     } else {
       return (
         <Routes>
-          <Route path={`/lessons/:category/:subcategory?/:lessonPath/overview`}>
-            <div>
-              <ErrorBoundary>
-                <DocumentTitle title={"Typey Type | Lesson overview"}>
-                  <LessonOverview
-                    lessonIndex={lessonIndex}
-                    lessonMetadata={metadata}
-                    lessonPath={location.pathname.replace("overview", "")}
-                    lessonTxtPath={location.pathname.replace(
-                      "overview",
+          <Route
+            path={"overview"}
+            element={
+              <div>
+                <ErrorBoundary>
+                  <DocumentTitle title={"Typey Type | Lesson overview"}>
+                    <LessonOverview
+                      lessonIndex={lessonIndex}
+                      lessonMetadata={metadata}
+                      lessonPath={location.pathname.replace("overview", "")}
+                      lessonTxtPath={location.pathname.replace(
+                        "overview",
+                        "lesson.txt"
+                      )}
+                      lessonTitle={lesson.title}
+                    />
+                  </DocumentTitle>
+                </ErrorBoundary>
+              </div>
+            }
+          />
+          <Route
+            path={"flashcards"}
+            element={
+              <div>
+                <DocumentTitle title={"Typey Type | Flashcards"}>
+                  <Flashcards
+                    fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
+                    globalLookupDictionary={globalLookupDictionary}
+                    globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                    personalDictionaries={personalDictionaries}
+                    updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+                    updatePersonalDictionaries={updatePersonalDictionaries}
+                    lessonpath={
+                      process.env.PUBLIC_URL +
+                      location.pathname.replace(/flashcards/, "") +
                       "lesson.txt"
-                    )}
-                    lessonTitle={lesson.title}
+                    }
+                    locationpathname={location.pathname}
                   />
                 </DocumentTitle>
-              </ErrorBoundary>
-            </div>
-          </Route>
+              </div>
+            }
+          />
           <Route
-            path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`}
-          >
-            <div>
-              <DocumentTitle title={"Typey Type | Flashcards"}>
-                <Flashcards
-                  fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-                  globalLookupDictionary={globalLookupDictionary}
-                  globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                  personalDictionaries={personalDictionaries}
-                  updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-                  updatePersonalDictionaries={updatePersonalDictionaries}
-                  lessonpath={
-                    process.env.PUBLIC_URL +
-                    location.pathname.replace(/flashcards/, "") +
-                    "lesson.txt"
-                  }
-                  locationpathname={location.pathname}
-                />
-              </DocumentTitle>
-            </div>
-          </Route>
-          <Route exact={true} path={`${location.pathname}`}>
-            <MainLessonView
-              createNewCustomLesson={createNewCustomLesson}
-              lessonSubTitle={lessonSubTitle}
-              overviewLink={overviewLink}
-              actualText={actualText}
-              changeShowStrokesInLesson={changeShowStrokesInLesson}
-              chooseStudy={chooseStudy}
-              completedPhrases={completedPhrases}
-              currentLessonStrokes={currentLessonStrokes}
-              currentPhrase={currentPhrase}
-              currentPhraseID={currentPhraseID}
-              currentStroke={currentStroke}
-              disableUserSettings={disableUserSettings}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              stopLesson={stopLesson}
-              toggleHideOtherSettings={toggleHideOtherSettings}
-              lesson={lesson}
-              lessonLength={lessonLength}
-              lessonTitle={lessonTitle}
-              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              repetitionsRemaining={repetitionsRemaining}
-              restartLesson={setRevisionModeAndRestartLesson}
-              revisionMode={revisionMode}
-              sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-              settings={settings}
-              showStrokesInLesson={showStrokesInLesson}
-              targetStrokeCount={targetStrokeCount}
-              timer={timer}
-              totalNumberOfHintedWords={totalNumberOfHintedWords}
-              totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
-              totalNumberOfMatchedWords={totalNumberOfMatchedWords}
-              totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-              totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-              totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-              totalWordCount={totalWordCount}
-              upcomingPhrases={upcomingPhrases}
-              updatePreset={updatePreset}
-              updateMarkup={updateRecentLessonsAndUpdateMarkup}
-              focusTriggerInt={focusTriggerInt}
-            />
-          </Route>
-          <Route path={"*"}>
-            <LessonNotFound />
-          </Route>
+            path={"/"}
+            element={
+              <MainLessonView
+                createNewCustomLesson={createNewCustomLesson}
+                lessonSubTitle={lessonSubTitle}
+                overviewLink={overviewLink}
+                actualText={actualText}
+                changeShowStrokesInLesson={changeShowStrokesInLesson}
+                chooseStudy={chooseStudy}
+                completedPhrases={completedPhrases}
+                currentLessonStrokes={currentLessonStrokes}
+                currentPhrase={currentPhrase}
+                currentPhraseID={currentPhraseID}
+                currentStroke={currentStroke}
+                disableUserSettings={disableUserSettings}
+                globalLookupDictionary={globalLookupDictionary}
+                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                stopLesson={stopLesson}
+                toggleHideOtherSettings={toggleHideOtherSettings}
+                lesson={lesson}
+                lessonLength={lessonLength}
+                lessonTitle={lessonTitle}
+                previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
+                repetitionsRemaining={repetitionsRemaining}
+                restartLesson={setRevisionModeAndRestartLesson}
+                revisionMode={revisionMode}
+                sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+                settings={settings}
+                showStrokesInLesson={showStrokesInLesson}
+                targetStrokeCount={targetStrokeCount}
+                timer={timer}
+                totalNumberOfHintedWords={totalNumberOfHintedWords}
+                totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+                totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+                totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+                totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+                totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+                totalWordCount={totalWordCount}
+                upcomingPhrases={upcomingPhrases}
+                updatePreset={updatePreset}
+                updateMarkup={updateRecentLessonsAndUpdateMarkup}
+                focusTriggerInt={focusTriggerInt}
+              />
+            }
+          />
+          <Route path={"*"} element={<LessonNotFound />} />
         </Routes>
       );
     }

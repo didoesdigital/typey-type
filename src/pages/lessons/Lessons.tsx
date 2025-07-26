@@ -13,9 +13,7 @@ import LessonNotFound from "pages/lessons/LessonNotFound";
 
 export type LessonsRoutingProps = ComponentPropsWithoutRef<typeof Lesson> &
   ComponentPropsWithoutRef<typeof CustomLessonSetup> &
-  ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator> & {
-    lessonNotFound: boolean;
-  };
+  ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>;
 
 const AsyncCustomLessonGenerator = Loadable({
   loader: () => import("./custom/CustomLessonGenerator"),
@@ -96,82 +94,68 @@ const Lessons = ({
     focusTriggerInt,
   };
 
-  // This would happen if we try to load a specific lesson's data and the
-  // route is sensible but we fail to fetch valid lesson text:
-  if (lessonNotFound) {
-    return <LessonNotFound />;
-  }
-
   return (
     <Suspense fallback={<PageLoading pastDelay={true} />}>
       <Routes>
+        {[
+          ":category/:subcategory/:lessonPath/*",
+          "fundamentals/:lessonPath/*",
+          "drills/:lessonPath/*",
+        ].map((path) => (
+          <Route key={path} path={path} element={<Lesson {...lessonProps} />} />
+        ))}
+        {["progress/", "progress/seen/", "progress/memorised/"].map((path) => (
+          <Route
+            key="ProgressLessons"
+            path={path}
+            element={<ProgressLesson {...lessonProps} />}
+          />
+        ))}
         <Route
-          path={[
-            `/lessons/:category/:subcategory/:lessonPath/flashcards`,
-            `/lessons/fundamentals/:lessonPath/flashcards`,
-            `/lessons/drills/:lessonPath/flashcards`,
-            `/lessons/:category/:subcategory/:lessonPath`,
-            `/lessons/fundamentals/:lessonPath`,
-            `/lessons/drills/:lessonPath`,
-          ]}
-        >
-          <Lesson {...lessonProps} />
-        </Route>
-        <Route
-          exact={true}
-          path={[
-            `/lessons/progress/`,
-            `/lessons/progress/seen/`,
-            `/lessons/progress/memorised/`,
-          ]}
-        >
-          <ProgressLesson {...lessonProps} />
-        </Route>
-        <Route exact={true} path={`/lessons/custom/setup`}>
-          <DocumentTitle title="Typey Type | Create a custom lesson">
-            <CustomLessonSetup
-              customLessonMaterial={customLessonMaterial}
-              customLessonMaterialValidationMessages={
-                customLessonMaterialValidationMessages
-              }
-              customLessonMaterialValidationState={
-                customLessonMaterialValidationState
-              }
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            />
-          </DocumentTitle>
-        </Route>
-        <Route exact={true} path={`/lessons/custom/generator`}>
-          <DocumentTitle title="Typey Type | Lesson generator">
-            <ErrorBoundary>
-              <AsyncCustomLessonGenerator
-                customLesson={customLesson}
+          path={"custom/setup"}
+          element={
+            <DocumentTitle title="Typey Type | Create a custom lesson">
+              <CustomLessonSetup
+                customLessonMaterial={customLessonMaterial}
+                customLessonMaterialValidationMessages={
+                  customLessonMaterialValidationMessages
+                }
                 customLessonMaterialValidationState={
                   customLessonMaterialValidationState
                 }
                 globalLookupDictionary={globalLookupDictionary}
+                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               />
-            </ErrorBoundary>
-          </DocumentTitle>
-        </Route>
-        <Route exact={true} path={`/lessons/custom`}>
-          <CustomLesson {...lessonProps} />
-        </Route>
-        <Route exact={true} path={`/lessons/flashcards`}>
-          <Lesson {...lessonProps} />
-        </Route>
-        <Route exact={true} path={`/lessons/:notFound`}>
-          <LessonNotFound />
-        </Route>
-        <Route exact={true} path={"/lessons"}>
-          <Suspense fallback={<PageLoading pastDelay={true} />}>
-            <LessonsIndex customLesson={customLesson} />
-          </Suspense>
-        </Route>
-        <Route path={"*"}>
-          <LessonNotFound />
-        </Route>
+            </DocumentTitle>
+          }
+        />
+        <Route
+          path={"custom/generator"}
+          element={
+            <DocumentTitle title="Typey Type | Lesson generator">
+              <ErrorBoundary>
+                <AsyncCustomLessonGenerator
+                  customLesson={customLesson}
+                  customLessonMaterialValidationState={
+                    customLessonMaterialValidationState
+                  }
+                  globalLookupDictionary={globalLookupDictionary}
+                />
+              </ErrorBoundary>
+            </DocumentTitle>
+          }
+        />
+        <Route path={"custom"} element={<CustomLesson {...lessonProps} />} />
+        <Route path={"flashcards"} element={<Lesson {...lessonProps} />} />
+        <Route
+          path={"/"}
+          element={
+            <Suspense fallback={<PageLoading pastDelay={true} />}>
+              <LessonsIndex customLesson={customLesson} />
+            </Suspense>
+          }
+        />
+        <Route path={"*"} element={<LessonNotFound />} />
       </Routes>
     </Suspense>
   );
