@@ -57,6 +57,7 @@ export default function LessonList() {
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  // On page load, if there's a hash, smooth scroll to valid matching headings, otherwise focus search input:
   useEffect(() => {
     const scrollToAnchor = () => {
       // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
