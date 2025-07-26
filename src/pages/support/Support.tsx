@@ -6,7 +6,7 @@ import DescriptionTerm from "../../components/DescriptionTerm";
 import DescriptionDetails from "../../components/DescriptionDetails";
 import Subheader from "../../components/Subheader";
 
-function hashToQuery(hash: string) {
+function hashToQuery(hash: Location["hash"]) {
   if (hash.includes(":~:text")) {
     const trimmedHashText = hash.replace(":~:text=", "");
     if (trimmedHashText.includes(encodeURIComponent("How long"))) {
