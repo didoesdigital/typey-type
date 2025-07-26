@@ -5,9 +5,9 @@ import { groups } from "d3-array";
 import { useLessonIndex } from "../../../../states/lessonIndexState";
 import debounce from "../../../../utils/debounce";
 import filterLessons from "pages/lessons/components/LessonList/filterLessonsBySearchTerm";
-import { InnerLessonList } from "pages/lessons/components/LessonList/InnerLessonList";
+import GroupedLessons from "pages/lessons/components/LessonList/GroupedLessons";
 
-const wrangleId = (id: string) => {
+export const wrangleId = (id: string) => {
   return id.toLowerCase().replace(/[ ,’()]/g, "-");
 };
 
@@ -176,41 +176,7 @@ export default function LessonList() {
           </ul>
         </>
       )}
-      {groupedLessons.map(([category, subcategories]) => {
-        return (
-          <div key={category}>
-            <a
-              href={`#${wrangleId(category)}`}
-              id={wrangleId(category)}
-              className="heading-link--content"
-            >
-              <h4 className="h3">{category}</h4>
-            </a>
-            {subcategories.map(([subcategory, lessons]) => {
-              if (subcategory) {
-                return (
-                  <div key={subcategory}>
-                    <a
-                      href={`#${wrangleId(subcategory)}`}
-                      id={wrangleId(subcategory)}
-                      className="heading-link--content"
-                    >
-                      <h5 className="h4">{subcategory}</h5>
-                    </a>
-                    <InnerLessonList lessonIndex={lessons} />
-                  </div>
-                );
-              } else {
-                return (
-                  <div key={subcategory}>
-                    <InnerLessonList lessonIndex={lessons} />
-                  </div>
-                );
-              }
-            })}
-          </div>
-        );
-      })}
+      <GroupedLessons groupedLessons={groupedLessons} />
     </div>
   );
 }
