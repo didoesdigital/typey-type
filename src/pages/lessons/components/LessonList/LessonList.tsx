@@ -124,7 +124,7 @@ export default function LessonList() {
       {searchFilter.trim().toLowerCase().includes("custom") && (
         <p className="py05">
           <Link
-            to={`/lessons/custom/setup`.replace(/\/{2,}/g, "/")}
+            to={"custom/setup".replace(/\/{2,}/g, "/")}
             id="ga--lesson-index--search--create-a-custom-lesson"
           >
             Create a custom lesson

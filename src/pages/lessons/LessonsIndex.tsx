@@ -42,7 +42,7 @@ const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
             </Link>
           ) : null}
           <Link
-            to={`../custom/setup`.replace(/\/{2,}/g, "/")}
+            to={`custom/setup`.replace(/\/{2,}/g, "/")}
             className="link-button button button--secondary table-cell mr2 ml1"
             style={{ lineHeight: 2 }}
             id="ga--lesson-index--create-a-custom-lesson"
