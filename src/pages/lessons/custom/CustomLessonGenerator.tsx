@@ -12,7 +12,7 @@ import {
   defaultState as defaultRulesWithData,
   rulesWithDataReducer,
 } from "./generator/rulesWithDataReducer";
-import { Link, useMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import RuleOptions from "./generator/components/RuleOptions";
 import RegexRuleSetting from "./generator/components/RegexRuleSetting";
 import availableRulePrettyNames from "./generator/utilities/availableRulePrettyNames";
@@ -168,13 +168,6 @@ const CustomLessonGenerator = ({
     });
   };
 
-  const match = useMatch({
-    path: "/lessons",
-    end: true,
-    caseSensitive: true,
-  });
-  const url = match?.pathname ?? "";
-
   return (
     <main id="main">
       <Subheader>
@@ -191,7 +184,7 @@ const CustomLessonGenerator = ({
         </div>
         <div className="flex flex-wrap mxn2">
           <Link
-            to={`${url}/custom/setup`.replace(/\/{2,}/g, "/")}
+            to={"../custom/setup".replace(/\/{2,}/g, "/")}
             className="link-button link-button-ghost table-cell mr1"
             style={{ lineHeight: 2 }}
             id="ga--lesson-index--create-a-custom-lesson"
