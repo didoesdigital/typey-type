@@ -38,23 +38,17 @@ const LessonNotFound = ({ restartLesson }: LessonNotFoundProps) => {
     mainHeading.current?.focus();
   }, [location]);
 
-  let possibleBetterPath = "";
-  let attemptedPathLessonTxt = "";
-  let possibleBetterLessonTitle = "";
-  if (location && location.pathname) {
-    attemptedPathLessonTxt = location.pathname + "/lesson.txt";
-
-    if (lessonIndex && lessonIndex.length > 0) {
-      let length = lessonIndex.length;
-      for (let i = 0; i < length; i++) {
-        let tmpBetterPath = "/lessons" + lessonIndex[i].path;
-        if (attemptedPathLessonTxt === tmpBetterPath) {
-          possibleBetterPath = tmpBetterPath.replace("lesson.txt", "");
-          possibleBetterLessonTitle = lessonIndex[i].title;
-        }
-      }
+  // Note: rewriting trailing slashes could be handled on the server instead:
+  const correctedLessonWithTrailingSlash = lessonIndex?.find(
+    (lessonIndexEntry) => {
+      return (
+        // e.g. "/fundamentals/roman-numerals/lesson.txt" => "/fundamentals/roman-numerals"
+        lessonIndexEntry.path.replace("/lesson.txt", "") ===
+        // e.g. "/lessons/fundamentals/roman-numerals" => "/fundamentals/roman-numerals"
+        location?.pathname.replace("/lessons", "")
+      );
     }
-  }
+  );
 
   return (
     <DocumentTitle title={"Typey Type | Missing Lesson"}>
@@ -89,13 +83,18 @@ const LessonNotFound = ({ restartLesson }: LessonNotFoundProps) => {
                   Top 100 words lesson
                 </Link>
               </li>
-              {possibleBetterPath.length > 0 && (
+              {correctedLessonWithTrailingSlash ? (
                 <li>
-                  <Link to={possibleBetterPath}>
-                    {possibleBetterLessonTitle} lesson
+                  <Link
+                    to={`/lessons${correctedLessonWithTrailingSlash.path.replace(
+                      "lesson.txt",
+                      ""
+                    )}`}
+                  >
+                    {correctedLessonWithTrailingSlash.title} lesson
                   </Link>
                 </li>
-              )}
+              ) : null}
             </ul>
             <p>
               Or{" "}
