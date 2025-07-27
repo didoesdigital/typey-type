@@ -63,6 +63,11 @@ export function useChangeInputForKAOES() {
   return onChangeInputForKAOES;
 }
 
+const experimentNames: Required<keyof Experiments>[] = [
+  "stenohintsonthefly",
+  "timesSeen",
+] as const;
+
 export function useToggleExperiment() {
   const setState = useSetAtom(experimentsState);
 
@@ -73,7 +78,7 @@ export function useToggleExperiment() {
     const value = target.checked;
     const name = target.name;
 
-    if (name in ["stenohintsonthefly", "timesSeen"]) {
+    if (experimentNames.includes(name as keyof Experiments)) {
       const typedName = name as keyof Experiments;
       setState(typedName, value);
     }
