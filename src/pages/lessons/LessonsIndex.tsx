@@ -11,8 +11,19 @@ type LessonsIndexProps = {
 };
 
 const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
-  const { stopLesson } = useAppMethods();
+  const { startCustomLesson, stopLesson } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
+
+  // The inclusion of startCustomLesson() here ensures the following navigation works:
+  // - generate a custom lesson
+  // - visit a standard lesson
+  // - visit lesson index
+  // - click "Start custom lesson" — should show custom lesson not standard lesson
+  // This workaround is possibly masking a deeper routing/rendering issue.
+  const handleStartCustomLesson = () => {
+    stopLesson();
+    startCustomLesson();
+  };
 
   useEffect(() => {
     mainHeading.current?.focus();
@@ -35,7 +46,7 @@ const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
                 /\/{2,}/g,
                 "/"
               )}
-              onClick={stopLesson}
+              onClick={handleStartCustomLesson}
               className="dib ml1 link-button link-button-ghost table-cell mr1"
             >
               Start custom lesson
