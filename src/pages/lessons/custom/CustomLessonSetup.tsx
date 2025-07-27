@@ -67,7 +67,7 @@ const CustomLessonSetup = ({
             to={`/lessons/custom/generator`.replace(/\/{2,}/g, "/")}
             className="link-button link-button-ghost table-cell mr1"
             style={{ lineHeight: 2 }}
-            id="ga--lesson-index--create-a-custom-lesson"
+            id="ga--lesson-index--generate-a-custom-lesson--subheader"
           >
             Generate a lesson
           </Link>
@@ -107,7 +107,7 @@ const CustomLessonSetup = ({
               to={`/lessons/custom/generator`.replace(/\/{2,}/g, "/")}
               className="link-button dib mt3"
               style={{ lineHeight: 2 }}
-              id="ga--lesson-index--create-a-custom-lesson"
+              id="ga--lesson-index--generate-a-custom-lesson"
             >
               Generate a lesson
             </Link>
