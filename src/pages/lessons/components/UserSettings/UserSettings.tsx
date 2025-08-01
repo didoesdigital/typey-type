@@ -1,9 +1,9 @@
 import React from "react";
-import InfoIconAndTooltip from "../../../../components/InfoIconAndTooltip";
-import ErrorBoundary from "../../../../components/ErrorBoundary";
-import NumericInput from "react-numeric-input";
-import SettingCheckbox from "../../../../components/SettingCheckbox";
-import SettingListItem from "../../../../components/SettingListItem";
+import InfoIconAndTooltip from "components/InfoIconAndTooltip";
+import ErrorBoundary from "components/ErrorBoundary";
+import NumericInput from "components/NumericInput";
+import SettingCheckbox from "components/SettingCheckbox";
+import SettingListItem from "components/SettingListItem";
 import SpeakWordsHelp from "../SpeakWordsHelp";
 import VoiceSetting from "../VoiceSetting";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import NumericInput from "react-numeric-input";
+import NumericInput from "components/NumericInput";
 import { ReactComponent as AlertRobot } from "../../../images/AlertRobot.svg";
 import { ReactComponent as BoredRobot } from "../../../images/BoredRobot.svg";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
