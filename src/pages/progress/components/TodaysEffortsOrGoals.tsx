@@ -1,5 +1,5 @@
 import React from "react";
-import NumericInput from "components/NumericInput";
+import NumericInput from "components/NumericInput/NumericInput";
 import { ReactComponent as AlertRobot } from "../../../images/AlertRobot.svg";
 import { ReactComponent as BoredRobot } from "../../../images/BoredRobot.svg";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
@@ -72,10 +72,6 @@ const TodaysEffortsOrGoals = ({
   userGoalInputOldWords,
   userGoals,
 }: Props) => {
-  const grabStyle = function () {
-    return false;
-  };
-
   function revealCompletedGoals() {
     celebrateCompletedGoals(
       oldWordsGoalMet && !oldWordsGoalUnveiled,
@@ -110,27 +106,27 @@ const TodaysEffortsOrGoals = ({
                 autoComplete="off"
                 autoCorrect="off"
                 autoFocus={false}
-                className="form-control w-100"
                 disabled={!showSetGoalsForm}
                 id="userGoalInputOldWords"
+                labelledbyId="js-first-interactive-form-field-element"
                 max={10000}
                 min={1}
                 name="userGoalInputOldWords"
-                onChange={handleOldWordsGoalInputChange}
+                updateValue={handleOldWordsGoalInputChange}
                 precision={0}
-                spellCheck="false"
                 step={1}
-                style={grabStyle()}
-                type="number"
                 value={userGoalInputOldWords}
-                snap
               />
               <div className="mt1 text-small de-emphasized">
                 (50–200 recommended)
               </div>
             </div>
             <div className="mb3">
-              <label className="pb1" htmlFor="userGoalInputNewWords">
+              <label
+                className="pb1"
+                id="label-userGoalInputNewWords"
+                htmlFor="userGoalInputNewWords"
+              >
                 New words goal
               </label>
               <NumericInput
@@ -138,20 +134,16 @@ const TodaysEffortsOrGoals = ({
                 autoComplete="off"
                 autoCorrect="off"
                 autoFocus={false}
-                className="form-control w-100"
                 disabled={!showSetGoalsForm}
                 id="userGoalInputNewWords"
+                labelledbyId="label-userGoalInputNewWords"
                 max={10000}
                 min={1}
                 name="userGoalInputNewWords"
-                onChange={handleNewWordsGoalInputChange}
+                updateValue={handleNewWordsGoalInputChange}
                 precision={0}
-                spellCheck="false"
                 step={1}
-                style={grabStyle()}
-                type="number"
                 value={userGoalInputNewWords}
-                snap
               />
               <div className="mt1 text-small de-emphasized">
                 (5–40 recommended)

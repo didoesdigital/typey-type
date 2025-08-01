@@ -1356,8 +1356,7 @@ $textarea-padding-x: 8px;
   }
 }
 
-.react-numeric-input { // this class is added by component
-  display: block;
+.numeric-input {
   position: relative;
   width: 144px;
 
@@ -1366,20 +1365,20 @@ $textarea-padding-x: 8px;
       border-color: add-tint($brand-primary, 85);
       background-color: add-tint($brand-primary, 97);
       color: add-tint($brand-primary, 70);
-      & ~ b {
+      & ~ button {
         cursor: default;
         border-color: add-tint($brand-primary, 85) !important;
         background-color: add-tint($brand-primary, 95) !important;
       }
-      & ~ b i {
+      & ~ button i {
         border-color: transparent transparent add-tint($brand-primary, 75) !important;
       }
-      & ~ b:last-child i {
+      & ~ button:last-child i {
         border-color: add-tint($brand-primary, 75) transparent transparent !important;
       }
     }
   }
-  b {
+  button {
     background-color: desaturate(add-tint($brand-primary, 97%), 50%);
     border-radius: 0px 0px 0px 0px;
     border: 1px solid add-tint($brand-primary, 60%);
@@ -1409,7 +1408,7 @@ $textarea-padding-x: 8px;
       margin: -0.3ex 0px 0px -0.56ex;
     }
   }
-  b:last-child {
+  button:last-child {
     border-radius: 0px 3px 3px 0px;
     right: 0px;
     i {
@@ -1419,7 +1418,7 @@ $textarea-padding-x: 8px;
   }
 }
 @media (prefers-color-scheme: dark) {
-  .react-numeric-input { // this class is added by component
+  .numeric-input {
     input {
       background-color: var(--coolgrey-1100);
       color: var(--coolgrey-400);
@@ -1427,20 +1426,20 @@ $textarea-padding-x: 8px;
         border-color: var(--coolgrey-900);
         background-color: var(--coolgrey-1100);
         color:  var(--coolgrey-900);
-        & ~ b {
+        & ~ button {
           cursor: default;
           border-color: var(--coolgrey-900) !important;
           background-color: var(--coolgrey-1000) !important;
         }
-        & ~ b i {
+        & ~ button i {
           border-color: transparent transparent var(--coolgrey-800) !important;
         }
-        & ~ b:last-child i {
+        & ~ button:last-child i {
           border-color: var(--coolgrey-800) transparent transparent !important;
         }
       }
     }
-    b {
+    button {
       background-color: var(--coolgrey-1000);
       border-color: var(--coolgrey-700);
       &:hover {
@@ -1454,7 +1453,7 @@ $textarea-padding-x: 8px;
         border-color: transparent transparent var(--coolgrey-500);
       }
     }
-    b:last-child {
+    button:last-child {
       i {
         border-color: var(--coolgrey-500) transparent transparent;
       }

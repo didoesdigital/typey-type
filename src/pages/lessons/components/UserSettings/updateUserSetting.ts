@@ -385,16 +385,12 @@ export function useChooseStudy() {
 export function useHandleBeatsPerMinute() {
   const setState = useSetAtom(beatsPerMinuteState);
 
-  const onHandleBeatsPerMinute:
-    | ((
-        value: number | null,
-        stringValue: string,
-        input: HTMLInputElement
-      ) => void)
-    | undefined = (event) => {
-    const value = event;
-
-    setState(value);
+  const onHandleBeatsPerMinute: ((value: number) => void) | undefined = (
+    value
+  ) => {
+    if (!isNaN(value)) {
+      setState(value);
+    }
 
     const labelString = !!value ? `${value}` : "BAD_INPUT";
 
@@ -413,13 +409,9 @@ export function useHandleBeatsPerMinute() {
 export function useHandleDiagramSize() {
   const setState = useSetAtom(diagramSizeState);
 
-  const onHandleDiagramSize:
-    | ((
-        value: number | null,
-        stringValue: string,
-        input: HTMLInputElement
-      ) => void)
-    | undefined = (event) => {
+  const onHandleDiagramSize: ((value: number) => void) | undefined = (
+    event
+  ) => {
     let value = typeof event === "number" ? +event.toFixed(1) : 1.0;
     if (value > 2) {
       value = 2.0;
@@ -447,13 +439,9 @@ export function useHandleDiagramSize() {
 export function useHandleLimitWordsChange() {
   const setState = useSetAtom(limitNumberOfWordsState);
 
-  const onHandleLimitWordsChange:
-    | ((
-        value: number | null,
-        stringValue: string,
-        input: HTMLInputElement
-      ) => void)
-    | undefined = (event) => {
+  const onHandleLimitWordsChange: ((value: number) => void) | undefined = (
+    event
+  ) => {
     const value = event;
 
     setState(value);
@@ -475,13 +463,9 @@ export function useHandleLimitWordsChange() {
 export function useHandleRepetitionsChange() {
   const setState = useSetAtom(repetitionsState);
 
-  const onHandleRepetitionsChange:
-    | ((
-        value: number | null,
-        stringValue: string,
-        input: HTMLInputElement
-      ) => void)
-    | undefined = (event) => {
+  const onHandleRepetitionsChange: ((value: number) => void) | undefined = (
+    event
+  ) => {
     const value = event;
 
     setState(value);
@@ -503,13 +487,9 @@ export function useHandleRepetitionsChange() {
 export function useHandleStartFromWordChange() {
   const setState = useSetAtom(startFromWordSettingState);
 
-  const onHandleStartFromWordChange:
-    | ((
-        value: number | null,
-        stringValue: string,
-        input: HTMLInputElement
-      ) => void)
-    | undefined = (event) => {
+  const onHandleStartFromWordChange: ((value: number) => void) | undefined = (
+    event
+  ) => {
     const value = event;
 
     setState(value);

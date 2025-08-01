@@ -1,7 +1,7 @@
 import React from "react";
 import InfoIconAndTooltip from "components/InfoIconAndTooltip";
 import ErrorBoundary from "components/ErrorBoundary";
-import NumericInput from "components/NumericInput";
+import NumericInput from "components/NumericInput/NumericInput";
 import SettingCheckbox from "components/SettingCheckbox";
 import SettingListItem from "components/SettingListItem";
 import SpeakWordsHelp from "../SpeakWordsHelp";
@@ -26,10 +26,6 @@ import {
   useHandleStartFromWordChange,
   useHandleUpcomingWordsLayout,
 } from "./updateUserSetting";
-
-const grabStyle = function () {
-  return false;
-};
 
 type Props = {
   disableUserSettings: boolean;
@@ -80,7 +76,11 @@ const UserSettings = ({
             <ul className="unstyled-list mb0 pb1">
               <SettingListItem sectionHierachy="major">
                 <div className="mt1 mb1 px1 flex flex-wrap items-center justify-between">
-                  <label className="mr1" htmlFor="limitNumberOfWords">
+                  <label
+                    className="mr1"
+                    htmlFor="limitNumberOfWords"
+                    id="label-limitNumberOfWords"
+                  >
                     Limit word count
                   </label>
                   <div className="flex items-center gap-2">
@@ -89,19 +89,15 @@ const UserSettings = ({
                       autoComplete="on"
                       autoCorrect="on"
                       autoFocus={false}
-                      className="form-control w-100"
                       disabled={disableUserSettings}
+                      labelledbyId="label-limitNumberOfWords"
                       min={0}
                       name="limitNumberOfWords"
                       id="limitNumberOfWords"
-                      onChange={handleLimitWordsChange}
+                      updateValue={handleLimitWordsChange}
                       precision={0}
-                      spellCheck="false"
                       step={1}
-                      style={grabStyle()}
-                      type="number"
                       value={userSettings.limitNumberOfWords}
-                      snap
                     />
                     <InfoIconAndTooltip
                       id="limitNumberOfWordsTooltip"
@@ -113,7 +109,11 @@ const UserSettings = ({
               </SettingListItem>
               <SettingListItem sectionHierachy="minor">
                 <div className="mt1 mb1 px1 flex flex-wrap items-center justify-between">
-                  <label className="mr1" htmlFor="startFromWord">
+                  <label
+                    className="mr1"
+                    htmlFor="startFromWord"
+                    id="label-startFromWord"
+                  >
                     Start from word
                   </label>
                   <div className="flex items-center gap-2">
@@ -122,20 +122,16 @@ const UserSettings = ({
                       autoComplete="on"
                       autoCorrect="on"
                       autoFocus={false}
-                      className="form-control w-100"
                       disabled={disableUserSettings || revisionMode}
-                      max={maxStartFromWord || 30000}
+                      labelledbyId="label-startFromWord"
+                      max={30_000}
                       min={1}
                       name="startFromWord"
                       id="startFromWord"
-                      onChange={handleStartFromWordChange}
+                      updateValue={handleStartFromWordChange}
                       precision={0}
-                      spellCheck="false"
                       step={1}
-                      style={grabStyle()}
-                      type="number"
                       value={userSettings.startFromWord}
-                      snap
                     />
                     <InfoIconAndTooltip
                       id="startFromWordTooltip"
@@ -147,7 +143,11 @@ const UserSettings = ({
               </SettingListItem>
               <SettingListItem sectionHierachy="minor">
                 <div className="mt1 mb1 px1 flex flex-wrap items-center justify-between">
-                  <label className="mr1" htmlFor="repetitions">
+                  <label
+                    className="mr1"
+                    htmlFor="repetitions"
+                    id="label-repetitions"
+                  >
                     Repetitions
                   </label>
                   <div className="flex items-center gap-2">
@@ -156,20 +156,16 @@ const UserSettings = ({
                       autoComplete="on"
                       autoCorrect="on"
                       autoFocus={false}
-                      className="form-control w-100"
                       disabled={disableUserSettings}
+                      labelledbyId="label-repetitions"
                       max={30}
                       min={1}
                       name="repetitions"
                       id="repetitions"
-                      onChange={handleRepetitionsChange}
+                      updateValue={handleRepetitionsChange}
                       precision={0}
-                      spellCheck="false"
                       step={1}
-                      style={grabStyle()}
-                      type="number"
                       value={userSettings.repetitions}
-                      snap
                     />
                     <InfoIconAndTooltip
                       id="repetitionsTooltip"
@@ -210,7 +206,11 @@ const UserSettings = ({
               </SettingListItem>
               <SettingListItem sectionHierachy="major">
                 <div className="mt1 mb1 px1 flex flex-wrap items-center justify-between">
-                  <label className="mr1" htmlFor="beatsPerMinute">
+                  <label
+                    className="mr1"
+                    htmlFor="beatsPerMinute"
+                    id="label-beatsPerMinute"
+                  >
                     Metronome BPM
                   </label>
                   <div className="flex items-center gap-2">
@@ -220,20 +220,16 @@ const UserSettings = ({
                       autoComplete="off"
                       autoCorrect="off"
                       autoFocus={false}
-                      className="form-control w-100"
                       disabled={disableUserSettings}
+                      labelledbyId="label-beatsPerMinute"
                       min={10}
                       max={360}
                       name="beatsPerMinute"
                       id="beatsPerMinute"
-                      onChange={handleBeatsPerMinute}
+                      updateValue={handleBeatsPerMinute}
                       precision={0}
-                      spellCheck="false"
                       step={10}
-                      style={grabStyle()}
-                      type="number"
                       value={userSettings.beatsPerMinute}
-                      snap
                     />
                     <InfoIconAndTooltip
                       id="beatsPerMinuteTooltip"
@@ -526,7 +522,11 @@ const UserSettings = ({
               </SettingListItem>
               <SettingListItem sectionHierachy="minor">
                 <div className="mt1 mb1 px1 flex flex-wrap items-center justify-between">
-                  <label className="mr1" htmlFor="diagramSize">
+                  <label
+                    className="mr1"
+                    htmlFor="diagramSize"
+                    id="label-diagramSize"
+                  >
                     Diagram size
                   </label>
                   <div className="flex items-center gap-2">
@@ -535,20 +535,16 @@ const UserSettings = ({
                       autoComplete="on"
                       autoCorrect="on"
                       autoFocus={false}
-                      className="form-control w-100"
                       disabled={disableUserSettings}
+                      labelledbyId="label-diagramSize"
                       min={1.0}
                       max={2.0}
                       name="diagramSize"
                       id="diagramSize"
-                      onChange={handleDiagramSize}
+                      updateValue={handleDiagramSize}
                       precision={1}
-                      spellCheck="false"
                       step={0.1}
-                      style={grabStyle()}
-                      type="number"
                       value={userSettings.diagramSize}
-                      snap
                     />
                     <InfoIconAndTooltip
                       id="diagramSizeTooltip"
