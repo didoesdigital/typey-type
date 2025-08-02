@@ -7,8 +7,8 @@ type Props = {
   regexRuleStatus: RuleStatus;
   regexRuleDataValue: string;
   entryPart: "outline" | "translation";
-  onChangeEntryRegexStatus: any;
-  onChangeEntryRegexData: any;
+  onChangeEntryRegexStatus: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeEntryRegexData: React.ChangeEventHandler<HTMLInputElement>;
   placeholder: string;
 };
 
