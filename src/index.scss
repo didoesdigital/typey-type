@@ -666,7 +666,7 @@ input:focus::placeholder {
 .content-start-ns { align-content: flex-start; }
 .hide             { display: none; }
 .show-sm-only     { @media (min-width: $small-breakpoint) { display: none; } }
-.hide-sm-only     { @media (max-width: $small-breakpoint - 1px) { display: none; } }
+.hide-sm-only     { @media (max-width: calc($small-breakpoint - 1px)) { display: none; } }
 .hide-md          { @media (min-width: $medium-breakpoint) { display: none; } }
 .v-hidden         { visibility: hidden; }
 .relative         { position: relative; }
