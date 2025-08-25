@@ -1,19 +1,7 @@
 import React, { useEffect } from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";
-
-export const missingAussieDict = (
-  currentStroke: string,
-  actualText: string
-) => {
-  const untranslatedAussieSuffixRegex = new RegExp(/(A\*U|aw)/);
-  return (
-    (currentStroke.includes("/A*U ") ||
-      currentStroke.includes("/A*U/") ||
-      currentStroke.endsWith("/A*U")) &&
-    actualText.match(untranslatedAussieSuffixRegex)
-  );
-};
+import { missingAussieDict } from "pages/lessons/components/LessonPrompts/missingAussieDict";
 
 type Props = {
   currentStroke: string;

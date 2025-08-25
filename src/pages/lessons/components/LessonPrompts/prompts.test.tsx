@@ -1,6 +1,6 @@
-import { hasSedSaid } from "./SedSaidPrompt";
-import { missingAussieDict } from "./AussieDictPrompt";
-import { hasWordBoundaryError } from "./WordBoundaryErrorPrompt";
+import { hasSedSaid } from "./hasSedSaid";
+import { missingAussieDict } from "./missingAussieDict";
+import { hasWordBoundaryError } from "./hasWordBoundaryError";
 
 describe("hasSedSaid", () => {
   it("returns something truthy for material matching said and actual text matching sed", () => {

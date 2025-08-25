@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";
-
-export const hasSedSaid = (currentPhrase: string, actualText: string) => {
-  const sedRegex = new RegExp(/^\s*sed\s*$/);
-  // Note: doesn't bother checking for "said,", assuming this is more of an issue for early steno
-  // students that have not yet reached story lessons
-  return currentPhrase === "said" && actualText.match(sedRegex);
-};
+import { hasSedSaid } from "pages/lessons/components/LessonPrompts/hasSedSaid";
 
 type Props = {
   currentPhrase: any;
