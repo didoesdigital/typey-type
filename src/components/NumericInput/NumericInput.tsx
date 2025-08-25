@@ -213,6 +213,7 @@ const NumericInput: React.FC<NumericInputProps> = ({
         autoCorrect={autoCorrect}
         autoFocus={autoFocus}
         disabled={disabled}
+        inputMode={precision > 0 ? "decimal" : "numeric"}
         min={min}
         max={max}
         step={step}
