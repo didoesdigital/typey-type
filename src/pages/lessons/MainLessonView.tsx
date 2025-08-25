@@ -58,7 +58,6 @@ export type MainLessonViewProps = {
   stopLesson: () => void;
   toggleHideOtherSettings: () => void;
   lesson: Lesson;
-  lessonLength: number;
   lessonTitle: PrettyLessonTitle;
   previousCompletedPhraseAsTyped: ActualTypedText;
   repetitionsRemaining: number;
@@ -100,7 +99,6 @@ const MainLessonView = ({
   stopLesson,
   toggleHideOtherSettings,
   lesson,
-  lessonLength,
   lessonTitle,
   previousCompletedPhraseAsTyped,
   repetitionsRemaining,

@@ -57,7 +57,6 @@ export type LessonProps = Pick<
   | "globalLookupDictionary"
   | "globalLookupDictionaryLoaded"
   | "lesson"
-  | "lessonLength"
   | "lessonSubTitle"
   | "lessonTitle"
   | "previousCompletedPhraseAsTyped"
@@ -69,6 +68,7 @@ export type LessonProps = Pick<
   | "focusTriggerInt"
 > & {
   lessonNotFound: boolean;
+  lessonLength: number;
   metWords: MetWords; // For Finished props
   personalDictionaries?: ImportedPersonalDictionaries; // For Flashcards props
   startTime: number | null;
