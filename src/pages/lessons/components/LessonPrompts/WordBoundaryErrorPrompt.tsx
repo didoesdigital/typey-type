@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";
-
-export const hasWordBoundaryError = (
-  currentPhrase: string,
-  actualText: string
-) => {
-  return currentPhrase === "wars" && actualText.includes("Star Wars");
-};
+import { hasWordBoundaryError } from "pages/lessons/components/LessonPrompts/hasWordBoundaryError";
 
 type Props = {
   currentPhrase: any;

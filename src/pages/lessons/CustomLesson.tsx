@@ -257,7 +257,6 @@ const Lesson = ({
           stopLesson={stopLesson}
           toggleHideOtherSettings={toggleHideOtherSettings}
           lesson={lesson}
-          lessonLength={lessonLength}
           lessonTitle={lessonTitle}
           previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
           repetitionsRemaining={repetitionsRemaining}

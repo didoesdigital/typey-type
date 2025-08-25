@@ -5891,15 +5891,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-numeric-input@npm:^2.2.4":
-  version: 2.2.4
-  resolution: "@types/react-numeric-input@npm:2.2.4"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 10c0/49268a0d999eb6683e272e0fd0f58c6932455ae0eca37efea3294fc04885b40f7094edd3dd3edcd662bb533b521225056c7eb6708e246eaed1f8ec3d81dfe44b
-  languageName: node
-  linkType: hard
-
 "@types/react-transition-group@npm:^4.4.5":
   version: 4.4.5
   resolution: "@types/react-transition-group@npm:4.4.5"
@@ -15787,15 +15778,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-numeric-input@npm:^2.2.3":
-  version: 2.2.3
-  resolution: "react-numeric-input@npm:2.2.3"
-  peerDependencies:
-    react: ">=0.14.0 || ^15.6.1 || ^16.0.0"
-  checksum: 10c0/812f8e2fe82bc2156d56e193be3783a1e62d753b924ebe193840969fc535abccd16b846e7dd731d411246a9788e36613f15d33b20889c1df303d7e4053e8c3a3
-  languageName: node
-  linkType: hard
-
 "react-refresh@npm:^0.11.0":
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
@@ -18140,7 +18122,6 @@ __metadata:
     "@types/react-dom": "npm:^17.0.2"
     "@types/react-loadable": "npm:^5.5.6"
     "@types/react-modal": "npm:^3.13.1"
-    "@types/react-numeric-input": "npm:^2.2.4"
     "@types/react-transition-group": "npm:^4.4.5"
     chromatic: "npm:^12.2.0"
     clipboard: "npm:^1.7.1"
@@ -18165,7 +18146,6 @@ __metadata:
     react-ga4: "npm:^2.1.0"
     react-loadable: "npm:^5.5.0"
     react-modal: "npm:^3.14.4"
-    react-numeric-input: "npm:^2.2.3"
     react-router-dom: "npm:^6.30.1"
     react-scripts: "npm:5.0.1"
     react-tooltip: "npm:^5.28.0"

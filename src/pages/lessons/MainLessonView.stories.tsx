@@ -77,7 +77,6 @@ const Template = (args: any) => {
         globalLookupDictionary={globalLookupDictionary}
         globalLookupDictionaryLoaded={true}
         lesson={lesson}
-        lessonLength={1}
         lessonSubTitle={""}
         lessonTitle={"Test lesson"}
         actualText={""}
