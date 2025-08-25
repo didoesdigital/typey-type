@@ -14,7 +14,6 @@ export default meta;
 
 const defaultArgs: ComponentPropsWithoutRef<typeof UserSettings> = {
   disableUserSettings: false,
-  maxStartFromWord: 100,
   revisionMode: false,
   totalWordCount: 50,
 };

@@ -237,7 +237,6 @@ const Finished = ({
         <div>
           <UserSettings
             disableUserSettings={disableUserSettings}
-            maxStartFromWord={lessonLength}
             revisionMode={revisionMode}
             totalWordCount={totalWordCount}
           />

@@ -29,14 +29,12 @@ import {
 
 type Props = {
   disableUserSettings: boolean;
-  maxStartFromWord: number;
   revisionMode: boolean;
   totalWordCount: number;
 };
 
 const UserSettings = ({
   disableUserSettings,
-  maxStartFromWord,
   revisionMode,
   totalWordCount,
 }: Props) => {

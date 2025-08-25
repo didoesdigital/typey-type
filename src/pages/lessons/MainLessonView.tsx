@@ -313,7 +313,6 @@ const MainLessonView = ({
           <div>
             <UserSettings
               disableUserSettings={disableUserSettings}
-              maxStartFromWord={lessonLength}
               revisionMode={revisionMode}
               totalWordCount={totalWordCount}
             />
