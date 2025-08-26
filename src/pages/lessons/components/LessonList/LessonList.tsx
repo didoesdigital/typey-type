@@ -9,28 +9,33 @@ import GroupedLessons from "pages/lessons/components/LessonList/GroupedLessons";
 import TableOfContents from "pages/lessons/components/LessonList/TableOfContents";
 
 const scrollToHeading = (hash: Location["hash"]) => {
-  // Given #gerard-nolst-trenit%C3%A9, decode it to #gerard-nolst-trenité:
-  const decodedHash = window.decodeURIComponent(hash);
-  // Given `# had# had had# had`, replace all symbols, spaces, and so on, including multiple `#`, but keep `-` and add a new `#`:
-  const cleanedDecodedHash = `#${decodedHash.replaceAll(
-    /[^\p{Letter}\p{Number}-]/gu,
-    ""
-  )}`;
-  const el = document.querySelector<HTMLAnchorElement>(cleanedDecodedHash);
-  let top = 0;
-  if (el && el.getBoundingClientRect().top) {
-    top = el.getBoundingClientRect().top;
-  }
-  const scrollOptions: ScrollToOptions = {
-    left: 0,
-    top: window.scrollY + top,
-    behavior: "smooth",
-  };
-  if (el) {
-    window.scrollTo(scrollOptions);
-    window.setTimeout(function () {
-      el.focus();
-    }, 300);
+  try {
+    // Given #gerard-nolst-trenit%C3%A9, decode it to #gerard-nolst-trenité:
+    const decodedHash = window.decodeURIComponent(hash);
+    // Given `# had# had had# had`, replace all symbols, spaces, and so on, including multiple `#`, but keep `-` and add a new `#`:
+    const cleanedDecodedHash = `#${decodedHash.replaceAll(
+      /[^\p{Letter}\p{Number}-]/gu,
+      ""
+    )}`;
+    const el = document.querySelector<HTMLAnchorElement>(cleanedDecodedHash);
+    let top = 0;
+    if (el && el.getBoundingClientRect().top) {
+      top = el.getBoundingClientRect().top;
+    }
+    const scrollOptions: ScrollToOptions = {
+      left: 0,
+      top: window.scrollY + top,
+      behavior: "smooth",
+    };
+    if (el) {
+      window.scrollTo(scrollOptions);
+      window.setTimeout(function () {
+        el.focus();
+      }, 300);
+    }
+  } catch (e) {
+    // Catch "Failed to execute 'querySelector' on 'Document'":
+    console.error(e);
   }
 };
 
