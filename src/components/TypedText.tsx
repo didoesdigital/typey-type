@@ -141,6 +141,10 @@ const TypedText = (props: Props) => {
           </samp>
           <span>
             <textarea
+              data-1p-ignore
+              data-bwignore
+              data-lpignore="true"
+              data-form-type="other"
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
