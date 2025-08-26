@@ -6,7 +6,9 @@ import {
   diagramSizeState,
   hideOtherSettingsState,
   limitNumberOfWordsState,
+  newWordsState,
   repetitionsState,
+  seenWordsState,
   showScoresWhileTypingState,
   showStrokesAsDiagramsState,
   showStrokesAsListState,
@@ -530,6 +532,34 @@ export function useStartFromWordOne() {
       category: "UserSettings",
       action: "Start from word 1",
       label: "true",
+    });
+  };
+}
+
+export function useSetNewWords(): (newState: boolean) => void {
+  const setNewWordsState = useSetAtom(newWordsState);
+
+  return (newState) => {
+    setNewWordsState(newState);
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Set new words",
+      label: newState ? "true" : "false",
+    });
+  };
+}
+
+export function useSetSeenWords(): (newState: boolean) => void {
+  const setSeenWordsState = useSetAtom(seenWordsState);
+
+  return (newState) => {
+    setSeenWordsState(newState);
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Set seen words",
+      label: newState ? "true" : "false",
     });
   };
 }

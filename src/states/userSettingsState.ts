@@ -55,3 +55,5 @@ export const diagramSizeState = subFieldAtom('diagramSize');
 export const limitNumberOfWordsState = subFieldAtom('limitNumberOfWords');
 export const repetitionsState = subFieldAtom('repetitions');
 export const hideOtherSettingsState = subFieldAtom('hideOtherSettings');
+export const newWordsState = subFieldAtom('newWords');
+export const seenWordsState = subFieldAtom('seenWords');
