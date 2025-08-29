@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Loadable from "react-loadable";
 import DictionariesIndex from "./DictionariesIndex";
 import PageLoading from "../../components/PageLoading";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
@@ -14,11 +13,7 @@ import type {
   LookupDictWithNamespacedDictsAndConfig,
 } from "../../types";
 
-const AsyncDictionary = Loadable({
-  loader: () => import("./Dictionary"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyDictionary = lazy(() => import("./Dictionary"));
 
 const LazyDictionaryManagement = lazy(() => import("./DictionaryManagement"));
 
@@ -56,7 +51,7 @@ const Dictionaries = ({
             path={path}
             element={
               <Suspense fallback={<PageLoading pastDelay={true} />}>
-                <AsyncDictionary />
+                <LazyDictionary />
               </Suspense>
             }
           />
