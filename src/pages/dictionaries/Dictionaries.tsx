@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loadable from "react-loadable";
 import DictionariesIndex from "./DictionariesIndex";
@@ -20,11 +20,7 @@ const AsyncDictionary = Loadable({
   delay: 300,
 });
 
-const AsyncDictionaryManagement = Loadable({
-  loader: () => import("./DictionaryManagement"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyDictionaryManagement = lazy(() => import("./DictionaryManagement"));
 
 type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
@@ -68,12 +64,14 @@ const Dictionaries = ({
         <Route
           path={"management"}
           element={
-            <AsyncDictionaryManagement
-              fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-              globalLookupDictionary={globalLookupDictionary}
-              toggleExperiment={toggleExperiment}
-              updatePersonalDictionaries={updatePersonalDictionaries}
-            />
+            <Suspense fallback={<PageLoading pastDelay={true} />}>
+              <LazyDictionaryManagement
+                fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
+                globalLookupDictionary={globalLookupDictionary}
+                toggleExperiment={toggleExperiment}
+                updatePersonalDictionaries={updatePersonalDictionaries}
+              />
+            </Suspense>
           }
         />
         <Route
