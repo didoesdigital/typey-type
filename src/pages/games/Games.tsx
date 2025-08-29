@@ -1,8 +1,7 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
-import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import "./Games.scss";
 import type {
@@ -14,47 +13,19 @@ import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 
-const AsyncGamesIndex = Loadable({
-  loader: () => import("./GamesIndex"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyGamesIndex = lazy(() => import("./GamesIndex"));
 
-const AsyncKAOES = Loadable({
-  loader: () => import("./KAOES/Index"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyKAOES = lazy(() => import("./KAOES/Index"));
 
-const AsyncKHAERT = Loadable({
-  loader: () => import("./KHAERT/Index"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyKHAERT = lazy(() => import("./KHAERT/Index"));
 
-const AsyncSHUFL = Loadable({
-  loader: () => import("./SHUFL/Index"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazySHUFL = lazy(() => import("./SHUFL/Index"));
 
-const AsyncTPEUBGSZ = Loadable({
-  loader: () => import("./TPEUBGSZ/Index"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyTPEUBGSZ = lazy(() => import("./TPEUBGSZ/Index"));
 
-const AsyncKPOES = Loadable({
-  loader: () => import("./KPOES/Index"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyKPOES = lazy(() => import("./KPOES/Index"));
 
-const AsyncTPEURPBGS = Loadable({
-  loader: () => import("./TPEURPBGS/Index"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyTPEURPBGS = lazy(() => import("./TPEURPBGS/Index"));
 
 type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
@@ -81,7 +52,9 @@ const Games = ({
         element={
           <DocumentTitle title={"Typey Type | KAOES game"}>
             <ErrorBoundary>
-              <AsyncKAOES inputForKAOES={globalUserSettings.inputForKAOES} />
+              <Suspense fallback={<PageLoading pastDelay={true} />}>
+                <LazyKAOES inputForKAOES={globalUserSettings.inputForKAOES} />
+              </Suspense>
             </ErrorBoundary>
           </DocumentTitle>
         }
@@ -91,7 +64,9 @@ const Games = ({
         element={
           <DocumentTitle title={"Typey Type | KHAERT"}>
             <ErrorBoundary>
-              <AsyncKHAERT globalLookupDictionary={globalLookupDictionary} />
+              <Suspense fallback={<PageLoading pastDelay={true} />}>
+                <LazyKHAERT globalLookupDictionary={globalLookupDictionary} />
+              </Suspense>
             </ErrorBoundary>
           </DocumentTitle>
         }
@@ -101,11 +76,13 @@ const Games = ({
         element={
           <DocumentTitle title={"Typey Type | SHUFL game"}>
             <ErrorBoundary>
-              <AsyncSHUFL
-                globalLookupDictionary={globalLookupDictionary}
-                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                startingMetWordsToday={startingMetWordsToday}
-              />
+              <Suspense fallback={<PageLoading pastDelay={true} />}>
+                <LazySHUFL
+                  globalLookupDictionary={globalLookupDictionary}
+                  globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                  startingMetWordsToday={startingMetWordsToday}
+                />
+              </Suspense>
             </ErrorBoundary>
           </DocumentTitle>
         }
@@ -115,7 +92,9 @@ const Games = ({
         element={
           <DocumentTitle title={"Typey Type | TPEUBGSZ game"}>
             <ErrorBoundary>
-              <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
+              <Suspense fallback={<PageLoading pastDelay={true} />}>
+                <LazyTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
+              </Suspense>
             </ErrorBoundary>
           </DocumentTitle>
         }
@@ -125,7 +104,9 @@ const Games = ({
         element={
           <DocumentTitle title={"Typey Type | TPEURPBGS game"}>
             <ErrorBoundary>
-              <AsyncTPEURPBGS />
+              <Suspense fallback={<PageLoading pastDelay={true} />}>
+                <LazyTPEURPBGS />
+              </Suspense>
             </ErrorBoundary>
           </DocumentTitle>
         }
@@ -135,18 +116,27 @@ const Games = ({
         element={
           <DocumentTitle title={"Typey Type | KPOES game"}>
             <ErrorBoundary>
-              <AsyncKPOES
-                globalLookupDictionary={globalLookupDictionary}
-                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                metWords={metWords}
-                personalDictionaries={personalDictionaries}
-                userSettings={userSettings}
-              />
+              <Suspense fallback={<PageLoading pastDelay={true} />}>
+                <LazyKPOES
+                  globalLookupDictionary={globalLookupDictionary}
+                  globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                  metWords={metWords}
+                  personalDictionaries={personalDictionaries}
+                  userSettings={userSettings}
+                />
+              </Suspense>
             </ErrorBoundary>
           </DocumentTitle>
         }
       />
-      <Route path={`/`} element={<AsyncGamesIndex />} />
+      <Route
+        path={`/`}
+        element={
+          <Suspense fallback={<PageLoading pastDelay={true} />}>
+            <LazyGamesIndex />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };
