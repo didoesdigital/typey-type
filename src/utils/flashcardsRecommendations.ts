@@ -69,13 +69,13 @@ function getFlashcardsNextLesson(courses: FlashcardsRecommendedCoursesType, flas
 
       if (courses[courseLevel][currentFlashcardsCourseIndex + 1]) {
         currentFlashcardsCourseIndex = currentFlashcardsCourseIndex + 1;
-        flashcardsNextLesson.linkTitle = courses[courseLevel][currentFlashcardsCourseIndex].lessonTitle + " flashcards";
-        flashcardsNextLesson.link = courses[courseLevel][currentFlashcardsCourseIndex].path;
+        flashcardsNextLesson.linkTitle = courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.lessonTitle ?? '' + " flashcards";
+        flashcardsNextLesson.link = courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.path ?? "";
       }
       else {
         currentFlashcardsCourseIndex = 0;
-        flashcardsNextLesson.linkTitle = courses[courseLevel][currentFlashcardsCourseIndex].lessonTitle + " flashcards";
-        flashcardsNextLesson.link = courses[courseLevel][currentFlashcardsCourseIndex].path;
+        flashcardsNextLesson.linkTitle = courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.lessonTitle ?? "" + " flashcards";
+        flashcardsNextLesson.link = courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.path ?? "";
       }
 
       // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
