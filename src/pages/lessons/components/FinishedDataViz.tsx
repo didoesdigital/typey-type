@@ -1,8 +1,7 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import DisplayMetric from "../../../components/DisplayMetric";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import ComponentLoading from "../../../components/ComponentLoading";
-import Loadable from "react-loadable";
 import type { DataPoint } from "pages/lessons/types";
 
 type ChartData = {
@@ -37,11 +36,9 @@ type SecondaryDisplayMetricsProps = {
   wordsTyped: number;
 };
 
-const AsyncFinishedSpeedChart = Loadable({
-  loader: () => import("../../../components/FinishedSpeedChart"),
-  loading: ComponentLoading,
-  delay: 300,
-});
+const LazyFinishedSpeedChart = lazy(
+  () => import("components/FinishedSpeedChart")
+);
 
 const FinishedHeroData = ({ speed, accuracy }: FinishedHeroDataProps) => {
   return (
@@ -160,7 +157,11 @@ const FinishedDataViz = ({
         >
           Skip chart
         </a>
-        {shouldShowChart && <AsyncFinishedSpeedChart data={chartData} />}
+        {shouldShowChart && (
+          <Suspense fallback={<ComponentLoading pastDelay={true} />}>
+            <LazyFinishedSpeedChart data={chartData} />
+          </Suspense>
+        )}
         <SecondaryDisplayMetrics
           newWords={totalNumberOfNewWordsMet}
           seen={totalNumberOfLowExposuresSeen}
