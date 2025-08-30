@@ -1,11 +1,10 @@
-import React, { ComponentPropsWithoutRef, Suspense } from "react";
+import React, { ComponentPropsWithoutRef, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import Lesson from "./Lesson";
 import LessonsIndex from "./LessonsIndex";
 import CustomLessonSetup from "./custom/CustomLessonSetup";
-import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import ProgressLesson from "pages/lessons/ProgressLesson";
 import CustomLesson from "pages/lessons/CustomLesson";
@@ -13,13 +12,11 @@ import LessonNotFound from "pages/lessons/LessonNotFound";
 
 export type LessonsRoutingProps = ComponentPropsWithoutRef<typeof Lesson> &
   ComponentPropsWithoutRef<typeof CustomLessonSetup> &
-  ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>;
+  ComponentPropsWithoutRef<typeof LazyCustomLessonGenerator>;
 
-const AsyncCustomLessonGenerator = Loadable({
-  loader: () => import("./custom/CustomLessonGenerator"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyCustomLessonGenerator = lazy(
+  () => import("./custom/CustomLessonGenerator")
+);
 
 const Lessons = ({
   customLesson,
@@ -134,13 +131,15 @@ const Lessons = ({
           element={
             <DocumentTitle title="Typey Type | Lesson generator">
               <ErrorBoundary>
-                <AsyncCustomLessonGenerator
-                  customLesson={customLesson}
-                  customLessonMaterialValidationState={
-                    customLessonMaterialValidationState
-                  }
-                  globalLookupDictionary={globalLookupDictionary}
-                />
+                <Suspense fallback={<PageLoading pastDelay={true} />}>
+                  <LazyCustomLessonGenerator
+                    customLesson={customLesson}
+                    customLessonMaterialValidationState={
+                      customLessonMaterialValidationState
+                    }
+                    globalLookupDictionary={globalLookupDictionary}
+                  />
+                </Suspense>
               </ErrorBoundary>
             </DocumentTitle>
           }
