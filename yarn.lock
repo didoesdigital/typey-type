@@ -5872,16 +5872,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-loadable@npm:^5.5.6":
-  version: 5.5.6
-  resolution: "@types/react-loadable@npm:5.5.6"
-  dependencies:
-    "@types/react": "npm:*"
-    "@types/webpack": "npm:^4"
-  checksum: 10c0/74f229ae6b5a9a35f9bc00ec79941967d38c0e1bdd7d6f5fc49fbecaeed408fbc2529b9169946e6b6691441cb5c8d6574ec6eebd244b873f6247607c82e7f625
-  languageName: node
-  linkType: hard
-
 "@types/react-modal@npm:^3.13.1":
   version: 3.13.1
   resolution: "@types/react-modal@npm:3.13.1"
@@ -5983,24 +5973,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/source-list-map@npm:*":
-  version: 0.1.2
-  resolution: "@types/source-list-map@npm:0.1.2"
-  checksum: 10c0/0538ce317294febf40ed3fc3a2e483fa4aee8ba85584a66e5ed9c0af9ea48a348960bc467076643cb56aeafdd7d2252e90c75e68ef664c0477ec87ea0554ffdc
-  languageName: node
-  linkType: hard
-
 "@types/stack-utils@npm:^2.0.0":
   version: 2.0.0
   resolution: "@types/stack-utils@npm:2.0.0"
   checksum: 10c0/caad537eef33daaa830e8ee5bc42e51803d7df175014495f2df6129c018a2e80bf19a4d6e5115937eafb03d3f2998a089b0a3892afbefd462d9e83ffad2fc93b
-  languageName: node
-  linkType: hard
-
-"@types/tapable@npm:^1":
-  version: 1.0.8
-  resolution: "@types/tapable@npm:1.0.8"
-  checksum: 10c0/01f77d47bac8aaeee7ed298e8e74eb012a28f920106c3c359e1f2730512cd810f2c6165cd2cd769422ae1064e2bf1072778b27fb5ec1973e18c35e2cc1ed5c8d
   languageName: node
   linkType: hard
 
@@ -6020,44 +5996,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uglify-js@npm:*":
-  version: 3.13.0
-  resolution: "@types/uglify-js@npm:3.13.0"
-  dependencies:
-    source-map: "npm:^0.6.1"
-  checksum: 10c0/0adf2b350a598a882e468a2657874d4dd6f72e03bbac69310fa75f6f8d7bd1f81edf3627bce56195084e9e090299244501ef69ad231844d71513a27a542e7bd2
-  languageName: node
-  linkType: hard
-
 "@types/uuid@npm:^9.0.1":
   version: 9.0.8
   resolution: "@types/uuid@npm:9.0.8"
   checksum: 10c0/b411b93054cb1d4361919579ef3508a1f12bf15b5fdd97337d3d351bece6c921b52b6daeef89b62340fd73fd60da407878432a1af777f40648cbe53a01723489
-  languageName: node
-  linkType: hard
-
-"@types/webpack-sources@npm:*":
-  version: 2.1.0
-  resolution: "@types/webpack-sources@npm:2.1.0"
-  dependencies:
-    "@types/node": "npm:*"
-    "@types/source-list-map": "npm:*"
-    source-map: "npm:^0.7.3"
-  checksum: 10c0/58a0be9bd45dc778b4c3a1529265bef5343476db0e01795bf6ad57e9722b0575aa5691ec58959fc1cfd001373d854f54574e16f89e5d17fc2c6cbdecc0b31b8d
-  languageName: node
-  linkType: hard
-
-"@types/webpack@npm:^4":
-  version: 4.41.32
-  resolution: "@types/webpack@npm:4.41.32"
-  dependencies:
-    "@types/node": "npm:*"
-    "@types/tapable": "npm:^1"
-    "@types/uglify-js": "npm:*"
-    "@types/webpack-sources": "npm:*"
-    anymatch: "npm:^3.0.0"
-    source-map: "npm:^0.6.0"
-  checksum: 10c0/7ebb64fe22eb436b42a89761b1bd67998769dfe26a6f371ac3733859414cea2f4cc743121f2dce638a280053fbd478747c9c15e8fa22644788cdc002e5a567f8
   languageName: node
   linkType: hard
 
@@ -6983,16 +6925,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"anymatch@npm:^3.0.0, anymatch@npm:~3.1.2":
-  version: 3.1.2
-  resolution: "anymatch@npm:3.1.2"
-  dependencies:
-    normalize-path: "npm:^3.0.0"
-    picomatch: "npm:^2.0.4"
-  checksum: 10c0/900645535aee46ed7958f4f5b5e38abcbf474b5230406e913de15fc9a1310f0d5322775deb609688efe31010fa57831e55d36040b19826c22ce61d537e9b9759
-  languageName: node
-  linkType: hard
-
 "anymatch@npm:^3.0.3":
   version: 3.1.1
   resolution: "anymatch@npm:3.1.1"
@@ -7000,6 +6932,16 @@ __metadata:
     normalize-path: "npm:^3.0.0"
     picomatch: "npm:^2.0.4"
   checksum: 10c0/cddd4998188a9ad48d95181e8d502559ac81484d7c3dbe67a5fcf76abd3255e87906b8ff0a63c7c09a5226bfe5511b3ab42755acf0e44546d94733077577b435
+  languageName: node
+  linkType: hard
+
+"anymatch@npm:~3.1.2":
+  version: 3.1.2
+  resolution: "anymatch@npm:3.1.2"
+  dependencies:
+    normalize-path: "npm:^3.0.0"
+    picomatch: "npm:^2.0.4"
+  checksum: 10c0/900645535aee46ed7958f4f5b5e38abcbf474b5230406e913de15fc9a1310f0d5322775deb609688efe31010fa57831e55d36040b19826c22ce61d537e9b9759
   languageName: node
   linkType: hard
 
@@ -15393,7 +15335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.x, prop-types@npm:^15.5.0, prop-types@npm:^15.5.6, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:15.x, prop-types@npm:^15.5.6, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -15749,17 +15691,6 @@ __metadata:
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
   checksum: 10c0/1d0df3c85af79df720524780f00c064d53a9dd1899d785eddb7264b378026979acbddb58a4b7e06e7d0d12aa1494fd5754562ee55d32907b15601068dae82c27
-  languageName: node
-  linkType: hard
-
-"react-loadable@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "react-loadable@npm:5.5.0"
-  dependencies:
-    prop-types: "npm:^15.5.0"
-  peerDependencies:
-    react: "*"
-  checksum: 10c0/d5501d9e6d68378c8320f3bb7941ae12c62bc96fe3001b06dc46fa284d4c018137e8cf74fc3ff0fcf48df618a3d3585fe3e32b1f164691db4c848531b83e3884
   languageName: node
   linkType: hard
 
@@ -18120,7 +18051,6 @@ __metadata:
     "@types/react": "npm:^17.0.2"
     "@types/react-document-title": "npm:^2.0.5"
     "@types/react-dom": "npm:^17.0.2"
-    "@types/react-loadable": "npm:^5.5.6"
     "@types/react-modal": "npm:^3.13.1"
     "@types/react-transition-group": "npm:^4.4.5"
     chromatic: "npm:^12.2.0"
@@ -18144,7 +18074,6 @@ __metadata:
     react-document-title: "npm:^2.0.3"
     react-dom: "npm:^17.0.2"
     react-ga4: "npm:^2.1.0"
-    react-loadable: "npm:^5.5.0"
     react-modal: "npm:^3.14.4"
     react-router-dom: "npm:^6.30.1"
     react-scripts: "npm:5.0.1"
