@@ -20,7 +20,7 @@ import Stroke from "utils/stroke";
 import strokeBits from "utils/strokeBits";
 import mapBriefsFunction from "../../../utils/stenoLayouts/mapBriefToAmericanStenoKeys";
 import Puzzle from "./Puzzle";
-import { ReactComponent as MischievousRobot } from "../../../images/MischievousRobot.svg";
+import MischievousRobot from "../../../images/MischievousRobot.svg?react";
 import { choosePuzzleKey, prettyKey } from "./utilities";
 import { mapQWERTYKeysToStenoStroke } from "../../../utils/mapQWERTYKeysToStenoStroke";
 import type { GlobalUserSettings } from "types";
@@ -421,7 +421,7 @@ export default function Game({
                           <li>
                             <a
                               href={
-                                process.env.PUBLIC_URL +
+                                import.meta.env.VITE_PUBLIC_URL +
                                 "/dictionaries/didoesdigital/raw-steno.json"
                               }
                               download={"raw-steno.json"}

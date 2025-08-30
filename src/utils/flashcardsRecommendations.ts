@@ -21,7 +21,7 @@ let data: null | FlashcardsRecommendedCoursesType = null;
 
 async function fetchFlashcardsRecommendations(): Promise<FlashcardsRecommendedCoursesType> {
   try {
-    const response = await fetch(process.env.PUBLIC_URL + '/lessons/flashcardsRecommendations.json', {
+    const response = await fetch(import.meta.env.VITE_PUBLIC_URL + '/lessons/flashcardsRecommendations.json', {
       method: "GET",
       credentials: "same-origin"
     });
@@ -61,7 +61,7 @@ function getFlashcardsNextLesson(courses: FlashcardsRecommendedCoursesType, flas
     let flashcardsNextLesson = {
       lastSeen: 1558144862000, // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
       linkTitle: "Prefixes",
-      link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
+      link: import.meta.env.VITE_PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
     };
 
     if (courses && courses[courseLevel]) {

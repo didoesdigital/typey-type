@@ -32,7 +32,7 @@ VERSION=$(git describe --abbrev=0 --tags)
 yarn run sentry-cli releases new "$VERSION"
 
 # Build the production app!
-REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
+VITE_REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build:production
 
 # Sync static build files to server
 rsync --itemize-changes -avz --exclude=".DS_Store" ~/projects/typey-type/build/ di@159.203.100.121:www/typey-type/

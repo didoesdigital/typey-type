@@ -38,8 +38,8 @@ const getExternalLink = (dictLink: DictLink) =>
 
 const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
   isInternalDictLink(dictLink) ? (
-    `${process.env.PUBLIC_URL}${dictLink}`.startsWith(
-      process.env.PUBLIC_URL + "/lessons"
+    `${import.meta.env.VITE_PUBLIC_URL}${dictLink}`.startsWith(
+      import.meta.env.VITE_PUBLIC_URL + "/lessons"
     ) ? (
       <p>
         <Link to={dictLink}>Lesson: {dictTitle}</Link>
@@ -91,7 +91,7 @@ const Dictionary = () => {
     category: "Typey Type",
     subcategory: "",
     tagline: "Loading…",
-    link: process.env.PUBLIC_URL + "/support#typey-type-dictionary",
+    link: import.meta.env.VITE_PUBLIC_URL + "/support#typey-type-dictionary",
     path: "/dictionaries/typey-type/top-10.json",
     contents: {
       "-T": "the",
@@ -121,7 +121,7 @@ const Dictionary = () => {
       location.pathname.startsWith("/dictionaries")
     ) {
       fetch(
-        process.env.PUBLIC_URL + location.pathname.replace(/\/$/, ".json"),
+        import.meta.env.VITE_PUBLIC_URL + location.pathname.replace(/\/$/, ".json"),
         {
           method: "GET",
           credentials: "same-origin",
@@ -133,7 +133,7 @@ const Dictionary = () => {
           if (contentType && contentType.indexOf("application/json") !== -1) {
             return response.json().then((dictionaryContents) => {
               const dictIndexEntry = lookUpDictionaryInIndex(
-                process.env.PUBLIC_URL + location.pathname,
+                import.meta.env.VITE_PUBLIC_URL + location.pathname,
                 dictionaryIndex
               );
               const dictionaryData = {
@@ -218,7 +218,7 @@ const Dictionary = () => {
                   Copy to clipboard
                 </PseudoContentButton>
                 <a
-                  href={process.env.PUBLIC_URL + dictionary.path}
+                  href={import.meta.env.VITE_PUBLIC_URL + dictionary.path}
                   download=""
                   onClick={trackDownloadDictionary}
                   style={{ lineHeight: 2 }}
@@ -263,7 +263,7 @@ const Dictionary = () => {
               )}
               {!!(dictionary.title.toUpperCase() === "FULL DICTIONARY") && (
                 <a
-                  href={process.env.PUBLIC_URL + dictionary.path}
+                  href={import.meta.env.VITE_PUBLIC_URL + dictionary.path}
                   download=""
                   onClick={trackDownloadDictionary}
                   style={{ lineHeight: 2 }}

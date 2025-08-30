@@ -431,12 +431,12 @@ class App extends Component<Props, AppState> {
             ignoredChars: '',
             customMessage: ''
           };
-          lesson.path = process.env.PUBLIC_URL + '/lessons/progress/seen/'
+          lesson.path = import.meta.env.VITE_PUBLIC_URL + '/lessons/progress/seen/'
           lesson.title = 'Your revision words'
-          if (newSeenOrMemorised[2]) { lesson.path = process.env.PUBLIC_URL + '/lessons/progress/memorised/'; }
+          if (newSeenOrMemorised[2]) { lesson.path = import.meta.env.VITE_PUBLIC_URL + '/lessons/progress/memorised/'; }
           if (newSeenOrMemorised[2]) { lesson.title = 'Your memorised words'; }
           if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.title = 'Your words'; }
-          if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.path = process.env.PUBLIC_URL + '/lessons/progress/'; }
+          if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.path = import.meta.env.VITE_PUBLIC_URL + '/lessons/progress/'; }
           lesson.subtitle = ''
         }
       }

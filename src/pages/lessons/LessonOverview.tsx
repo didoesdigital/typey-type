@@ -42,7 +42,7 @@ const LessonOverview = ({
     }
 
     if (metadata?.overview) {
-      getLessonOverview(process.env.PUBLIC_URL + "/lessons" + metadata.overview)
+      getLessonOverview(import.meta.env.VITE_PUBLIC_URL + "/lessons" + metadata.overview)
         .then((text) => {
           setContent(text);
           setError(
@@ -69,7 +69,7 @@ const LessonOverview = ({
       try {
         const metadata = getLessonMetadata(
           lessonIndex,
-          process.env.PUBLIC_URL + lessonTxtPath
+          import.meta.env.VITE_PUBLIC_URL + lessonTxtPath
         );
         updateLessonOverviewContent(metadata);
       } catch (e: unknown) {

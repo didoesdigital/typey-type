@@ -1,7 +1,7 @@
 import type { Translation } from "types";
 
 export const hasFewerThan7Letters = (translation: Translation) => {
-  // if (process.env.NODE_ENV === 'development') {return translation.trim().length < 5;}
+  // if (import.meta.env.MODE === 'development') {return translation.trim().length < 5;}
   return translation.trim().length < 7;
 };
 

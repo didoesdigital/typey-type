@@ -3,8 +3,8 @@ import { createChatBotMessage } from "react-chatbot-kit";
 import DogPicture from "./DogPicture";
 import PhraseLookup from "./PhraseLookup";
 import ExternalLink from "./ExternalLink";
-import { ReactComponent as AussieRobotAvatar } from "../../../images/AussieRobotAvatar.svg";
-import { ReactComponent as Stenographer } from "../../../images/Stenographer.svg";
+import AussieRobotAvatar from "../../../images/AussieRobotAvatar.svg?react";
+import Stenographer from "../../../images/Stenographer.svg?react";
 
 export const botName = "Shazza";
 

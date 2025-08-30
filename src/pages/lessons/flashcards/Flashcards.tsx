@@ -205,12 +205,12 @@ export class Flashcards extends Component<FlashcardsProps, State> {
 
   fetchAndSetupFlashCards() {
     let path =
-      process.env.PUBLIC_URL + "/lessons/drills/top-1000-words/lesson.txt";
+      import.meta.env.VITE_PUBLIC_URL + "/lessons/drills/top-1000-words/lesson.txt";
     if (this.props.lessonpath) {
       path = this.props.lessonpath;
       if (path === "flashcards") {
         path =
-          process.env.PUBLIC_URL + "/lessons/drills/top-1000-words/lesson.txt";
+          import.meta.env.VITE_PUBLIC_URL + "/lessons/drills/top-1000-words/lesson.txt";
       }
     }
 

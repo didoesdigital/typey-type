@@ -10,7 +10,7 @@ const typeyDictionariesSubDir = "dictionaries/didoesdigital";
 
 const allTypeyTypeDictURLs = allTypeyTypeDictNames.map(
   (filename) =>
-    `${process.env.PUBLIC_URL}/${typeyDictionariesSubDir}/${filename}`
+    `${import.meta.env.VITE_PUBLIC_URL}/${typeyDictionariesSubDir}/${filename}`
 );
 
 function getTypeyTypeDicts() {

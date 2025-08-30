@@ -13,10 +13,10 @@ import { useLessonIndexWithFallback } from "./states/lessonIndexState";
 import { revisionModeState } from "./states/lessonState";
 import Analytics from "components/Analytics";
 
-if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
+if (import.meta.env.MODE === "production") {
   init({
     dsn: "https://50e71fa7abea49288b136cb517fc55be@o180165.ingest.sentry.io/1268615",
-    release: process.env.REACT_APP_TYPEY_TYPE_RELEASE || "development",
+    release: import.meta.env.VITE_REACT_APP_TYPEY_TYPE_RELEASE || "development",
     ignoreErrors: [
       /ResizeObserver loop limit exceeded/i,
       /ResizeObserver loop completed with undelivered notifications/i,
@@ -41,7 +41,7 @@ const AppWithAtomsCompat = withAtomsCompat(AppWrapper, [
 ReactDOM.render(
   <DocumentTitle title="Typey Type for Stenographers">
     <Router
-      basename="/typey-type"
+      basename={import.meta.env.VITE_PUBLIC_URL}
       future={{
         v7_relativeSplatPath: false,
         v7_startTransition: false,

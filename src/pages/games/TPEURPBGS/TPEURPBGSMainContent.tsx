@@ -1,9 +1,8 @@
 import React, { FC } from "react";
 import { useTPEURPBGSData } from "./TPEURPBGSContext/useTPEURPBGS";
 import GameProgress from "./GameProgress";
-import { ReactComponent as BananasRobot } from "../../../images/BananasRobot.svg";
+import BananasRobot from "../../../images/BananasRobot.svg?react";
 import GamePlay from "./GamePlay";
-
 
 type Props = {
   gameName: string;

@@ -10,8 +10,8 @@ if [[ $REPLY =~ ^[Yy]$ ]];
 fi
 
 VERSION=$(git describe --abbrev=0 --tags)
-# Build the production app!
-REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
+# Build the production app but with staging env vars!
+VITE_REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build:staging
 
 rsync --archive --verbose --exclude=".DS_Store" ~/projects/typey-type/build/ stg.lan:www/typey-type/
 

@@ -124,7 +124,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
   }
 
   componentDidMount() {
-    let dict:string = '' + (process.env.PUBLIC_URL || '') + `/dictionaries/typey-type/${LATEST_TYPEY_TYPE_FULL_DICT_NAME}`;
+    let dict:string = '' + (import.meta.env.VITE_PUBLIC_URL || '') + `/dictionaries/typey-type/${LATEST_TYPEY_TYPE_FULL_DICT_NAME}`;
     fetchResource<StenoDictionary>(dict)
       .then((json) => {
         this.setState({

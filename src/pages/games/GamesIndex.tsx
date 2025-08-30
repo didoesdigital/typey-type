@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import GameBox from "./components/GameBox";
-import { ReactComponent as RaverRobot } from "../../images/RaverRobot.svg";
-import { ReactComponent as AussieRobot } from "../../images/AussieRobot.svg";
-import { ReactComponent as ThinkingRobot } from "../../images/ThinkingRobot.svg";
-import { ReactComponent as BananasRobot } from "../../images/BananasRobot.svg";
-import { ReactComponent as ComposingRobot } from "../../images/ComposingRobot.svg";
-import { ReactComponent as MischievousRobot } from "../../images/MischievousRobot.svg";
+import RaverRobot from "../../images/RaverRobot.svg?react";
+import AussieRobot from "../../images/AussieRobot.svg?react";
+import ThinkingRobot from "../../images/ThinkingRobot.svg?react";
+import BananasRobot from "../../images/BananasRobot.svg?react";
+import ComposingRobot from "../../images/ComposingRobot.svg?react";
+import MischievousRobot from "../../images/MischievousRobot.svg?react";
 import Subheader from "../../components/Subheader";
 
 export default function GamesIndex() {

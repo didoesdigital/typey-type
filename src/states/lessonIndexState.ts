@@ -7,14 +7,14 @@ const lessonIndexFallback: LessonIndexEntry[] = [{
   "subtitle": "",
   "category": "Drills",
   "subcategory": "",
-  "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt",
+  "path": import.meta.env.VITE_PUBLIC_URL + "/drills/steno/lesson.txt",
   overview: "",
   suggestedNext: "",
   wordCount: 0,
 }];
 
 function fetchLessonIndex() {
-  return fetch(process.env.PUBLIC_URL + '/lessons/lessonIndex.json', {
+  return fetch(import.meta.env.VITE_PUBLIC_URL + '/lessons/lessonIndex.json', {
     method: "GET",
     credentials: "same-origin"
   }).then((response) => {

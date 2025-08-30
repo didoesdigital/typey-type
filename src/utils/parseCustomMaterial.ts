@@ -20,7 +20,7 @@ export function parseCustomMaterial(
     title: "Custom",
     subtitle: "",
     newPresentedMaterial: new Zipper([{ phrase: "", stroke: "" }]),
-    path: process.env.PUBLIC_URL + "/lessons/custom",
+    path: import.meta.env.VITE_PUBLIC_URL + "/lessons/custom",
   };
   if (lessonTextAndStrokes.length === 0) {
     validationState = "fail";
@@ -70,7 +70,7 @@ export function parseCustomMaterial(
       title: lessonTitle,
       subtitle: lessonSubtitle,
       newPresentedMaterial: new Zipper(sourceMaterial),
-      path: process.env.PUBLIC_URL + "/lessons/custom",
+      path: import.meta.env.VITE_PUBLIC_URL + "/lessons/custom",
     },
     validationState,
     validationMessages,

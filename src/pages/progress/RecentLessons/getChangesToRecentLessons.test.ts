@@ -2,7 +2,7 @@ import { RecentLessons } from "../../../states/recentLessonHistoryState";
 import { LessonPathWithBasenameAndFilename } from "../../../types";
 import getChangesToRecentLessons from "./getChangesToRecentLessons";
 
-const basename = process.env.PUBLIC_URL;
+const basename = import.meta.env.VITE_PUBLIC_URL;
 
 const scenarioCustomLesson: TestTableRow = {
   description: "should ignore custom lesson and return null",

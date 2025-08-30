@@ -12,7 +12,7 @@ const defaultRecommendedNextLesson: RecommendedNextLesson = {
   linkTitle: "Top 10000 Project Gutenberg words",
   linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
   link:
-    process.env.PUBLIC_URL +
+    import.meta.env.VITE_PUBLIC_URL +
     "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" +
     PARAMS.practiceParams,
 };

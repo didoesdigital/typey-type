@@ -3,7 +3,7 @@ import type { DictionaryIndexEntry } from "types";
 async function fetchDictionaryIndex(): Promise<DictionaryIndexEntry[]> {
   try {
     const response = await fetch(
-      process.env.PUBLIC_URL + "/dictionaries/dictionaryIndex.json",
+      import.meta.env.VITE_PUBLIC_URL + "/dictionaries/dictionaryIndex.json",
       {
         method: "GET",
         credentials: "same-origin",

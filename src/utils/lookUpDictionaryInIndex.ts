@@ -19,7 +19,7 @@ function lookUpDictionaryInIndex(
 ) {
   let dictionaryMetadata = dictionaryIndex.find(
     (metadataEntry) =>
-      process.env.PUBLIC_URL + metadataEntry.path ===
+      import.meta.env.VITE_PUBLIC_URL + metadataEntry.path ===
       path.replace(/\/$/, ".json")
   );
 

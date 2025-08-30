@@ -11,7 +11,7 @@ type TrimBasenameAndFilename = (
 
 const trimBasenameAndFilename: TrimBasenameAndFilename = (lessonPath) => {
   return lessonPath
-    .replace(process.env.PUBLIC_URL, "")
+    .replace(import.meta.env.VITE_PUBLIC_URL, "")
     .replace("lesson.txt", "");
 };
 

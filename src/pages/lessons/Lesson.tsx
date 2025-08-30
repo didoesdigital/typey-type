@@ -122,7 +122,7 @@ const Lesson = ({
         lesson.path !== location.pathname + "lesson.txt" &&
         location.pathname.startsWith("/lessons")
       ) {
-        handleLesson(process.env.PUBLIC_URL + location.pathname + "lesson.txt");
+        handleLesson(import.meta.env.VITE_PUBLIC_URL + location.pathname + "lesson.txt");
       }
 
       const parsedParams = queryString.parse(location.search);
@@ -158,7 +158,7 @@ const Lesson = ({
       !isOverview(location.pathname) &&
       location.pathname.startsWith("/lessons")
     ) {
-      handleLesson(process.env.PUBLIC_URL + location.pathname + "lesson.txt");
+      handleLesson(import.meta.env.VITE_PUBLIC_URL + location.pathname + "lesson.txt");
     }
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -319,7 +319,7 @@ const Lesson = ({
                     updateGlobalLookupDictionary={updateGlobalLookupDictionary}
                     updatePersonalDictionaries={updatePersonalDictionaries}
                     lessonpath={
-                      process.env.PUBLIC_URL +
+                      import.meta.env.VITE_PUBLIC_URL +
                       location.pathname.replace(/flashcards/, "") +
                       "lesson.txt"
                     }

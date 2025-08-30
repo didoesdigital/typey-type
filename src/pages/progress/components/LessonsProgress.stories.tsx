@@ -21,33 +21,33 @@ export default {
   ],
 };
 
-const fakePUBLIC_URL = "."; // should be '/typey-type' but that requires setting the Storybook environment variable for PUBLIC_URL and that in turn breaks other stories
+const fakeVITE_PUBLIC_URL = "."; // should be '/typey-type' but that requires setting the Storybook environment variable for VITE_PUBLIC_URL and that in turn breaks other stories
 
 const testLessonsProgress = {
-  [`${fakePUBLIC_URL}/lessons/fundamentals/introduction/lesson.txt`]: {
+  [`${fakeVITE_PUBLIC_URL}/lessons/fundamentals/introduction/lesson.txt`]: {
     numberOfWordsMemorised: 52,
     numberOfWordsSeen: 0,
     numberOfWordsToDiscover: 0,
   },
-  [`${fakePUBLIC_URL}/lessons/fundamentals/one-syllable-words-with-simple-keys/lesson.txt`]:
+  [`${fakeVITE_PUBLIC_URL}/lessons/fundamentals/one-syllable-words-with-simple-keys/lesson.txt`]:
     {
       numberOfWordsMemorised: 0,
       numberOfWordsSeen: 4,
       numberOfWordsToDiscover: 160,
     },
-  [`${fakePUBLIC_URL}/lessons/fundamentals/one-syllable-words-with-more-consonants/lesson.txt`]:
+  [`${fakeVITE_PUBLIC_URL}/lessons/fundamentals/one-syllable-words-with-more-consonants/lesson.txt`]:
     {
       numberOfWordsMemorised: 0,
       numberOfWordsSeen: 0,
       numberOfWordsToDiscover: 96,
     },
-  [`${fakePUBLIC_URL}/lessons/fundamentals/multi-syllable-words-with-suffixes/lesson.txt`]:
+  [`${fakeVITE_PUBLIC_URL}/lessons/fundamentals/multi-syllable-words-with-suffixes/lesson.txt`]:
     {
       numberOfWordsMemorised: 9,
       numberOfWordsSeen: 524,
       numberOfWordsToDiscover: 842,
     },
-  [`${fakePUBLIC_URL}/lessons/stories/proverbial-phrases/proverbial-phrases-starting-with-e/lesson.txt`]:
+  [`${fakeVITE_PUBLIC_URL}/lessons/stories/proverbial-phrases/proverbial-phrases-starting-with-e/lesson.txt`]:
     {
       numberOfWordsMemorised: 0,
       numberOfWordsSeen: 0,

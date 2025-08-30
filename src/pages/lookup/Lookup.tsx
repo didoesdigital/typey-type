@@ -42,7 +42,7 @@ const Lookup = ({
   const { appFetchAndSetupGlobalDict, setCustomLessonContent } =
     useAppMethods();
   const [bookmarkURL, setBookmarkURL] = useState(
-    process.env.PUBLIC_URL + "/lookup"
+    import.meta.env.VITE_PUBLIC_URL + "/lookup"
   );
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const [trackedPhrase, setTrackPhrase] = useState("");
@@ -69,7 +69,7 @@ const Lookup = ({
   const strokesForWordsChange = (phrase: string) => {
     setLookupTerm(phrase);
     const encodedPhrase = encodeURIComponent(phrase);
-    setBookmarkURL(process.env.PUBLIC_URL + "/lookup?q=" + encodedPhrase);
+    setBookmarkURL(import.meta.env.VITE_PUBLIC_URL + "/lookup?q=" + encodedPhrase);
   };
 
   const setUpCustomLesson = () => {

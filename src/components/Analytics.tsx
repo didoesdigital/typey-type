@@ -5,11 +5,7 @@ type AnalyticsProps = {
   children: React.ReactElement;
 };
 
-if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
-  GoogleAnalytics.initialize("G-VMN1E6BYC2");
-} else {
-  GoogleAnalytics.initialize("G-45R7RGF4FZ");
-}
+GoogleAnalytics.initialize(import.meta.env.VITE_GA_MEASUREMENT_ID);
 
 const Analytics = ({ children }: AnalyticsProps) => {
   return <>{children}</>;

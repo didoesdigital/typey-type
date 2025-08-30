@@ -13,7 +13,7 @@ function customiseLesson() {
     title: "Custom", // "Start custom lesson" overrides this anyway
     subtitle: "",
     newPresentedMaterial: new Zipper(existingLesson.sourceMaterial.slice()),
-    path: process.env.PUBLIC_URL + "/lessons/custom",
+    path: import.meta.env.VITE_PUBLIC_URL + "/lessons/custom",
   };
 
   const validationState = "success";

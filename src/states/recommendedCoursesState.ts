@@ -35,7 +35,7 @@ const recommendedCoursesFallback: RecommendedCoursesType = {
 };
 
 function fetchRecommendations() {
-  return fetch(process.env.PUBLIC_URL + "/lessons/recommendations.json", {
+  return fetch(import.meta.env.VITE_PUBLIC_URL + "/lessons/recommendations.json", {
     method: "GET",
     credentials: "same-origin",
   })

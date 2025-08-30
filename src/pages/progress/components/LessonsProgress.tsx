@@ -96,16 +96,16 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
     }
     if (
       lessonsProgress &&
-      lessonsProgress[process.env.PUBLIC_URL + "/lessons" + lesson.path]
+      lessonsProgress[import.meta.env.VITE_PUBLIC_URL + "/lessons" + lesson.path]
     ) {
       let toDiscover =
-        lessonsProgress[process.env.PUBLIC_URL + "/lessons" + lesson.path]
+        lessonsProgress[import.meta.env.VITE_PUBLIC_URL + "/lessons" + lesson.path]
           ?.numberOfWordsToDiscover || 0;
       let seen =
-        lessonsProgress[process.env.PUBLIC_URL + "/lessons" + lesson.path]
+        lessonsProgress[import.meta.env.VITE_PUBLIC_URL + "/lessons" + lesson.path]
           ?.numberOfWordsSeen || 0;
       let memorised =
-        lessonsProgress[process.env.PUBLIC_URL + "/lessons" + lesson.path]
+        lessonsProgress[import.meta.env.VITE_PUBLIC_URL + "/lessons" + lesson.path]
           ?.numberOfWordsMemorised || 0;
       numberOfWordsSeenOrMemorised = seen + memorised;
       wordCountDenominator = seen + memorised + toDiscover;

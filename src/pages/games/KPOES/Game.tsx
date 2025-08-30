@@ -2,7 +2,7 @@ import React from "react";
 import Intro from "../components/Intro";
 import Prompt from "./Prompt";
 import WriteYourWords from "./WriteYourWords";
-import { ReactComponent as ComposingRobot } from "../../../images/ComposingRobot.svg";
+import ComposingRobot from "../../../images/ComposingRobot.svg?react";
 import StrokesForWords from "../../../components/StrokesForWords";
 import updateMultipleMetWords from "./updateMultipleMetWords";
 import "./styles.scss";

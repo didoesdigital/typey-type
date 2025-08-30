@@ -42,7 +42,7 @@ const Template = (args) => {
           userSettings={{}}
           changeFullscreen={() => undefined}
           lessonpath={
-            process.env.PUBLIC_URL +
+            import.meta.env.VITE_PUBLIC_URL +
             lessonPath.replace(/flashcards/, "") +
             "lesson.txt"
           }

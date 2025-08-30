@@ -1,8 +1,8 @@
 import React from "react";
 import NumericInput from "components/NumericInput/NumericInput";
-import { ReactComponent as AlertRobot } from "../../../images/AlertRobot.svg";
-import { ReactComponent as BoredRobot } from "../../../images/BoredRobot.svg";
-import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
+import AlertRobot from "../../../images/AlertRobot.svg?react";
+import BoredRobot from "../../../images/BoredRobot.svg?react";
+import HappyRobot from "../../../images/HappyRobot.svg?react";
 import type { MetWords } from "../../../types";
 
 type Props = {

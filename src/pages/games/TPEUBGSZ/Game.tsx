@@ -8,7 +8,7 @@ import Intro from "../components/Intro";
 import LevelCompleted from "../utilities/LevelCompleted";
 import Puzzle from "./Puzzle";
 import GameProgress from "../components/GameProgress";
-import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
+import ThinkingRobot from "../../../images/ThinkingRobot.svg?react";
 import type { MetWords } from "types";
 
 const gameName = "TPEUBGSZ";

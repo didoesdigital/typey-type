@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Intro from "../components/Intro";
-import { ReactComponent as AussieRobot } from "../../../images/AussieRobot.svg";
+import AussieRobot from "../../../images/AussieRobot.svg?react";
 import Chatbot from "react-chatbot-kit";
 import "./styles.scss";
 import makeConfig, { botName } from "./config";

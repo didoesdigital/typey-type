@@ -125,7 +125,7 @@ function generateCustomLesson(
     title: "Custom",
     subtitle: "Generated lesson",
     newPresentedMaterial: new Zipper(rulesFilteredMaterial),
-    path: process.env.PUBLIC_URL + "/lessons/custom",
+    path: import.meta.env.VITE_PUBLIC_URL + "/lessons/custom",
   };
 
   const validGeneratedLesson = customLesson.presentedMaterial.length > 0;

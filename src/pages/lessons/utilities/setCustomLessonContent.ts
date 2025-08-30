@@ -10,7 +10,7 @@ function setCustomLessonContent(material: MaterialItem[]) {
     title: "Custom", // "Start custom lesson" overrides this anyway
     subtitle: "",
     newPresentedMaterial: new Zipper(material.slice()),
-    path: process.env.PUBLIC_URL + "/lessons/custom",
+    path: import.meta.env.VITE_PUBLIC_URL + "/lessons/custom",
   };
 
   const validationState = "success";

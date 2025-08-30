@@ -8,7 +8,7 @@ import Intro from "../components/Intro";
 import GameProgress from "../components/GameProgress";
 import LevelCompleted from "../utilities/LevelCompleted";
 import Puzzle from "./Puzzle";
-import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
+import RaverRobot from "../../../images/RaverRobot.svg?react";
 import App from "../../../App";
 
 import type { LookupDictWithNamespacedDictsAndConfig, MetWords } from "types";
@@ -59,8 +59,7 @@ export default function Game({
       dispatch({ type: actions.roundCompleted });
     }
 
-    if (process.env.NODE_ENV === "development")
-      console.log(gameState.rightAnswers);
+    if (import.meta.env.DEV) console.log(gameState.rightAnswers);
   };
 
   return (

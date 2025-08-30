@@ -65,7 +65,7 @@ function getRecommendedNextLesson(
     linkTitle: "Top 10000 Project Gutenberg words",
     linkText: "Practice 300 words from Top 10000 Project Gutenberg words",
     link:
-      process.env.PUBLIC_URL +
+      import.meta.env.VITE_PUBLIC_URL +
       "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" +
       PARAMS.practiceParams,
   };
@@ -145,7 +145,7 @@ function getRecommendedNextLesson(
         let recommendedPracticeLesson = courses.practiceCourse.find(
           (recommendable) => {
             let entryInLessonsProgress =
-              lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
+              lessonsProgress[import.meta.env.VITE_PUBLIC_URL + recommendable.path];
             let seenOrMemorisedChoice: keyof LessonsProgressEntry =
               Math.random() < 0.9
                 ? "numberOfWordsSeen"
@@ -263,7 +263,7 @@ function getRecommendedNextLesson(
         let recommendedDrillLesson = courses.drillCourse.find(
           (recommendable) => {
             entryInLessonsProgress =
-              lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
+              lessonsProgress[import.meta.env.VITE_PUBLIC_URL + recommendable.path];
 
             // No lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
             // It's not a great candidate for drilling
@@ -358,7 +358,7 @@ function getRecommendedNextLesson(
             // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
             // so it's probably not a good candidate for revision
             entryInLessonsProgress =
-              lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
+              lessonsProgress[import.meta.env.VITE_PUBLIC_URL + recommendable.path];
             if (typeof entryInLessonsProgress === "undefined") {
               return false;
             }
@@ -428,14 +428,14 @@ function getRecommendedNextLesson(
         // so it's probably a good candidate
         if (
           typeof lessonsProgress[
-            process.env.PUBLIC_URL + recommendable.path
+            import.meta.env.VITE_PUBLIC_URL + recommendable.path
           ] === "undefined"
         ) {
           return true;
         }
 
         entryInLessonsProgress =
-          lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
+          lessonsProgress[import.meta.env.VITE_PUBLIC_URL + recommendable.path];
 
         // don't pick this lesson if you've already seen/memorised 15 words and its target was 15
         if (
