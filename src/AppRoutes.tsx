@@ -1,7 +1,6 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import DocumentTitle from "react-document-title";
-import Loadable from "react-loadable";
 import PageLoading from "./components/PageLoading";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Lessons from "./pages/lessons/Lessons";
@@ -22,85 +21,27 @@ import type {
 } from "./types";
 import { CustomLessonMaterialValidationState } from "./pages/lessons/custom/components/CustomLessonIntro";
 
-const AsyncBreak = Loadable({
-  loader: () => import("./pages/break/Break"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyBreak = lazy(() => import("./pages/break/Break"));
 
-const AsyncContribute = Loadable({
-  loader: () => import("./pages/contribute/Contribute"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyContribute = lazy(() => import("./pages/contribute/Contribute"));
 
-const AsyncPageNotFound = Loadable({
-  loader: () => import("./pages/pagenotfound/PageNotFound"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyPageNotFound = lazy(() => import("./pages/pagenotfound/PageNotFound"));
 
-const AsyncProgress = Loadable({
-  loader: () => import("./pages/progress/Progress"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyProgress = lazy(() => import("./pages/progress/Progress"));
 
-const AsyncWriter = Loadable({
-  loader: () => import("./pages/writer/Writer"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyWriter = lazy(() => import("./pages/writer/Writer"));
 
-const AsyncFlashcards = Loadable({
-  loader: () => import("./pages/lessons/flashcards/Flashcards"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyFlashcards = lazy(() => import("./pages/lessons/flashcards/Flashcards"));
 
-const AsyncHome = Loadable({
-  loader: () => import("./pages/home/Home"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyHome = lazy(() => import("./pages/home/Home"));
 
-const AsyncSupport = Loadable({
-  loader: () => import("./pages/support/Support"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazySupport = lazy(() => import("./pages/support/Support"));
 
-const AsyncLookup = Loadable({
-  loader: () => import("./pages/lookup/Lookup"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyLookup = lazy(() => import("./pages/lookup/Lookup"));
 
-const AsyncDictionaries = Loadable({
-  loader: () => import("./pages/dictionaries/Dictionaries"),
-  loading: PageLoading,
-  delay: 300,
-});
+const LazyDictionaries = lazy(() => import("./pages/dictionaries/Dictionaries"));
 
-const AsyncGames = Loadable({
-  loader: () => import("./pages/games/Games"),
-  loading: PageLoading,
-  delay: 300,
-});
-
-// Test PageLoadingPastDelay at Dictionaries route:
-// import PageLoadingPastDelay from './components/PageLoadingPastDelay';
-// const AsyncDictionaries = Loadable({
-//   loader: () => import('./components/PageLoadingPastDelay'), // oh no!
-//   loading: PageLoading,
-// });
-
-// Test PageLoadingFailed at Dictionaries route:
-// import PageLoadingFailed from './components/PageLoadingFailed';
-// const AsyncDictionaries = Loadable({
-//   loader: () => import('./components/PageLoadingFailed'), // oh no!
-//   loading: PageLoading,
-// });
+const LazyGames = lazy(() => import("./pages/games/Games"));
 
 /**
  * This is based on state initialization in App.tsx.
@@ -173,7 +114,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
 
                 <DocumentTitle title="Typey Type for Stenographers">
                   <ErrorBoundary>
-                    <AsyncHome />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyHome />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -187,7 +130,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
 
                 <DocumentTitle title={"Typey Type | About"}>
                   <ErrorBoundary>
-                    <AsyncSupport />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazySupport />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -201,7 +146,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
 
                 <DocumentTitle title={"Typey Type | Writer"}>
                   <ErrorBoundary>
-                    <AsyncWriter />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyWriter />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -214,15 +161,17 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <Header />
                 <DocumentTitle title={"Typey Type | Games"}>
                   <ErrorBoundary>
-                    <AsyncGames
-                      globalLookupDictionary={appState.globalLookupDictionary}
-                      globalLookupDictionaryLoaded={
-                        appState.globalLookupDictionaryLoaded
-                      }
-                      metWords={appState.metWords}
-                      personalDictionaries={appState.personalDictionaries}
-                      startingMetWordsToday={appState.startingMetWordsToday}
-                    />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyGames
+                        globalLookupDictionary={appState.globalLookupDictionary}
+                        globalLookupDictionaryLoaded={
+                          appState.globalLookupDictionaryLoaded
+                        }
+                        metWords={appState.metWords}
+                        personalDictionaries={appState.personalDictionaries}
+                        startingMetWordsToday={appState.startingMetWordsToday}
+                      />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -235,7 +184,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <Header />
                 <DocumentTitle title={"Typey Type | Take a break"}>
                   <ErrorBoundary>
-                    <AsyncBreak />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyBreak />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -248,7 +199,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <Header />
                 <DocumentTitle title={"Typey Type | Contribute"}>
                   <ErrorBoundary>
-                    <AsyncContribute />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyContribute />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -262,7 +215,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <DocumentTitle title={"Typey Type | Progress"}>
                   <ErrorBoundary>
                     <Suspense fallback={<PageLoading pastDelay={true} />}>
-                      <AsyncProgress
+                      <LazyProgress
                         metWords={appState.metWords}
                         lessonsProgress={appState.lessonsProgress}
                         startingMetWordsToday={appState.startingMetWordsToday}
@@ -282,15 +235,17 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <Header />
                 <DocumentTitle title={"Typey Type | Flashcards"}>
                   <ErrorBoundary>
-                    <AsyncFlashcards
-                      globalLookupDictionary={appState.globalLookupDictionary}
-                      globalLookupDictionaryLoaded={
-                        appState.globalLookupDictionaryLoaded
-                      }
-                      lessonpath="flashcards"
-                      locationpathname={location.pathname}
-                      personalDictionaries={appState.personalDictionaries}
-                    />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyFlashcards
+                        globalLookupDictionary={appState.globalLookupDictionary}
+                        globalLookupDictionaryLoaded={
+                          appState.globalLookupDictionaryLoaded
+                        }
+                        lessonpath="flashcards"
+                        locationpathname={location.pathname}
+                        personalDictionaries={appState.personalDictionaries}
+                      />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -303,13 +258,15 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <Header />
                 <DocumentTitle title={"Typey Type | Lookup"}>
                   <ErrorBoundary>
-                    <AsyncLookup
-                      globalLookupDictionary={appState.globalLookupDictionary}
-                      globalLookupDictionaryLoaded={
-                        appState.globalLookupDictionaryLoaded
-                      }
-                      personalDictionaries={appState.personalDictionaries}
-                    />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyLookup
+                        globalLookupDictionary={appState.globalLookupDictionary}
+                        globalLookupDictionaryLoaded={
+                          appState.globalLookupDictionaryLoaded
+                        }
+                        personalDictionaries={appState.personalDictionaries}
+                      />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -322,13 +279,15 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <Header />
                 <DocumentTitle title={"Typey Type | Dictionaries"}>
                   <ErrorBoundary>
-                    <AsyncDictionaries
-                      globalLookupDictionary={appState.globalLookupDictionary}
-                      globalLookupDictionaryLoaded={
-                        appState.globalLookupDictionaryLoaded
-                      }
-                      personalDictionaries={appState.personalDictionaries}
-                    />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyDictionaries
+                        globalLookupDictionary={appState.globalLookupDictionary}
+                        globalLookupDictionaryLoaded={
+                          appState.globalLookupDictionaryLoaded
+                        }
+                        personalDictionaries={appState.personalDictionaries}
+                      />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -418,7 +377,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
               <div>
                 <DocumentTitle title={"Typey Type | Page not found"}>
                   <ErrorBoundary>
-                    <AsyncPageNotFound />
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
+                      <LazyPageNotFound />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
