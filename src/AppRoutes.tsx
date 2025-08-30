@@ -172,7 +172,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <Header />
 
                 <DocumentTitle title="Typey Type for Stenographers">
-                  <AsyncHome />
+                  <ErrorBoundary>
+                    <AsyncHome />
+                  </ErrorBoundary>
                 </DocumentTitle>
               </div>
             }
@@ -279,15 +281,17 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
               <div>
                 <Header />
                 <DocumentTitle title={"Typey Type | Flashcards"}>
-                  <AsyncFlashcards
-                    globalLookupDictionary={appState.globalLookupDictionary}
-                    globalLookupDictionaryLoaded={
-                      appState.globalLookupDictionaryLoaded
-                    }
-                    lessonpath="flashcards"
-                    locationpathname={location.pathname}
-                    personalDictionaries={appState.personalDictionaries}
-                  />
+                  <ErrorBoundary>
+                    <AsyncFlashcards
+                      globalLookupDictionary={appState.globalLookupDictionary}
+                      globalLookupDictionaryLoaded={
+                        appState.globalLookupDictionaryLoaded
+                      }
+                      lessonpath="flashcards"
+                      locationpathname={location.pathname}
+                      personalDictionaries={appState.personalDictionaries}
+                    />
+                  </ErrorBoundary>
                 </DocumentTitle>
               </div>
             }
@@ -413,7 +417,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
             element={
               <div>
                 <DocumentTitle title={"Typey Type | Page not found"}>
-                  <AsyncPageNotFound />
+                  <ErrorBoundary>
+                    <AsyncPageNotFound />
+                  </ErrorBoundary>
                 </DocumentTitle>
               </div>
             }
