@@ -175,7 +175,7 @@ const Finished = ({
         JSON.stringify(lessonHistory)
       );
     }
-  }, [wpm, numericAccuracy, lessonTitle]);
+  }, [numericAccuracy, lessonTitle]);
 
   return (
     <div>
