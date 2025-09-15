@@ -1,24 +1,29 @@
 import React, { useMemo } from "react";
 import { format } from "d3-format";
-import type { ScaleLinear } from "d3-scale";
+import { ScaleLinear, ScaleTime } from "d3-scale";
 
 const formatter = format(",");
 
 type Dimensions = {
-  boundedWidth: string;
-  boundedHeight: string;
+  boundedWidth: number;
+  boundedHeight: number;
 };
 
 type AxisSharedProps = {
   dimensions: Dimensions;
-  scale: ScaleLinear<any, any>;
+  scale: ScaleLinear<any, any> | ScaleTime<any, any>;
   gridLines: boolean;
   numberOfTicks: number;
+  tickFormat?: (value: any, index: number, ticks: any[]) => string;
+  label?: string;
+  labelColor?: string;
 };
 
 type AxisHorizontalProps = AxisSharedProps;
 
-type AxisVerticalProps = AxisSharedProps;
+type AxisVerticalProps = AxisSharedProps & {
+  position?: "left" | "right";
+};
 
 // An ok default value: numberOfTicks = dimensions.boundedWidth / 80
 const AxisHorizontal = ({
@@ -26,6 +31,9 @@ const AxisHorizontal = ({
   scale,
   gridLines,
   numberOfTicks,
+  tickFormat,
+  label,
+  labelColor,
   ...props
 }: AxisHorizontalProps) => {
   const ticks = useMemo(() => {
@@ -41,10 +49,10 @@ const AxisHorizontal = ({
       role="presentation"
       {...props}
     >
-      {ticks.map(({ value, xOffset }) => {
+      {ticks.map(({ value, xOffset }, i) => {
         return (
           <g
-            key={value}
+            key={value.toString()}
             transform={`translate(${xOffset}, 0)`}
             role="presentation"
           >
@@ -58,7 +66,7 @@ const AxisHorizontal = ({
             />
 
             <text
-              key={value}
+              key={value.toString()}
               aria-hidden="true"
               role="presentation"
               style={{
@@ -67,11 +75,22 @@ const AxisHorizontal = ({
                 userSelect: "none",
               }}
             >
-              {formatter(value)}
+              {tickFormat ? tickFormat(value, i, ticks) : formatter(value)}
             </text>
           </g>
         );
       })}
+      {label && (
+        <text
+          style={{
+            textAnchor: "middle",
+            transform: `translate(${dimensions.boundedWidth / 2}px, 40px)`,
+            fill: labelColor,
+          }}
+        >
+          {label}
+        </text>
+      )}
     </g>
   );
 };
@@ -82,9 +101,20 @@ const AxisVertical = ({
   scale,
   gridLines,
   numberOfTicks,
+  position = "right",
+  tickFormat,
+  label,
+  labelColor,
   ...props
 }: AxisVerticalProps) => {
-  const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 0] : [0, 4];
+  const [x1, x2] =
+    gridLines === true
+      ? position === "right"
+        ? [-dimensions.boundedWidth, 0]
+        : [dimensions.boundedWidth, 0]
+      : position === "right"
+        ? [0, 4]
+        : [0, -4];
 
   const ticks = useMemo(() => {
     return scale.ticks(numberOfTicks).map((value) => ({
@@ -93,16 +123,20 @@ const AxisVertical = ({
     }));
   }, [scale, numberOfTicks]);
 
+  const transform =
+    position === "right"
+      ? `translate(${dimensions.boundedWidth}, 0)`
+      : `translate(0, 0)`;
+  const textAnchor = position === "right" ? "start" : "end";
+  const textTransform =
+    position === "right" ? "translateX(8px)" : "translateX(-8px)";
+
   return (
-    <g
-      transform={`translate(${dimensions.boundedWidth}, 0)`}
-      role="presentation"
-      {...props}
-    >
+    <g transform={transform} role="presentation" {...props}>
       {ticks.map(({ value, yOffset }, i) => {
         return (
           <g
-            key={value}
+            key={value.toString()}
             transform={`translate(0, ${yOffset})`}
             role="presentation"
           >
@@ -117,21 +151,34 @@ const AxisVertical = ({
             />
 
             <text
-              key={value}
+              key={value.toString()}
               aria-hidden="true"
               role="presentation"
               style={{
-                textAnchor: "start",
-                transform: "translateX(8px)",
+                textAnchor,
+                transform: textTransform,
                 userSelect: "none",
               }}
               dy="0.32em"
             >
-              {`${formatter(value)}${i === ticks.length - 1 ? " WPM" : ""}`}
+              {tickFormat ? tickFormat(value, i, ticks) : formatter(value)}
             </text>
           </g>
         );
       })}
+      {label && (
+        <text
+          style={{
+            textAnchor: "middle",
+            transform: `translate(${position === "right" ? "45px" : "-45px"}, ${
+              dimensions.boundedHeight / 2
+            }px) rotate(-90deg)`,
+            fill: labelColor,
+          }}
+        >
+          {label}
+        </text>
+      )}
     </g>
   );
 };
@@ -144,7 +191,9 @@ const axisComponentsByDimension = {
 type AxisProps = {
   dimension: "x" | "y";
   dimensions: Dimensions;
-} & AxisSharedProps;
+} & AxisSharedProps & {
+    position?: "left" | "right";
+  };
 
 const Axis = ({ dimension, dimensions, ...props }: AxisProps) => {
   const AxisByDimension = axisComponentsByDimension[dimension];

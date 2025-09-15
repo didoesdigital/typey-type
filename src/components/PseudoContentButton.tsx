@@ -6,6 +6,7 @@ type Props = {
   children: React.ReactNode;
   className: string;
   dataClipboardTarget?: string;
+  dataClipboardText?: string;
   style?: any;
   onClick?: () => void;
 };
@@ -80,6 +81,7 @@ const PseudoContentButton = (props: Props) => {
     <button
       className={props.className + (clicked ? " fade-out-up" : "")}
       data-clipboard-target={props.dataClipboardTarget}
+      data-clipboard-text={props.dataClipboardText}
       onClick={animatedPseudoContent}
       style={props.style || {}}
     >

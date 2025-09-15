@@ -16,6 +16,7 @@ import LessonFinePrintFooter from "./LessonFinePrintFooter";
 import getNumericAccuracy from "../utilities/getNumericAccuracy";
 import type { ConfettiConfig } from "./FinishedSummaryHeadings";
 import type { FinishedProps, LessonData, TransformedData } from "../types";
+import type { LessonHistory, LessonResult } from "../../../types";
 import {
   newTopSpeedPersonalBestState,
   newTopSpeedTodayState,
@@ -153,6 +154,28 @@ const Finished = ({
     // lesson title instead of "New top speed for today!"
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLessonStrokes.length, revisionMode, wpm]);
+
+  // save lesson results to local storage
+  useEffect(() => {
+    if (wpm > 0) {
+      const lessonResult: LessonResult = {
+        timestamp: new Date().toISOString(),
+        lessonTitle,
+        wpm,
+        accuracy: numericAccuracy,
+      };
+
+      const lessonHistoryString = window.localStorage.getItem("lessonHistory");
+      const lessonHistory: LessonHistory = lessonHistoryString
+        ? JSON.parse(lessonHistoryString)
+        : [];
+      lessonHistory.push(lessonResult);
+      window.localStorage.setItem(
+        "lessonHistory",
+        JSON.stringify(lessonHistory)
+      );
+    }
+  }, [wpm, numericAccuracy, lessonTitle]);
 
   return (
     <div>

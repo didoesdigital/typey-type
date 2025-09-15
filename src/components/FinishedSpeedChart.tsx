@@ -290,6 +290,12 @@ export default function FinishedSpeedChart({ data }: Props) {
                 scale={yScale}
                 numberOfTicks={4}
                 gridLines={true}
+                tickFormat={(value, index, ticks) => {
+                  if (index === ticks.length - 1) {
+                    return `${format(",")(value)} WPM`;
+                  }
+                  return format(",")(value);
+                }}
               />
             )}
             <g
