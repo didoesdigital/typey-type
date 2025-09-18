@@ -208,7 +208,7 @@ const ProgressGraph: React.FC<ProgressGraphProps> = ({
           gridLines={false}
           numberOfTicks={4}
           position="left"
-          label="Total Words"
+          label="Total Correct Words"
           labelColor="#47A8E1"
           tickFormat={yTickFormat}
         />

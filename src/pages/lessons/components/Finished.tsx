@@ -64,18 +64,18 @@ const Finished = ({
 }: FinishedProps) => {
   const [chartData, setChartData] = useState<TransformedData>(
     transformLessonDataToChartData(
-      stitchTogetherLessonData(currentLessonStrokes, startTime ?? 0, 0)
-    )
+      stitchTogetherLessonData(currentLessonStrokes, startTime ?? 0, 0),
+    ),
   );
   const [confettiConfig, setConfettiConfig] = useState<ConfettiConfig>(null);
   const [topSpeedPersonalBest, setTopSpeedPersonalBest] = useAtom(
-    topSpeedPersonalBestState
+    topSpeedPersonalBestState,
   );
   const [newTopSpeedPersonalBest, setNewTopSpeedPersonalBest] = useAtom(
-    newTopSpeedPersonalBestState
+    newTopSpeedPersonalBestState,
   );
   const [newTopSpeedToday, setNewTopSpeedToday] = useAtom(
-    newTopSpeedTodayState
+    newTopSpeedTodayState,
   );
   const [numericAccuracy, setNumericAccuracy] = useState(0);
   const [wpm, setWpm] = useState(0);
@@ -92,7 +92,7 @@ const Finished = ({
       currentLessonStrokes,
       // In theory, startTime should always be set to a number already if the lesson was run in order to even reach the Finished component, but we'll use a nullish coalesce operator here so we don't have to handle null type
       startTime ?? 0,
-      wpm
+      wpm,
     );
     setChartData(transformLessonDataToChartData(lessonData));
   }, [currentLessonStrokes, startTime, wpm]);
@@ -103,18 +103,26 @@ const Finished = ({
       totalNumberOfMistypedWords,
       totalNumberOfHintedWords,
       currentLessonStrokes,
-      wpm
+      wpm,
     );
     setNumericAccuracy(calculatedNumericAccuracy);
+  }, [
+    currentLessonStrokes,
+    totalNumberOfHintedWords,
+    totalNumberOfMistypedWords,
+    wpm,
+  ]);
 
-    // save lesson results to local storage
-    if (wpm > 0) {
+  // save lesson results to local storage (separate effect with proper dependencies)
+  useEffect(() => {
+    if (wpm > 0 && numericAccuracy > 0) {
+      // Wait for both values to be calculated
       const lessonResult: LessonResult = {
         timestamp: new Date().toISOString(),
         lessonTitle,
         wpm,
-        accuracy: Math.round(calculatedNumericAccuracy),
-        words: totalNumberOfMatchedWords,
+        accuracy: Math.round(numericAccuracy),
+        words: Math.floor(totalNumberOfMatchedWords),
       };
 
       const lessonHistoryString = window.localStorage.getItem("lessonHistory");
@@ -124,17 +132,10 @@ const Finished = ({
       lessonHistory.push(lessonResult);
       window.localStorage.setItem(
         "lessonHistory",
-        JSON.stringify(lessonHistory)
+        JSON.stringify(lessonHistory),
       );
     }
-  }, [
-    currentLessonStrokes,
-    totalNumberOfHintedWords,
-    totalNumberOfMistypedWords,
-    wpm,
-    lessonTitle,
-    totalNumberOfMatchedWords,
-  ]);
+  }, [wpm, numericAccuracy, lessonTitle, totalNumberOfMatchedWords]); // Proper dependencies
 
   // update top speed today or ever and headings and confetti
   useEffect(() => {
@@ -176,8 +177,6 @@ const Finished = ({
     // lesson title instead of "New top speed for today!"
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLessonStrokes.length, revisionMode, wpm]);
-
-  
 
   return (
     <div>
