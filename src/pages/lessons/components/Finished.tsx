@@ -99,19 +99,41 @@ const Finished = ({
 
   // update hero data in FinishedDataViz
   useEffect(() => {
-    setNumericAccuracy(
-      getNumericAccuracy(
-        totalNumberOfMistypedWords,
-        totalNumberOfHintedWords,
-        currentLessonStrokes,
-        wpm
-      )
+    const calculatedNumericAccuracy = getNumericAccuracy(
+      totalNumberOfMistypedWords,
+      totalNumberOfHintedWords,
+      currentLessonStrokes,
+      wpm
     );
+    setNumericAccuracy(calculatedNumericAccuracy);
+
+    // save lesson results to local storage
+    if (wpm > 0) {
+      const lessonResult: LessonResult = {
+        timestamp: new Date().toISOString(),
+        lessonTitle,
+        wpm,
+        accuracy: Math.round(calculatedNumericAccuracy),
+        words: totalNumberOfMatchedWords,
+      };
+
+      const lessonHistoryString = window.localStorage.getItem("lessonHistory");
+      const lessonHistory: LessonHistory = lessonHistoryString
+        ? JSON.parse(lessonHistoryString)
+        : [];
+      lessonHistory.push(lessonResult);
+      window.localStorage.setItem(
+        "lessonHistory",
+        JSON.stringify(lessonHistory)
+      );
+    }
   }, [
     currentLessonStrokes,
     totalNumberOfHintedWords,
     totalNumberOfMistypedWords,
     wpm,
+    lessonTitle,
+    totalNumberOfMatchedWords,
   ]);
 
   // update top speed today or ever and headings and confetti
@@ -155,28 +177,7 @@ const Finished = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLessonStrokes.length, revisionMode, wpm]);
 
-  // save lesson results to local storage
-  useEffect(() => {
-    if (wpm > 0) {
-      const lessonResult: LessonResult = {
-        timestamp: new Date().toISOString(),
-        lessonTitle,
-        wpm,
-        accuracy: numericAccuracy,
-        words: totalNumberOfMatchedWords,
-      };
-
-      const lessonHistoryString = window.localStorage.getItem("lessonHistory");
-      const lessonHistory: LessonHistory = lessonHistoryString
-        ? JSON.parse(lessonHistoryString)
-        : [];
-      lessonHistory.push(lessonResult);
-      window.localStorage.setItem(
-        "lessonHistory",
-        JSON.stringify(lessonHistory)
-      );
-    }
-  }, [numericAccuracy, lessonTitle, totalNumberOfMatchedWords, wpm]);
+  
 
   return (
     <div>
