@@ -83,7 +83,7 @@ const Progress = (props: Props) => {
       ? JSON.parse(lessonHistoryString)
       : [];
     setLessonHistory(history);
-  }, []);
+  }, [props.metWords]);
 
   useEffect(() => {
     if (mainHeading) {

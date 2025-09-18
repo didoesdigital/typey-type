@@ -25,7 +25,8 @@ const ProgressHistoryList: React.FC<ProgressHistoryListProps> = ({ lessonHistory
             <th className="pa2 tl">Date</th>
             <th className="pa2 tl">Lesson</th>
             <th className="pa2 tr">WPM</th>
-            <th className="pa2 tr">Accuracy</th>
+            <th className="pa2 tl">Accuracy</th>
+            <th className="pa2 tr">Words</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@ const ProgressHistoryList: React.FC<ProgressHistoryListProps> = ({ lessonHistory
               <td className="pa2">{result.lessonTitle}</td>
               <td className="pa2 tr">{result.wpm.toFixed(0)}</td>
               <td className="pa2 tr">{result.accuracy.toFixed(0)}%</td>
+              <td className="pa2 tr">{result.words.toFixed(0)}</td>
             </tr>
           ))}
         </tbody>

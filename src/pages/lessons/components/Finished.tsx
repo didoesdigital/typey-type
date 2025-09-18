@@ -163,6 +163,7 @@ const Finished = ({
         lessonTitle,
         wpm,
         accuracy: numericAccuracy,
+        words: totalNumberOfMatchedWords,
       };
 
       const lessonHistoryString = window.localStorage.getItem("lessonHistory");
@@ -175,7 +176,7 @@ const Finished = ({
         JSON.stringify(lessonHistory)
       );
     }
-  }, [numericAccuracy, lessonTitle]);
+  }, [numericAccuracy, lessonTitle, totalNumberOfMatchedWords, wpm]);
 
   return (
     <div>

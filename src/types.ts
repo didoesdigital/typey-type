@@ -636,6 +636,7 @@ export type LessonResult = {
   lessonTitle: string;
   wpm: number;
   accuracy: number;
+  words: number;
 };
 
 export type LessonHistory = LessonResult[];
