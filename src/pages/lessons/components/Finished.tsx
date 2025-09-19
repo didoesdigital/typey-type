@@ -114,8 +114,10 @@ const Finished = ({
   ]);
 
   // save lesson results to local storage (separate effect with proper dependencies)
+  // adds duplicate entries without checking if lesson ahs already been saved
+  const [lessonSaved, setLessonSaved] = useState(false);
   useEffect(() => {
-    if (wpm > 0 && numericAccuracy > 0) {
+    if (wpm > 0 && numericAccuracy > 0 && !lessonSaved) {
       // Wait for both values to be calculated
       const lessonResult: LessonResult = {
         timestamp: new Date().toISOString(),
@@ -134,8 +136,15 @@ const Finished = ({
         "lessonHistory",
         JSON.stringify(lessonHistory),
       );
+      setLessonSaved(true);
     }
-  }, [wpm, numericAccuracy, lessonTitle, totalNumberOfMatchedWords]); // Proper dependencies
+  }, [
+    wpm,
+    numericAccuracy,
+    lessonTitle,
+    totalNumberOfMatchedWords,
+    lessonSaved,
+  ]); // Proper dependencies
 
   // update top speed today or ever and headings and confetti
   useEffect(() => {
