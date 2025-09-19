@@ -3,7 +3,7 @@ import { max, min, bisector } from "d3-array";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { timeFormat } from "d3-time-format";
 import { format } from "d3-format";
-import { curveLinear } from "d3-shape";
+import { curveMonotoneX } from "d3-shape";
 import { pointer } from "d3-selection";
 import { useChartDimensions } from "../../../components/Chart/utils";
 import Chart from "../../../components/Chart/Chart";
@@ -244,7 +244,7 @@ const ProgressGraph: React.FC<ProgressGraphProps> = ({
           xAccessor={xAccessorScaled}
           yAccessor={yAccessorCumulativeWordsScaled}
           y0Accessor={y0Accessor}
-          interpolation={curveLinear}
+          interpolation={curveMonotoneX}
           colorAccessor="#47A8E1"
         />
         <Line
@@ -253,7 +253,7 @@ const ProgressGraph: React.FC<ProgressGraphProps> = ({
           xAccessor={xAccessorScaled}
           yAccessor={yAccessorWpmScaled}
           y0Accessor={y0Accessor}
-          interpolation={curveLinear}
+          interpolation={curveMonotoneX}
           colorAccessor="#9880C2"
         />
         <Line
@@ -262,7 +262,7 @@ const ProgressGraph: React.FC<ProgressGraphProps> = ({
           xAccessor={xAccessorScaled}
           yAccessor={yAccessorAccuracyScaled}
           y0Accessor={y0Accessor}
-          interpolation={curveLinear}
+          interpolation={curveMonotoneX}
           colorAccessor="#E17547"
         />
         {highlightedDatum && (
