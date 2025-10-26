@@ -218,7 +218,7 @@ const Dictionary = () => {
                   Copy to clipboard
                 </PseudoContentButton>
                 <a
-                  href={import.meta.env.VITE_PUBLIC_URL + dictionary.path}
+                  href={`${import.meta.env.VITE_PUBLIC_URL}${dictionary.path}`}
                   download=""
                   onClick={trackDownloadDictionary}
                   style={{ lineHeight: 2 }}
@@ -263,7 +263,7 @@ const Dictionary = () => {
               )}
               {!!(dictionary.title.toUpperCase() === "FULL DICTIONARY") && (
                 <a
-                  href={import.meta.env.VITE_PUBLIC_URL + dictionary.path}
+                  href={`${import.meta.env.VITE_PUBLIC_URL}${dictionary.path}`}
                   download=""
                   onClick={trackDownloadDictionary}
                   style={{ lineHeight: 2 }}

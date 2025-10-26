@@ -420,10 +420,9 @@ export default function Game({
                         <ol>
                           <li>
                             <a
-                              href={
-                                import.meta.env.VITE_PUBLIC_URL +
-                                "/dictionaries/didoesdigital/raw-steno.json"
-                              }
+                              href={`${
+                                import.meta.env.VITE_PUBLIC_URL
+                              }/dictionaries/didoesdigital/raw-steno.json`}
                               download={"raw-steno.json"}
                               onClick={trackDownloadDictionary}
                             >
