@@ -1,6 +1,5 @@
 import sortLesson from "./sortLesson";
 import { PresentedMaterial, UserSettings } from "../../types";
-import { mockRandomForEach } from "jest-mock-random";
 
 describe("sortLesson", () => {
   describe("spaces", () => {
@@ -65,8 +64,10 @@ describe("sortLesson", () => {
         sortOrder: "sortRandom",
         spacePlacement: "spaceOff",
       };
-      mockRandomForEach([0.1]);
+
       it("should present material in a randomised order", () => {
+        const spiedRandom = vi.spyOn(Math, "random").mockReturnValue(0.1);
+
         expect(
           sortLesson(presentedMaterial, metWords, userSettings)
         ).not.toEqual([
@@ -74,8 +75,11 @@ describe("sortLesson", () => {
           { phrase: "of", stroke: "-F" },
           { phrase: "and", stroke: "SKP" },
         ]);
+
+        spiedRandom.mockRestore();
       });
     });
+
     describe("when settings sort by old", () => {
       const userSettings: Pick<UserSettings, "sortOrder" | "spacePlacement"> = {
         sortOrder: "sortOld",
