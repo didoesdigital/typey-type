@@ -24,15 +24,17 @@ export default defineConfig(() => {
       },
     },
     plugins: [
-      checker({
-        // Later, add TS check here:
-        // typescript: true,
-        eslint: {
-          // This should match `package.json` lint script:
-          lintCommand: "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-          watchPath: "src",
-        },
-      }),
+      !process.env.VITEST
+        ? checker({
+            // Later, add TS check here:
+            // typescript: true,
+            eslint: {
+              // This should match `package.json` lint script:
+              lintCommand: "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+              watchPath: "src",
+            },
+          })
+        : undefined,
       react(),
       // svgr options: https://react-svgr.com/docs/options/
       // svgr({ svgrOptions: { icon: true } }),
