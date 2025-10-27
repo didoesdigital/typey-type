@@ -96,7 +96,6 @@
     "eslint": "8.23.0",
     "eslint-config-react-app": "7.0.1",
     "eslint-plugin-storybook": "^0.6.15",
-    "jest-mock-random": "^1.1.1",
     "jsdom": "^27.0.1",
     "sass-embedded": "^1.91.0",
     "storybook": "8.6.14",
