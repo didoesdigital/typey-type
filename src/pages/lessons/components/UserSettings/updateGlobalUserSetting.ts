@@ -83,6 +83,7 @@ export function useToggleExperiment() {
       setState(typedName, value);
     }
 
+    // eslint-disable-next-line no-extra-boolean-cast
     const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({

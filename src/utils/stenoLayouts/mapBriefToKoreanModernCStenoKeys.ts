@@ -52,9 +52,11 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
 
   for (let i = 0; i < briefCharactersLength; i++) {
     let char = briefCharacters[i];
+    // eslint-disable-next-line no-extra-boolean-cast
     if (!!char.match(vowelRegex)) {
       vowel = true;
       vowels.push(char);
+      // eslint-disable-next-line no-extra-boolean-cast
     } else if (!!char.match(numberRegex)) {
       numbers.push(char);
     } else {

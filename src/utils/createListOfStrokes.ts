@@ -8,6 +8,7 @@ const createListOfStrokes = (
   const gotPhraseFromGlobalLookupDict = globalLookupDictionary.get(phrase);
 
   return splitIntoStrokesDictsAndNamespaces(
+    // eslint-disable-next-line no-extra-boolean-cast
     !!gotPhraseFromGlobalLookupDict ? gotPhraseFromGlobalLookupDict : []
   );
 };

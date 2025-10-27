@@ -221,6 +221,7 @@ const RecommendationBox = ({
   let recommendedNextLessonHeadingClassNames =
     "mt0 pb1 bb b--brand-primary-tint mb3";
 
+  // eslint-disable-next-line no-extra-boolean-cast
   if (!!recommendedNextLesson) {
     metadataStats = (
       <React.Fragment>

@@ -465,6 +465,7 @@ describe(App, () => {
         await assertText("");
         // This is somewhat artificial for spaceExact. In practice, each word looks like "y" "o" and "u"
         await typeIn(`${spBefore}you${spAfter}${spBefore}can't${spAfter}`);
+        // eslint-disable-next-line eqeqeq
         if (spacePlacement == "spaceExact") {
           await assertCurrentPhrase("lead");
           await assertText("'t");

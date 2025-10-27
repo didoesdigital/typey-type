@@ -248,6 +248,7 @@ export function useChangeUserSetting() {
 
     setState(newState);
 
+    // eslint-disable-next-line no-extra-boolean-cast
     const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
@@ -394,6 +395,7 @@ export function useHandleBeatsPerMinute() {
       setState(value);
     }
 
+    // eslint-disable-next-line no-extra-boolean-cast
     const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
@@ -424,6 +426,7 @@ export function useHandleDiagramSize() {
 
     setState(value);
 
+    // eslint-disable-next-line no-extra-boolean-cast
     const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
@@ -448,6 +451,7 @@ export function useHandleLimitWordsChange() {
 
     setState(value);
 
+    // eslint-disable-next-line no-extra-boolean-cast
     const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
@@ -472,6 +476,7 @@ export function useHandleRepetitionsChange() {
 
     setState(value);
 
+    // eslint-disable-next-line no-extra-boolean-cast
     const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
@@ -496,6 +501,7 @@ export function useHandleStartFromWordChange() {
 
     setState(value);
 
+    // eslint-disable-next-line no-extra-boolean-cast
     const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({

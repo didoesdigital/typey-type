@@ -56,6 +56,7 @@ const FlashcardsBox = ({
     updateFlashcardsRecommendation();
   };
 
+  // eslint-disable-next-line no-extra-boolean-cast
   return !!flashcardsNextLesson ? (
     <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
       <p className="text-right">

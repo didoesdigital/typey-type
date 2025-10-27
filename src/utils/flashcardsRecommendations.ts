@@ -69,12 +69,12 @@ function getFlashcardsNextLesson(courses: FlashcardsRecommendedCoursesType, flas
 
       if (courses[courseLevel][currentFlashcardsCourseIndex + 1]) {
         currentFlashcardsCourseIndex = currentFlashcardsCourseIndex + 1;
-        flashcardsNextLesson.linkTitle = courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.lessonTitle ?? '' + " flashcards";
+        flashcardsNextLesson.linkTitle = (courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.lessonTitle ?? '') + " flashcards";
         flashcardsNextLesson.link = courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.path ?? "";
       }
       else {
         currentFlashcardsCourseIndex = 0;
-        flashcardsNextLesson.linkTitle = courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.lessonTitle ?? "" + " flashcards";
+        flashcardsNextLesson.linkTitle = (courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.lessonTitle ?? "") + " flashcards";
         flashcardsNextLesson.link = courses?.[courseLevel]?.[currentFlashcardsCourseIndex]?.path ?? "";
       }
 

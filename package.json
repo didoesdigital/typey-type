@@ -10,7 +10,7 @@
     "build:production": "vite build --mode production",
     "build-and-lint:ci": "CI=true react-scripts build",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "# eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "preview": "vite preview",
     "test": "vitest",
     "test:unit": "vitest run **/*.test.{js,ts}",
