@@ -1,6 +1,4 @@
 import { getRecommendedNextLesson } from "./recommendations";
-import { mockRandom, resetMockRandom } from "jest-mock-random";
-
 import recommendationsJSON from "../../typey-type-data/lessons/recommendations.json";
 import lessonIndexJSON from "../../typey-type-data/lessons/lessonIndex.json";
 
@@ -10,7 +8,21 @@ import lessonsProgressCompetent from "../fixtures/lessonsProgressCompetent.json"
 // import lessonsProgressProficient from './../fixtures/lessonsProgressProficient.json'
 // import lessonsProgressExpert from './../fixtures/lessonsProgressExpert.json'
 
+import type { LessonIndexEntry, LessonsProgressIndex } from "types";
+import type { RecommendationHistory } from "pages/progress/components/RecommendationBox";
+
 // import metWordsCompetent from "../fixtures/metWordsCompetent.json";
+
+function addPublicUrlToLessonsProgress(
+  lessonsProgress: LessonsProgressIndex
+): LessonsProgressIndex {
+  return Object.fromEntries(
+    Object.entries(lessonsProgress).map(([path, progress]) => [
+      import.meta.env.VITE_PUBLIC_URL + path,
+      progress,
+    ])
+  );
+}
 
 describe("recommended next lesson for novice stenographer", () => {
   it("returns recommended next lesson", () => {
@@ -19,7 +31,12 @@ describe("recommended next lesson for novice stenographer", () => {
     let numberOfWordsMemorised = 0;
     let history = { currentStep: null };
 
-    mockRandom(0.9);
+    vi.stubGlobal("Math", {
+      random: () => 0.9,
+      floor: Math.floor,
+      max: Math.max,
+      min: Math.min,
+    });
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
@@ -40,7 +57,7 @@ describe("recommended next lesson for novice stenographer", () => {
       repetitions: 5,
     });
 
-    resetMockRandom();
+    vi.unstubAllGlobals();
   });
 });
 
@@ -49,18 +66,22 @@ describe("recommended next lesson for beginner stenographer a few lessons in", (
     let numberOfWordsSeen = 116;
     let numberOfWordsMemorised = 0;
     // let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
-    let history = { currentStep: null };
+    let history: RecommendationHistory = { currentStep: null };
 
-    mockRandom(0.9);
+    vi.stubGlobal("Math", {
+      random: () => 0.9,
+      floor: Math.floor,
+      max: Math.max,
+    });
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
       // @ts-expect-error missing `numberOfWordsMemorised` in lessonsProgress is handled in code by not typed to match (TODO fix that)
-      lessonsProgressBeginner,
+      addPublicUrlToLessonsProgress(lessonsProgressBeginner),
       history,
       numberOfWordsSeen,
       numberOfWordsMemorised,
-      lessonIndexJSON
+      lessonIndexJSON as LessonIndexEntry[]
     );
 
     expect(result).toEqual({
@@ -72,25 +93,29 @@ describe("recommended next lesson for beginner stenographer a few lessons in", (
       repetitions: 3,
     });
 
-    resetMockRandom();
+    vi.unstubAllGlobals();
   });
 
   it("returns recommended next lesson, revision lesson", () => {
     let numberOfWordsSeen = 116;
     let numberOfWordsMemorised = 0;
     // let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
-    let history = { currentStep: null };
+    let history: RecommendationHistory = { currentStep: null };
 
-    mockRandom(0.3);
+    vi.stubGlobal("Math", {
+      random: () => 0.3,
+      floor: Math.floor,
+      max: Math.max,
+    });
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
       // @ts-expect-error missing `numberOfWordsMemorised` in lessonsProgress is handled in code by not typed to match (TODO fix that)
-      lessonsProgressBeginner,
+      addPublicUrlToLessonsProgress(lessonsProgressBeginner),
       history,
       numberOfWordsSeen,
       numberOfWordsMemorised,
-      lessonIndexJSON
+      lessonIndexJSON as LessonIndexEntry[]
     );
 
     expect(result).toEqual({
@@ -102,7 +127,7 @@ describe("recommended next lesson for beginner stenographer a few lessons in", (
       repetitions: 3,
     });
 
-    resetMockRandom();
+    vi.unstubAllGlobals();
   });
 });
 
@@ -110,18 +135,22 @@ describe("recommended next lesson for competent stenographer", () => {
   it("returns recommended next lesson", () => {
     let numberOfWordsSeen = 50;
     let numberOfWordsMemorised = 3;
-    let history = { currentStep: "revise" };
+    let history: RecommendationHistory = { currentStep: "revise" };
 
-    mockRandom(0.3);
+    vi.stubGlobal("Math", {
+      random: () => 0.3,
+      floor: Math.floor,
+      max: Math.max,
+    });
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
       // @ts-expect-error missing `numberOfWordsMemorised` in lessonsProgress is handled in code by not typed to match (TODO fix that)
-      lessonsProgressCompetent,
+      addPublicUrlToLessonsProgress(lessonsProgressCompetent),
       history,
       numberOfWordsSeen,
       numberOfWordsMemorised,
-      lessonIndexJSON
+      lessonIndexJSON as LessonIndexEntry[]
     );
 
     expect(result).toEqual({
@@ -133,7 +162,7 @@ describe("recommended next lesson for competent stenographer", () => {
       repetitions: 3,
     });
 
-    resetMockRandom();
+    vi.unstubAllGlobals();
   });
 });
 

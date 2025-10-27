@@ -388,7 +388,7 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("AEU/H-PLS");
     });
 
-    xit("with repeated, hyphenated gibberish", () => {
+    it.skip("with repeated, hyphenated gibberish", () => {
       let wordOrPhraseMaterial = "aaaa-aaaa";
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("A*/A*/A*/A* H-PB A*/A*/A*/A*");
       expect(
@@ -431,7 +431,7 @@ describe("create stroke hint for phrase", () => {
     });
 
     // TODO
-    xit("with a colon, space, opening quote, and capitalised word", () => {
+    it.skip("with a colon, space, opening quote, and capitalised word", () => {
       let wordOrPhraseMaterial = 'and said: "You';
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKP SAEUD STPH-FPLT KW-GS KPA*/U");
       expect(
@@ -449,7 +449,7 @@ describe("create stroke hint for phrase", () => {
     });
 
     // TODO:
-    xit("with hyphenated phrase and trailing full stop", () => {
+    it.skip("with hyphenated phrase and trailing full stop", () => {
       let wordOrPhraseMaterial = "a hit-and-miss.";
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU H-PLS TP-PL");
       expect(
@@ -499,7 +499,7 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("KPA/TPH/KWROUR/KR-PGS");
     });
 
-    xit('with "cross-petition" and a comma', () => {
+    it.skip('with "cross-petition" and a comma', () => {
       let wordOrPhraseMaterial = "In your cross-petition, you";
 
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/TPH KWROUR KR-PGS KW-BG U");
@@ -639,7 +639,7 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("KROPL");
     });
 
-    xit('shows fingerspelled outline for non-affixy ".com"', () => {
+    it.skip('shows fingerspelled outline for non-affixy ".com"', () => {
       let wordOrPhraseMaterial = ".com";
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
@@ -727,7 +727,7 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("PHRARPLS");
     });
 
-    xit('shows outline for "Mr. and Mrs. Long"', () => {
+    it.skip('shows outline for "Mr. and Mrs. Long"', () => {
       let wordOrPhraseMaterial = "Mr. and Mrs. Long";
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PHRARPLS KPA/HROPBG");
       expect(
@@ -845,35 +845,35 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("KET/*L/10BG");
     });
 
-    xit("showing good stroke hint for gibberish word and suffix with one hyphen", () => {
+    it.skip("showing good stroke hint for gibberish word and suffix with one hyphen", () => {
       let wordOrPhraseMaterial = "dckx-acre";
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       ).toEqual("TK*/KR*/K*/KP*/A*EURBG");
     });
 
-    xit("showing good stroke hint for gibberish word and suffix with two hyphens", () => {
+    it.skip("showing good stroke hint for gibberish word and suffix with two hyphens", () => {
       let wordOrPhraseMaterial = "dckx-in-law";
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       ).toEqual("TK*/KR*/K*/KP*/*EUPB/HRAU");
     });
 
-    xit("showing good stroke hint for gibberish word and prefix with one hyphen", () => {
+    it.skip("showing good stroke hint for gibberish word and prefix with one hyphen", () => {
       let wordOrPhraseMaterial = "ani-dckx";
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       ).toEqual("AEUPB/SKWREU/TK*/KR*/K*/KP*");
     });
 
-    xit("showing good stroke hint for gibberish word and prefix with two hyphens", () => {
+    it.skip("showing good stroke hint for gibberish word and prefix with two hyphens", () => {
       let wordOrPhraseMaterial = "over-the-dckx";
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       ).toEqual("AUFR/-T/TK*/KR*/K*/KP*");
     });
 
-    xit("showing good stroke hint for gibberish word and suffix containing a colon and numbers", () => {
+    it.skip("showing good stroke hint for gibberish word and suffix containing a colon and numbers", () => {
       let wordOrPhraseMaterial = "dckx:10";
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
@@ -888,7 +888,7 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("HAERB/STOEUPB");
     });
 
-    xit("showing good stroke hint for one capitalised word hash tag", () => {
+    it.skip("showing good stroke hint for one capitalised word hash tag", () => {
       let wordOrPhraseMaterial = "#Steno";
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HAERB KPA*/STOEUPB");
       expect(
@@ -896,7 +896,7 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("HAERB/KPA*/STOEUPB");
     });
 
-    xit("showing good stroke hint for camel case hash tags", () => {
+    it.skip("showing good stroke hint for camel case hash tags", () => {
       let wordOrPhraseMaterial = "#StenoLife";
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HAERB KPA*/STOEUPB KPA*/HRAOEUF");
       expect(
@@ -904,7 +904,7 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("HAERB/KPA*/STOEUPB/KPA*/HRAOEUF");
     });
 
-    xit("showing good stroke hint for camel case hash tags in a sentence", () => {
+    it.skip("showing good stroke hint for camel case hash tags in a sentence", () => {
       let wordOrPhraseMaterial = "This is #StenoLife";
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA*/TH S HAERB KPA*/STOEUPB KPA*/HRAOEUF");
       expect(
@@ -995,14 +995,14 @@ describe("create stroke hint for phrase", () => {
   });
 
   describe("returns hints for complex capitalised and punctuated phrases", () => {
-    xit("showing good stroke hint for known word with added capital letter and punctuation", () => {
+    it.skip("showing good stroke hint for known word with added capital letter and punctuation", () => {
       let wordOrPhraseMaterial = "Stay tuned,";
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       ).toEqual("KPA/STAOUPBD/KW-BG");
     });
 
-    xit("showing good stroke hint for known word with added capital letter, punctuation, and internal apostrophe", () => {
+    it.skip("showing good stroke hint for known word with added capital letter, punctuation, and internal apostrophe", () => {
       let wordOrPhraseMaterial = "\"They're";
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
@@ -1091,7 +1091,7 @@ describe("create stroke hint for phrase", () => {
 
   describe("returns hints for phrasing briefs prioritising phrasing brief starters", () => {
     // In the future, we'll use preferPhrasingBriefStarters to make this pass
-    xit('returns T*D for "it\'d" instead of EUTD', () => {
+    it.skip('returns T*D for "it\'d" instead of EUTD', () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       let wordOrPhraseMaterial = "it'd";
       expect(
@@ -1118,7 +1118,7 @@ describe("create stroke hint for phrase", () => {
 
   describe("returns hints for separate words separated by spaces instead of slashes", () => {
     // After releasing Node CLI, remove entry from hardCodedPatches and enable this test
-    xit('returns KWR T-S for "why it\'s" instead of KWR/T-S', () => {
+    it.skip('returns KWR T-S for "why it\'s" instead of KWR/T-S', () => {
       let wordOrPhraseMaterial = "why it's";
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWR T-S");
       expect(
@@ -1240,7 +1240,7 @@ describe("create stroke hint for phrase", () => {
   });
 
   describe("hint for well-loved", () => {
-    xit("returns hint with preferred shorter, phonetic well- prefix", () => {
+    it.skip("returns hint with preferred shorter, phonetic well- prefix", () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       const wellLovedGlobalLookupDictionary = createGlobalLookupDictionary(
         emptyPersonalDictionaries,
@@ -1294,7 +1294,7 @@ describe("create stroke hint for phrase", () => {
   });
 
   describe('hint for "enquiries"', () => {
-    xit("returns a sensible hint for enquiry + ^ies without condensed stroke", () => {
+    it.skip("returns a sensible hint for enquiry + ^ies without condensed stroke", () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       const enquiriesGlobalLookupDictionary = createGlobalLookupDictionary(
         emptyPersonalDictionaries,
@@ -1434,7 +1434,7 @@ describe("create stroke hint for phrase", () => {
   });
 
   describe("hint for frolick'd", () => {
-    xit("returns a sensible apostrophe dee hint for missing lower-cased word", () => {
+    it.skip("returns a sensible apostrophe dee hint for missing lower-cased word", () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       const frolickdGlobalLookupDictionary = createGlobalLookupDictionary(
         emptyPersonalDictionaries,
@@ -1719,7 +1719,7 @@ describe("create stroke hint for phrase", () => {
   });
 
   describe("the word and with various extra spaces", () => {
-    xit("returns a hint with preceding space and word", () => {
+    it.skip("returns a hint with preceding space and word", () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       let wordOrPhraseMaterial = " and";
       const result = createStrokeHintForPhrase(
@@ -1737,7 +1737,7 @@ describe("create stroke hint for phrase", () => {
       expect(result).toEqual("S-P/SKP");
     });
 
-    xit("returns a hint with word and trailing space", () => {
+    it.skip("returns a hint with word and trailing space", () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       let wordOrPhraseMaterial = "and ";
       const result = createStrokeHintForPhrase(
@@ -1755,7 +1755,7 @@ describe("create stroke hint for phrase", () => {
       expect(result).toEqual("SKP/S-P");
     });
 
-    xit("returns a hint with word and surrounding spaces", () => {
+    it.skip("returns a hint with word and surrounding spaces", () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       let wordOrPhraseMaterial = " and ";
       const result = createStrokeHintForPhrase(
@@ -1981,7 +1981,7 @@ describe("create stroke hint for phrase", () => {
   describe("split on comma", () => {
     describe("split on one comma with phrasing brief", () => {
       // Note: the app can achieve this using an exactly matched condensed stroke entry
-      xit("returns strokes for words and KW-BG for comma", () => {
+      it.skip("returns strokes for words and KW-BG for comma", () => {
         const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] =
           [];
         const wordOrPhraseMaterial = "so far, so good";
@@ -2007,7 +2007,7 @@ describe("create stroke hint for phrase", () => {
 
     describe("split on multiple spaced commas", () => {
       // Note: the app can achieve this using an exactly matched condensed stroke entry
-      xit("returns strokes for words and KW-BG for all spaced commas", () => {
+      it.skip("returns strokes for words and KW-BG for all spaced commas", () => {
         const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] =
           [];
         const wordOrPhraseMaterial = "wham, bam, thank you, ma'am";
@@ -2179,7 +2179,7 @@ describe("create stroke hint for phrase", () => {
 
   describe("handle pairs of numbers", () => {
     describe("handle numbers and punctuation", () => {
-      xit("20/20", () => {
+      it.skip("20/20", () => {
         const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] =
           [];
         const wordOrPhraseMaterial = "20/20";
@@ -2201,7 +2201,7 @@ describe("create stroke hint for phrase", () => {
         expect(result).toEqual("#T/#O/OEU/#T/#O");
       });
 
-      xit("20/20 with full stop", () => {
+      it.skip("20/20 with full stop", () => {
         const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] =
           [];
         const wordOrPhraseMaterial = "20/20.";

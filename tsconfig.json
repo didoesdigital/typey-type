@@ -28,7 +28,10 @@
     // "noUnusedLocals": true,
     // "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    // Types
+    "types": ["vitest/globals", "@testing-library/jest-dom", "node"]
   },
   "include": ["src"]
 }

@@ -54,7 +54,7 @@ describe("lookUpDictionaryInIndex", () => {
 
   describe("is in index", () => {
     it("should return dictionary metadata", () => {
-      let path = "/dictionaries/plover/main-16-aug-2017/";
+      let path = import.meta.env.VITE_PUBLIC_URL + "/dictionaries/plover/main-16-aug-2017/";
       expect(lookUpDictionaryInIndex(path, dictionaryIndex)).toEqual({
         author: "Plover",
         title: "Main Aug 16, 2017",
@@ -70,7 +70,7 @@ describe("lookUpDictionaryInIndex", () => {
 
   describe("is not in index", () => {
     it("should return dummy metadata", () => {
-      let path = "/dictionaries/bad-path/bad-dict/";
+      let path = import.meta.env.VITE_PUBLIC_URL + "/dictionaries/bad-path/bad-dict/";
       expect(lookUpDictionaryInIndex(path, dictionaryIndex)).toEqual({
         author: "Typey Type",
         title: "Missing dictionary details",
@@ -83,6 +83,7 @@ describe("lookUpDictionaryInIndex", () => {
       });
     });
   });
+
   describe("has a line with no tabs", () => {
     it("should return a lesson without that line", () => {
       let customMaterial = `testWithSpace TEFT
@@ -98,13 +99,14 @@ testWithTab	TEFT
           newPresentedMaterial: new Zipper([
             { phrase: "testWithTab", stroke: "TEFT" },
           ]),
-          path: "/lessons/custom",
+          path: import.meta.env.VITE_PUBLIC_URL + "/lessons/custom",
         },
         "success",
         [],
       ]);
     });
   });
+
   describe("has a line with multiple tabs", () => {
     it("should return a lesson with the first stroke provided", () => {
       let customMaterial = `testWithTab	TEFT	TEFTD`;
@@ -118,7 +120,7 @@ testWithTab	TEFT
           newPresentedMaterial: new Zipper([
             { phrase: "testWithTab", stroke: "TEFT" },
           ]),
-          path: "/lessons/custom",
+          path: import.meta.env.VITE_PUBLIC_URL + "/lessons/custom",
         },
         "success",
         [],

@@ -340,7 +340,7 @@ describe("choose outline for phrase", () => {
       ).toEqual(["HROPBG/-G", 1]);
     });
 
-    xit("with multiple suffixes", () => {
+    it.skip("with multiple suffixes", () => {
       let wordOrPhrase = "cuffings";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
@@ -356,7 +356,7 @@ describe("choose outline for phrase", () => {
       ).toEqual(["KUF/-G/-S", 1]);
     });
 
-    xit("with multi-syllable word with multiple suffixes", () => {
+    it.skip("with multi-syllable word with multiple suffixes", () => {
       let wordOrPhrase = "buffetings";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
@@ -708,7 +708,7 @@ describe("choose outline for phrase", () => {
   });
 
   describe("returns outline string with standard affixes", () => {
-    xit('showing "TRAFL/HREUPBG" for "travelling" given "/HREUPBG": "ling"', () => {
+    it.skip('showing "TRAFL/HREUPBG" for "travelling" given "/HREUPBG": "ling"', () => {
       let wordOrPhrase = "travelling";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
@@ -753,7 +753,7 @@ describe("choose outline for phrase", () => {
   });
 
   describe("returns outline string with custom affixes", () => {
-    xit('showing "TRAFL/*LG" for "travelling" given "/*LG": "ling"', () => {
+    it.skip('showing "TRAFL/*LG" for "travelling" given "/*LG": "ling"', () => {
       let wordOrPhrase = "travelling";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
@@ -881,7 +881,7 @@ describe("choose outline for phrase", () => {
       ).toEqual(["HROPBLG/-G", 1]);
     });
 
-    xit('with orthography rule to replace "e" with "ing" and append an "s" using multiple suffixes', () => {
+    it.skip('with orthography rule to replace "e" with "ing" and append an "s" using multiple suffixes', () => {
       let wordOrPhrase = "lodgings";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;

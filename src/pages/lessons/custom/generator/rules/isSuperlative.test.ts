@@ -1,7 +1,7 @@
 import isSuperlative from "./isSuperlative";
 
 describe("isSuperlative", () => {
-  xit("returns true for simpler", async () => {
+  it.skip("returns true for simpler", async () => {
     expect(isSuperlative("SEUFRP/HRER", "simpler")).toEqual(true);
   });
 

@@ -10,12 +10,12 @@ describe("hasOnlyOneVowelKey", () => {
   });
 
   // !!outline.match(/[^AOEU][AOEU][^AOEU]/);
-  xit("returns true for at", async () => {
+  it.skip("returns true for at", async () => {
     expect(hasOnlyOneVowelKey("AT", "at")).toEqual(true);
   });
 
   // !!outline.match(/[^AOEU][AOEU][^AOEU]/);
-  xit("returns true for la", async () => {
+  it.skip("returns true for la", async () => {
     expect(hasOnlyOneVowelKey("HRA", "la")).toEqual(true);
   });
 });

@@ -21,7 +21,7 @@ describe("hasPhillyShift", () => {
     expect(hasPhillyShift("HERTS", "hertz")).toEqual(false);
   });
 
-  xit("returns true for hertz using Z", async () => {
+  it.skip("returns true for hertz using Z", async () => {
     expect(hasPhillyShift("HERTZ", "hertz")).toEqual(true);
   });
 });

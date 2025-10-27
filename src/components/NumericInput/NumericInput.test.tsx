@@ -100,6 +100,10 @@ const setup = (setupOptions: SetupOptions) => {
 };
 
 describe("NumericInput", () => {
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
   it("renders a text input", () => {
     const { input } = setup({ ...defaultProps });
 
@@ -205,7 +209,7 @@ describe("NumericInput", () => {
   });
 
   it("cleans up gibberish in field even if parsed input value is the same as `value`", async () => {
-    const spyValue = jest.spyOn(spies, "testUpdateValue");
+    const spyValue = vi.spyOn(spies, "testUpdateValue");
 
     const { user, input } = setup({
       ...defaultProps,
@@ -225,7 +229,7 @@ describe("NumericInput", () => {
   });
 
   it('excitedly changes "4xa" to "4"', async () => {
-    const spyValue = jest.spyOn(spies, "testUpdateValue");
+    const spyValue = vi.spyOn(spies, "testUpdateValue");
 
     const { user, input } = setup({
       ...defaultProps,
@@ -292,7 +296,7 @@ describe("NumericInput", () => {
   });
 
   it("calls updateValue only with cleaned numbers", async () => {
-    const spyValue = jest.spyOn(spies, "testUpdateValue");
+    const spyValue = vi.spyOn(spies, "testUpdateValue");
 
     const { user, input } = setup({
       ...defaultProps,
@@ -310,7 +314,7 @@ describe("NumericInput", () => {
   });
 
   it("clamps number over max to max", async () => {
-    const spyValue = jest.spyOn(spies, "testUpdateValue");
+    const spyValue = vi.spyOn(spies, "testUpdateValue");
 
     const { user, input } = setup({
       ...defaultProps,

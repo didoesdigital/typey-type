@@ -1,8 +1,9 @@
+import { Mock, vi } from 'vitest'
 import App from "./App";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, useNavigate, useLocation } from "react-router-dom";
 import React from "react";
-import fs from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import userEvent from "@testing-library/user-event";
 import { SpacePlacement } from "./types";
 import { useAtom } from "jotai";
@@ -52,12 +53,16 @@ const PAGES: { [name: string]: Page } = {
 
 // For some reason these tooltip components cause the tests to time out.
 // That's not what we're testing here so let's just mock them:
-jest.mock('./components/Tooltip.tsx', () => () => {
-  return <div data-testid="test-tooltip" />;
-});
-jest.mock("./components/InfoIconAndTooltip.tsx", () => () => {
-  return <div data-testid="test-info-icon-and-tooltip" />;
-});
+vi.mock('./components/Tooltip.tsx', () => ({
+  default: () => {
+    return <div data-testid="test-tooltip" />
+  }
+}));
+vi.mock("./components/InfoIconAndTooltip.tsx", () => ({
+  default: () => {
+  return <div data-testid="test-info-icon-and-tooltip" />
+  }
+}));
 
 describe(App, () => {
   let currentState: any = undefined;
@@ -94,17 +99,18 @@ describe(App, () => {
   beforeEach(() => {
     localStorage.clear();
     currentState = undefined;
-    Date.now = jest.fn(() => 1234567890123);
-    window.URL.createObjectURL = jest.fn();
-    global.fetch = jest.fn(async (path, options) => {
-      let content = (await fs.readFile(`./public${path}`)).toString();
+    Date.now = vi.fn(() => 1234567890123);
+    window.URL.createObjectURL = vi.fn();
+    global.fetch = vi.fn(async (path, options) => {
+      const tweakedPath = `./public${(path as string).replace(import.meta.env.VITE_PUBLIC_URL, "")}`;
+      let content = (await readFile(tweakedPath)).toString();
       return new Response(content);
     });
   });
 
   afterEach(() => {
-    (window.URL.createObjectURL as jest.Mock).mockReset();
-    jest.resetAllMocks();
+    (window.URL.createObjectURL as Mock).mockReset();
+    vi.resetAllMocks();
   });
 
   describe.each([
@@ -249,7 +255,7 @@ describe(App, () => {
         );
       });
       // TODO: once we're happy that with the new behaviour as the permanent default, remove all the `batchUpdate`-specific branching code and tests:
-      xit("accepts excess chars except for spaceAfterOutput", async () => {
+      it.skip("accepts excess chars except for spaceAfterOutput", async () => {
         document.cookie = "batchUpdate=0";
         // This user with spaceOff setting actually puts space after
         const spBefore = spacePlacement === "spaceBeforeOutput" ? " " : "";

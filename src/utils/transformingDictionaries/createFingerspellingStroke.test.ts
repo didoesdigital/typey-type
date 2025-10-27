@@ -62,7 +62,7 @@ describe("createFingerspellingStroke", () => {
     );
   });
 
-  // xit("returns number bar key and letter keys for numbers", () => {
+  // it.skip("returns number bar key and letter keys for numbers", () => {
   //   const affixList = AFFIXES.getSharedAffixes();
   //   const lookupDict: LookupDictWithNamespacedDicts = new Map([
   //     ["a", [["AEU", "typey:typey-type.json"]]],
