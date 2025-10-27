@@ -32,8 +32,11 @@ jobs:
       - name: ☑️ Run tests
         run: yarn run test:ci
 
-      - name: ☑️ Build and lint
-        run: yarn run build-and-lint:ci
+      - name: ☑️ Lint
+        run: yarn run lint:ci
+
+      - name: ☑️ Run a production build
+        run: yarn run build:production
 
       - name: ☑️ Build Storybook
         run: yarn run build-storybook
