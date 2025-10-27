@@ -9164,13 +9164,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-mock-random@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "jest-mock-random@npm:1.1.1"
-  checksum: 10c0/f7f510c8b45e3d3fd49b0a0bf3fbb16147f087e57abf59e1db6c7ae2ac0626d72408aca5209018038a53d288ddcc593fab681a4870f9a507070f6e718e9f510e
-  languageName: node
-  linkType: hard
-
 "jest-worker@npm:^27.4.5":
   version: 27.5.1
   resolution: "jest-worker@npm:27.5.1"
@@ -13042,7 +13035,6 @@ __metadata:
     eslint-config-react-app: "npm:7.0.1"
     eslint-plugin-storybook: "npm:^0.6.15"
     howler: "npm:^2.2.3"
-    jest-mock-random: "npm:^1.1.1"
     jotai: "npm:^2.8.0"
     jsdom: "npm:^27.0.1"
     pure-react-carousel: "https://github.com/didoesdigital/pure-react-carousel.git#add-slider-callback"
