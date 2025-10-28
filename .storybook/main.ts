@@ -1,4 +1,4 @@
-import type { StorybookConfig } from "@storybook/react-webpack5";
+import type { StorybookConfig } from "@storybook/react-vite";
 
 // NOTE: this file is not eslint checked in CI because create react app linting
 // via build with CI=true does not check Storybook eslint rules and Storybook
@@ -16,7 +16,7 @@ const config: StorybookConfig = {
   ],
 
   framework: {
-    name: "@storybook/react-webpack5",
+    name: "@storybook/react-vite",
     options: {},
   },
 
