@@ -2916,45 +2916,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pmmmwh/react-refresh-webpack-plugin@npm:^0.5.1":
-  version: 0.5.7
-  resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.5.7"
-  dependencies:
-    ansi-html-community: "npm:^0.0.8"
-    common-path-prefix: "npm:^3.0.0"
-    core-js-pure: "npm:^3.8.1"
-    error-stack-parser: "npm:^2.0.6"
-    find-up: "npm:^5.0.0"
-    html-entities: "npm:^2.1.0"
-    loader-utils: "npm:^2.0.0"
-    schema-utils: "npm:^3.0.0"
-    source-map: "npm:^0.7.3"
-  peerDependencies:
-    "@types/webpack": 4.x || 5.x
-    react-refresh: ">=0.10.0 <1.0.0"
-    sockjs-client: ^1.4.0
-    type-fest: ">=0.17.0 <3.0.0"
-    webpack: ">=4.43.0 <6.0.0"
-    webpack-dev-server: 3.x || 4.x
-    webpack-hot-middleware: 2.x
-    webpack-plugin-serve: 0.x || 1.x
-  peerDependenciesMeta:
-    "@types/webpack":
-      optional: true
-    sockjs-client:
-      optional: true
-    type-fest:
-      optional: true
-    webpack-dev-server:
-      optional: true
-    webpack-hot-middleware:
-      optional: true
-    webpack-plugin-serve:
-      optional: true
-  checksum: 10c0/11bc7e2223eda628ee90164b2dbdc8e3c7a83c4d43871c3ed217e3cae6f70df76e7e2270da9377c77ca7ef14e3886654e8497cce3792011f34dd07730fc59706
-  languageName: node
-  linkType: hard
-
 "@polka/url@npm:^1.0.0-next.24":
   version: 1.0.0-next.29
   resolution: "@polka/url@npm:1.0.0-next.29"
@@ -3578,22 +3539,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/preset-create-react-app@npm:8.6.14":
-  version: 8.6.14
-  resolution: "@storybook/preset-create-react-app@npm:8.6.14"
-  dependencies:
-    "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.1"
-    "@storybook/react-docgen-typescript-plugin": "npm:1.0.6--canary.9.0c3f3b7.0"
-    "@types/semver": "npm:^7.5.6"
-    pnp-webpack-plugin: "npm:^1.7.0"
-    semver: "npm:^7.5.4"
-  peerDependencies:
-    react-scripts: ">=5.0.0"
-    storybook: ^8.6.14
-  checksum: 10c0/7d15eebc9f7a6fc6a36f20a06929e2fd097559120f4821b6e5c810e0c750c6fba084042cfcca150f605b653d5d11b4beb185599a2cfbbfa6c2457ec547609f83
-  languageName: node
-  linkType: hard
-
 "@storybook/preset-react-webpack@npm:8.6.14":
   version: 8.6.14
   resolution: "@storybook/preset-react-webpack@npm:8.6.14"
@@ -4163,7 +4108,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.6":
+"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.5":
   version: 7.0.7
   resolution: "@types/json-schema@npm:7.0.7"
   checksum: 10c0/fea3f318c98e16b648b1bb9ca8690b4c12f2f0d5295943e108624b855691d73143c2db76ae82155363a3dc7fb456e4d976fb52f50355b63ef682f131a73ab1a5
@@ -4300,13 +4245,6 @@ __metadata:
   version: 7.5.4
   resolution: "@types/semver@npm:7.5.4"
   checksum: 10c0/dee66a71d9f089c118be74b5937d4fef42864d68d9472a3f4f5399b9e3ad74d56a8e155020c846667b9ecf9de78fdb9ea55a53fff5067af28e06779b282b6c40
-  languageName: node
-  linkType: hard
-
-"@types/semver@npm:^7.5.6":
-  version: 7.7.0
-  resolution: "@types/semver@npm:7.7.0"
-  checksum: 10c0/6b5f65f647474338abbd6ee91a6bbab434662ddb8fe39464edcbcfc96484d388baad9eb506dff217b6fc1727a88894930eb1f308617161ac0f376fe06be4e1ee
   languageName: node
   linkType: hard
 
@@ -5138,7 +5076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-html-community@npm:0.0.8, ansi-html-community@npm:^0.0.8":
+"ansi-html-community@npm:0.0.8":
   version: 0.0.8
   resolution: "ansi-html-community@npm:0.0.8"
   bin:
@@ -6096,13 +6034,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"common-path-prefix@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "common-path-prefix@npm:3.0.0"
-  checksum: 10c0/c4a74294e1b1570f4a8ab435285d185a03976c323caa16359053e749db4fde44e3e6586c29cd051100335e11895767cbbd27ea389108e327d62f38daf4548fdb
-  languageName: node
-  linkType: hard
-
 "commondir@npm:^1.0.1":
   version: 1.0.1
   resolution: "commondir@npm:1.0.1"
@@ -6144,13 +6075,6 @@ __metadata:
   dependencies:
     browserslist: "npm:^4.26.3"
   checksum: 10c0/d50f8870e14434477acac1f9f52929b6298fd86313386c4105be0d43978708ad10ab3b80b9b54d77b93761dbc5430e3151de0c792dabd117b58c25b551b78e20
-  languageName: node
-  linkType: hard
-
-"core-js-pure@npm:^3.8.1":
-  version: 3.19.1
-  resolution: "core-js-pure@npm:3.19.1"
-  checksum: 10c0/acc7f9c56f501e7d0223410327e11e3b70357261641e1258f8e022e2f04040d058fab9a793f387a353008e1ece644d7293b03ec7f018418313e2fdf3fb646a30
   languageName: node
   linkType: hard
 
@@ -6925,15 +6849,6 @@ __metadata:
   dependencies:
     is-arrayish: "npm:^0.2.1"
   checksum: 10c0/ba827f89369b4c93382cfca5a264d059dfefdaa56ecc5e338ffa58a6471f5ed93b71a20add1d52290a4873d92381174382658c885ac1a2305f7baca363ce9cce
-  languageName: node
-  linkType: hard
-
-"error-stack-parser@npm:^2.0.6":
-  version: 2.0.6
-  resolution: "error-stack-parser@npm:2.0.6"
-  dependencies:
-    stackframe: "npm:^1.1.1"
-  checksum: 10c0/4a09ea8d6309f2ad492d8e5e417ddf3aeed17440e6747ea128f8423de1e6b9f24db9220845426ab43224481ebe6ec52e92aaff8211e7d28b79f462a220745352
   languageName: node
   linkType: hard
 
@@ -10432,15 +10347,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pnp-webpack-plugin@npm:^1.7.0":
-  version: 1.7.0
-  resolution: "pnp-webpack-plugin@npm:1.7.0"
-  dependencies:
-    ts-pnp: "npm:^1.1.6"
-  checksum: 10c0/79d1973ec0b04be6d44f15d5625991701a010dae28f2798d974d3aa164e8c60dc7fa22fd01a47fb6af369c4ba6585c3030d4deb775ccfecd7156594bc223d086
-  languageName: node
-  linkType: hard
-
 "polished@npm:^4.2.2":
   version: 4.2.2
   resolution: "polished@npm:4.2.2"
@@ -11776,17 +11682,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"schema-utils@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "schema-utils@npm:3.0.0"
-  dependencies:
-    "@types/json-schema": "npm:^7.0.6"
-    ajv: "npm:^6.12.5"
-    ajv-keywords: "npm:^3.5.2"
-  checksum: 10c0/6590ce7cf328c5313866f9f4757e4a9aeaf5b1277b66467ae92a2538ef9268cfe79dfbfcf0be0eef3ccffa0a221c91224b687eab0a40352286f70f55bde10c82
-  languageName: node
-  linkType: hard
-
 "schema-utils@npm:^3.1.0, schema-utils@npm:^3.1.1":
   version: 3.1.1
   resolution: "schema-utils@npm:3.1.1"
@@ -11900,7 +11795,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.5.4, semver@npm:^7.6.2":
+"semver@npm:^7.6.2":
   version: 7.7.2
   resolution: "semver@npm:7.7.2"
   bin:
@@ -12157,13 +12052,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map@npm:^0.7.3":
-  version: 0.7.3
-  resolution: "source-map@npm:0.7.3"
-  checksum: 10c0/7d2ddb51f3d2451847692a9ac7808da2b2b3bf7aef92ece33128919040a7e74d9a5edfde7a781f035c974deff876afaf83f2e30484faffffb86484e7408f5d7c
-  languageName: node
-  linkType: hard
-
 "split-on-first@npm:^1.0.0":
   version: 1.1.0
   resolution: "split-on-first@npm:1.1.0"
@@ -12184,13 +12072,6 @@ __metadata:
   version: 0.0.2
   resolution: "stackback@npm:0.0.2"
   checksum: 10c0/89a1416668f950236dd5ac9f9a6b2588e1b9b62b1b6ad8dff1bfc5d1a15dbf0aafc9b52d2226d00c28dffff212da464eaeebfc6b7578b9d180cef3e3782c5983
-  languageName: node
-  linkType: hard
-
-"stackframe@npm:^1.1.1":
-  version: 1.2.0
-  resolution: "stackframe@npm:1.2.0"
-  checksum: 10c0/b3ad9e9884eb4555e4be0c1359d700c10f2c9d01cddcd67f574bb2f99cec57b0d1b8e18ebbf68d633e904ba29830cae9b601545fb8b97724779a784f79a2586c
   languageName: node
   linkType: hard
 
@@ -12801,16 +12682,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-pnp@npm:^1.1.6":
-  version: 1.2.0
-  resolution: "ts-pnp@npm:1.2.0"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 10c0/ff32b4f810f9d99f676d70fe2c0e327cb6c812214bd4fc7135870b039f9e85a85b2c20f8fe030d9bd36e9598a12faa391f10aecb95df624b92f1af6bd47dc397
-  languageName: node
-  linkType: hard
-
 "tsconfck@npm:^3.0.3":
   version: 3.1.6
   resolution: "tsconfck@npm:3.1.6"
@@ -12996,7 +12867,6 @@ __metadata:
     "@storybook/addon-interactions": "npm:8.6.14"
     "@storybook/addon-links": "npm:8.6.14"
     "@storybook/node-logger": "npm:8.6.14"
-    "@storybook/preset-create-react-app": "npm:8.6.14"
     "@storybook/react": "npm:8.6.14"
     "@storybook/react-webpack5": "npm:8.6.14"
     "@storybook/test": "npm:8.6.14"
