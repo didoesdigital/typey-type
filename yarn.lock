@@ -3316,15 +3316,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/node-logger@npm:8.6.14":
-  version: 8.6.14
-  resolution: "@storybook/node-logger@npm:8.6.14"
-  peerDependencies:
-    storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: 10c0/8c5bdacd3cd3ee6d74c5be859d4ec7f10a85b4684e2c90f4d7f4e533be6488d563e8d35e7f12539d1127c938ea3973f5da0876ea2487db7c83f1bc60f0a2ca38
-  languageName: node
-  linkType: hard
-
 "@storybook/preview-api@npm:8.6.14":
   version: 8.6.14
   resolution: "@storybook/preview-api@npm:8.6.14"
@@ -11524,7 +11515,6 @@ __metadata:
     "@storybook/addon-essentials": "npm:8.6.14"
     "@storybook/addon-interactions": "npm:8.6.14"
     "@storybook/addon-links": "npm:8.6.14"
-    "@storybook/node-logger": "npm:8.6.14"
     "@storybook/react": "npm:8.6.14"
     "@storybook/react-vite": "npm:8.6.14"
     "@storybook/test": "npm:8.6.14"
