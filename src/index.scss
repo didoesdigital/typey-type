@@ -227,10 +227,10 @@ $brand-success: #23512C;
 $brand-danger: #953159;
 
 @function add-tint($color, $percentage) {
-  @return color.mix(white, $color, $percentage);
+  @return color.mix(white, $color, calc($percentage));
 }
 @function add-shade($color, $percentage) {
-  @return color.mix(black, $color, $percentage);
+  @return color.mix(black, $color, calc($percentage));
 }
 @function add-alpha($color, $percentage) {
   $decimal: calc($percentage / 100%);
@@ -1363,19 +1363,19 @@ $textarea-padding-x: 8px;
 
   input {
     &:disabled {
-      border-color: add-tint($brand-primary, 85);
-      background-color: add-tint($brand-primary, 97);
-      color: add-tint($brand-primary, 70);
+      border-color: add-tint($brand-primary, 85%);
+      background-color: add-tint($brand-primary, 97%);
+      color: add-tint($brand-primary, 70%);
       & ~ button {
         cursor: default;
-        border-color: add-tint($brand-primary, 85) !important;
-        background-color: add-tint($brand-primary, 95) !important;
+        border-color: add-tint($brand-primary, 85%) !important;
+        background-color: add-tint($brand-primary, 95%) !important;
       }
       & ~ button i {
-        border-color: transparent transparent add-tint($brand-primary, 75) !important;
+        border-color: transparent transparent add-tint($brand-primary, 75%) !important;
       }
       & ~ button:last-child i {
-        border-color: add-tint($brand-primary, 75) transparent transparent !important;
+        border-color: add-tint($brand-primary, 75%) transparent transparent !important;
       }
     }
   }
