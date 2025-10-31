@@ -5400,7 +5400,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.5.3":
+"chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -7757,13 +7757,6 @@ __metadata:
   version: 5.2.0
   resolution: "ignore@npm:5.2.0"
   checksum: 10c0/7fb7b4c4c52c2555113ff968f8a83b8ac21b076282bfcb3f468c3fb429be69bd56222306c31de95dd452c647fc6ae24339b8047ebe3ef34c02591abfec58da01
-  languageName: node
-  linkType: hard
-
-"immutable@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "immutable@npm:4.0.0"
-  checksum: 10c0/964b51a559e026f38835985b892599964e9915a77967b549784878e29b1f95331518b3f64d100faa11054ae5d43a6b1af28e6a7f5bba5463b0ae68a30aa2b1b4
   languageName: node
   linkType: hard
 
@@ -10581,19 +10574,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.49.8":
-  version: 1.49.8
-  resolution: "sass@npm:1.49.8"
-  dependencies:
-    chokidar: "npm:>=3.0.0 <4.0.0"
-    immutable: "npm:^4.0.0"
-    source-map-js: "npm:>=0.6.2 <2.0.0"
-  bin:
-    sass: sass.js
-  checksum: 10c0/fcee38bc78016898c9bb5a724f40d88dfcd23ae34dc80d0a6413833f21f80887a6d0f078c9a9b1cfb6480e27c1a2b2e84802870d92ab8cfa81d4ff0697880196
-  languageName: node
-  linkType: hard
-
 "saxes@npm:^6.0.0":
   version: 6.0.0
   resolution: "saxes@npm:6.0.0"
@@ -11718,7 +11698,6 @@ __metadata:
     react-router-dom: "npm:^6.30.1"
     react-tooltip: "npm:^5.28.0"
     react-transition-group: "npm:^2.4.0"
-    sass: "npm:^1.49.8"
     sass-embedded: "npm:^1.91.0"
     storybook: "npm:8.6.14"
     typescript: "npm:5.8.3"
