@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@sentry/react": "^10.22.0",
+    "@sentry/vite-plugin": "^4.6.0",
     "clipboard": "^1.7.1",
     "d3-array": "^3.1.1",
     "d3-format": "^3.1.0",
