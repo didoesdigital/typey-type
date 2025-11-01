@@ -1,4 +1,4 @@
-import { init } from "@sentry/browser";
+import "./instrument";
 import React from "react";
 import ReactDOM from "react-dom";
 import DocumentTitle from "react-document-title";
@@ -12,18 +12,6 @@ import { globalUserSettingsState } from "./states/globalUserSettingsState";
 import { useLessonIndexWithFallback } from "./states/lessonIndexState";
 import { revisionModeState } from "./states/lessonState";
 import Analytics from "components/Analytics";
-
-if (import.meta.env.MODE === "production") {
-  init({
-    dsn: "https://50e71fa7abea49288b136cb517fc55be@o180165.ingest.sentry.io/1268615",
-    release: import.meta.env.VITE_REACT_APP_TYPEY_TYPE_RELEASE || "development",
-    ignoreErrors: [
-      /ResizeObserver loop limit exceeded/i,
-      /ResizeObserver loop completed with undelivered notifications/i,
-      /ChunkLoadError/i,
-    ],
-  });
-}
 
 function AppWrapper(props: object) {
   const lessonIndex = useLessonIndexWithFallback();
