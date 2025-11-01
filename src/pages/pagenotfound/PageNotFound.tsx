@@ -24,7 +24,7 @@ const PageNotFound = () => {
     });
 
     Sentry.captureException("Page not found");
-  }, [location]);
+  }, [location.pathname]);
 
   return (
     <div>
