@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../components/OutboundLink";
-import * as Sentry from "@sentry/browser";
+import * as Sentry from "@sentry/react";
 import { Link, useLocation } from "react-router-dom";
 import TypeyTypeIcon from "../../components/Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "../../components/Icons/Icon";

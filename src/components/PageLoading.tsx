@@ -1,5 +1,5 @@
 import React from "react";
-import * as Sentry from "@sentry/browser";
+import * as Sentry from "@sentry/react";
 import PageLoadingFailed from "./PageLoadingFailed";
 import PageLoadingPastDelay from "./PageLoadingPastDelay";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga4";
-import * as Sentry from "@sentry/browser";
+import * as Sentry from "@sentry/react";
 import DocumentTitle from "react-document-title";
 import { Link, useLocation } from "react-router-dom";
 import Subheader from "../../components/Subheader";
