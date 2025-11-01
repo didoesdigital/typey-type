@@ -7,6 +7,15 @@ import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  if (
+    process.env.NODE_ENV === "production" &&
+    !process.env.TYPEY_TYPE_RELEASE
+  ) {
+    throw new Error(
+      "TYPEY_TYPE_RELEASE env var is not set. Either set it or disable Sentry in vite.config.ts"
+    );
+  }
+
   return {
     base: "/typey-type",
     build: {
