@@ -22,7 +22,7 @@ fi
 
 VERSION=$(git describe --abbrev=0 --tags)
 # Build the production app but with staging env vars!
-VITE_REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build:staging
+TYPEY_TYPE_RELEASE="${VERSION}+qa" yarn run build:staging
 
 # rsync build to prod server QA directory:
 rsync --itemize-changes --archive --verbose --compress --exclude=".DS_Store" ~/projects/typey-type/build/ di@159.203.100.121:www/qa-typey-type/typey-type/

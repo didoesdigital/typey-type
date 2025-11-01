@@ -9,7 +9,6 @@ interface ViteTypeOptions {
 
 interface ImportMetaEnv {
   readonly VITE_PUBLIC_URL: string;
-  readonly VITE_REACT_APP_TYPEY_TYPE_RELEASE: string;
   readonly VITE_GA_MEASUREMENT_ID: string;
 }
 

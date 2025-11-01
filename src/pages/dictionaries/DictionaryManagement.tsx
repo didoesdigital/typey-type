@@ -461,7 +461,6 @@ const DictionaryManagement = (props: Props) => {
         Sentry.captureException(writeDictionariesError.error);
         Sentry.captureMessage(
           "Write dictionaries error… " + writeDictionariesError.message,
-          // @ts-expect-error TS(2345) FIXME: Argument of type '"debug"' is not assignable to pa... Remove this comment to see the full error message
           "debug"
         );
       }
@@ -522,7 +521,6 @@ const DictionaryManagement = (props: Props) => {
         Sentry.captureException(writeDictionariesError.error);
         Sentry.captureMessage(
           "Write dictionaries error… " + writeDictionariesError.message,
-          // @ts-expect-error TS(2345) FIXME: Argument of type '"debug"' is not assignable to pa... Remove this comment to see the full error message
           "debug"
         );
       }
