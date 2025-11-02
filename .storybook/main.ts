@@ -20,17 +20,17 @@ const config: StorybookConfig = {
     options: {},
   },
 
+  core: {
+    disableTelemetry: true,
+    enableCrashReports: false,
+  },
+
   // https://storybook.js.org/docs/8/configure/environment-variables#using-storybook-configuration
   env: (config) => ({
     ...config,
     // EXAMPLE_VAR: 'An environment variable configured in Storybook',
     VITE_PUBLIC_URL: ".",
   }),
-
-  core: {
-    disableTelemetry: true,
-    enableCrashReports: false,
-  },
 
   staticDirs: ["../public"],
   docs: {},
