@@ -52,17 +52,14 @@ export default defineConfig(({ mode }) => {
             project: "typey-type-for-stenographers",
             telemetry: false,
             release: {
-              name:
-                mode === "production"
-                  ? process.env.TYPEY_TYPE_RELEASE
-                  : `${process.env.TYPEY_TYPE_RELEASE}+${mode}`,
+              name: process.env.TYPEY_TYPE_RELEASE,
               deploy: {
                 env: mode,
               },
             },
 
             // Enable debug information logs during build-time. Defaults to false.
-            debug: true,
+            debug: false,
             // Completely disables all functionality of the plugin. Defaults to false.
             disable: false,
           }),
