@@ -31,12 +31,7 @@ describe("recommended next lesson for novice stenographer", () => {
     let numberOfWordsMemorised = 0;
     let history = { currentStep: null };
 
-    vi.stubGlobal("Math", {
-      random: () => 0.9,
-      floor: Math.floor,
-      max: Math.max,
-      min: Math.min,
-    });
+    const spiedRandom = vi.spyOn(Math, "random").mockReturnValue(0.9);
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
@@ -57,7 +52,7 @@ describe("recommended next lesson for novice stenographer", () => {
       repetitions: 5,
     });
 
-    vi.unstubAllGlobals();
+    spiedRandom.mockRestore();
   });
 });
 
@@ -68,11 +63,7 @@ describe("recommended next lesson for beginner stenographer a few lessons in", (
     // let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
     let history: RecommendationHistory = { currentStep: null };
 
-    vi.stubGlobal("Math", {
-      random: () => 0.9,
-      floor: Math.floor,
-      max: Math.max,
-    });
+    const spiedRandom = vi.spyOn(Math, "random").mockReturnValue(0.9);
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
@@ -93,7 +84,7 @@ describe("recommended next lesson for beginner stenographer a few lessons in", (
       repetitions: 3,
     });
 
-    vi.unstubAllGlobals();
+    spiedRandom.mockRestore();
   });
 
   it("returns recommended next lesson, revision lesson", () => {
@@ -102,11 +93,7 @@ describe("recommended next lesson for beginner stenographer a few lessons in", (
     // let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
     let history: RecommendationHistory = { currentStep: null };
 
-    vi.stubGlobal("Math", {
-      random: () => 0.3,
-      floor: Math.floor,
-      max: Math.max,
-    });
+    const spiedRandom = vi.spyOn(Math, "random").mockReturnValue(0.3);
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
@@ -127,7 +114,7 @@ describe("recommended next lesson for beginner stenographer a few lessons in", (
       repetitions: 3,
     });
 
-    vi.unstubAllGlobals();
+    spiedRandom.mockRestore();
   });
 });
 
@@ -137,11 +124,7 @@ describe("recommended next lesson for competent stenographer", () => {
     let numberOfWordsMemorised = 3;
     let history: RecommendationHistory = { currentStep: "revise" };
 
-    vi.stubGlobal("Math", {
-      random: () => 0.3,
-      floor: Math.floor,
-      max: Math.max,
-    });
+    const spiedRandom = vi.spyOn(Math, "random").mockReturnValue(0.3);
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
@@ -162,7 +145,7 @@ describe("recommended next lesson for competent stenographer", () => {
       repetitions: 3,
     });
 
-    vi.unstubAllGlobals();
+    spiedRandom.mockRestore();
   });
 });
 
