@@ -101,6 +101,26 @@ Run `yarn vitest:ui` to open the [Vitest UI](https://vitest.dev/guide/ui.html#vi
 
 Run `yarn test:coverage` to review test coverage.
 
+### Checks
+
+Run the TypeScript type checker:
+
+```
+yarn types
+```
+
+Run `eslint` to check for code issues:
+
+```
+yarn lint
+```
+
+Run `eslint` and fix any auto-fixable code issues:
+
+```
+yarn lint:fix
+```
+
 ### Storybook
 
 Run the [Storybook](https://storybook.js.org/) command to develop and test components in isolation:
