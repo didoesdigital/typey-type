@@ -78,11 +78,11 @@ Run the Typey Type app:
 yarn start
 ```
 
-Open <http://localhost:3000> to view it in the browser.
+Open the Vite local link <http://localhost:5173/typey-type> to view it in the browser.
 
 ### Offline
 
-To use Typey Type offline, you can follow the steps in this README to install and start the app in development mode, and copy your progress words from [the Progress page online](https://didoesdigital.com/typey-type/progress) to your local progress page <http://localhost:3000/typey-type/progress> before going offline.
+To use Typey Type offline, you can follow the steps in this README to install and start the app in development mode, and copy your progress words from [the Progress page online](https://didoesdigital.com/typey-type/progress) to your local progress page <http://localhost:5173/typey-type/progress> before going offline.
 
 ### Testing
 
@@ -92,22 +92,28 @@ Run the test runner during development:
 yarn test
 ```
 
-`yarn test` will run all of the tests, but if you want to focus on a specific subset, there's also:
+`yarn test` will run all of the tests and watch for changes to source files, but if you want to focus on running a specific subset, there's also:
 
 - `yarn test:unit`, which has the most coverage for the app and runs quickly
 - `yarn test:ui`, which covers the most critical part of progressing through words in lessons and takes longer to run
 
+Run `yarn vitest:ui` to open the [Vitest UI](https://vitest.dev/guide/ui.html#vitest-ui).
+
+Run `yarn test:coverage` to review test coverage.
+
 ### Storybook
 
-Run Storybook to develop and test components in isolation:
+Run the [Storybook](https://storybook.js.org/) command to develop and test components in isolation:
 
 ```sh
 yarn storybook
 ```
 
-### Create React App
+### Vite
 
-For reference, Typey Type is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Typey Type uses [Vite](https://vite.dev/) as its build tool.
+
+Typey Type was originally bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Steno dictionaries
 
