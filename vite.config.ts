@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import checker from "vite-plugin-checker";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
@@ -12,6 +13,15 @@ export default defineConfig(() => {
       outDir: "build",
     },
     plugins: [
+      checker({
+        // Later, add TS check here:
+        // typescript: true,
+        eslint: {
+          // This should match `package.json` lint script:
+          lintCommand: "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+          watchPath: "src",
+        },
+      }),
       react(),
       // svgr options: https://react-svgr.com/docs/options/
       // svgr({ svgrOptions: { icon: true } }),

@@ -1,7 +1,39 @@
 {
-  "extends": ["react-app", "plugin:storybook/recommended"],
-  "ignorePatterns": ["!.storybook"],
+  "extends": [
+    "react-app",
+    // "eslint:recommended",
+    // "plugin:@typescript-eslint/recommended",
+    "plugin:storybook/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "ignorePatterns": [
+    // Ignore top-level dot files:
+    ".*",
+    // Allow specific dot folders:
+    "!.storybook",
+    // Allow specific dot files:
+    "!.eslintrc.json",
+    "!.prettierrc.json",
+    // Ignore deps:
+    "node_modules",
+    "yarn.lock",
+    // Ignore build output folders:
+    "/build",
+    // Ignore log files:
+    "*.log",
+    // Ignore other top-level folders:
+    "/bin",
+    "/design",
+    "/coverage",
+    "/docs",
+    "/storybook-static",
+    // Ignore other top-level files:
+    "/tags",
+    "/tsconfig.tsbuildinfo"
+  ],
   "rules": {
-    "jsx-a11y/accessible-emoji": "warn"
+    "no-extra-boolean-cast": "warn"
   }
 }
