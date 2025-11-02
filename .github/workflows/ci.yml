@@ -35,8 +35,8 @@ jobs:
       - name: ☑️ Lint
         run: yarn run lint:ci
 
-      - name: ☑️ Run a production build
-        run: yarn run build:production
+      - name: ☑️ Run a production-like staging build but without a Sentry release
+        run: yarn run build:staging
 
       - name: ☑️ Build Storybook
         run: yarn run build-storybook
