@@ -7,15 +7,6 @@ import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  if (
-    process.env.NODE_ENV === "production" &&
-    !process.env.TYPEY_TYPE_RELEASE
-  ) {
-    throw new Error(
-      "TYPEY_TYPE_RELEASE env var is not set. Either set it or disable Sentry in vite.config.ts"
-    );
-  }
-
   return {
     base: "/typey-type",
     build: {
@@ -53,26 +44,28 @@ export default defineConfig(({ mode }) => {
       tsconfigPaths(),
 
       // Put the Sentry vite plugin after all other plugins
-      sentryVitePlugin({
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-        org: "di-does-digital",
-        project: "typey-type-for-stenographers",
-        telemetry: false,
-        release: {
-          name:
-            mode === "production"
-              ? process.env.TYPEY_TYPE_RELEASE
-              : `${process.env.TYPEY_TYPE_RELEASE}+${mode}`,
-          deploy: {
-            env: mode,
-          },
-        },
+      !process.env.TYPEY_TYPE_RELEASE
+        ? undefined
+        : sentryVitePlugin({
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            org: "di-does-digital",
+            project: "typey-type-for-stenographers",
+            telemetry: false,
+            release: {
+              name:
+                mode === "production"
+                  ? process.env.TYPEY_TYPE_RELEASE
+                  : `${process.env.TYPEY_TYPE_RELEASE}+${mode}`,
+              deploy: {
+                env: mode,
+              },
+            },
 
-        // Enable debug information logs during build-time. Defaults to false.
-        debug: false,
-        // Completely disables all functionality of the plugin. Defaults to false.
-        disable: false,
-      }),
+            // Enable debug information logs during build-time. Defaults to false.
+            debug: true,
+            // Completely disables all functionality of the plugin. Defaults to false.
+            disable: false,
+          }),
     ],
   };
 });
