@@ -342,7 +342,6 @@ const DictionaryManagement = (props: Props) => {
                 ) {
                   // Skip valid, but unhandled dictionary formats
                 } else {
-                  debugger;
                   throw new Error(
                     `This doesn't look like a valid dictionary filename: ${filename.slice(
                       0,
