@@ -16,7 +16,9 @@ const Template = (args) => (
       globalLookupDictionaryLoaded={true}
       metWords={{}}
       userSettings={userSettings}
-      updateMultipleMetWords={() => {}}
+      updateMultipleMetWords={() => {
+        // do nothing
+      }}
       {...args}
     />
   </div>
