@@ -12,7 +12,7 @@ const getProgressRevisionUserSettings = (
   newUserSettings.seenWords = newSeenOrMemorised[1];
   newUserSettings.retainedWords = newSeenOrMemorised[2];
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   const [_, revisePreset, drillPreset, practicePreset] =
     currentSettings?.studyPresets ?? [
       { limitNumberOfWords: 5, repetitions: 5 },
