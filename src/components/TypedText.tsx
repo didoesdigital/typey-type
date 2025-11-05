@@ -27,7 +27,7 @@ const TypedText = (props: Props) => {
 
   useEffect(() => {
     return () => {
-      let synth = window.speechSynthesis;
+      const synth = window.speechSynthesis;
       if (synth && synth.speaking) {
         synth.cancel();
       }
@@ -85,13 +85,13 @@ const TypedText = (props: Props) => {
   }
 
   const isMultiline = userSettings.upcomingWordsLayout === "multiline";
-  let previousCompletedPhraseAsTypedKey = props.completedPhrases
+  const previousCompletedPhraseAsTypedKey = props.completedPhrases
     ? props.completedPhrases.length
     : 0;
-  let strokes = props.currentLessonStrokes;
-  let previousCompletedPhraseAccuracy =
+  const strokes = props.currentLessonStrokes;
+  const previousCompletedPhraseAccuracy =
     strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
-  let hideEchoesFromScreenReaders = !userSettings.textInputAccessibility;
+  const hideEchoesFromScreenReaders = !userSettings.textInputAccessibility;
 
   let sayCurrentPhraseButton = null;
   if (userSettings && userSettings.speakMaterial) {

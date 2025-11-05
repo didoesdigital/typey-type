@@ -33,7 +33,7 @@ const FinishedPossibleStrokeImprovements = ({
     <ol className="mb0 unstyled-list">
       {currentLessonStrokes.map((phrase: any, i: number) => {
         let strokeAttemptsPresentation;
-        let strokeAttempts = phrase.attempts.map(
+        const strokeAttempts = phrase.attempts.map(
           ({ text }: { text: string }, j: any) => {
             return (
               <li key={j} className="whitespace-nowrap di ml1">

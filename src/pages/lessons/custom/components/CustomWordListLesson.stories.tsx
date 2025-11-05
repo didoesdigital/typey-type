@@ -42,12 +42,12 @@ const dict: LookupDictWithNamespacedDicts = new Map([
   ["hello", [["H-L", "typey:typey-type.json"]]],
   ["world", [["WORLD", "typey:typey-type.json"]]],
 ]);
-let config: DictionaryConfig = {
+const config: DictionaryConfig = {
   configuration: [],
 };
 dict.configuration = config.configuration;
 
-let globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
+const globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
   dict as LookupDictWithNamespacedDictsAndConfig;
 
 export const CustomWordListLessonFilled: Story = {

@@ -50,7 +50,7 @@ const runAllPersonalDictionariesMigrations = function (
   personalDictionaries: LocalStoragePersonalDictionariesUnknownVersion,
   dirtyFlag: boolean
 ): [LocalStoragePersonalDictionariesV1 | null, boolean, string | null] {
-  let error = null;
+  const error = null;
   try {
     [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(
       personalDictionaries,
@@ -107,7 +107,7 @@ function loadPersonalDictionariesFromLocalStorage() {
         return null;
       }
 
-      let areDictsSomewhatValid =
+      const areDictsSomewhatValid =
         versionedDictionaries !== null &&
         versionedDictionaries.v &&
         versionedDictionaries.v === "1" &&
@@ -149,7 +149,7 @@ function writePersonalPreferences(itemToStore: string, JSONToStore: any) {
     };
   }
 
-  let stringToStore = JSON.stringify(JSONToStore);
+  const stringToStore = JSON.stringify(JSONToStore);
 
   try {
     window.localStorage.setItem(itemToStore, stringToStore);

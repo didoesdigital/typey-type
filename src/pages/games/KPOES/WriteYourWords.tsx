@@ -32,8 +32,8 @@ const YourWords = ({
   useEffect(() => {
     try {
       if (window.localStorage) {
-        let yourKPOESwords = window.localStorage.getItem(wordsStorageKey);
-        let yourKPOEStime = window.localStorage.getItem(timeStorageKey);
+        const yourKPOESwords = window.localStorage.getItem(wordsStorageKey);
+        const yourKPOEStime = window.localStorage.getItem(timeStorageKey);
         if (
           yourKPOESwords &&
           yourKPOEStime &&

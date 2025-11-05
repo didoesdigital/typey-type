@@ -3,7 +3,7 @@ import mapBriefToItalianMichelaStenoKeys from "./mapBriefToItalianMichelaStenoKe
 describe("map Italian stroke to Michela keys", () => {
   // let michelaOrder = 'FSCZPNRXIUuieanpzcsf';
   it("show no keys for empty brief", () => {
-    let brief = "";
+    const brief = "";
     expect(mapBriefToItalianMichelaStenoKeys(brief)).toEqual({
       leftCapitalF: false,
       leftCapitalS: false,
@@ -29,7 +29,7 @@ describe("map Italian stroke to Michela keys", () => {
   });
 
   it("show nothing when given non-steno letters", () => {
-    let brief = "⌘";
+    const brief = "⌘";
     expect(mapBriefToItalianMichelaStenoKeys(brief)).toEqual({
       leftCapitalF: false,
       leftCapitalS: false,
@@ -55,7 +55,7 @@ describe("map Italian stroke to Michela keys", () => {
   });
 
   it("shows mixed case brief", () => {
-    let brief = "FCPXienf";
+    const brief = "FCPXienf";
     expect(mapBriefToItalianMichelaStenoKeys(brief)).toEqual({
       leftCapitalF: true,
       leftCapitalS: false,
@@ -81,7 +81,7 @@ describe("map Italian stroke to Michela keys", () => {
   });
 
   it("shows brief for numbers", () => {
-    let brief = "XI";
+    const brief = "XI";
     expect(mapBriefToItalianMichelaStenoKeys(brief)).toEqual({
       leftCapitalF: false,
       leftCapitalS: false,
@@ -107,7 +107,7 @@ describe("map Italian stroke to Michela keys", () => {
   });
 
   it("shows all keys for full steno order", () => {
-    let brief = "FSCZPNRXIUuieanpzcsf";
+    const brief = "FSCZPNRXIUuieanpzcsf";
     expect(mapBriefToItalianMichelaStenoKeys(brief)).toEqual({
       leftCapitalF: true,
       leftCapitalS: true,

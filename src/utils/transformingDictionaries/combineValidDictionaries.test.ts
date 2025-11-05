@@ -19,13 +19,13 @@ describe("combining valid dictionaries without sorting", () => {
   });
 
   it("returns a combined Map with strokes left unsorted which means dictionary insertion order and alphabetic where personal dictionaries are processed first, then Typey Type", () => {
-    let personalDictionaries: PersonalDictionaryNameAndContents[] = [
+    const personalDictionaries: PersonalDictionaryNameAndContents[] = [
       ["personal.json", { "TAO*EUPT": "Typey Type" }],
       ["overrides.json", { "SED": "sed" }],
       ["misstrokes.json", { "E": "he" }],
     ];
 
-    let testTypeyTypeDict = {
+    const testTypeyTypeDict = {
       "-F": "of",
       "EU": "I",
       "HE": "he",
@@ -47,7 +47,7 @@ describe("combining valid dictionaries without sorting", () => {
       "SOUPBD/-Z": "sounds",
     };
 
-    let expectedCombinedDict = new Map([
+    const expectedCombinedDict = new Map([
       ["Typey Type", [["TAO*EUPT", "user:personal.json"]]],
       [
         "and",
@@ -125,13 +125,13 @@ describe("combining valid dictionaries without sorting", () => {
   });
 
   it("returns a combined Map with no Plover dict", () => {
-    let personalDictionaries: PersonalDictionaryNameAndContents[] = [
+    const personalDictionaries: PersonalDictionaryNameAndContents[] = [
       ["personal.json", { "TAO*EUPT": "Typey Type" }],
       ["overrides.json", { "SED": "sed" }],
       ["misstrokes.json", { "E": "he" }],
     ];
 
-    let testTypeyTypeDict = {
+    const testTypeyTypeDict = {
       "-F": "of",
       "EU": "I",
       "HE": "he",
@@ -146,7 +146,7 @@ describe("combining valid dictionaries without sorting", () => {
       "WHEPB": "when",
     };
 
-    let expectedCombinedDict = new Map([
+    const expectedCombinedDict = new Map([
       ["Typey Type", [["TAO*EUPT", "user:personal.json"]]],
       ["and", [["SKP", "typey:typey-type.json"]]],
       ["to", [["TO", "typey:typey-type.json"]]],

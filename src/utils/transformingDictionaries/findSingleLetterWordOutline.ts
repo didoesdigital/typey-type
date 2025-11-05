@@ -11,8 +11,8 @@ const findSingleLetterWordOutline = (
   // try look it up from personal dictionaries:
   // single letter words, natural capitalisation
   if (wordOrPhrase === "a" || wordOrPhrase === "I") {
-    let modifiedWordOrPhrase = `${wordOrPhrase}`;
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = `${wordOrPhrase}`;
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       strokeForOneCharacterWord = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -23,20 +23,20 @@ const findSingleLetterWordOutline = (
   }
   // single letter word, capitalised for start of sentence
   else if (wordOrPhrase === "A") {
-    let letterAEntry = globalLookupDictionary.get("a");
-    let capitalisationTranslation = ["", ".", "?", "!"].includes(precedingChar)
+    const letterAEntry = globalLookupDictionary.get("a");
+    const capitalisationTranslation = ["", ".", "?", "!"].includes(precedingChar)
       ? "{}{-|}"
       : "{^}{-|}";
-    let capitalisationEntry = globalLookupDictionary.get(
+    const capitalisationEntry = globalLookupDictionary.get(
       capitalisationTranslation
     );
     if (letterAEntry && capitalisationEntry) {
-      let letterAOutline = getRankedOutlineFromLookupEntry(
+      const letterAOutline = getRankedOutlineFromLookupEntry(
         letterAEntry,
         "a",
         affixList
       );
-      let capitalisationOutline = getRankedOutlineFromLookupEntry(
+      const capitalisationOutline = getRankedOutlineFromLookupEntry(
         capitalisationEntry,
         capitalisationTranslation,
         affixList
@@ -46,8 +46,8 @@ const findSingleLetterWordOutline = (
   }
   // roman numerals
   else if (wordOrPhrase === "X" || wordOrPhrase === "V") {
-    let modifiedWordOrPhrase = `${wordOrPhrase}`;
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = `${wordOrPhrase}`;
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       strokeForOneCharacterWord = getRankedOutlineFromLookupEntry(
         lookupEntry,

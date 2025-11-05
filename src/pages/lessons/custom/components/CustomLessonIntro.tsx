@@ -29,7 +29,7 @@ const CustomLessonIntro = ({
       break;
     case "fail": {
       validationStateStyle = "b-danger";
-      let listItemsOfValidationMessages =
+      const listItemsOfValidationMessages =
         customLessonMaterialValidationMessages.map((entry: any, index: any) => {
           return <li key={index}>{entry}</li>;
         });

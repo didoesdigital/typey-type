@@ -11,7 +11,7 @@ import type {
   RecommendedNextLesson,
 } from "pages/progress/components/RecommendationBox";
 
-let recommendedStudySession = [
+const recommendedStudySession = [
   // null,
   "practice",
   "drill",
@@ -58,7 +58,7 @@ function getRecommendedNextLesson(
   lessonIndex: LessonIndexEntry[] = []
 ) {
   // fallback lesson:
-  let recommendedNextLesson: RecommendedNextLesson = {
+  const recommendedNextLesson: RecommendedNextLesson = {
     studyType: "practice",
     limitNumberOfWords: 300,
     repetitions: 1,
@@ -127,7 +127,7 @@ function getRecommendedNextLesson(
 
   if (recommendedStudySession[recommendedStudySessionIndex] === "practice") {
     let practiceParams = "?recommended=true&" + PARAMS.practiceParams;
-    let practiceChoice =
+    const practiceChoice =
       Math.random() < 0.9 ? "practiceLessons" : "practiceAllYourWords";
 
     switch (practiceChoice) {
@@ -142,11 +142,11 @@ function getRecommendedNextLesson(
         break;
 
       case "practiceLessons": {
-        let recommendedPracticeLesson = courses.practiceCourse.find(
+        const recommendedPracticeLesson = courses.practiceCourse.find(
           (recommendable) => {
-            let entryInLessonsProgress =
+            const entryInLessonsProgress =
               lessonsProgress[import.meta.env.VITE_PUBLIC_URL + recommendable.path];
-            let seenOrMemorisedChoice: keyof LessonsProgressEntry =
+            const seenOrMemorisedChoice: keyof LessonsProgressEntry =
               Math.random() < 0.9
                 ? "numberOfWordsSeen"
                 : "numberOfWordsMemorised";
@@ -191,7 +191,7 @@ function getRecommendedNextLesson(
         let wordCount = 300;
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        let recommendedPracticeLessonInIndex = lessonIndex.find(
+        const recommendedPracticeLessonInIndex = lessonIndex.find(
           (recommended) => {
             return (
               "/lessons" + recommended.path ===
@@ -246,7 +246,7 @@ function getRecommendedNextLesson(
   if (recommendedStudySession[recommendedStudySessionIndex] === "drill") {
     let entryInLessonsProgress;
 
-    let drillChoice = Math.random() < 0.5 ? "drillLessons" : "drillMemorised";
+    const drillChoice = Math.random() < 0.5 ? "drillLessons" : "drillMemorised";
 
     switch (drillChoice) {
       case "drillMemorised":
@@ -260,7 +260,7 @@ function getRecommendedNextLesson(
         break;
 
       case "drillLessons": {
-        let recommendedDrillLesson = courses.drillCourse.find(
+        const recommendedDrillLesson = courses.drillCourse.find(
           (recommendable) => {
             entryInLessonsProgress =
               lessonsProgress[
@@ -340,7 +340,7 @@ function getRecommendedNextLesson(
 
   if (recommendedStudySession[recommendedStudySessionIndex] === "revise") {
     // One day it could include an option to revise your worst words or tricky words
-    let reviseChoice = Math.random() < 0.5 ? "reviseLessons" : "reviseSeen";
+    const reviseChoice = Math.random() < 0.5 ? "reviseLessons" : "reviseSeen";
 
     switch (reviseChoice) {
       case "reviseSeen":
@@ -355,7 +355,7 @@ function getRecommendedNextLesson(
 
       case "reviseLessons": {
         let entryInLessonsProgress;
-        let recommendedRevisionLesson = courses.revisionCourse.find(
+        const recommendedRevisionLesson = courses.revisionCourse.find(
           (recommendable) => {
             // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
             // so it's probably not a good candidate for revision
@@ -426,7 +426,7 @@ function getRecommendedNextLesson(
   if (recommendedStudySession[recommendedStudySessionIndex] === "discover") {
     let discoverParams = "?recommended=true&" + PARAMS.discoverParams;
     let entryInLessonsProgress;
-    let recommendedDiscoverLesson = courses.discoverCourse.find(
+    const recommendedDiscoverLesson = courses.discoverCourse.find(
       (recommendable) => {
         // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
         // so it's probably a good candidate
@@ -459,11 +459,11 @@ function getRecommendedNextLesson(
       }
     );
 
-    let recommendedDiscoverLessonPath = recommendedDiscoverLesson?.path ?? "";
+    const recommendedDiscoverLessonPath = recommendedDiscoverLesson?.path ?? "";
 
     let wordCount = 15;
 
-    let recommendedDiscoverLessonInIndex = lessonIndex.find((recommended) => {
+    const recommendedDiscoverLessonInIndex = lessonIndex.find((recommended) => {
       return "/lessons" + recommended.path === recommendedDiscoverLessonPath;
     });
 
@@ -519,7 +519,7 @@ function getRecommendedNextLesson(
 
   if (recommendedStudySession[recommendedStudySessionIndex] === "wildcard") {
     // One day it could include "test"
-    let wildcardChoice = Math.random() < 0.5 ? "compete" : "game";
+    const wildcardChoice = Math.random() < 0.5 ? "compete" : "game";
 
     switch (wildcardChoice) {
       case "compete":

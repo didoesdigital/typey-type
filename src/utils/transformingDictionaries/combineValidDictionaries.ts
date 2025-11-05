@@ -11,7 +11,7 @@ const combineValidDictionaries = (
   typeyDicts: ReadDictionariesData
 ) => {
   let combinedLookupDictionary = new Map();
-  let numberOfPersonalDictionaries =
+  const numberOfPersonalDictionaries =
     personalDictionariesNamesAndContents.length;
   let outlinesWeHaveSeen = new Set<Outline>();
   // eslint-disable-next-line
@@ -19,8 +19,8 @@ const combineValidDictionaries = (
 
   // 1. Add personal dictionaries entries
   for (let i = 0; i < numberOfPersonalDictionaries; i++) {
-    let dictName = personalDictionariesNamesAndContents[i][0];
-    let dictContent = personalDictionariesNamesAndContents[i][1];
+    const dictName = personalDictionariesNamesAndContents[i][0];
+    const dictContent = personalDictionariesNamesAndContents[i][1];
     [combinedLookupDictionary, outlinesWeHaveSeen] =
       addOutlinesToWordsInCombinedDict(
         dictContent,

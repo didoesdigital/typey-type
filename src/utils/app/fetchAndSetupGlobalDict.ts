@@ -41,7 +41,7 @@ function fetchAndSetupGlobalDict(
 
   // TODO: this will all need to change when we change how Typey Type is included or excluded in
   // personal dictionary usage…
-  let localConfigPlusTypeyType = localConfig.slice(0);
+  const localConfigPlusTypeyType = localConfig.slice(0);
   localConfigPlusTypeyType.unshift(
     ...allTypeyTypeDictNames.map(
       (typeyDict) => `${SOURCE_NAMESPACES.get("typey")}:${typeyDict}`
@@ -73,10 +73,10 @@ function fetchAndSetupGlobalDict(
     return loadingPromise;
   } else {
     loadingPromise = Promise.all([getTypeyTypeDict()]).then((data) => {
-      let [typeyDictionaries] = data;
+      const [typeyDictionaries] = data;
 
       // let t0 = performance.now();
-      let sortedAndCombinedLookupDictionary = createGlobalLookupDictionary(
+      const sortedAndCombinedLookupDictionary = createGlobalLookupDictionary(
         personalDictionaries,
         typeyDictionaries
       );

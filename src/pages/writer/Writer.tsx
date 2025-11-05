@@ -113,7 +113,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
     }
     else if (currentValue.includes(' ')) {
       currentValue = currentValue.trim();
-      let stenoBrief = this.updateBrief(currentValue);
+      const stenoBrief = this.updateBrief(currentValue);
       this.sendStroke(stenoBrief);
       currentValue = '';
     }
@@ -124,7 +124,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
   }
 
   componentDidMount() {
-    let dict:string = '' + (import.meta.env.VITE_PUBLIC_URL || '') + `/dictionaries/typey-type/${LATEST_TYPEY_TYPE_FULL_DICT_NAME}`;
+    const dict:string = '' + (import.meta.env.VITE_PUBLIC_URL || '') + `/dictionaries/typey-type/${LATEST_TYPEY_TYPE_FULL_DICT_NAME}`;
     fetchResource<StenoDictionary>(dict)
       .then((json) => {
         this.setState({
@@ -142,7 +142,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
 
   downloadDiagramSVG(e: any) {
     // First version of this:
-    let svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
+    const svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
 
     GoogleAnalytics.event({
       category: 'Downloads',
@@ -151,11 +151,11 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
     });
 
     let downloadDiagramSVG;
-    let svg:HTMLElement | null = document.getElementById("stenoDiagram");
+    const svg:HTMLElement | null = document.getElementById("stenoDiagram");
     if (svg) {
-      let svgHTML = svg.outerHTML;
+      const svgHTML = svg.outerHTML;
       if (Blob !== undefined) {
-        let blob = new Blob([svgHTML], {type: "image/svg+xml"});
+        const blob = new Blob([svgHTML], {type: "image/svg+xml"});
         downloadDiagramSVG = URL.createObjectURL(blob);
       }
       else {
@@ -174,7 +174,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
   }
 
   sendStroke(stenoBrief: Outline) {
-    let writtenText = this.lookUpStrokeInDictionary(stenoBrief);
+    const writtenText = this.lookUpStrokeInDictionary(stenoBrief);
 
     let labelString = this.state.stenoBrief;
     if (!labelString) { labelString = "BAD_INPUT"; }
@@ -208,7 +208,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
 
   updateBrief(typedText: string) {
     // TODO: let strokes = splitBriefsIntoStrokes(typedText);
-    let stenoStroke = mapQWERTYKeysToStenoStroke(typedText, this.props.userSettings.stenoLayout);
+    const stenoStroke = mapQWERTYKeysToStenoStroke(typedText, this.props.userSettings.stenoLayout);
 
     this.setState({
       stenoBrief: stenoStroke.toString(),
@@ -218,7 +218,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
   }
 
   addKeyToStenoBrief(key: number) {
-    let stenoStroke = this.state.stenoStroke.set(key);
+    const stenoStroke = this.state.stenoStroke.set(key);
 
     this.setState({
       stenoBrief: stenoStroke.toString(),
@@ -298,13 +298,13 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
 
     let downloadDiagramSVG = null;
 
-    let svg = document.getElementById("stenoDiagram");
+    const svg = document.getElementById("stenoDiagram");
     if (svg) {
       downloadDiagramSVG = "#";
     }
 
     // Second version of this:
-    let svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
+    const svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
 
     return (
       <main id="main">

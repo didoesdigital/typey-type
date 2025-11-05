@@ -217,7 +217,7 @@ export class Flashcards extends Component<FlashcardsProps, State> {
     fetchLesson(path)
       .then((lessonText) => {
         if (Utils.isLessonTextValid(lessonText)) {
-          let lesson = parseLesson(lessonText, path);
+          const lesson = parseLesson(lessonText, path);
           this.setState(
             {
               presentedMaterial: lesson.presentedMaterial,
@@ -256,10 +256,10 @@ export class Flashcards extends Component<FlashcardsProps, State> {
     }
 
     let flashcards = [];
-    let numberOfFlashcardsToShow = 100;
+    const numberOfFlashcardsToShow = 100;
     let newlesson = false;
 
-    let lessonpath = this.props.locationpathname;
+    const lessonpath = this.props.locationpathname;
     let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
     if (!flashcardsProgress[lessonpath]) {
       // Give this new lesson a lastSeen timestamp
@@ -267,7 +267,7 @@ export class Flashcards extends Component<FlashcardsProps, State> {
       newlesson = true;
     }
 
-    let timeAgoInMinutes =
+    const timeAgoInMinutes =
       (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
     const baseUnitInMinutes = 30;
     const multiplier = 2;
@@ -341,21 +341,21 @@ export class Flashcards extends Component<FlashcardsProps, State> {
           if (unfocus) {
             // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
             if (this.hardButton) {
-              let element = document.getElementById("hardButton");
+              const element = document.getElementById("hardButton");
               if (element) {
                 element.focus();
               }
             }
             // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
             else if (this.showButton) {
-              let element = document.getElementById("showButton");
+              const element = document.getElementById("showButton");
               if (element) {
                 element.focus();
               }
             }
             // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
             else if (this.shuffleButton) {
-              let element = document.getElementById("shuffleButton");
+              const element = document.getElementById("shuffleButton");
               if (element) {
                 element.focus();
               }
@@ -370,19 +370,19 @@ export class Flashcards extends Component<FlashcardsProps, State> {
   // but doesn't have user feedback to say if it was a known flashcard or not
   // @ts-expect-error TS(7006) FIXME: Parameter 'slideIndex' implicitly has an 'any' typ... Remove this comment to see the full error message
   onChangeCurrentSlide(slideIndex) {
-    let lessonpath = this.props.locationpathname;
+    const lessonpath = this.props.locationpathname;
     this.props.updateFlashcardsProgress(lessonpath);
 
-    let [currentSlideContent, currentSlideContentType] =
+    const [currentSlideContent, currentSlideContentType] =
       getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
-      let word = getWordForCurrentStrokeSlideIndex(
+      const word = getWordForCurrentStrokeSlideIndex(
         this.state.flashcards,
         slideIndex
       );
       this.props.setFlashcardsMetWords(word, "show", currentSlideContent);
     } else if (currentSlideContentType === "phrase") {
-      let stroke = getStrokeForCurrentSlideContent(
+      const stroke = getStrokeForCurrentSlideContent(
         currentSlideContent,
         this.state.sourceMaterial
       );
@@ -428,16 +428,16 @@ export class Flashcards extends Component<FlashcardsProps, State> {
     if (this.flashcardsCarousel) {
       slideIndex = this.flashcardsCarousel.state.currentSlide;
     }
-    let [currentSlideContent, currentSlideContentType] =
+    const [currentSlideContent, currentSlideContentType] =
       getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
-      let word = getWordForCurrentStrokeSlideIndex(
+      const word = getWordForCurrentStrokeSlideIndex(
         this.state.flashcards,
         this.state.currentSlide
       );
       this.props.setFlashcardsMetWords(word, feedback, currentSlideContent);
     } else if (currentSlideContentType === "phrase") {
-      let stroke = getStrokeForCurrentSlideContent(
+      const stroke = getStrokeForCurrentSlideContent(
         currentSlideContent,
         this.state.sourceMaterial
       );
@@ -478,21 +478,21 @@ export class Flashcards extends Component<FlashcardsProps, State> {
           if (unfocus) {
             // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
             if (this.hardButton) {
-              let element = document.getElementById("hardButton");
+              const element = document.getElementById("hardButton");
               if (element) {
                 element.focus();
               }
             }
             // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
             else if (this.showButton) {
-              let element = document.getElementById("showButton");
+              const element = document.getElementById("showButton");
               if (element) {
                 element.focus();
               }
             }
             // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
             else if (this.shuffleButton) {
-              let element = document.getElementById("shuffleButton");
+              const element = document.getElementById("shuffleButton");
               if (element) {
                 element.focus();
               }
@@ -504,9 +504,9 @@ export class Flashcards extends Component<FlashcardsProps, State> {
   }
 
   prefillSurveyLink() {
-    let googleFormURL =
+    const googleFormURL =
       "https://docs.google.com/forms/d/e/1FAIpQLSc3XqvJC2lwIRieR5NVoAI7nYa4fTFSZL4Ifk1YA7K7I-lnog/viewform?usp=pp_url&entry.1884511690=";
-    let param = "&entry.1893816394=";
+    const param = "&entry.1893816394=";
     let prefillLesson = "";
     let prefillFlashcard = "";
 

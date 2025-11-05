@@ -64,7 +64,7 @@ const getDictionaryContentsString = (
   const contentsArray = contents.split("\n");
   const contentsArrayLength = contentsArray.length;
   if (contentsArrayLength > truncationLimit) {
-    let newContents = contentsArray.slice(0, truncationLimit);
+    const newContents = contentsArray.slice(0, truncationLimit);
     newContents[truncationLimit - 1] = newContents[truncationLimit - 1].slice(
       0,
       -1

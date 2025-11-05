@@ -34,7 +34,7 @@ describe("add outlines for words to combined lookup dict", () => {
   });
 
   it("returns combined dict including misstrokes", () => {
-    let dictContent = {
+    const dictContent = {
       "TO": "to",
       "O": "to",
       "SED": "said",
@@ -43,15 +43,15 @@ describe("add outlines for words to combined lookup dict", () => {
       "SOUPBDZ": "sounds",
       "SOUPBSD": "sounds",
     };
-    let combinedLookupDictionary = new Map();
-    let dictName = "typey:typey-type.json";
+    const combinedLookupDictionary = new Map();
+    const dictName = "typey:typey-type.json";
     // let misstrokes = new Map(Object.entries({
     //   "O": "to",
     //   "SED": "sed",
     //   "SOUPBSD": "sounds"
     // }));
-    let seenSet = new Set<Outline>();
-    let expectedSet = new Set<Outline>();
+    const seenSet = new Set<Outline>();
+    const expectedSet = new Set<Outline>();
     expectedSet.add("TO");
     expectedSet.add("O");
     expectedSet.add("SED");
@@ -59,7 +59,7 @@ describe("add outlines for words to combined lookup dict", () => {
     expectedSet.add("SOUPBD/-Z");
     expectedSet.add("SOUPBDZ");
     expectedSet.add("SOUPBSD");
-    let expectedResult = new Map([
+    const expectedResult = new Map([
       [
         "to",
         [
@@ -111,7 +111,7 @@ describe("generate dictionary entries", () => {
 
   it("returns array of phrases and strokes for top 100 words", () => {
     // prettier-ignore
-    let top100Words = ['the', 'of', 'and', 'to', 'in', 'I', 'that', 'was', 'his', 'he', 'it', 'with', 'is', 'for', 'as', 'had', 'you', 'not', 'be', 'her', 'on', 'at', 'by', 'which', 'have', 'or', 'from', 'this', 'him', 'but', 'all', 'she', 'they', 'were', 'my', 'are', 'me', 'one', 'their', 'so', 'an', 'said', 'them', 'we', 'who', 'would', 'been', 'will', 'no', 'when', 'there', 'if', 'more', 'out', 'up', 'into', 'do', 'any', 'your', 'what', 'has', 'man', 'could', 'other', 'than', 'our', 'some', 'very', 'time', 'upon', 'about', 'may', 'its', 'only', 'now', 'like', 'little', 'then', 'can', 'should', 'made', 'did', 'us', 'such', 'a', 'great', 'before', 'must', 'two', 'these', 'see', 'know', 'over', 'much', 'down', 'after', 'first', 'Mr.', 'good', 'men'];
+    const top100Words = ['the', 'of', 'and', 'to', 'in', 'I', 'that', 'was', 'his', 'he', 'it', 'with', 'is', 'for', 'as', 'had', 'you', 'not', 'be', 'her', 'on', 'at', 'by', 'which', 'have', 'or', 'from', 'this', 'him', 'but', 'all', 'she', 'they', 'were', 'my', 'are', 'me', 'one', 'their', 'so', 'an', 'said', 'them', 'we', 'who', 'would', 'been', 'will', 'no', 'when', 'there', 'if', 'more', 'out', 'up', 'into', 'do', 'any', 'your', 'what', 'has', 'man', 'could', 'other', 'than', 'our', 'some', 'very', 'time', 'upon', 'about', 'may', 'its', 'only', 'now', 'like', 'little', 'then', 'can', 'should', 'made', 'did', 'us', 'such', 'a', 'great', 'before', 'must', 'two', 'these', 'see', 'know', 'over', 'much', 'down', 'after', 'first', 'Mr.', 'good', 'men'];
 
     expect(
       generateListOfWordsAndStrokes(top100Words, globalLookupDictionary)
@@ -221,10 +221,10 @@ describe("generate dictionary entries", () => {
 
   it("returns array of phrases and strokes for troublesome words", () => {
     // prettier-ignore
-    let wordList = ['a', 'A', 'i', 'I', ' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', '3D', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached', 'bed, man, and address' ];
+    const wordList = ['a', 'A', 'i', 'I', ' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', '3D', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached', 'bed, man, and address' ];
     // let wordList = [' ', '?', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man!', 'man?', "'sinatra'", 'and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff --cached', 'diff -- cached', '<title>Learn!</title>' ];
 
-    let globalLookupDictionaryForMatchingCapitalisationAndPunctuation: LookupDictWithNamespacedDicts =
+    const globalLookupDictionaryForMatchingCapitalisationAndPunctuation: LookupDictWithNamespacedDicts =
       new Map([
         ["a", [["AEU", "typey:typey-type.json"]]],
         ["I", [["EU", "typey:typey-type.json"]]],

@@ -2,7 +2,7 @@ import mapBriefToYaweiChineseStenoKeys from "./mapBriefToYaweiChineseStenoKeys";
 
 describe("map stroke to keys", () => {
   it("show no keys for empty brief", () => {
-    let brief = "";
+    const brief = "";
     expect(mapBriefToYaweiChineseStenoKeys(brief)).toEqual({
       "LeftHashKey": false,
       "LeftXKey": false,
@@ -35,7 +35,7 @@ describe("map stroke to keys", () => {
   });
 
   it("shows left-hand XGIU", () => {
-    let brief = "XGIU";
+    const brief = "XGIU";
     expect(mapBriefToYaweiChineseStenoKeys(brief)).toEqual({
       "LeftHashKey": false,
       "LeftXKey": true,
@@ -68,7 +68,7 @@ describe("map stroke to keys", () => {
   });
 
   it("shows right-hand -XGIU", () => {
-    let brief = "-XGIU";
+    const brief = "-XGIU";
     expect(mapBriefToYaweiChineseStenoKeys(brief)).toEqual({
       "LeftHashKey": false,
       "LeftXKey": false,
@@ -101,7 +101,7 @@ describe("map stroke to keys", () => {
   });
 
   it("handles left-hand numbers like 2", () => {
-    let brief = "#N";
+    const brief = "#N";
     expect(mapBriefToYaweiChineseStenoKeys(brief)).toEqual({
       "LeftHashKey": true,
       "LeftXKey": false,
@@ -134,7 +134,7 @@ describe("map stroke to keys", () => {
   });
 
   it("handles right-hand numbers like 9", () => {
-    let brief = "-#N";
+    const brief = "-#N";
     expect(mapBriefToYaweiChineseStenoKeys(brief)).toEqual({
       "LeftHashKey": false,
       "LeftXKey": false,

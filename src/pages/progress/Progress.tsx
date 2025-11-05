@@ -32,7 +32,7 @@ import RecommendationBoxFallback from "./components/RecommendationBoxFallback";
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
 
-let particles: Confetti.ConfettiParticle[] = [];
+const particles: Confetti.ConfettiParticle[] = [];
 
 type Props = {
   lessonsProgress: LessonsProgressIndex;

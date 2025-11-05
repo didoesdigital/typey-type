@@ -47,9 +47,9 @@ function mapQWERTYKeysToStenoStroke(
   };
 
   let stenoStroke = new Stroke();
-  let splitQWERTY = [...qwertyString];
+  const splitQWERTY = [...qwertyString];
   for (let i = 0; i < splitQWERTY.length; i++) {
-    let character = qwertyString[i];
+    const character = qwertyString[i];
     if (QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP[character]) {
       stenoStroke = stenoStroke.set(
         QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP[character]

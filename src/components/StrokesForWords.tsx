@@ -75,7 +75,7 @@ const StrokesForWords = ({
   const handleWordsOnChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
     event
   ) => {
-    let phrase = event.target.value;
+    const phrase = event.target.value;
     updateWordsForStrokes(phrase);
   };
 
@@ -84,7 +84,7 @@ const StrokesForWords = ({
       onChange(phrase);
     }
 
-    let [listOfStrokesAndDicts, modifiedWordOrPhrase] =
+    const [listOfStrokesAndDicts, modifiedWordOrPhrase] =
       lookupListOfStrokesAndDicts(phrase, globalLookupDictionary);
 
     const listOfStrokesDictsNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[] =

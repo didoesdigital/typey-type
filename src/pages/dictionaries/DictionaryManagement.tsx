@@ -122,9 +122,9 @@ const DictionaryManagement = (props: Props) => {
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'files' implicitly has an 'any' type.
   function validateDictionaries(files) {
-    let validDictionaries = validDictionariesState.slice();
-    let invalidDictionaries: [DictName, string][] = [];
-    let filesLength = files.length;
+    const validDictionaries = validDictionariesState.slice();
+    const invalidDictionaries: [DictName, string][] = [];
+    const filesLength = files.length;
 
     if (filesLength === 0) {
       setValidDictionariesState(validDictionaries);
@@ -132,15 +132,15 @@ const DictionaryManagement = (props: Props) => {
         ["No dictionary", "Choose a dictionary file to import."],
       ]);
     } else {
-      let misstrokesInDictionaries: MisstrokeInDictEntry[] = [];
+      const misstrokesInDictionaries: MisstrokeInDictEntry[] = [];
       for (let i = 0; i < filesLength; ++i) {
-        let dictionary = files[i];
-        let dictName = dictionary.name;
+        const dictionary = files[i];
+        const dictName = dictionary.name;
 
         const reader = new FileReader();
 
         reader.onload = (event) => {
-          let text = event?.target?.result ?? "";
+          const text = event?.target?.result ?? "";
 
           try {
             if (dictionary.size > 25000000) {
@@ -176,31 +176,31 @@ const DictionaryManagement = (props: Props) => {
             }
 
             // @ts-expect-error TS(2345) FIXME: Argument of type 'string | ArrayBuffer | null' is ... Remove this comment to see the full error message
-            let maybeParsedDictionary = JSON.parse(text);
+            const maybeParsedDictionary = JSON.parse(text);
 
             if (maybeParsedDictionary.constructor !== {}.constructor) {
               throw new Error("This JSON does not contain an object.");
             }
 
-            let parsedDictionary = maybeParsedDictionary as StenoDictionary;
+            const parsedDictionary = maybeParsedDictionary as StenoDictionary;
 
-            let parsedDictionaryEntries = Object.entries(parsedDictionary);
+            const parsedDictionaryEntries = Object.entries(parsedDictionary);
 
             if (parsedDictionaryEntries.length < 1) {
               throw new Error("This dictionary is empty.");
             }
 
-            let probableMisstrokes: ProbableMisstrokeList = [];
-            let parsedDictionaryEntriesLength = parsedDictionaryEntries.length;
+            const probableMisstrokes: ProbableMisstrokeList = [];
+            const parsedDictionaryEntriesLength = parsedDictionaryEntries.length;
 
             for (let i = 0; i < parsedDictionaryEntriesLength; ++i) {
-              let [outline, translation] = parsedDictionaryEntries[i];
-              let invalidStenoOutline = outline.match(
+              const [outline, translation] = parsedDictionaryEntries[i];
+              const invalidStenoOutline = outline.match(
                 /[^#STKPWHRAO*-EUFRPBLGTSDZ/]/
               );
               if (invalidStenoOutline !== null) {
-                let maxLength = 50;
-                let trimmedInvalidStenoOutline =
+                const maxLength = 50;
+                const trimmedInvalidStenoOutline =
                   outline.length > maxLength
                     ? outline.substring(0, maxLength - 3) + "…"
                     : outline.substring(0, maxLength);
@@ -247,7 +247,7 @@ const DictionaryManagement = (props: Props) => {
             }
           );
 
-          let dictionariesTypeyTypeWillUse =
+          const dictionariesTypeyTypeWillUse =
             getListOfValidDictionariesAddedAndInConfig(
               validDictionariesListedInConfigState,
               namesOfValidImportedDictionaries
@@ -272,10 +272,10 @@ const DictionaryManagement = (props: Props) => {
   // @ts-expect-error TS(7006) FIXME: Parameter 'files' implicitly has an 'any' type.
   function validateConfig(files) {
     let validConfig = "";
-    let validDictionariesListedInConfig = [];
+    const validDictionariesListedInConfig = [];
     // @ts-expect-error TS(7034) FIXME: Variable 'invalidConfig' implicitly has type 'any[... Remove this comment to see the full error message
     let invalidConfig = [];
-    let filesLength = files.length;
+    const filesLength = files.length;
 
     if (filesLength > 1) {
       setValidConfig(validConfig);
@@ -294,19 +294,19 @@ const DictionaryManagement = (props: Props) => {
         "The file name must end in “.cfg”.",
       ]);
     } else {
-      let dictionaryConfig = files[0];
-      let configName = dictionaryConfig.name;
+      const dictionaryConfig = files[0];
+      const configName = dictionaryConfig.name;
 
       const reader = new FileReader();
 
       reader.onload = (event) => {
         // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-        let text = event.target.result;
+        const text = event.target.result;
 
         try {
           // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-          let lines = text.split("\n");
-          let linesLength = lines.length;
+          const lines = text.split("\n");
+          const linesLength = lines.length;
           let parsedConfig = "";
           for (let i = 0; i < linesLength; ++i) {
             if (lines[i].startsWith("dictionaries = ")) {
@@ -320,7 +320,7 @@ const DictionaryManagement = (props: Props) => {
             throw new Error("This file has no list of dictionaries.");
           }
 
-          let parsedConfigLength = parsedConfig.length;
+          const parsedConfigLength = parsedConfig.length;
           for (let i = 0; i < parsedConfigLength; ++i) {
             if (
               Object.prototype.hasOwnProperty.call(parsedConfig[i], "enabled") &&
@@ -329,7 +329,7 @@ const DictionaryManagement = (props: Props) => {
               // @ts-expect-error TS(7015) FIXME: Element implicitly has an 'any' type because index... Remove this comment to see the full error message
               if (parsedConfig[i]["enabled"]) {
                 // @ts-expect-error TS(7015) FIXME: Element implicitly has an 'any' type because index... Remove this comment to see the full error message
-                let filename = parsedConfig[i]["path"]
+                const filename = parsedConfig[i]["path"]
                   .split("\\")
                   .pop()
                   .split("/")
@@ -369,7 +369,7 @@ const DictionaryManagement = (props: Props) => {
           invalidConfig = [configName, error.message];
         }
 
-        let dictionariesTypeyTypeWillUse =
+        const dictionariesTypeyTypeWillUse =
           getListOfValidDictionariesAddedAndInConfig(
             validDictionariesListedInConfig,
             namesOfValidImportedDictionariesState
@@ -401,7 +401,7 @@ const DictionaryManagement = (props: Props) => {
 
     let labelString = "No files for dictionaries";
     if (files && files.length > 0) {
-      let fileNames = [];
+      const fileNames = [];
       for (let i = 0; i < files.length; i++) {
         fileNames.push(files[i].name);
       }
@@ -430,7 +430,7 @@ const DictionaryManagement = (props: Props) => {
     let labelString = "No files for config";
 
     if (files && files.length > 0) {
-      let fileNames = [];
+      const fileNames = [];
       for (let i = 0; i < files.length; i++) {
         fileNames.push(files[i].name);
       }
@@ -450,7 +450,7 @@ const DictionaryManagement = (props: Props) => {
   function handleOnSubmitClear(event) {
     event.preventDefault();
 
-    let writeDictionariesError = writePersonalPreferences(
+    const writeDictionariesError = writePersonalPreferences(
       "personalDictionaries",
       []
     );
@@ -491,7 +491,7 @@ const DictionaryManagement = (props: Props) => {
     setImportedDictionariesLoaded(false);
     setImportedDictionariesLoading(true);
 
-    let configOrder = validDictionariesListedInConfigState;
+    const configOrder = validDictionariesListedInConfigState;
     let sortedValidDictionaries = validDictionariesState.slice(0);
     sortedValidDictionaries = sortedValidDictionaries.sort((a, b) => {
       // dictionaries that don't appear in config will be before dictionaries that do
@@ -503,13 +503,13 @@ const DictionaryManagement = (props: Props) => {
       dictionariesNamesAndContents: sortedValidDictionaries,
     });
 
-    let personalDictionariesToStoreInV1Format = {
+    const personalDictionariesToStoreInV1Format = {
       v: "1",
       dicts: validDictionariesState,
     };
 
     // Second, update local storage
-    let writeDictionariesError = writePersonalPreferences(
+    const writeDictionariesError = writePersonalPreferences(
       "personalDictionaries",
       personalDictionariesToStoreInV1Format
     );
@@ -525,9 +525,9 @@ const DictionaryManagement = (props: Props) => {
       }
     }
 
-    let dictionariesTypeyTypeWillUse = dictionariesTypeyTypeWillUseState;
+    const dictionariesTypeyTypeWillUse = dictionariesTypeyTypeWillUseState;
 
-    let labelString = dictionariesTypeyTypeWillUse || "No files for config";
+    const labelString = dictionariesTypeyTypeWillUse || "No files for config";
     GoogleAnalytics.event({
       category: "Apply dictionary changes",
       action: "Click apply button",
@@ -565,7 +565,7 @@ const DictionaryManagement = (props: Props) => {
     setDictionaryErrorNotification(null);
   }
 
-  let dictionariesTypeyTypeWillUse = dictionariesTypeyTypeWillUseState.map(
+  const dictionariesTypeyTypeWillUse = dictionariesTypeyTypeWillUseState.map(
     (dictionary, index) => {
       return <li key={index}>{dictionary}</li>;
     }
@@ -605,7 +605,7 @@ const DictionaryManagement = (props: Props) => {
     </>
   );
 
-  let misstrokesBlurb =
+  const misstrokesBlurb =
     // @ts-expect-error TS(2339) FIXME: Property 'length' does not exist on type 'never'.
     misstrokesInDictionaries?.length > 0 ? (
       <>

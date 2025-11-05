@@ -77,7 +77,7 @@ const stenoKeys = [
 ] as const;
 
 function mapBriefToDanishStenoKeys(brief: Outline) {
-  let keys = {
+  const keys = {
     numberBar: false,
     leftN: false,
     leftSLower: false,
@@ -105,7 +105,7 @@ function mapBriefToDanishStenoKeys(brief: Outline) {
     rightDLower: false,
   };
 
-  let briefLetters = brief.split("");
+  const briefLetters = brief.split("");
 
   for (let i = 0; i < stenoOrder.length; i++) {
     if (briefLetters.length > 0) {

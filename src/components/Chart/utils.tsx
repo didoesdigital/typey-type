@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'dimensions' implicitly has an 'any' typ... Remove this comment to see the full error message
 export const combineChartDimensions = (dimensions) => {
-  let parsedDimensions = {
+  const parsedDimensions = {
     marginTop: 16,
     marginRight: 16,
     marginBottom: 16,

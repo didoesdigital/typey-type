@@ -75,7 +75,7 @@ const stenoKeys = [
 ] as const;
 
 function mapBriefToAmericanStenoKeys(brief: Outline) {
-  let keys = {
+  const keys = {
     numberBar: false,
     leftSUpper: false,
     leftSLower: false,
@@ -103,7 +103,7 @@ function mapBriefToAmericanStenoKeys(brief: Outline) {
     rightZ: false,
   };
 
-  let briefLetters = brief.split("");
+  const briefLetters = brief.split("");
 
   for (let i = 0; i < stenoOrder.length; i++) {
     if (briefLetters.length > 0) {

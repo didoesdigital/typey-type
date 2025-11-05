@@ -25,7 +25,7 @@ describe("rankOutlines", () => {
   describe("sorts the many outlines for quadruplicate", () => {
     it("returns sorted lconst misstrokesJSON = {};ist of outlines", () => {
       const misstrokesJSON = {};
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["KWAD/RUP/KAT", "typey-type.json", "typey"],
           ["KWA/TKRAOU/PHREU/KAEUT", "typey-type-full.json", "typey"],
@@ -355,7 +355,7 @@ describe("rankOutlines", () => {
 
   describe("with duplicate outlines across dictionaries", () => {
     it('returns sorted list of outlines for "GitHub", preserving dictionary order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["TKPWEUT/HUB", "code.json", "typey"],
           ["TKPWEUT/HUB", "typey-type.json", "typey"],
@@ -378,7 +378,7 @@ describe("rankOutlines", () => {
 
   describe("with duplicate outlines across dictionaries", () => {
     it('returns unsorted list of outlines for "GitHub", preserving dictionary order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["TKPWEUT/HUB", "typey-type.json", "typey"],
           ["TKPWEUT/HUB", "code.json", "typey"],
@@ -401,7 +401,7 @@ describe("rankOutlines", () => {
 
   describe("with different outlines across dictionaries", () => {
     it("returns shortest stroke", () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["TKPWEUT/HUB", "typey-type.json", "typey"],
           ["TKWEUT/HUB", "code.json", "typey"],
@@ -424,7 +424,7 @@ describe("rankOutlines", () => {
 
   describe("with different outlines across dictionaries", () => {
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, already in order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
           ["KPERZ/-S", "briefs.json", "typey"],
@@ -453,7 +453,7 @@ describe("rankOutlines", () => {
     });
 
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
           ["KPERZ/-Z", "briefs.json", "typey"],
@@ -483,7 +483,7 @@ describe("rankOutlines", () => {
 
     // Note: this test will fail with node v10
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order, with more than 10 elements', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
           ["KPERZ/-Z", "briefs.json", "typey"],
@@ -522,7 +522,7 @@ describe("rankOutlines", () => {
     });
 
     it('returns sorted list of outlines for "slept", prioritising T endings over D, already in order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["TEFT/SHREPT", "plover.json", "plover"],
           ["TEFT/SHREPD", "plover.json", "plover"],
@@ -545,7 +545,7 @@ describe("rankOutlines", () => {
     });
 
     it('returns sorted list of outlines for "intermediate", prioritising T endings over D, not in order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["EUPBT/PHAOED", "plover.json", "plover"],
           ["EUPBT/PHAOET", "plover.json", "plover"],
@@ -566,7 +566,7 @@ describe("rankOutlines", () => {
     });
 
     it('returns sorted list of outlines for "credit card", prioritising T endings over D, except when the word ends in "d"', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["KRED/EUT/KART", "plover.json", "plover"],
           ["KRED/EUT/KARD", "plover.json", "plover"],
@@ -590,7 +590,7 @@ describe("rankOutlines", () => {
   describe("with different outlines including misstrokes across dictionaries", () => {
     // TODO: consider how another namespace might fit in here instead of Plover, before Typey Type
     it.skip('returns sorted list of outlines for "and", prioritising user, typey, plover namespaces, and by length', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["-PBD", "plover.json", "plover"],
           ["SP", "plover.json", "plover"],
@@ -654,7 +654,7 @@ describe("rankOutlines", () => {
   describe("with different outlines including misstrokes across dictionaries", () => {
     // TODO: consider how another namespace might fit in here instead of Plover, before Typey Type
     it.skip('returns sorted list of outlines for "cite", prioritising user, typey, plover namespaces, and good strokes over misstrokes of equal length', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["SKRAO*EUT", "plover.json", "plover"],
           ["KRAOEUR", "plover.json", "plover"],
@@ -701,7 +701,7 @@ describe("rankOutlines", () => {
 
   describe("with different outlines including misstrokes across dictionaries", () => {
     it('returns sorted list of outlines for "quiz", prioritising good strokes over misstrokes that are shorter', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["KWUZ", "plover.json", "plover"],
           ["KWEUZ", "plover.json", "plover"],
@@ -727,7 +727,7 @@ describe("rankOutlines", () => {
   describe("with different outlines including misstrokes across dictionaries", () => {
     // TODO: consider how another namespace might fit in here instead of Plover, before Typey Type
     it.skip('returns sorted list of outlines for "he", prioritising user, typey, plover namespaces, and good strokes over misstrokes that are shorter', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["E", "magnum.json", "user"],
           ["HE", "plover.json", "plover"],
@@ -759,7 +759,7 @@ describe("rankOutlines", () => {
 
   describe("with outlines with and without dashes", () => {
     it('returns sorted list of outlines for "test", including dashes', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["T-FPB", "plover.json", "plover"],
           ["TEFL", "plover.json", "plover"],
@@ -782,7 +782,7 @@ describe("rankOutlines", () => {
 
   describe("with outlines with and without stars", () => {
     it('returns sorted list of outlines for "test", penalising stars', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["T*EFT", "user.json", "user"],
           ["TAEFT", "user.json", "user"],
@@ -803,7 +803,7 @@ describe("rankOutlines", () => {
     });
 
     it('returns sorted list of outlines for "test", penalising stars', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["T*EFT/T*EFT", "user.json", "user"],
           ["TAEFT/TAEFTS", "user.json", "user"],
@@ -824,7 +824,7 @@ describe("rankOutlines", () => {
     });
 
     it('returns sorted list of outlines for "test", penalising stars', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["T*EFT/T*EFT", "user.json", "user"],
           ["TAEFTS/TAEFTS", "user.json", "user"],
@@ -847,7 +847,7 @@ describe("rankOutlines", () => {
 
   describe("with outlines with and without slashes", () => {
     it('returns sorted list of outlines for "grasshopper", penalising slashes', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["TKPWHRFRPBLG", "user.json", "user"],
           ["TKPWHR*FRPBLG", "user.json", "user"],
@@ -878,7 +878,7 @@ describe("rankOutlines", () => {
 
   describe("with prefix and suffix strokes", () => {
     it('returns sorted list of outlines for "upstarted", penalising briefs without affix strokes, for default dicts', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["UP/START/-D", "plover.json", "plover"],
           ["UP/STARTD", "plover.json", "plover"],
@@ -905,14 +905,14 @@ describe("rankOutlines", () => {
     });
 
     it('returns sorted list of outlines for "upstarted", penalising briefs without personal affix stroke, with personal dicts', () => {
-      let sharedAffixes: AffixObject = {
+      const sharedAffixes: AffixObject = {
         suffixes: [],
         prefixes: [
           ["UP/", "up"], // from user dictionary… AffixList chooses the first affix in first inserted dictionary
         ],
       };
 
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["UP/START/-D", "user.json", "user"],
           ["UP/STARTD", "user.json", "user"],
@@ -943,7 +943,7 @@ describe("rankOutlines", () => {
 
   describe("with gutenberg entries", () => {
     it('returns sorted list of outlines for "get" where the gutenberg entry comes first', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           // ["TKWET", "misstrokes.json"],
           // ["TPWET", "misstrokes.json"],
@@ -978,7 +978,7 @@ describe("rankOutlines", () => {
 
   describe("briefs starting with it, prioritising T over EUT", () => {
     it('returns outlines starting with T* ranked first for "it" contractions', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["EUTD", "plover.json", "plover"],
           ["T*D", "plover.json", "plover"],
@@ -1003,7 +1003,7 @@ describe("rankOutlines", () => {
     });
 
     it('returns outlines starting with T- ranked first for "it" phrasing briefs', () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["TWAS", "plover.json", "plover"],
           ["TWUS", "plover.json", "plover"],
@@ -1039,7 +1039,7 @@ describe("rankOutlines", () => {
 
   describe("complex case with stars, slashes, suffixes, misused suffixes, and outlines ending in S and Z", () => {
     it("returns a sensible order with HOR/TKEFRBZ first", () => {
-      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+      const arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["HOR/TKEFRBZ", "condensed-strokes.json", "typey"],
           ["HOR/TKEFRB/-S", "dict.json", "typey"],

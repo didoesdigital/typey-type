@@ -2,7 +2,7 @@ import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from "./mapBriefToNoNumbe
 
 describe("map stroke to keys", () => {
   it("show no keys for empty brief", () => {
-    let brief = "";
+    const brief = "";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: false,
@@ -37,7 +37,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows left-hand T for "it"', () => {
-    let brief = "T";
+    const brief = "T";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: false,
@@ -72,7 +72,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows right-hand -T for "the"', () => {
-    let brief = "-T";
+    const brief = "-T";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: false,
@@ -107,7 +107,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows both S keys for "is"', () => {
-    let brief = "S";
+    const brief = "S";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: false,
@@ -142,7 +142,7 @@ describe("map stroke to keys", () => {
   });
 
   it("shows right number key for numbers on left hand", () => {
-    let brief = "3";
+    const brief = "3";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: true,
@@ -177,7 +177,7 @@ describe("map stroke to keys", () => {
   });
 
   it("shows left number key for numbers on the right hand", () => {
-    let brief = "7";
+    const brief = "7";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: true,
       rightNumberBarKey: false,
@@ -212,7 +212,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show all star keys for starred brief", () => {
-    let brief = "AO*EUS";
+    const brief = "AO*EUS";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: false,
@@ -247,7 +247,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show keys for dash-only brief "welcome"', () => {
-    let brief = "HR-BG";
+    const brief = "HR-BG";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: false,
@@ -282,7 +282,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show nothing when given non-steno letters", () => {
-    let brief = "⌘";
+    const brief = "⌘";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: false,
@@ -317,7 +317,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show left number key for numbers using right-hand vowel keys", () => {
-    let brief = "#TPEU"; // 32
+    const brief = "#TPEU"; // 32
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: true,
       rightNumberBarKey: false,
@@ -352,7 +352,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show left number key for easy-to-write #A", () => {
-    let brief = "#A"; // 5
+    const brief = "#A"; // 5
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: true,
       rightNumberBarKey: false,
@@ -388,7 +388,7 @@ describe("map stroke to keys", () => {
 
   // e.g. '05' is #AOEU in standard number-bar steno, but #AOE in inner-thumbers and #AOU in outer-thumbers
   it("show right number key for #AOU to write 05", () => {
-    let brief = "#AOU";
+    const brief = "#AOU";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: false,
       rightNumberBarKey: true,
@@ -424,7 +424,7 @@ describe("map stroke to keys", () => {
 
   // Exceptions: https://www.paulfioravanti.com/blog/steno-numbers-georgi/
   it("show left number bar for weird exceptions 60, 70, 80, 90", () => {
-    let brief = "0EU7";
+    const brief = "0EU7";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: true,
       rightNumberBarKey: false,

@@ -100,7 +100,7 @@ const Lesson = ({
         !location.pathname.includes("/lessons/progress/seen/") &&
         !location.pathname.includes("/lessons/progress/memorised/")
       ) {
-        let loadedPersonalPreferences = loadPersonalPreferences();
+        const loadedPersonalPreferences = loadPersonalPreferences();
         const newSeenOrMemorised = [false, true, true] as const;
         const newUserSettings = getProgressRevisionUserSettings(
           userSettings,
@@ -112,8 +112,8 @@ const Lesson = ({
           newSeenOrMemorised
         );
       } else if (location.pathname.startsWith("/lessons/progress/seen/")) {
-        let loadedPersonalPreferences = loadPersonalPreferences();
-        let newSeenOrMemorised = [false, true, false] as const;
+        const loadedPersonalPreferences = loadPersonalPreferences();
+        const newSeenOrMemorised = [false, true, false] as const;
         const newUserSettings = getProgressRevisionUserSettings(
           userSettings,
           newSeenOrMemorised
@@ -124,8 +124,8 @@ const Lesson = ({
           newSeenOrMemorised
         );
       } else if (location.pathname.startsWith("/lessons/progress/memorised/")) {
-        let loadedPersonalPreferences = loadPersonalPreferences();
-        let newSeenOrMemorised = [false, false, true] as const;
+        const loadedPersonalPreferences = loadPersonalPreferences();
+        const newSeenOrMemorised = [false, false, true] as const;
         const newUserSettings = getProgressRevisionUserSettings(
           userSettings,
           newSeenOrMemorised

@@ -27,17 +27,17 @@ class ConfettiParticle {
     private startY: number,
     public startTime: number,
   ) {
-  let confettiMinimumSize = 2; // pixels
-  let confettiMaximumSize = 10; // pixels
-  let confettiMinimumXVelocity = -30; // pixel distance per tick
-  let confettiMaximumXVelocity = 30; // pixel distance per tick
-  let confettiMinimumYVelocity = -30; // pixel distance per tick
-  let confettiMaximumYVelocity = 10; // pixel distance per tick
-  let gravity = 0.981;
-  let confettiLife = 300; // ticks
-  let confettiShrinkSpeed = 0.25; // pixels per tick
-  let confettiLifeVariation = 10; // ticks
-  let confettiDecaySpeed = 1; // life per tick
+  const confettiMinimumSize = 2; // pixels
+  const confettiMaximumSize = 10; // pixels
+  const confettiMinimumXVelocity = -30; // pixel distance per tick
+  const confettiMaximumXVelocity = 30; // pixel distance per tick
+  const confettiMinimumYVelocity = -30; // pixel distance per tick
+  const confettiMaximumYVelocity = 10; // pixel distance per tick
+  const gravity = 0.981;
+  const confettiLife = 300; // ticks
+  const confettiShrinkSpeed = 0.25; // pixels per tick
+  const confettiLifeVariation = 10; // ticks
+  const confettiDecaySpeed = 1; // life per tick
 
   // Bouncier, more upwards version:
   // let confettiMinimumSize = 2; // pixels
@@ -82,7 +82,7 @@ class ConfettiParticle {
 }
 
 function createParticleAtPoint(x: number, y: number, colorData: ConfettiParticle['rgbArray'], particles: ConfettiParticle[]) {
-  let particle = new ConfettiParticle(colorData, x, y, Date.now());
+  const particle = new ConfettiParticle(colorData, x, y, Date.now());
 
   particles.push(particle);
 }
@@ -97,19 +97,19 @@ function setupCanvas(config: ConfettiConfig, confettiSourceID: string, particles
   }
 
   // let confettiSource = this.refs.finishedHeading;
-  let confettiSource = document.getElementById(confettiSourceID);
+  const confettiSource = document.getElementById(confettiSourceID);
   if (confettiSource) {
-    let width = confettiSource.offsetWidth;
-    let height = confettiSource.offsetHeight
+    const width = confettiSource.offsetWidth;
+    const height = confettiSource.offsetHeight
 
     let count = 0;
-    let bcr = confettiSource.getBoundingClientRect();
+    const bcr = confettiSource.getBoundingClientRect();
 
     for(let localX = 0; localX < width; localX++) {
       for(let localY = 0; localY < height; localY++) {
         if (count % config['sparsity'] === 0) {
           // $brand-highlight #ffd073 or $brand-primary #402351 confetti
-          let colors: ConfettiParticle['rgbArray'][] = [
+          const colors: ConfettiParticle['rgbArray'][] = [
             [255, 208, 115, getRandomBetween(0.7, 1)], // #FFD073
             [130, 66, 168, getRandomBetween(0.7, 1)], // #8242A8
             [255, 191, 64, getRandomBetween(0.7, 1)], // #FFBF40
@@ -121,10 +121,10 @@ function setupCanvas(config: ConfettiConfig, confettiSourceID: string, particles
 
           colors.splice(config['colors']);
 
-          let rgbaColor = colors[Math.floor(Math.random() * colors.length)];
+          const rgbaColor = colors[Math.floor(Math.random() * colors.length)];
 
-          let globalX =  (bcr.x + getRandomBetween(-positioningRandomness, positioningRandomness)) + localX;
-          let globalY =  (bcr.y + getRandomBetween(-positioningRandomness, positioningRandomness)) + localY;
+          const globalX =  (bcr.x + getRandomBetween(-positioningRandomness, positioningRandomness)) + localX;
+          const globalY =  (bcr.y + getRandomBetween(-positioningRandomness, positioningRandomness)) + localY;
 
           createParticleAtPoint(globalX, globalY, rgbaColor, particles);
         }

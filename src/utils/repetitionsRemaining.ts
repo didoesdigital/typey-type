@@ -5,12 +5,12 @@ export function repetitionsRemaining(
   presentedMaterial: PresentedMaterial,
   currentPhraseID: number
 ) {
-  let lessonLength = presentedMaterial.length;
+  const lessonLength = presentedMaterial.length;
   if (currentPhraseID > lessonLength) {
     return 0;
   }
-  let reps = userSettings.repetitions;
-  let wordsPerRep = lessonLength / userSettings.repetitions;
-  let wordsRemaining = lessonLength - currentPhraseID;
+  const reps = userSettings.repetitions;
+  const wordsPerRep = lessonLength / userSettings.repetitions;
+  const wordsRemaining = lessonLength - currentPhraseID;
   return reps - Math.floor((lessonLength - wordsRemaining) / wordsPerRep);
 }

@@ -80,7 +80,7 @@ const stenoKeys = [
 ] as const;
 
 function mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief: Outline) {
-  let keys = {
+  const keys = {
     numberBarKey: false,
     leftSUpperKey: false,
     leftSLowerKey: false,
@@ -109,7 +109,7 @@ function mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief: Outline) {
     rightZKey: false,
   };
 
-  let briefLetters = brief.split("");
+  const briefLetters = brief.split("");
 
   for (let i = 0; i < stenoOrder.length; i++) {
     if (briefLetters.length > 0) {

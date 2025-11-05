@@ -31,8 +31,8 @@ export const flashcardsMetWordsState = atom(
     // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     rung: number = 0
   ) => {
-    let localStroke = stroke || "XXX";
-    let flashcardsMetWords = { ...get(_flashcardsMetWordsState) };
+    const localStroke = stroke || "XXX";
+    const flashcardsMetWords = { ...get(_flashcardsMetWordsState) };
     if (flashcardsMetWords[word]) {
       if (flashcardsMetWords[word].rung) {
         rung = flashcardsMetWords[word].rung;

@@ -101,7 +101,7 @@ const RecommendationBox = ({
   function updateRecommendationHistory(
     prevRecommendationHistory: RecommendationHistory
   ) {
-    let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
+    const newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
 
     if (
       typeof newRecommendationHistory["currentStep"] === "undefined" ||
@@ -152,7 +152,7 @@ const RecommendationBox = ({
     setRecommendedNextLesson(typedNextRecommendedLesson);
 
     // For new Typey Type students, there may be no valid practice/drill/revision recommendations so it may recommend "Discover" 4 times in a row. If the recommendation is the same as the previous recommendation, update the recommendation history again to skip ahead:
-    let prevRecommendedLesson = recommendedNextLesson;
+    const prevRecommendedLesson = recommendedNextLesson;
     if (
       prevRecommendedLesson.linkText === nextRecommendedLesson.linkText &&
       nextRecommendedLesson.studyType !== "error" &&
@@ -218,7 +218,7 @@ const RecommendationBox = ({
   let metadataStats;
   let studyType;
   let recommendedNextLessonCallToActionButton;
-  let recommendedNextLessonHeadingClassNames =
+  const recommendedNextLessonHeadingClassNames =
     "mt0 pb1 bb b--brand-primary-tint mb3";
 
   // eslint-disable-next-line no-extra-boolean-cast

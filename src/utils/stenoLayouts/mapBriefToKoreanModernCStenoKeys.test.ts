@@ -2,7 +2,7 @@ import mapBriefToKoreanModernCStenoKeys from "utils/stenoLayouts/mapBriefToKorea
 
 describe("map stroke to keys", () => {
   it("show no keys for empty brief", () => {
-    let brief = "";
+    const brief = "";
     expect(mapBriefToKoreanModernCStenoKeys(brief)).toEqual({
       the1Key: false,
       the2Key: false,
@@ -44,7 +44,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows left-hand ㄱ', () => {
-    let brief = "ㄱ";
+    const brief = "ㄱ";
     expect(mapBriefToKoreanModernCStenoKeys(brief)).toEqual({
       the1Key: false,
       the2Key: false,
@@ -86,7 +86,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show keys for 없습니까?', () => {
-    let brief = "ㅇㅂ-ㅂㄴㅅ"; // 없습니까?
+    const brief = "ㅇㅂ-ㅂㄴㅅ"; // 없습니까?
     expect(mapBriefToKoreanModernCStenoKeys(brief)).toEqual({
       the1Key: false,
       the2Key: false,
@@ -128,7 +128,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show nothing when given non-steno letters", () => {
-    let brief = "⌘";
+    const brief = "⌘";
     expect(mapBriefToKoreanModernCStenoKeys(brief)).toEqual({
       the1Key: false,
       the2Key: false,

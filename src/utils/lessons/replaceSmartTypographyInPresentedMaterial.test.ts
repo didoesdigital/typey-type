@@ -23,7 +23,7 @@ describe("replaceSmartTypographyInPresentedMaterial with typography", () => {
   });
 
   describe("has fancy typography", () => {
-    let userSettings: Pick<UserSettings, "simpleTypography"> = {
+    const userSettings: Pick<UserSettings, "simpleTypography"> = {
       simpleTypography: false,
     };
 
@@ -53,7 +53,7 @@ describe("replaceSmartTypographyInPresentedMaterial with typography", () => {
   });
 
   describe("has simple typography", () => {
-    let userSettings: Pick<UserSettings, "simpleTypography"> = {
+    const userSettings: Pick<UserSettings, "simpleTypography"> = {
       simpleTypography: true,
     };
 

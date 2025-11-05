@@ -93,17 +93,17 @@ class App extends Component<Props, AppState> {
     this.intervalID = null;
     // When updating default state for anything stored in local storage,
     // add the same default to load/set personal preferences code and test.
-    let metWordsFromStorage = loadPersonalPreferences()[0];
-    let startingMetWordsToday = loadPersonalPreferences()[0];
+    const metWordsFromStorage = loadPersonalPreferences()[0];
+    const startingMetWordsToday = loadPersonalPreferences()[0];
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
     
     const emptyGlobalLookupDict: LookupDictWithNamespacedDicts = new Map();
-    let config: DictionaryConfig = {
+    const config: DictionaryConfig = {
       configuration: [],
     };
     emptyGlobalLookupDict.configuration = config.configuration;
 
-    let initGlobalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
+    const initGlobalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
       emptyGlobalLookupDict as LookupDictWithNamespacedDictsAndConfig;
 
     this.state = {
@@ -227,7 +227,7 @@ class App extends Component<Props, AppState> {
     };
 
     if (this.shouldUpdateLessonsProgress(newState.lesson)) {
-      let lessonsProgress = this.getUpdatedLessonsProgress({lessonPath: prevState.lesson.path,
+      const lessonsProgress = this.getUpdatedLessonsProgress({lessonPath: prevState.lesson.path,
                                                             lesson: prevState.lesson,
                                                             userSettings: this.props.userSettings,
                                                             prevLessonsProgress: prevState.lessonsProgress,
@@ -278,7 +278,7 @@ class App extends Component<Props, AppState> {
     let lessonsProgressState = this.state.lessonsProgress;
     if (source && source !== '') {
       try {
-        let parsedSource = JSON.parse(source);
+        const parsedSource = JSON.parse(source);
         if (parsedSource && typeof parsedSource === "object") {
           metWordsFromStateOrArg = parsedSource;
         }
@@ -292,8 +292,8 @@ class App extends Component<Props, AppState> {
       [metWordsFromStateOrArg, lessonsProgressState] = loadPersonalPreferences();
     }
 
-    let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
-    let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
+    const calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
+    const calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
     // these two writePersonalPreferences calls were in a callback of setState - so 
     // these may need to be moved to useEffect later, for example, when
@@ -334,11 +334,11 @@ class App extends Component<Props, AppState> {
       material = replaceSmartTypographyInPresentedMaterial.call(this, material, userSettings);
     }
 
-    let len = material.length;
+    const len = material.length;
     let seenAccumulator = 0;
     let memorisedAccumulator = 0;
 
-    let normalisedMetWords: Record<NormalisedTypedWord, number> = {};
+    const normalisedMetWords: Record<NormalisedTypedWord, number> = {};
     Object.keys(metWords).forEach(function(key) {
       if (normalisedMetWords[key.trim()]) {
         normalisedMetWords[key.trim()] = metWords[key] + normalisedMetWords[key.trim()];
@@ -352,8 +352,8 @@ class App extends Component<Props, AppState> {
     // familiarity so when space before output is set and {"roused": 1} appears
     // in metWords, " roused" will show in the lesson as a "new word" but
     // already be counted as seen on the progress page.
-    let alreadyChecked = [];
-    let wordsLeftToDiscover = [];
+    const alreadyChecked = [];
+    const wordsLeftToDiscover = [];
     for (let i = 0; i < len; ++i) {
       let sourceMaterialPhrase = material[i].phrase;
       sourceMaterialPhrase = sourceMaterialPhrase.trim();
@@ -380,7 +380,7 @@ class App extends Component<Props, AppState> {
       }
     }
 
-    let uniqueLowerCasedWordsLeftToDiscover = [...new Set(wordsLeftToDiscover)];
+    const uniqueLowerCasedWordsLeftToDiscover = [...new Set(wordsLeftToDiscover)];
 
     let numberOfWordsToDiscover = 0;
     if (uniqueLowerCasedWordsLeftToDiscover && uniqueLowerCasedWordsLeftToDiscover.length > 0) {
@@ -411,21 +411,21 @@ class App extends Component<Props, AppState> {
     metWordsFromStorage: MetWords,
     newSeenOrMemorised: readonly [boolean, boolean, boolean]
   ) {
-    let lesson = fallbackLesson;
+    const lesson = fallbackLesson;
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
 
     this.appFetchAndSetupGlobalDict(null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
-      let myWords = createWordListFromMetWords(metWordsFromStorage).join("\n");
+      const myWords = createWordListFromMetWords(metWordsFromStorage).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
-      let result = parseWordList(myWords);
+      const result = parseWordList(myWords);
         // perhaps we can replace these with result = createWordListFromMetWords?
         // let myWords = createWordListFromMetWords(metWords).join("\n");
         // let result = parseWordList(myWords);
       if (result && result.length > 0) {
         // look up strokes for each word
-        let lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.globalLookupDictionary);
+        const lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.globalLookupDictionary);
         if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
           lesson.sourceMaterial = lessonWordsAndStrokes;
           lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -510,11 +510,11 @@ class App extends Component<Props, AppState> {
       // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
     }
     else if (startFromWord > 0 && limitNumberOfWords > 0) {
-      let startFrom = startFromWord - 1;
+      const startFrom = startFromWord - 1;
       newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + limitNumberOfWords);
     }
     else if (startFromWord > 0) {
-      let startFrom = startFromWord - 1;
+      const startFrom = startFromWord - 1;
       newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
     }
     else if (limitNumberOfWords > 0) {
@@ -576,7 +576,7 @@ class App extends Component<Props, AppState> {
     fetchLesson(path).then((lessonText) => {
       if (isLessonTextValid(lessonText)) {
         this.setState({lessonNotFound: false});
-        let lesson = parseLesson(lessonText, path);
+        const lesson = parseLesson(lessonText, path);
         if (
           this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly &&
           !path.includes("phrasing") &&
@@ -587,7 +587,7 @@ class App extends Component<Props, AppState> {
         ) {
 
           this.appFetchAndSetupGlobalDict(null).then(() => {
-            let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
+            const lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
               lesson.newPresentedMaterial = new Zipper(lessonWordsAndStrokes);
@@ -633,7 +633,7 @@ class App extends Component<Props, AppState> {
   }
 
   startCustomLesson() {
-    let lesson = Object.assign({}, this.state.customLesson);
+    const lesson = Object.assign({}, this.state.customLesson);
     lesson.title = 'Custom'
     this.setupLesson({
       currentPhraseID: 0,
@@ -643,8 +643,8 @@ class App extends Component<Props, AppState> {
 
   createCustomLesson(event: React.ChangeEvent<HTMLTextAreaElement>) {
     if (event && event.target) {
-      let providedText = event.target.value || '';
-      let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
+      const providedText = event.target.value || '';
+      const [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
       let customLesson = Object.assign({}, this.state.customLesson);
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
       this.setupLesson({
@@ -658,7 +658,7 @@ class App extends Component<Props, AppState> {
     }
     else { // for navigating straight to custom lesson page without setup
     // TODO: is this the place where I should set a default empty custom lesson?
-      let lesson = Object.assign({}, this.state.customLesson);
+      const lesson = Object.assign({}, this.state.customLesson);
       lesson.title = 'Custom'
       this.setupLesson({
         customLesson: lesson,
@@ -700,7 +700,7 @@ class App extends Component<Props, AppState> {
   updateBufferTimer = null;
 
   updateMarkup(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    let actualText = event.target.value;
+    const actualText = event.target.value;
     // TODO: once we're happy that this will be the permanent new default behaviour, remove all the `batchUpdate`-specific branching code and tests:
     // const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
     const batchUpdate = true;
@@ -911,7 +911,7 @@ class App extends Component<Props, AppState> {
       state.yourSeenWordCount = calculateSeenWordCount(state.metWords);
       state.yourMemorisedWordCount = calculateMemorisedWordCount(state.metWords);
 
-      let screenReaderEchoes = this.props.userSettings.textInputAccessibility
+      const screenReaderEchoes = this.props.userSettings.textInputAccessibility
       if (!screenReaderEchoes) {
         state.focusTriggerInt = state.focusTriggerInt + 1;
       }
@@ -944,7 +944,7 @@ class App extends Component<Props, AppState> {
 
   sayCurrentPhraseAgain() {
     if (this.props.userSettings.speakMaterial) {
-      let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
+      const currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
       if (currentPhrase && Object.prototype.hasOwnProperty.call(currentPhrase, 'phrase')) {
         this.say(currentPhrase.phrase);
       }
@@ -965,8 +965,8 @@ class App extends Component<Props, AppState> {
   }
 
   render() {
-    let completedMaterial = this.presentCompletedMaterial();
-    let upcomingMaterial = this.presentUpcomingMaterial();
+    const completedMaterial = this.presentCompletedMaterial();
+    const upcomingMaterial = this.presentUpcomingMaterial();
 
     let stateLesson = this.state.lesson;
     if ((Object.keys(stateLesson).length === 0 && stateLesson.constructor === Object) || !stateLesson) {
@@ -980,7 +980,7 @@ class App extends Component<Props, AppState> {
       };
     }
 
-    let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
+    const presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     return (
       <div id="js-app" className="app">
         <div className="flex flex-column justify-between min-vh-100">

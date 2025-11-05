@@ -17,7 +17,7 @@ type FlashcardsRecommendedCoursesType = {
   "expertCourse": FlashcardsCourseItem[];
 }
 
-let data: null | FlashcardsRecommendedCoursesType = null;
+const data: null | FlashcardsRecommendedCoursesType = null;
 
 async function fetchFlashcardsRecommendations(): Promise<FlashcardsRecommendedCoursesType> {
   try {
@@ -58,7 +58,7 @@ export function getFlashcardsRecommendedCourses() {
 
 function getFlashcardsNextLesson(courses: FlashcardsRecommendedCoursesType, flashcardsProgress = {}, courseLevel: keyof FlashcardsRecommendedCoursesType = "expertCourse", currentFlashcardsCourseIndex = 0): [FlashcardsNextLesson, number] {
     // fallback lesson:
-    let flashcardsNextLesson = {
+    const flashcardsNextLesson = {
       lastSeen: 1558144862000, // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
       linkTitle: "Prefixes",
       link: import.meta.env.VITE_PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams

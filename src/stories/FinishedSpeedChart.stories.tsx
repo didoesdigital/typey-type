@@ -22,20 +22,20 @@ export default {
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'numberOfWords' implicitly has an 'any' ... Remove this comment to see the full error message
 const generateData = (numberOfWords) => {
-  let generatedData = {
+  const generatedData = {
     averageWPM: 120,
     dataPoints: [],
   };
 
-  let dataPoints = [];
+  const dataPoints = [];
 
   for (let i = 1; i < numberOfWords + 1; i++) {
-    let elapsedTime = i * 1000 + Math.random() * 1000; // [1200, 2900, 3100]
-    let wordsPerMinute = i / (elapsedTime / 1000 / 60);
-    let typedText = i % 2 === 0 ? "five." : "chars";
-    let material = i % 2 === 0 ? "five." : "chars";
-    let markedCorrect = true;
-    let hint = "TPAOEUF/TP-PL";
+    const elapsedTime = i * 1000 + Math.random() * 1000; // [1200, 2900, 3100]
+    const wordsPerMinute = i / (elapsedTime / 1000 / 60);
+    const typedText = i % 2 === 0 ? "five." : "chars";
+    const material = i % 2 === 0 ? "five." : "chars";
+    const markedCorrect = true;
+    const hint = "TPAOEUF/TP-PL";
     dataPoints.push({
       attemptPeak: false,
       elapsedTime: elapsedTime,
@@ -179,7 +179,7 @@ WPM61.args = {
 WPM61.storyName = "61 WPM lesson";
 
 export const WPM111 = Template.bind({});
-let WPM111Data = Object.assign({}, practiceProverb);
+const WPM111Data = Object.assign({}, practiceProverb);
 WPM111Data.dataPoints = WPM111Data.dataPoints.map(
   ({ wordsPerMinute, ...datumProps }, i) => ({
     ...datumProps,
@@ -194,7 +194,7 @@ WPM111.args = {
 WPM111.storyName = "111 WPM lesson (FIXME)";
 
 export const WPM151 = Template.bind({});
-let WPM151Data = Object.assign({}, practiceProverb);
+const WPM151Data = Object.assign({}, practiceProverb);
 WPM151Data.dataPoints = WPM151Data.dataPoints.map(
   ({ wordsPerMinute, ...datumProps }, i) => ({
     ...datumProps,
@@ -209,7 +209,7 @@ WPM151.args = {
 WPM151.storyName = "151 WPM lesson (FIXME)";
 
 export const WPM226 = Template.bind({});
-let WPM226Data = Object.assign({}, practiceProverb);
+const WPM226Data = Object.assign({}, practiceProverb);
 WPM226Data.dataPoints = WPM226Data.dataPoints.map(
   ({ wordsPerMinute, ...datumProps }, i) => ({
     ...datumProps,
@@ -224,7 +224,7 @@ WPM226.args = {
 WPM226.storyName = "226 WPM lesson (FIXME)";
 
 export const WPM320 = Template.bind({});
-let WPM320Data = Object.assign({}, practiceProverb);
+const WPM320Data = Object.assign({}, practiceProverb);
 WPM320Data.dataPoints = WPM320Data.dataPoints.map(
   ({ wordsPerMinute, ...datumProps }, i) => ({
     ...datumProps,

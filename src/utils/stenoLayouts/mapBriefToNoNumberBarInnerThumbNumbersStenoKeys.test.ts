@@ -2,7 +2,7 @@ import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from "./mapBriefToNoNumbe
 
 describe("map stroke to keys", () => {
   it("show no keys for empty brief", () => {
-    let brief = "";
+    const brief = "";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSUpperKey: false,
@@ -34,7 +34,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows left-hand T for "it"', () => {
-    let brief = "T";
+    const brief = "T";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSUpperKey: false,
@@ -66,7 +66,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows right-hand -T for "the"', () => {
-    let brief = "-T";
+    const brief = "-T";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSUpperKey: false,
@@ -98,7 +98,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows both S keys for "is"', () => {
-    let brief = "S";
+    const brief = "S";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSUpperKey: true,
@@ -130,7 +130,7 @@ describe("map stroke to keys", () => {
   });
 
   it("shows number key for numbers", () => {
-    let brief = "3";
+    const brief = "3";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: true,
       leftSUpperKey: false,
@@ -162,7 +162,7 @@ describe("map stroke to keys", () => {
   });
 
   it("shows left number key for numbers on the right hand", () => {
-    let brief = "7";
+    const brief = "7";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: true,
       leftSUpperKey: false,
@@ -194,7 +194,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show all star keys for starred brief", () => {
-    let brief = "AO*EUS";
+    const brief = "AO*EUS";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSUpperKey: false,
@@ -226,7 +226,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show keys for dash-only brief "welcome"', () => {
-    let brief = "HR-BG";
+    const brief = "HR-BG";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSUpperKey: false,
@@ -258,7 +258,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show nothing when given non-steno letters", () => {
-    let brief = "⌘";
+    const brief = "⌘";
     expect(mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSUpperKey: false,

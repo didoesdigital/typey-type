@@ -82,7 +82,7 @@ const stenoKeys = [
 ] as const;
 
 function mapBriefToYaweiChineseStenoKeys(brief: Outline) {
-  let keys = {
+  const keys = {
     "LeftHashKey": false,
     "LeftXKey": false,
     "LeftBKey": false,
@@ -112,7 +112,7 @@ function mapBriefToYaweiChineseStenoKeys(brief: Outline) {
     "RightOKey": false,
   };
 
-  let briefLetters = brief.split("");
+  const briefLetters = brief.split("");
   // let briefLetters = [...brief];
 
   for (let i = 0; i < stenoOrder.length; i++) {

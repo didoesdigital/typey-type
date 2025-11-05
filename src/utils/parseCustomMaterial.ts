@@ -11,9 +11,9 @@ export function parseCustomMaterial(
   lessonTextAndStrokes: string
 ): [CustomLesson, ValidationState, ValidationMessages] {
   let validationState: ValidationState = "unvalidated";
-  let validationMessages: ValidationMessages = [];
+  const validationMessages: ValidationMessages = [];
 
-  let emptyCustomLesson = {
+  const emptyCustomLesson = {
     sourceMaterial: [],
     presentedMaterial: [{ phrase: "", stroke: "" }],
     settings: { ignoredChars: "" },
@@ -34,8 +34,8 @@ export function parseCustomMaterial(
     return [emptyCustomLesson, validationState, validationMessages];
   }
 
-  let lessonTitle = "Custom";
-  let lessonSubtitle = "";
+  const lessonTitle = "Custom";
+  const lessonSubtitle = "";
 
   let lines = lessonTextAndStrokes.split("\n");
   lines = lines.filter((phrase) => phrase !== "");
@@ -49,14 +49,14 @@ export function parseCustomMaterial(
     return [emptyCustomLesson, validationState, validationMessages];
   }
 
-  let sourceMaterial = [];
-  let settings = { ignoredChars: "" };
+  const sourceMaterial = [];
+  const settings = { ignoredChars: "" };
 
   for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
-    let phraseAndStroke = line.split("	");
-    let phrase = phraseAndStroke[0];
-    let stroke = phraseAndStroke[1];
+    const line = lines[i];
+    const phraseAndStroke = line.split("	");
+    const phrase = phraseAndStroke[0];
+    const stroke = phraseAndStroke[1];
     sourceMaterial.push({ phrase: phrase, stroke: stroke });
   }
 

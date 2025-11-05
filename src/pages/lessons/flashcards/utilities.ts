@@ -13,7 +13,7 @@ const getStrokeForCurrentSlideContent = (
 ) => {
   let stroke = "XXX";
   let i = 0;
-  let length = sourceMaterial.length;
+  const length = sourceMaterial.length;
 
   for (; i < length; i++) {
     if (sourceMaterial[i].phrase === word) {
@@ -107,7 +107,7 @@ const getCurrentSlideContentAndType = (
     "",
     "phrase",
   ];
-  let currentSlide = flashcardsCarouselCurrentSlide;
+  const currentSlide = flashcardsCarouselCurrentSlide;
   let flashcardsIndex = 0;
   // assumes stroke slides are always odd
   if (currentSlide > flashcards.length * 2) {

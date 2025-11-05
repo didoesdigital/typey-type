@@ -23,7 +23,7 @@ function lookupListOfStrokesAndDicts(
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig,
   affixList = AFFIXES.getSharedAffixes()
 ): [StrokeAndDictionaryAndNamespace[], string] {
-  let lookupText = phrase;
+  const lookupText = phrase;
   let modifiedWordOrPhrase = lookupText.slice();
   modifiedWordOrPhrase = getModifiedWordOrPhraseForLookup(phrase);
 
@@ -49,7 +49,7 @@ function lookupListOfStrokesAndDicts(
 
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = "{^}" + lookupText + "{^}";
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -59,7 +59,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = "{^}" + lookupText;
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -69,7 +69,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = lookupText + "{^}";
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -79,7 +79,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = "{^" + lookupText + "^}";
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -89,7 +89,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = "{^" + lookupText + "}";
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -99,7 +99,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = "{" + lookupText + "^}";
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -109,7 +109,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = "{" + lookupText + "}";
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -119,7 +119,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = "" + lookupText + "{-|}";
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -129,7 +129,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = "{~|'^}" + lookupText.replace("'", "");
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -139,7 +139,7 @@ function lookupListOfStrokesAndDicts(
   }
   if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = lookupText.trim();
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+    const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,
       globalLookupDictionary
     );
@@ -155,7 +155,7 @@ function lookupListOfStrokesAndDicts(
     modifiedWordOrPhrase = lookupText.trim().replace(/(\ufe0e|\ufe0f)$/, "");
 
     if (modifiedWordOrPhrase !== lookupText) {
-      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+      const listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
         modifiedWordOrPhrase,
         globalLookupDictionary
       );

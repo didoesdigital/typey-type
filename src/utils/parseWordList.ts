@@ -14,7 +14,7 @@
 type InputWordList = string;
 
 function parseWordList(userInputWordList: InputWordList): string[] {
-  let wordList: string[] = [];
+  const wordList: string[] = [];
   if (userInputWordList.length === 0) {
     return wordList;
   }
@@ -25,7 +25,7 @@ function parseWordList(userInputWordList: InputWordList): string[] {
   }
 
   for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
+    const line = lines[i];
     wordList.push(line);
   }
 

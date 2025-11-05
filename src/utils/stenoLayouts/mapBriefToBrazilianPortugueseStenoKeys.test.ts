@@ -2,7 +2,7 @@ import mapBriefToBrazilianPortugueseStenoKeys from "./mapBriefToBrazilianPortugu
 
 describe("map stroke to keys", () => {
   it("show no keys for empty brief", () => {
-    let brief = "";
+    const brief = "";
     expect(mapBriefToBrazilianPortugueseStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSKey: false,
@@ -32,7 +32,7 @@ describe("map stroke to keys", () => {
   });
 
   it("shows FLR*EBG for fonema", () => {
-    let brief = "FLR*EBG";
+    const brief = "FLR*EBG";
     expect(mapBriefToBrazilianPortugueseStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSKey: false,
@@ -62,7 +62,7 @@ describe("map stroke to keys", () => {
   });
 
   it("has outlines for words with accents like preparação", () => {
-    let brief = "PRAEPS";
+    const brief = "PRAEPS";
     expect(mapBriefToBrazilianPortugueseStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSKey: false,
@@ -92,7 +92,7 @@ describe("map stroke to keys", () => {
   });
 
   it("handles numbers like 3", () => {
-    let brief = "TRES";
+    const brief = "TRES";
     expect(mapBriefToBrazilianPortugueseStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSKey: false,

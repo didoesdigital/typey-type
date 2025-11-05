@@ -228,7 +228,7 @@ export function useChangeUserSetting() {
   const onChangeUserSetting: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    let newState = Object.assign({}, currentState);
+    const newState = Object.assign({}, currentState);
 
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -269,7 +269,7 @@ export function useChangeVoiceUserSetting(): (
 ) => void {
   const [currentState, setState] = useAtom(userSettingsState);
   return (voiceName, voiceURI) => {
-    let newState = Object.assign({}, currentState);
+    const newState = Object.assign({}, currentState);
 
     newState["voiceName"] = voiceName;
     newState["voiceURI"] = voiceURI;
@@ -293,7 +293,7 @@ export function useChangeVoiceUserSetting(): (
 export function useChooseStudy() {
   const [currentState, setState] = useAtom(userSettingsState);
   const onChooseStudy: LessonCanvasFooterProps["chooseStudy"] = (event) => {
-    let newState = Object.assign({}, currentState);
+    const newState = Object.assign({}, currentState);
 
     const value = event.target.value;
 
@@ -525,8 +525,8 @@ export function useStartFromWordOne() {
     // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
     // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
     window.setTimeout(function () {
-      let yourTypedText = document.getElementById("your-typed-text");
-      let noWordsToWrite = document.getElementById("js-no-words-to-write");
+      const yourTypedText = document.getElementById("your-typed-text");
+      const noWordsToWrite = document.getElementById("js-no-words-to-write");
       if (yourTypedText) {
         yourTypedText.focus();
       } else if (noWordsToWrite) {
@@ -640,7 +640,7 @@ export function useToggleHideOtherSettings() {
 
     setState(value);
 
-    let labelString = value.toString();
+    const labelString = value.toString();
 
     GoogleAnalytics.event({
       category: "UserSettings",

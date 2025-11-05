@@ -22,14 +22,14 @@ const createGlobalLookupDictionary = (
 ): LookupDictWithNamespacedDictsAndConfig => {
   // TODO: one day, this could be the place we check for whether Typey Type dictionaries are enabled and if so combineValidDictionaries with them and add to 'configuration'
 
-  let combinedLookupDictionary: LookupDictWithNamespacedDicts =
+  const combinedLookupDictionary: LookupDictWithNamespacedDicts =
     combineValidDictionaries(personalDictionariesNamesAndContents, typeyDicts);
 
   const typeyDictsConfigEntries = typeyDicts.map(
     (readDictData) => `${SOURCE_NAMESPACES.get("typey")}:${readDictData[1]}`
   );
 
-  let configuration = [
+  const configuration = [
     ...typeyDictsConfigEntries,
     ...personalDictionariesNamesAndContents.map(
       (d) => `${SOURCE_NAMESPACES.get("user")}:${d[0]}`

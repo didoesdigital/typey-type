@@ -14,9 +14,9 @@ const FlashcardsCarouselActionButtons = (props: Props) => {
   const hardButtonRef = useRef(null);
   const shuffleButtonRef = useRef(null);
 
-  let currentSlideContentType = props.currentSlideContentType;
-  let ButtonNext = props.ButtonNext;
-  let numberOfFlashcards = props.numberOfFlashcards;
+  const currentSlideContentType = props.currentSlideContentType;
+  const ButtonNext = props.ButtonNext;
+  const numberOfFlashcards = props.numberOfFlashcards;
 
   return (
     <React.Fragment>

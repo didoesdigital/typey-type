@@ -43,7 +43,7 @@ class Stroke {
   }
 
   toString() {
-    let raw = [];
+    const raw = [];
 
     if (this.bits & HASH) {
       raw.push("#");

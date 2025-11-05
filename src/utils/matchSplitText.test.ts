@@ -5,7 +5,7 @@ import {
 
 describe("matchSplitText", () => {
   describe("case insensitive, ignore spacing", () => {
-    let settings = { ignoredChars: "" };
+    const settings = { ignoredChars: "" };
     const userSettings: PartialUserSettingsAndCaseAndSpacePlacement = {
       caseSensitive: false,
       simpleTypography: true,
@@ -86,7 +86,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for prefix with ignored chars, ignore spacing", () => {
-      let settings = { ignoredChars: "^" };
+      const settings = { ignoredChars: "^" };
       const expectedText = "over-the-^";
       const actualText = "over-the-";
       const expected = ["over-the-", "", "over-the-", ""];
@@ -277,7 +277,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for prefix with ignored chars, ignore spacing", () => {
-      let settings = { ignoredChars: "^" };
+      const settings = { ignoredChars: "^" };
       const expectedText = "over-the-^";
       const actualText = " over-the-";
       const expected = [" over-the-", "", " over-the-", ""];
@@ -451,7 +451,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for prefix with ignored chars, ignore spacing", () => {
-      let settings = { ignoredChars: "^" };
+      const settings = { ignoredChars: "^" };
       const expectedText = "over-the-^";
       const actualText = "over-the- ";
       const expected = ["over-the- ", "", "over-the- ", ""];

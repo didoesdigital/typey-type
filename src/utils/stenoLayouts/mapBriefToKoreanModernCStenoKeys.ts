@@ -1,7 +1,7 @@
 import type { Outline } from "../../types";
 
 function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
-  let keys = {
+  const keys = {
     the1Key: false,
     the2Key: false,
     the3Key: false,
@@ -40,18 +40,18 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
     theRightㅁKey: false,
   };
 
-  let briefCharacters = brief.split("");
-  let briefCharactersLength = briefCharacters.length;
-  let numbers = [];
-  let leftSide = [];
-  let vowels = [];
-  let rightSide = [];
+  const briefCharacters = brief.split("");
+  const briefCharactersLength = briefCharacters.length;
+  const numbers = [];
+  const leftSide = [];
+  const vowels = [];
+  const rightSide = [];
   let vowel = false;
-  let vowelRegex = /[ㅗㅏㅜ*\-ㅓㅣ]/;
-  let numberRegex = /[0-9]/;
+  const vowelRegex = /[ㅗㅏㅜ*\-ㅓㅣ]/;
+  const numberRegex = /[0-9]/;
 
   for (let i = 0; i < briefCharactersLength; i++) {
-    let char = briefCharacters[i];
+    const char = briefCharacters[i];
     // eslint-disable-next-line no-extra-boolean-cast
     if (!!char.match(vowelRegex)) {
       vowel = true;
@@ -68,7 +68,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
     }
   }
 
-  let numberslength = numbers.length;
+  const numberslength = numbers.length;
   for (let i = 0; i < numberslength; i++) {
     const keyName = "the" + numbers[i] + "Key";
     if (Object.prototype.hasOwnProperty.call(keys, keyName)) {
@@ -77,7 +77,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
     }
   }
 
-  let vowelslength = vowels.length;
+  const vowelslength = vowels.length;
   for (let i = 0; i < vowelslength; i++) {
     if (Object.prototype.hasOwnProperty.call(keys, "the" + vowels[i] + "Key")) {
       // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
@@ -87,7 +87,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
     }
   }
 
-  let leftSidelength = leftSide.length;
+  const leftSidelength = leftSide.length;
   for (let i = 0; i < leftSidelength; i++) {
     if (
       Object.prototype.hasOwnProperty.call(
@@ -100,7 +100,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
     }
   }
 
-  let rightSidelength = rightSide.length;
+  const rightSidelength = rightSide.length;
   for (let i = 0; i < rightSidelength; i++) {
     if (
       Object.prototype.hasOwnProperty.call(

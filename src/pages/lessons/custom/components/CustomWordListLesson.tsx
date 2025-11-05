@@ -25,9 +25,9 @@ const CustomWordListLesson = ({ globalLookupDictionary }: Props) => {
 
   const handleWordsForDictionaryEntries = useCallback(
     (value: any, globalLookupDictionaryTmp = globalLookupDictionary) => {
-      let result = parseWordList(value);
+      const result = parseWordList(value);
       if (result && result.length > 0) {
-        let customLessonWordsAndStrokesTmp = generateListOfWordsAndStrokes(
+        const customLessonWordsAndStrokesTmp = generateListOfWordsAndStrokes(
           result,
           globalLookupDictionaryTmp
         );

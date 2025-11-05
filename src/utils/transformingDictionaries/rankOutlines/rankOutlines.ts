@@ -46,8 +46,8 @@ function rankOutlines(
       return -1; // sort a before b
     }
 
-    let outlineA = a[0];
-    let outlineB = b[0];
+    const outlineA = a[0];
+    const outlineB = b[0];
     let outlineALengthWithAllPenalties = outlineA.length;
     let outlineBLengthWithAllPenalties = outlineB.length;
 

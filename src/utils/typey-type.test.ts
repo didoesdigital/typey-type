@@ -32,11 +32,11 @@ import { updateCapitalisationStrokesInNextItem } from "./updateCapitalisationStr
 
 describe("update capitalisation strokes in next item", () => {
   describe("where previous word ends in a letter", () => {
-    let lastWord = "cat";
+    const lastWord = "cat";
 
     // ` cat "A`
     describe("where next item has quotes", () => {
-      let nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
+      const nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
       it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
         expect(
           updateCapitalisationStrokesInNextItem(nextItem, lastWord)
@@ -50,10 +50,10 @@ describe("update capitalisation strokes in next item", () => {
 
   // ` cat. "A`
   describe("where previous word ends in full stop", () => {
-    let lastWord = "cat.";
+    const lastWord = "cat.";
 
     describe("where next item has quotes", () => {
-      let nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
+      const nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
       it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
         expect(
           updateCapitalisationStrokesInNextItem(nextItem, lastWord)
@@ -67,10 +67,10 @@ describe("update capitalisation strokes in next item", () => {
 
   // ` request. When`
   describe("where previous word ends in full stop", () => {
-    let lastWord = "request.";
+    const lastWord = "request.";
 
     describe("where next item has quotes", () => {
-      let nextItem = { phrase: "When", stroke: "KPA/WHEPB" };
+      const nextItem = { phrase: "When", stroke: "KPA/WHEPB" };
       it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
         expect(
           updateCapitalisationStrokesInNextItem(nextItem, lastWord)
@@ -84,10 +84,10 @@ describe("update capitalisation strokes in next item", () => {
 
   // ` cat… "A`
   describe("where previous word ends in an ellipsis", () => {
-    let lastWord = "cat…";
+    const lastWord = "cat…";
 
     describe("where next item has quotes", () => {
-      let nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
+      const nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
       it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
         expect(
           updateCapitalisationStrokesInNextItem(nextItem, lastWord)
@@ -101,10 +101,10 @@ describe("update capitalisation strokes in next item", () => {
 
   // ` everything." "Be`
   describe("where previous word ends in an ellipsis", () => {
-    let lastWord = 'everything."';
+    const lastWord = 'everything."';
 
     describe("where next item has quotes", () => {
-      let nextItem = { phrase: '"Be', stroke: "KW-GS KPA/-B" };
+      const nextItem = { phrase: '"Be', stroke: "KW-GS KPA/-B" };
       it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
         expect(
           updateCapitalisationStrokesInNextItem(nextItem, lastWord)
@@ -118,10 +118,10 @@ describe("update capitalisation strokes in next item", () => {
 
   // ` "Be everything."`
   describe("where previous word ends in an ellipsis", () => {
-    let lastWord = '"Be';
+    const lastWord = '"Be';
 
     describe("where next item has quotes", () => {
-      let nextItem = { phrase: 'everything."', stroke: "EFG TP-PL KR-GS" };
+      const nextItem = { phrase: 'everything."', stroke: "EFG TP-PL KR-GS" };
       it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
         expect(
           updateCapitalisationStrokesInNextItem(nextItem, lastWord)
@@ -135,10 +135,10 @@ describe("update capitalisation strokes in next item", () => {
 
   // ` said: "Be`
   describe("where previous word ends in a colon", () => {
-    let lastWord = "said:";
+    const lastWord = "said:";
 
     describe("where next item has quotes", () => {
-      let nextItem = { phrase: '"Be', stroke: "KR-GS KPA/-B" };
+      const nextItem = { phrase: '"Be', stroke: "KR-GS KPA/-B" };
       it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
         expect(
           updateCapitalisationStrokesInNextItem(nextItem, lastWord)
@@ -152,10 +152,10 @@ describe("update capitalisation strokes in next item", () => {
 
   // ` cat… "A`
   describe("where previous word ends in an ellipsis", () => {
-    let lastWord = "cat…";
+    const lastWord = "cat…";
 
     describe("where next item has quotes", () => {
-      let nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
+      const nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
       it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
         expect(
           updateCapitalisationStrokesInNextItem(nextItem, lastWord)
@@ -169,17 +169,17 @@ describe("update capitalisation strokes in next item", () => {
 });
 
 describe("migratePersonalDictionariesV", () => {
-  let startingV0Dictionaries: LocalStoragePersonalDictionariesV0 = [
+  const startingV0Dictionaries: LocalStoragePersonalDictionariesV0 = [
     ["personal.json", { "TAO*EUPT": "Typey Type" }],
   ];
-  let startingV1Dictionaries: LocalStoragePersonalDictionariesV1 = {
+  const startingV1Dictionaries: LocalStoragePersonalDictionariesV1 = {
     "v": "1",
     "dicts": [["personal.json", { "TAO*EUPT": "Typey Type" }]],
   };
-  let migratedV1Dictionaries = Object.assign({}, startingV1Dictionaries);
+  const migratedV1Dictionaries = Object.assign({}, startingV1Dictionaries);
 
   describe("runAllPersonalDictionariesMigrations", () => {
-    let dirtyFlag = false;
+    const dirtyFlag = false;
 
     describe("where local storage had v0 format", () => {
       it("returns true dirty flag", () => {
@@ -205,7 +205,7 @@ describe("migratePersonalDictionariesV", () => {
   });
 
   describe("v0 to v1", () => {
-    let dirtyFlag = false;
+    const dirtyFlag = false;
 
     describe("where local storage had v0 format", () => {
       it("returns dictionary migrated to v1 and true dirty flag", () => {

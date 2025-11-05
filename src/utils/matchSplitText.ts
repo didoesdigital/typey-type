@@ -44,8 +44,8 @@ function matchSplitText(
   } else if (userSettings?.spacePlacement === "spaceAfterOutput") {
     expected = expected + " ";
   }
-  let expectedChars = expected.split("");
-  let actualTextChars = actualText.split("");
+  const expectedChars = expected.split("");
+  const actualTextChars = actualText.split("");
   let charactersMatch: (char1: string, char2: string) => boolean;
   let expectedIndex = 0;
   let actualTextIndex = 0;
@@ -122,10 +122,10 @@ function matchSplitText(
   //   }
   // }
 
-  let matchedExpected = expectedChars.slice(0, expectedIndex).join("");
-  let unmatchedExpected = expectedChars.slice(expectedIndex).join("");
-  let matchedActual = actualTextChars.slice(0, actualTextIndex).join("");
-  let unmatchedActual = actualTextChars.slice(actualTextIndex).join("");
+  const matchedExpected = expectedChars.slice(0, expectedIndex).join("");
+  const unmatchedExpected = expectedChars.slice(expectedIndex).join("");
+  const matchedActual = actualTextChars.slice(0, actualTextIndex).join("");
+  const unmatchedActual = actualTextChars.slice(actualTextIndex).join("");
 
   return [matchedExpected, unmatchedExpected, matchedActual, unmatchedActual];
 }

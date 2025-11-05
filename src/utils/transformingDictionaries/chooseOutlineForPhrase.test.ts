@@ -26,9 +26,9 @@ describe("choose outline for phrase", () => {
 
   describe("returns array of chosen outline and number of lookup attempts", () => {
     it("simple example returns 1 attempt for KP-PL", () => {
-      let wordOrPhrase = "example";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "example";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -42,9 +42,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("P*ERS for {&%} percent", () => {
-      let wordOrPhrase = "%";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "%";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -66,9 +66,9 @@ describe("choose outline for phrase", () => {
     // });
 
     it("single closing curly quote ’ should match TP-L/TP-L", () => {
-      let wordOrPhrase = "’";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "’";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -82,9 +82,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('{^}:{^} with "KHR-PB" for colon with suppressed spaces like clock time', () => {
-      let wordOrPhrase = ":";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = ":";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -98,9 +98,9 @@ describe("choose outline for phrase", () => {
     });
 
     it(': with "STPH-FPLT" for colon with un-suppressed spaces like said:', () => {
-      let wordOrPhrase = ":";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = ":";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -114,9 +114,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('{^}^{^} with "KR-RT" for caret with suppressed spaces', () => {
-      let wordOrPhrase = "^";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "^";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -130,9 +130,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('{^}({^} with "PREPB" for opening parenthesis', () => {
-      let wordOrPhrase = "(";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "(";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -173,9 +173,9 @@ describe("choose outline for phrase", () => {
 
     // eslint-disable-next-line no-template-curly-in-string
     it("for dollar with suppressed trailing space should match ${^}", () => {
-      let wordOrPhrase = "$";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "$";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -189,9 +189,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("for hash with suppressed trailing space", () => {
-      let wordOrPhrase = "#";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "#";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -205,9 +205,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("for left angle bracket with suppressed space", () => {
-      let wordOrPhrase = "<";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "<";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -229,9 +229,9 @@ describe("choose outline for phrase", () => {
     // });
 
     it("with OERBGS for oh,", () => {
-      let wordOrPhrase = "oh,";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "oh,";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -245,9 +245,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("with HRAO*EUBG for , like,", () => {
-      let wordOrPhrase = ", like,";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = ", like,";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -261,9 +261,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("with a hyphenated phrase", () => {
-      let wordOrPhrase = "hit-and-miss";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "hit-and-miss";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -277,9 +277,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("with a prefix", () => {
-      let wordOrPhrase = "relent";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "relent";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -293,9 +293,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("with a prefix", () => {
-      let wordOrPhrase = "autoscroll";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "autoscroll";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -309,9 +309,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("with long", () => {
-      let wordOrPhrase = "long";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "long";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -325,9 +325,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("with longing", () => {
-      let wordOrPhrase = "longing";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "longing";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -341,9 +341,9 @@ describe("choose outline for phrase", () => {
     });
 
     it.skip("with multiple suffixes", () => {
-      let wordOrPhrase = "cuffings";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "cuffings";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -357,9 +357,9 @@ describe("choose outline for phrase", () => {
     });
 
     it.skip("with multi-syllable word with multiple suffixes", () => {
-      let wordOrPhrase = "buffetings";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "buffetings";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -373,9 +373,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("with WAPBGD/-S for wanderings", () => {
-      let wordOrPhrase = "wanderings";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "wanderings";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -389,10 +389,10 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "as"', () => {
-      let wordOrPhrase = "as";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForAs: LookupDictWithNamespacedDicts = new Map([
+      const wordOrPhrase = "as";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
+      const globalLookupDictionaryForAs: LookupDictWithNamespacedDicts = new Map([
         [
           "as",
           [
@@ -419,10 +419,10 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "rest"', () => {
-      let wordOrPhrase = "rest";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForRest: LookupDictWithNamespacedDicts =
+      const wordOrPhrase = "rest";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
+      const globalLookupDictionaryForRest: LookupDictWithNamespacedDicts =
         new Map([
           [
             "rest",
@@ -446,10 +446,10 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "into"', () => {
-      let wordOrPhrase = "into";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForInto: LookupDictWithNamespacedDicts =
+      const wordOrPhrase = "into";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
+      const globalLookupDictionaryForInto: LookupDictWithNamespacedDicts =
         new Map([
           [
             "into",
@@ -475,10 +475,10 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "get"', () => {
-      let wordOrPhrase = "get";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForGet: LookupDictWithNamespacedDicts = new Map(
+      const wordOrPhrase = "get";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
+      const globalLookupDictionaryForGet: LookupDictWithNamespacedDicts = new Map(
         [
           [
             "get",
@@ -502,9 +502,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "a"', () => {
-      let wordOrPhrase = "a";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "a";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -518,9 +518,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "A"', () => {
-      let wordOrPhrase = "A";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "A";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -534,9 +534,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "i"', () => {
-      let wordOrPhrase = "i";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "i";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -550,9 +550,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "I"', () => {
-      let wordOrPhrase = "I";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "I";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -566,10 +566,10 @@ describe("choose outline for phrase", () => {
     });
 
     it('shows the outline for the word "trust"', () => {
-      let wordOrPhrase = "trust";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForSituation: LookupDictWithNamespacedDicts =
+      const wordOrPhrase = "trust";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
+      const globalLookupDictionaryForSituation: LookupDictWithNamespacedDicts =
         new Map([
           [
             "trust",
@@ -595,9 +595,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("shows actual suffix stroke for maiden", () => {
-      let wordOrPhrase = "maiden";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "maiden";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -611,9 +611,9 @@ describe("choose outline for phrase", () => {
     });
 
     it("returns number strokes", () => {
-      let wordOrPhrase = "0";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "0";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -630,10 +630,10 @@ describe("choose outline for phrase", () => {
   // FIXME: these probably shouldn't be so unstable
   describe("dictionaries in different orders", () => {
     it("returns outline for lovers, preferring O", () => {
-      let wordOrPhrase = "lovers";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryWithHROFRSfirst: LookupDictWithNamespacedDicts =
+      const wordOrPhrase = "lovers";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
+      const globalLookupDictionaryWithHROFRSfirst: LookupDictWithNamespacedDicts =
         new Map([
           [
             "lovers",
@@ -656,10 +656,10 @@ describe("choose outline for phrase", () => {
     });
 
     it("returns outline for lovers, preferring U", () => {
-      let wordOrPhrase = "lovers";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryWithHRUFRSfirst: LookupDictWithNamespacedDicts =
+      const wordOrPhrase = "lovers";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
+      const globalLookupDictionaryWithHRUFRSfirst: LookupDictWithNamespacedDicts =
         new Map([
           [
             "lovers",
@@ -709,9 +709,9 @@ describe("choose outline for phrase", () => {
 
   describe("returns outline string with standard affixes", () => {
     it.skip('showing "TRAFL/HREUPBG" for "travelling" given "/HREUPBG": "ling"', () => {
-      let wordOrPhrase = "travelling";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "travelling";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
       // let globalLookupDictionary = new Map([
       //   ["{^ling}", [["HREUPBG", "typey-type.json"]]],
       //   ["travel", [["TRAFL", "typey-type.json"]]],
@@ -736,9 +736,9 @@ describe("choose outline for phrase", () => {
 
   describe("returns outlines for words with apostrophes", () => {
     it('showing "OP/TOPL/TREUFT/AES" for "optometrist\'s"', () => {
-      let wordOrPhrase = "optometrist's";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "optometrist's";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -754,9 +754,9 @@ describe("choose outline for phrase", () => {
 
   describe("returns outline string with custom affixes", () => {
     it.skip('showing "TRAFL/*LG" for "travelling" given "/*LG": "ling"', () => {
-      let wordOrPhrase = "travelling";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "travelling";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
       // let globalLookupDictionary = new Map([
       //   ["{^ling}", [["*LG", "dict-en-AU-vocab.json"]]],
       //   ["travel", [["TRAFL", "typey-type.json"]]],
@@ -786,9 +786,9 @@ describe("choose outline for phrase", () => {
     // });
 
     it('with orthography rule to replace "e" with "ing"', () => {
-      let wordOrPhrase = "narrating";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "narrating";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -802,9 +802,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('with orthography rule to find stroke after replacing "e" with "ing"', () => {
-      let wordOrPhrase = "seething";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "seething";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -818,9 +818,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('with a mistyped orthography rule to find stroke by appending "ing" to word otherwise ending in "e"', () => {
-      let wordOrPhrase = "seetheing";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "seetheing";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -834,9 +834,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('with orthography rule to replace "e" with "ing" where "eing" ending is also a word', () => {
-      let wordOrPhrase = "binging";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "binging";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -850,9 +850,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('with orthography rule to append "eing" where replacing "e" with "ing" is also a word', () => {
-      let wordOrPhrase = "bingeing";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "bingeing";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -866,9 +866,9 @@ describe("choose outline for phrase", () => {
     });
 
     it('with orthography rule to replace "e" with "ing"', () => {
-      let wordOrPhrase = "lodging";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "lodging";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(
@@ -882,9 +882,9 @@ describe("choose outline for phrase", () => {
     });
 
     it.skip('with orthography rule to replace "e" with "ing" and append an "s" using multiple suffixes', () => {
-      let wordOrPhrase = "lodgings";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+      const wordOrPhrase = "lodgings";
+      const chosenStroke = "";
+      const strokeLookupAttempts = 0;
 
       expect(
         chooseOutlineForPhrase(

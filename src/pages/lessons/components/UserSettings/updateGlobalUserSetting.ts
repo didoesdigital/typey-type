@@ -101,7 +101,7 @@ export function useDismissBackupBanner() {
   return () => {
     setState(Date.now());
 
-    let labelString = "Dismiss";
+    const labelString = "Dismiss";
 
     GoogleAnalytics.event({
       category: "Global user settings",

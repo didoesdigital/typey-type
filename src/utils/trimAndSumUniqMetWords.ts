@@ -1,9 +1,9 @@
 import type { MetWords } from "../types";
 
 function trimAndSumUniqMetWords(metWords: MetWords) {
-  let mungedUniqWords: { [key: string]: number } = {};
+  const mungedUniqWords: { [key: string]: number } = {};
   for (const [metWord, timesSeen] of Object.entries(metWords)) {
-    let trimmedWord = metWord.trim();
+    const trimmedWord = metWord.trim();
     if (mungedUniqWords[trimmedWord]) {
       mungedUniqWords[trimmedWord] += timesSeen;
     } else {

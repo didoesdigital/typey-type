@@ -111,7 +111,7 @@ const applyQueryParamsToUserSettings = (
         // @ts-expect-error TS(2345) FIXME: Argument of type 'string | string[]' is not assign... Remove this comment to see the full error message
         isNormalInteger(paramVal ?? "")
       ) {
-        let paramValNumber = Number(paramVal);
+        const paramValNumber = Number(paramVal);
         newSettings[param] = paramValNumber;
       }
     }

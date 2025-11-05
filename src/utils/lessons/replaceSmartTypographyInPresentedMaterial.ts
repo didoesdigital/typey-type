@@ -6,7 +6,7 @@ function replaceSmartTypographyInPresentedMaterial(
   userSettings: Pick<UserSettings, "simpleTypography">
 ) {
   if (userSettings.simpleTypography) {
-    let presentedMaterialLength = presentedMaterial.length;
+    const presentedMaterialLength = presentedMaterial.length;
     for (let i = 0; i < presentedMaterialLength; i++) {
 
       // dashes: em dash, en dash, non-breaking hyphen, mongolian soft hyphen, double hyphen

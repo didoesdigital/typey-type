@@ -154,8 +154,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   const revisionMode = false;
 
   describe('when spaceOff ignores spaces and new words selected', () => {
-    let metWords = { " the":1, " of":1, " I":1, " be spoke":1, " bespoke":1, "the ":1, "of ":1, "I ":1, "be spoke ":1, "bespoke ":1, "the":1, "of":1, "I":1, "be spoke":1, "bespoke":1, "bes poke":1, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":1, " of":1, " I":1, " be spoke":1, " bespoke":1, "the ":1, "of ":1, "I ":1, "be spoke ":1, "bespoke ":1, "the":1, "of":1, "I":1, "be spoke":1, "bespoke":1, "bes poke":1, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceOff",
       newWords: true,
       seenWords: false,
@@ -171,8 +171,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceOff ignores spaces and seen words selected', () => {
-    let metWords = { " the":0, " of":1, " I":0, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":0, "be spoke ":0, "bespoke ":0, "the":0, "of":0, "I":1, "be spoke":0, "bespoke":0, "bes poke":1, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":0, " of":1, " I":0, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":0, "be spoke ":0, "bespoke ":0, "the":0, "of":0, "I":1, "be spoke":0, "bespoke":0, "bes poke":1, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceOff",
       newWords: false,
       seenWords: true,
@@ -191,8 +191,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceOff ignores spaces and memorised words selected', () => {
-    let metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceOff",
       newWords: false,
       seenWords: false,
@@ -212,8 +212,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceOff ignores spaces and ALL words selected', () => {
-    let metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceOff",
       newWords: true,
       seenWords: true,
@@ -234,8 +234,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceExact ignores spaces and new words selected', () => {
-    let metWords = { " the":1, " of":1, " I":30, " be spoke":1, " bespoke":1, "the ":1, "of ":1, "I ":30, "be spoke ":1, "bespoke ":1, "the":0, "of":1, "I":0, "be spoke":0, "bespoke":1, "bes poke":1, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":1, " of":1, " I":30, " be spoke":1, " bespoke":1, "the ":1, "of ":1, "I ":30, "be spoke ":1, "bespoke ":1, "the":0, "of":1, "I":0, "be spoke":0, "bespoke":1, "bes poke":1, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceExact",
       newWords: true,
       seenWords: false,
@@ -251,8 +251,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceExact ignores spaces and seen words selected', () => {
-    let metWords = { " the":0, " of":1, " I":0, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":0, "be spoke ":0, "bespoke ":0, "the":0, "of":0, "I":1, "be spoke":0, "bespoke":0, "bes poke":1, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":0, " of":1, " I":0, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":0, "be spoke ":0, "bespoke ":0, "the":0, "of":0, "I":1, "be spoke":0, "bespoke":0, "bes poke":1, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceExact",
       newWords: false,
       seenWords: true,
@@ -269,8 +269,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceExact ignores spaces and memorised words selected', () => {
-    let metWords = { " the":30, " of":1, " I":10, " be spoke":29, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":29, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":1, "bes poke":30, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":30, " of":1, " I":10, " be spoke":29, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":29, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":1, "bes poke":30, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceExact",
       newWords: false,
       seenWords: false,
@@ -290,8 +290,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceExact ignores spaces and ALL words selected', () => {
-    let metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceExact",
       newWords: true,
       seenWords: true,
@@ -312,8 +312,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceBeforeOutput ignores spaces and new words selected', () => {
-    let metWords = { " the":1, " of":1, " I":1, " be spoke":1, " bespoke":1, "the ":1, "of ":1, "I ":1, "be spoke ":1, "bespoke ":1, "the":1, "of":1, "I":1, "be spoke":1, "bespoke":1, "bes poke":1, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":1, " of":1, " I":1, " be spoke":1, " bespoke":1, "the ":1, "of ":1, "I ":1, "be spoke ":1, "bespoke ":1, "the":1, "of":1, "I":1, "be spoke":1, "bespoke":1, "bes poke":1, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceBeforeOutput",
       newWords: true,
       seenWords: false,
@@ -329,8 +329,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceBeforeOutput ignores spaces and seen words selected', () => {
-    let metWords = { " the":0, " of":1, " I":0, " be spoke":1, " bespoke":0, "the ":0, "of ":1, "I ":0, "be spoke ":0, "bespoke ":0, "the":0, "of":0, "I":1, "be spoke":0, "bespoke":0, "bes poke":1, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":0, " of":1, " I":0, " be spoke":1, " bespoke":0, "the ":0, "of ":1, "I ":0, "be spoke ":0, "bespoke ":0, "the":0, "of":0, "I":1, "be spoke":0, "bespoke":0, "bes poke":1, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceBeforeOutput",
       newWords: false,
       seenWords: true,
@@ -347,8 +347,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceBeforeOutput ignores spaces and memorised words selected', () => {
-    let metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceBeforeOutput",
       newWords: false,
       seenWords: false,
@@ -364,8 +364,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceBeforeOutput ignores spaces and ALL words selected', () => {
-    let metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceBeforeOutput",
       newWords: true,
       seenWords: true,
@@ -386,8 +386,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceAfterOutput ignores spaces and new words selected', () => {
-    let metWords = { " the":1, " of":1, " I":1, " be spoke":1, " bespoke":1, "the ":1, "of ":1, "I ":1, "be spoke ":1, "bespoke ":1, "the":1, "of":1, "I":1, "be spoke":1, "bespoke":1, "bes poke":1, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":1, " of":1, " I":1, " be spoke":1, " bespoke":1, "the ":1, "of ":1, "I ":1, "be spoke ":1, "bespoke ":1, "the":1, "of":1, "I":1, "be spoke":1, "bespoke":1, "bes poke":1, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceAfterOutput",
       newWords: true,
       seenWords: false,
@@ -403,8 +403,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceAfterOutput ignores spaces and seen words selected', () => {
-    let metWords = { " the":0, " of":1, " I":0, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":0, "be spoke ":0, "bespoke ":0, "the":0, "of":0, "I":1, "be spoke":0, "bespoke":0, "bes poke":1, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":0, " of":1, " I":0, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":0, "be spoke ":0, "bespoke ":0, "the":0, "of":0, "I":1, "be spoke":0, "bespoke":0, "bes poke":1, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceAfterOutput",
       newWords: false,
       seenWords: true,
@@ -420,8 +420,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceAfterOutput ignores spaces and memorised words selected', () => {
-    let metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceAfterOutput",
       newWords: false,
       seenWords: false,
@@ -436,8 +436,8 @@ describe('filterByFamiliarity with different spacing settings', () => {
   });
 
   describe('when spaceAfterOutput ignores spaces and ALL words selected', () => {
-    let metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
-    let userSettings: UserSettings = {
+    const metWords = { " the":30, " of":1, " I":10, " be spoke":0, " bespoke":0, "the ":0, "of ":1, "I ":10, "be spoke ":0, "bespoke ":0, "the":0, "of":30, "I":10, "be spoke":0, "bespoke":0, "bes poke":30, };
+    const userSettings: UserSettings = {
       spacePlacement: "spaceAfterOutput",
       newWords: true,
       seenWords: true,

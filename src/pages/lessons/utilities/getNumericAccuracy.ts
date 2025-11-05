@@ -18,7 +18,7 @@ const getNumericAccuracy = (
       // this should never happen because first `if` code path handles zero state
       accuracyPercent = 100.0;
     }
-    let accuracyPercentRoundedToTwoDecimalPlaces =
+    const accuracyPercentRoundedToTwoDecimalPlaces =
       Math.floor(accuracyPercent * 100) / 100;
     numericAccuracy = accuracyPercentRoundedToTwoDecimalPlaces;
   } else if (totalNumberOfHintedWords >= 1) {

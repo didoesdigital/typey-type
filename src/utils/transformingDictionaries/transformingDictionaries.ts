@@ -11,13 +11,13 @@ function generateListOfWordsAndStrokes(
   globalLookupDictionary: LookupDictWithNamespacedDicts
 ) {
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
-  let sourceAndPresentedMaterial = [];
+  const sourceAndPresentedMaterial = [];
 
   for (let i = 0; i < wordList.length; i++) {
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
-    let wordOrPhraseMaterial = wordList[i];
+    const wordOrPhraseMaterial = wordList[i];
 
-    let strokes = createStrokeHintForPhrase(
+    const strokes = createStrokeHintForPhrase(
       wordOrPhraseMaterial,
       globalLookupDictionary
     );
@@ -58,11 +58,11 @@ function addOutlinesToWordsInCombinedDict(
   dictName: DictName,
   outlinesWeHaveSeen: Set<Outline>
 ): [LookupDictWithNamespacedDicts, Set<Outline>] {
-  for (let [outline, translation] of Object.entries(dictContent)) {
-    let seen = outlinesWeHaveSeen.has(outline);
+  for (const [outline, translation] of Object.entries(dictContent)) {
+    const seen = outlinesWeHaveSeen.has(outline);
     if (!seen) {
       // current = [[PWAZ, user:dict.json], [PWA*Z, typey:typey.json]];
-      let current = combinedLookupDictionary.get(translation);
+      const current = combinedLookupDictionary.get(translation);
       if (current) {
         current.push([outline, dictName]);
         combinedLookupDictionary.set(translation, current);
@@ -79,7 +79,7 @@ function getListOfValidDictionariesAddedAndInConfig(
   dictNamesFromAddedConfig: DictName[],
   namesOfValidAddedDictionaries: DictName[]
 ) {
-  let listOfValidDictionariesAddedAndInConfig: DictName[] = [];
+  const listOfValidDictionariesAddedAndInConfig: DictName[] = [];
   const numberOfDictionariesInAddedConfig = dictNamesFromAddedConfig.length;
 
   for (let i = 0; i < numberOfDictionariesInAddedConfig; i++) {

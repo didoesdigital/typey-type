@@ -3,10 +3,10 @@ import type { LookupDictWithNamespacedDictsAndConfig } from "../types";
 
 describe("create list of strokes", () => {
   it("list of strokes and which dictionary they came from", () => {
-    let phrase = "baz";
+    const phrase = "baz";
     // Note: the type should start as LookupDictWithNamespacedDicts and finish with config
     // @ts-expect-error TS(2322) FIXME: Type 'Map<string, [string, string][]>' is not assi... Remove this comment to see the full error message
-    let dictionaryOfWordsStrokesAndSourceDictionary: LookupDictWithNamespacedDictsAndConfig =
+    const dictionaryOfWordsStrokesAndSourceDictionary: LookupDictWithNamespacedDictsAndConfig =
       new Map(
         Object.entries({
           "baz": [
@@ -22,7 +22,7 @@ describe("create list of strokes", () => {
       "user:personal.json",
     ];
 
-    let listOfStrokesAndDicts = [
+    const listOfStrokesAndDicts = [
       ["PWAZ", "personal.json", "user"],
       ["PWAZ", "code.json", "user"],
     ];

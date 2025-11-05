@@ -2,7 +2,7 @@ import mapBriefToLapwingStenoKeys from "utils/stenoLayouts/mapBriefToLapwingSten
 
 describe("map stroke to keys", () => {
   it("show no keys for empty brief", () => {
-    let brief = "";
+    const brief = "";
     expect(mapBriefToLapwingStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSKey: false,
@@ -32,7 +32,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows left-hand S for "is"', () => {
-    let brief = "S";
+    const brief = "S";
     expect(mapBriefToLapwingStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSKey: true,
@@ -62,7 +62,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show keys for dash-only brief "welcome"', () => {
-    let brief = "HR-BG";
+    const brief = "HR-BG";
     expect(mapBriefToLapwingStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSKey: false,
@@ -92,7 +92,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show nothing when given non-steno letters", () => {
-    let brief = "⌘";
+    const brief = "⌘";
     expect(mapBriefToLapwingStenoKeys(brief)).toEqual({
       numberBarKey: false,
       leftSKey: false,

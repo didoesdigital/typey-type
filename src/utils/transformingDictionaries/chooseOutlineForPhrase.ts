@@ -19,11 +19,11 @@ const chooseOutlineForPhrase = (
   precedingChar: string,
   affixList = AFFIXES.getSharedAffixes()
 ): ChooseOutlineForPhraseResult => {
-  let suffixes = affixList.suffixes;
-  let suffixesLength = suffixes.length;
-  let prefixes = affixList.prefixes;
-  let prefixesLength = prefixes.length;
-  let lookupEntry = globalLookupDictionary.get(wordOrPhrase); // "example": [["KP-PL", "plover.json"],["KP-P", "plover.json"]]
+  const suffixes = affixList.suffixes;
+  const suffixesLength = suffixes.length;
+  const prefixes = affixList.prefixes;
+  const prefixesLength = prefixes.length;
+  const lookupEntry = globalLookupDictionary.get(wordOrPhrase); // "example": [["KP-PL", "plover.json"],["KP-P", "plover.json"]]
   if (lookupEntry && lookupEntry.length > 0) {
     // Instead of discarding non-Typey entries, let's assume the first entry is Best.
     // This could be achieved removing misstrokes before we get here.
@@ -42,8 +42,8 @@ const chooseOutlineForPhrase = (
   }
 
   let spacedCapitalisationOutline = "KPA";
-  let spacedCapitalisationTranslation = "{}{-|}";
-  let spacedCapitalisationEntry = globalLookupDictionary.get(
+  const spacedCapitalisationTranslation = "{}{-|}";
+  const spacedCapitalisationEntry = globalLookupDictionary.get(
     spacedCapitalisationTranslation
   );
   if (spacedCapitalisationEntry) {
@@ -55,8 +55,8 @@ const chooseOutlineForPhrase = (
   }
 
   let unspacedCapitalisationOutline = "KPA*";
-  let unspacedCapitalisationTranslation = "{^}{-|}";
-  let unspacedCapitalisationEntry = globalLookupDictionary.get(
+  const unspacedCapitalisationTranslation = "{^}{-|}";
+  const unspacedCapitalisationEntry = globalLookupDictionary.get(
     unspacedCapitalisationTranslation
   );
   if (unspacedCapitalisationEntry) {
@@ -68,8 +68,8 @@ const chooseOutlineForPhrase = (
   }
 
   let uppercaseOutline = "*URP";
-  let uppercaseTranslation = "{<}";
-  let uppercaseEntry = globalLookupDictionary.get(uppercaseTranslation);
+  const uppercaseTranslation = "{<}";
+  const uppercaseEntry = globalLookupDictionary.get(uppercaseTranslation);
   if (uppercaseEntry) {
     uppercaseOutline = getRankedOutlineFromLookupEntry(
       uppercaseEntry,
@@ -79,8 +79,8 @@ const chooseOutlineForPhrase = (
   }
 
   let lowercaseOutline = "HRO*ER";
-  let lowercaseTranslation = "{>}";
-  let lowercaseEntry = globalLookupDictionary.get(lowercaseTranslation);
+  const lowercaseTranslation = "{>}";
+  const lowercaseEntry = globalLookupDictionary.get(lowercaseTranslation);
   if (lowercaseEntry) {
     lowercaseOutline = getRankedOutlineFromLookupEntry(
       lowercaseEntry,
@@ -90,8 +90,8 @@ const chooseOutlineForPhrase = (
   }
 
   let suppressSpaceOutline = "TK-LS";
-  let suppressSpaceTranslation = "{^^}";
-  let suppressSpaceEntry = globalLookupDictionary.get(suppressSpaceTranslation);
+  const suppressSpaceTranslation = "{^^}";
+  const suppressSpaceEntry = globalLookupDictionary.get(suppressSpaceTranslation);
   if (suppressSpaceEntry) {
     suppressSpaceOutline = getRankedOutlineFromLookupEntry(
       suppressSpaceEntry,
@@ -136,7 +136,7 @@ const chooseOutlineForPhrase = (
 
   // FIRST => first
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = wordOrPhrase.toLowerCase();
+    const modifiedWordOrPhrase = wordOrPhrase.toLowerCase();
     let lookupEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       lookupEntry = getRankedOutlineFromLookupEntry(
@@ -145,7 +145,7 @@ const chooseOutlineForPhrase = (
         affixList
       );
     }
-    let uppercasedStroke = lookupEntry;
+    const uppercasedStroke = lookupEntry;
 
     if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
       chosenStroke = uppercaseOutline + "/" + uppercasedStroke;
@@ -154,7 +154,7 @@ const chooseOutlineForPhrase = (
 
   // TUESDAY => Tuesday
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = wordOrPhrase
+    const modifiedWordOrPhrase = wordOrPhrase
       .toLowerCase()
       .replace(/(^|\s)\S/g, (l) => l.toUpperCase());
     let lookupEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
@@ -165,7 +165,7 @@ const chooseOutlineForPhrase = (
         affixList
       );
     }
-    let uppercasedStroke = lookupEntry;
+    const uppercasedStroke = lookupEntry;
 
     if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
       chosenStroke = uppercaseOutline + "/" + uppercasedStroke;
@@ -176,8 +176,8 @@ const chooseOutlineForPhrase = (
   // To find "KO*EUPBG/AES" for "King's" where "King" already has an entry
   // Must come before capitalisation step to avoid `"KEUPBG/AES": "king's"`
   if (!chosenStroke && wordOrPhrase.endsWith("'s")) {
-    let apostropheEssIndex = wordOrPhrase.indexOf("'s");
-    let mainWord = wordOrPhrase.slice(0, apostropheEssIndex);
+    const apostropheEssIndex = wordOrPhrase.indexOf("'s");
+    const mainWord = wordOrPhrase.slice(0, apostropheEssIndex);
 
     let i = 0;
     let bestApostropheEssSuffixWithSlash;
@@ -188,9 +188,9 @@ const chooseOutlineForPhrase = (
       i++;
     }
 
-    let modifiedWordOrPhrase = mainWord.toLowerCase();
+    const modifiedWordOrPhrase = mainWord.toLowerCase();
     let originalEntry: any = globalLookupDictionary.get(mainWord);
-    let modifiedEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
 
     if (
       originalEntry &&
@@ -212,7 +212,7 @@ const chooseOutlineForPhrase = (
 
   // tom => Tom
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = wordOrPhrase.replace(/(^|\s)\S/g, (l) =>
+    const modifiedWordOrPhrase = wordOrPhrase.replace(/(^|\s)\S/g, (l) =>
       l.toUpperCase()
     );
     let lookupEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
@@ -223,7 +223,7 @@ const chooseOutlineForPhrase = (
         affixList
       );
     }
-    let capitalisedStroke = lookupEntry;
+    const capitalisedStroke = lookupEntry;
 
     if (capitalisedStroke) {
       chosenStroke = lowercaseOutline + "/" + capitalisedStroke;
@@ -232,7 +232,7 @@ const chooseOutlineForPhrase = (
 
   // Heather => heather
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = wordOrPhrase.toLowerCase();
+    const modifiedWordOrPhrase = wordOrPhrase.toLowerCase();
     let lookupEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       lookupEntry = getRankedOutlineFromLookupEntry(
@@ -241,7 +241,7 @@ const chooseOutlineForPhrase = (
         affixList
       );
     }
-    let lowercasedStroke = lookupEntry;
+    const lowercasedStroke = lookupEntry;
 
     if (lowercasedStroke) {
       if (precedingChar === " " || precedingChar === "") {
@@ -256,8 +256,8 @@ const chooseOutlineForPhrase = (
   // To find "HEFPB/AES" for "Heaven's" where "Heaven" has no entry
   // NOTE: don't use .includes("'s") because it may match `'safe'` and others
   if (!chosenStroke && wordOrPhrase.endsWith("'s")) {
-    let apostropheEssIndex = wordOrPhrase.indexOf("'s");
-    let mainWord = wordOrPhrase.slice(0, apostropheEssIndex);
+    const apostropheEssIndex = wordOrPhrase.indexOf("'s");
+    const mainWord = wordOrPhrase.slice(0, apostropheEssIndex);
 
     let i = 0;
     let bestApostropheEssSuffixWithSlash;
@@ -268,7 +268,7 @@ const chooseOutlineForPhrase = (
       i++;
     }
 
-    let modifiedWordOrPhrase = mainWord.toLowerCase();
+    const modifiedWordOrPhrase = mainWord.toLowerCase();
     let lookupEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       lookupEntry = getRankedOutlineFromLookupEntry(
@@ -277,7 +277,7 @@ const chooseOutlineForPhrase = (
         affixList
       );
     }
-    let lowercasedStroke = lookupEntry;
+    const lowercasedStroke = lookupEntry;
 
     if (
       lowercasedStroke &&
@@ -303,8 +303,8 @@ const chooseOutlineForPhrase = (
   if (wordOrPhrase.includes(",")) {
     // , xxx, => {,}xxx{,}
     if (!chosenStroke) {
-      let modifiedWordOrPhrase = wordOrPhrase.replace(/, (.+),/, "{,}$1{,}");
-      let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      const modifiedWordOrPhrase = wordOrPhrase.replace(/, (.+),/, "{,}$1{,}");
+      const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) {
         chosenStroke = getRankedOutlineFromLookupEntry(
           lookupEntry,
@@ -316,8 +316,8 @@ const chooseOutlineForPhrase = (
 
     // xxx, => xxx{,}
     if (!chosenStroke) {
-      let modifiedWordOrPhrase = wordOrPhrase.replace(",", "{,}");
-      let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      const modifiedWordOrPhrase = wordOrPhrase.replace(",", "{,}");
+      const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) {
         chosenStroke = getRankedOutlineFromLookupEntry(
           lookupEntry,
@@ -330,8 +330,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {^}xxx{^}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{^}" + wordOrPhrase + "{^}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{^}" + wordOrPhrase + "{^}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -343,8 +343,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {^}xxx
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{^}" + wordOrPhrase;
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{^}" + wordOrPhrase;
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -356,8 +356,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => xxx{^}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = wordOrPhrase + "{^}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = wordOrPhrase + "{^}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -369,8 +369,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => xxx {-|}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = wordOrPhrase + " {-|}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = wordOrPhrase + " {-|}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -382,8 +382,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => xxx{-|}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = wordOrPhrase + "{-|}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = wordOrPhrase + "{-|}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -395,8 +395,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {^xxx^}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{^" + wordOrPhrase + "^}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{^" + wordOrPhrase + "^}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -409,8 +409,8 @@ const chooseOutlineForPhrase = (
   // xxx => {^xxx}
   // e.g. ' => {^'}
   if (!chosenStroke && precedingChar.length > 0 && precedingChar !== " ") {
-    let modifiedWordOrPhrase = "{^" + wordOrPhrase + "}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{^" + wordOrPhrase + "}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -422,8 +422,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {xxx^}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{" + wordOrPhrase + "^}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{" + wordOrPhrase + "^}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -435,8 +435,8 @@ const chooseOutlineForPhrase = (
 
   // 'xxx => {~|'^}xxx
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = wordOrPhrase.replace(/^'(.+)$/, "{~|'^}$1");
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = wordOrPhrase.replace(/^'(.+)$/, "{~|'^}$1");
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -448,8 +448,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {^~|xxx^}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{^~|" + wordOrPhrase + "^}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{^~|" + wordOrPhrase + "^}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -461,8 +461,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {^~|xxx}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{^~|" + wordOrPhrase + "}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{^~|" + wordOrPhrase + "}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -474,8 +474,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {~|xxx^}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{~|" + wordOrPhrase + "^}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{~|" + wordOrPhrase + "^}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -487,8 +487,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {~|xxx}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{~|" + wordOrPhrase + "}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{~|" + wordOrPhrase + "}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -500,8 +500,8 @@ const chooseOutlineForPhrase = (
 
   // xxx => {xxx}
   if (!chosenStroke) {
-    let modifiedWordOrPhrase = "{" + wordOrPhrase + "}";
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    const modifiedWordOrPhrase = "{" + wordOrPhrase + "}";
+    const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
       chosenStroke = getRankedOutlineFromLookupEntry(
         lookupEntry,
@@ -523,8 +523,8 @@ const chooseOutlineForPhrase = (
       const ingSuffixOutlineWithSlash = ingSuffixEntry
         ? ingSuffixEntry[0]
         : "/xxx";
-      let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "");
-      let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      const modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "");
+      const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) {
         chosenStroke =
           getRankedOutlineFromLookupEntry(
@@ -550,10 +550,10 @@ const chooseOutlineForPhrase = (
     while (i < prefixesLength && !chosenStroke) {
       if (wordOrPhrase.startsWith(prefixes[i][1])) {
         prefixTranslation = prefixes[i][1];
-        let regex = new RegExp("^" + escapeRegExp(prefixTranslation) + "");
-        let modifiedWordOrPhrase = wordOrPhrase.replace(regex, "");
-        let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-        let hardCodedFixForQuestionMark = !(
+        const regex = new RegExp("^" + escapeRegExp(prefixTranslation) + "");
+        const modifiedWordOrPhrase = wordOrPhrase.replace(regex, "");
+        const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+        const hardCodedFixForQuestionMark = !(
           wordOrPhrase.replace(regex, "") === "?"
         );
         if (lookupEntry && hardCodedFixForQuestionMark) {
@@ -576,9 +576,9 @@ const chooseOutlineForPhrase = (
     while (j < suffixesLength && !chosenStroke) {
       if (wordOrPhrase.endsWith(suffixes[j][1])) {
         suffixTranslation = suffixes[j][1];
-        let regex = new RegExp("" + escapeRegExp(suffixTranslation) + "$");
-        let modifiedWordOrPhrase = wordOrPhrase.replace(regex, "");
-        let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+        const regex = new RegExp("" + escapeRegExp(suffixTranslation) + "$");
+        const modifiedWordOrPhrase = wordOrPhrase.replace(regex, "");
+        const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
         if (lookupEntry) {
           chosenStroke =
             getRankedOutlineFromLookupEntry(
@@ -603,8 +603,8 @@ const chooseOutlineForPhrase = (
       const edSuffixOutlineWithSlash = edSuffixEntry
         ? edSuffixEntry[0]
         : "/xxx";
-      let modifiedWordOrPhrase = wordOrPhrase.replace(/d$/, "");
-      let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      const modifiedWordOrPhrase = wordOrPhrase.replace(/d$/, "");
+      const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) {
         chosenStroke =
           getRankedOutlineFromLookupEntry(
@@ -645,8 +645,8 @@ const chooseOutlineForPhrase = (
       const ingSuffixOutlineWithSlash = ingSuffixEntry
         ? ingSuffixEntry[0]
         : "/xxx";
-      let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "e");
-      let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      const modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "e");
+      const lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) {
         chosenStroke =
           getRankedOutlineFromLookupEntry(

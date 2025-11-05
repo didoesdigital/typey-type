@@ -76,7 +76,7 @@ const stenoKeys = [
 ] as const;
 
 function mapBriefToBrazilianPortugueseStenoKeys(brief: Outline) {
-  let keys = {
+  const keys = {
     numberBarKey: false,
     leftSKey: false,
     leftKKey: false,
@@ -103,7 +103,7 @@ function mapBriefToBrazilianPortugueseStenoKeys(brief: Outline) {
     rightZKey: false,
   };
 
-  let briefLetters = brief.split("");
+  const briefLetters = brief.split("");
 
   for (let i = 0; i < stenoOrder.length; i++) {
     if (briefLetters.length > 0) {

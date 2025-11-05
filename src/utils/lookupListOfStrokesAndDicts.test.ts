@@ -16,24 +16,24 @@ describe("lookup list of strokes and dicts with punctuation with carry capitalis
     });
   });
 
-  let lookupDictionary: LookupDictWithNamespacedDicts = new Map(
+  const lookupDictionary: LookupDictWithNamespacedDicts = new Map(
     Object.entries({
       "ago": [["AG", "typey:typey-type.json"]],
       '{~|"^}': [["KW-GS", "typey:typey-type.json"]],
       '{^~|"}': [["KR-GS", "typey:typey-type.json"]],
     })
   );
-  let config: DictionaryConfig = {
+  const config: DictionaryConfig = {
     configuration: ["typey:typey-type.json"],
   };
   lookupDictionary.configuration = config.configuration;
 
-  let globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
+  const globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
     lookupDictionary as LookupDictWithNamespacedDictsAndConfig;
 
   it("shows list of strokes and dictionary for word without whitespace", () => {
-    let phrase = "ago";
-    let listOfStrokesAndDicts = [["AG", "typey-type.json", "typey"]];
+    const phrase = "ago";
+    const listOfStrokesAndDicts = [["AG", "typey-type.json", "typey"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, phrase]
@@ -41,8 +41,8 @@ describe("lookup list of strokes and dicts with punctuation with carry capitalis
   });
 
   it("shows list of strokes and dictionary for word with preceding whitespace", () => {
-    let phrase = " ago";
-    let listOfStrokesAndDicts = [["AG", "typey-type.json", "typey"]];
+    const phrase = " ago";
+    const listOfStrokesAndDicts = [["AG", "typey-type.json", "typey"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, phrase.trimStart()]
@@ -50,8 +50,8 @@ describe("lookup list of strokes and dicts with punctuation with carry capitalis
   });
 
   it("shows list of strokes and dictionary for closing quote without whitespace", () => {
-    let phrase = '"';
-    let listOfStrokesAndDicts = [["KW-GS", "typey-type.json", "typey"]];
+    const phrase = '"';
+    const listOfStrokesAndDicts = [["KW-GS", "typey-type.json", "typey"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, '{~|"^}']
@@ -59,8 +59,8 @@ describe("lookup list of strokes and dicts with punctuation with carry capitalis
   });
 
   it("shows list of strokes and dictionary for closing quote with trailing whitespace", () => {
-    let phrase = '" ';
-    let listOfStrokesAndDicts = [["KR-GS", "typey-type.json", "typey"]];
+    const phrase = '" ';
+    const listOfStrokesAndDicts = [["KR-GS", "typey-type.json", "typey"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, '{^~|"}']
@@ -69,7 +69,7 @@ describe("lookup list of strokes and dicts with punctuation with carry capitalis
 });
 
 describe("lookup list of strokes and dicts with fingerspelling and single-letter words", () => {
-  let lookupDictionary: LookupDictWithNamespacedDicts = new Map(
+  const lookupDictionary: LookupDictWithNamespacedDicts = new Map(
     Object.entries({
       "{a^}": [
         ["AEU", "user:personal.json"],
@@ -136,8 +136,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
     lookupDictionary as LookupDictWithNamespacedDictsAndConfig;
 
   it("shows list of strokes and dictionary for fingerspelled letter “a” without whitespace", () => {
-    let phrase = "a";
-    let listOfStrokesAndDicts = [
+    const phrase = "a";
+    const listOfStrokesAndDicts = [
       ["A*", "personal.json", "user"],
       ["A*", "typey-type.json", "typey"],
     ];
@@ -148,8 +148,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for word “ a” with whitespace", () => {
-    let phrase = " a";
-    let listOfStrokesAndDicts = [
+    const phrase = " a";
+    const listOfStrokesAndDicts = [
       ["A", "personal.json", "user"],
       ["AEU", "typey-type.json", "typey"],
     ];
@@ -160,8 +160,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for word “a ” with trailing whitespace", () => {
-    let phrase = "a ";
-    let listOfStrokesAndDicts = [
+    const phrase = "a ";
+    const listOfStrokesAndDicts = [
       ["A", "personal.json", "user"],
       ["AEU", "typey-type.json", "typey"],
     ];
@@ -172,8 +172,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for fingerspelled letter “A” without whitespace", () => {
-    let phrase = "A";
-    let listOfStrokesAndDicts = [
+    const phrase = "A";
+    const listOfStrokesAndDicts = [
       ["A*P", "personal.json", "user"],
       ["A*P", "typey-type.json", "typey"],
     ];
@@ -185,8 +185,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
 
   // TODO: might be wrong expectation
   it("shows list of strokes and dictionary for word “ A” with whitespace", () => {
-    let phrase = " A";
-    let listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
+    const phrase = " A";
+    const listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
     // TODO: make this possible:
     // let listOfStrokesAndDicts = [
     //   ["KPA/A", "personal.json", "user"],
@@ -199,8 +199,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for fingerspelled letter “i” without whitespace", () => {
-    let phrase = "i";
-    let listOfStrokesAndDicts = [
+    const phrase = "i";
+    const listOfStrokesAndDicts = [
       ["EUFPLT", "personal.json", "user"],
       ["EUP", "typey-type.json", "typey"],
     ];
@@ -211,8 +211,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for word “ i” with whitespace", () => {
-    let phrase = " i";
-    let listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
+    const phrase = " i";
+    const listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
     // TODO: make this possible:
     // let listOfStrokesAndDicts = [
     //   ["*EU", "personal.json", "user"],
@@ -225,8 +225,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for fingerspelled letter “I” without whitespace", () => {
-    let phrase = "I";
-    let listOfStrokesAndDicts = [
+    const phrase = "I";
+    const listOfStrokesAndDicts = [
       ["*EUFPLT", "personal.json", "user"],
       ["*EUP", "typey-type.json", "typey"],
     ];
@@ -237,8 +237,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for word “ I” with whitespace", () => {
-    let phrase = " I";
-    let listOfStrokesAndDicts = [
+    const phrase = " I";
+    const listOfStrokesAndDicts = [
       ["EU", "personal.json", "user"],
       ["EU", "typey-type.json", "typey"],
     ];
@@ -249,8 +249,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for fingerspelled letter “x” without whitespace", () => {
-    let phrase = "x";
-    let listOfStrokesAndDicts = [
+    const phrase = "x";
+    const listOfStrokesAndDicts = [
       ["BGS", "personal.json", "user"],
       ["KP-FPLT", "personal.json", "user"],
       ["KP*", "typey-type.json", "typey"],
@@ -262,8 +262,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for word “ x” with whitespace", () => {
-    let phrase = " x";
-    let listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
+    const phrase = " x";
+    const listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
     // TODO: make this possible:
     // let listOfStrokesAndDicts = [
     //   [KP-FPLT", "personal.json", "user"],
@@ -277,8 +277,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
 
   // TODO: might be wrong expectation
   it("shows list of strokes and dictionary for word “&” unspaced", () => {
-    let phrase = "&";
-    let listOfStrokesAndDicts = [["SP-PBD", "plover.json", "plover"]];
+    const phrase = "&";
+    const listOfStrokesAndDicts = [["SP-PBD", "plover.json", "plover"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, phrase]
@@ -287,8 +287,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
 
   // TODO: might be wrong expectation
   it("shows list of strokes and dictionary for word “&&” unspaced", () => {
-    let phrase = "&&";
-    let listOfStrokesAndDicts = [["SPHAPBD/SPHAPBD", "plover.json", "plover"]];
+    const phrase = "&&";
+    const listOfStrokesAndDicts = [["SPHAPBD/SPHAPBD", "plover.json", "plover"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, phrase]
@@ -296,8 +296,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for word “ &” with leading whitespace", () => {
-    let phrase = " &";
-    let listOfStrokesAndDicts = [["SP-PBD", "plover.json", "plover"]];
+    const phrase = " &";
+    const listOfStrokesAndDicts = [["SP-PBD", "plover.json", "plover"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, phrase.trimStart()]
@@ -305,8 +305,8 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   });
 
   it("shows list of strokes and dictionary for word “ &&” with leading whitespace", () => {
-    let phrase = " &&";
-    let listOfStrokesAndDicts = [["SPHAPBD/SPHAPBD", "plover.json", "plover"]];
+    const phrase = " &&";
+    const listOfStrokesAndDicts = [["SPHAPBD/SPHAPBD", "plover.json", "plover"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, phrase.trimStart()]
@@ -315,7 +315,7 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
 });
 
 describe("lookup list of strokes and dicts with capitalization dictionary formatting", () => {
-  let lookupDictionary: LookupDictWithNamespacedDicts = new Map(
+  const lookupDictionary: LookupDictWithNamespacedDicts = new Map(
     Object.entries({
       "Mx.{-|}": [["PH-BGS", "typey:typey-type-full.json"]],
       "{~|'^}til": [["T*EUL", "typey:typey-type-full.json"]],
@@ -326,8 +326,8 @@ describe("lookup list of strokes and dicts with capitalization dictionary format
     lookupDictionary as LookupDictWithNamespacedDictsAndConfig;
 
   it("shows list of strokes and dictionary for “Mx.” that use capitalize next word dictionary formatting", () => {
-    let phrase = "Mx.";
-    let listOfStrokesAndDicts = [["PH-BGS", "typey-type-full.json", "typey"]];
+    const phrase = "Mx.";
+    const listOfStrokesAndDicts = [["PH-BGS", "typey-type-full.json", "typey"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, "Mx.{-|}"]
@@ -335,8 +335,8 @@ describe("lookup list of strokes and dicts with capitalization dictionary format
   });
 
   it("shows list of strokes and dictionary for “'til” that use carry capitalization dictionary formatting", () => {
-    let phrase = "'til";
-    let listOfStrokesAndDicts = [["T*EUL", "typey-type-full.json", "typey"]];
+    const phrase = "'til";
+    const listOfStrokesAndDicts = [["T*EUL", "typey-type-full.json", "typey"]];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, "{~|'^}til"]

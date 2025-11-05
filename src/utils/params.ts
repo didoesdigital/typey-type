@@ -49,7 +49,7 @@ const practice: StudyTypeParams = {
 };
 
 export function createParamString(studyTypeObject: StudyTypeParams) {
-  let paramList = [];
+  const paramList = [];
   for (const [key, value] of Object.entries(studyTypeObject)) {
     let shortStringValue: string | StudyTypeParams[keyof StudyTypeParams] =
       value;

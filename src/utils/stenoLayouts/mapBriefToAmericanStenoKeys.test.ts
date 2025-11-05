@@ -2,7 +2,7 @@ import mapBriefToAmericanStenoKeys from "./mapBriefToAmericanStenoKeys";
 
 describe("map stroke to keys", () => {
   it("show no keys for empty brief", () => {
-    let brief = "";
+    const brief = "";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -33,7 +33,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows left-hand T for "it"', () => {
-    let brief = "T";
+    const brief = "T";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -64,7 +64,7 @@ describe("map stroke to keys", () => {
   });
 
   it('shows right-hand -T for "the"', () => {
-    let brief = "-T";
+    const brief = "-T";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -95,7 +95,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show star key for brief with star "eyes"', () => {
-    let brief = "AO*EUS";
+    const brief = "AO*EUS";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -126,7 +126,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show keys for dash-only brief "welcome"', () => {
-    let brief = "HR-BG";
+    const brief = "HR-BG";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -157,7 +157,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show keys for left-side only brief "consider"', () => {
-    let brief = "KR";
+    const brief = "KR";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -188,7 +188,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show keys for right-side only brief "be"', () => {
-    let brief = "-B";
+    const brief = "-B";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -219,7 +219,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show 5 keys for "same" brief', () => {
-    let brief = "SAEUPL";
+    const brief = "SAEUPL";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: true,
@@ -250,7 +250,7 @@ describe("map stroke to keys", () => {
   });
 
   it('show 1 key for "M" brief', () => {
-    let brief = "PH*P";
+    const brief = "PH*P";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -281,7 +281,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show nothing when given non-steno letters", () => {
-    let brief = "⌘";
+    const brief = "⌘";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
       leftSUpper: false,
@@ -312,7 +312,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show correct brief containing numbers and letters for 70s", () => {
-    let brief = "0EU7S";
+    const brief = "0EU7S";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: true,
       leftSUpper: false,
@@ -343,7 +343,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show correct brief containing numbers for 90", () => {
-    let brief = "0EU9";
+    const brief = "0EU9";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: true,
       leftSUpper: false,
@@ -374,7 +374,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show correct brief containing duplicated numbers like 11", () => {
-    let brief = "1-D";
+    const brief = "1-D";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: true,
       leftSUpper: true,
@@ -405,7 +405,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show # and EU for out-of-steno-order numbers using hash and letter keys", () => {
-    let brief = "#TPEU"; // 32
+    const brief = "#TPEU"; // 32
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: true,
       leftSUpper: false,
@@ -436,7 +436,7 @@ describe("map stroke to keys", () => {
   });
 
   it("show number bar for #AOEU to write 05 using hash and letter keys", () => {
-    let brief = "#AOEU";
+    const brief = "#AOEU";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: true,
       leftSUpper: false,

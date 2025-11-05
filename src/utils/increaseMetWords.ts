@@ -4,7 +4,7 @@ function increaseMetWords(
   totalNumberOfLowExposuresSeen: number,
   totalNumberOfRetainedWords: number
 ) {
-  let newState: {
+  const newState: {
     totalNumberOfNewWordsMet?: number;
     totalNumberOfLowExposuresSeen?: number;
     totalNumberOfRetainedWords?: number;

@@ -72,7 +72,7 @@ const palantypeKeys = [
 ];
 
 function mapBriefToPalantypeKeys(brief: Outline) {
-  let keys = {
+  const keys = {
     leftS: false,
     leftC: false,
     leftP: false,
@@ -107,7 +107,7 @@ function mapBriefToPalantypeKeys(brief: Outline) {
     rightH: false,
   };
 
-  let briefLetters = brief.split("");
+  const briefLetters = brief.split("");
 
   for (let i = 0; i < palantypeOrder.length; i++) {
     if (briefLetters.length > 0) {

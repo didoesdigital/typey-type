@@ -6,7 +6,7 @@ describe('return a string representing stroke', () => {
     it('should return stroke string without dash', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.S);
-      let stenoBrief = 'S';
+      const stenoBrief = 'S';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -16,7 +16,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.E);
       stenoStroke = stenoStroke.set(strokeBits.F);
-      let stenoBrief = 'EF';
+      const stenoBrief = 'EF';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -26,7 +26,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.E);
       stenoStroke = stenoStroke.set(strokeBits.L);
-      let stenoBrief = 'EL';
+      const stenoBrief = 'EL';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -37,7 +37,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.E);
       stenoStroke = stenoStroke.set(strokeBits.F);
       stenoStroke = stenoStroke.set(strokeBits.RR);
-      let stenoBrief = 'EFR';
+      const stenoBrief = 'EFR';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -47,7 +47,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.U);
       stenoStroke = stenoStroke.set(strokeBits.RS);
-      let stenoBrief = 'US';
+      const stenoBrief = 'US';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -56,7 +56,7 @@ describe('return a string representing stroke', () => {
     it('should return stroke string with dash', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.F);
-      let stenoBrief = '-F';
+      const stenoBrief = '-F';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -66,7 +66,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.F);
       stenoStroke = stenoStroke.set(strokeBits.RR);
-      let stenoBrief = '-FR';
+      const stenoBrief = '-FR';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -78,7 +78,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.RP);
       stenoStroke = stenoStroke.set(strokeBits.L);
       stenoStroke = stenoStroke.set(strokeBits.RT);
-      let stenoBrief = '-FPLT';
+      const stenoBrief = '-FPLT';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -87,7 +87,7 @@ describe('return a string representing stroke', () => {
     it('should return stroke string with dash', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.B);
-      let stenoBrief = '-B';
+      const stenoBrief = '-B';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -96,7 +96,7 @@ describe('return a string representing stroke', () => {
     it('should return stroke string with dash', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.RT);
-      let stenoBrief = '-T';
+      const stenoBrief = '-T';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -108,7 +108,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.U);
       stenoStroke = stenoStroke.set(strokeBits.STAR);
       stenoStroke = stenoStroke.set(strokeBits.RS);
-      let stenoBrief = '*US';
+      const stenoBrief = '*US';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -119,7 +119,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.A);
       stenoStroke = stenoStroke.set(strokeBits.STAR);
       stenoStroke = stenoStroke.set(strokeBits.RS);
-      let stenoBrief = 'A*S';
+      const stenoBrief = 'A*S';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -129,7 +129,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.STAR);
       stenoStroke = stenoStroke.set(strokeBits.F);
-      let stenoBrief = '*F';
+      const stenoBrief = '*F';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -139,7 +139,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.STAR);
       stenoStroke = stenoStroke.set(strokeBits.B);
-      let stenoBrief = '*B';
+      const stenoBrief = '*B';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -149,7 +149,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.STAR);
       stenoStroke = stenoStroke.set(strokeBits.RT);
-      let stenoBrief = '*T';
+      const stenoBrief = '*T';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -160,7 +160,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.W);
       stenoStroke = stenoStroke.set(strokeBits.A);
       stenoStroke = stenoStroke.set(strokeBits.RS);
-      let stenoBrief = 'WAS';
+      const stenoBrief = 'WAS';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -170,7 +170,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.S);
       stenoStroke = stenoStroke.set(strokeBits.RT);
-      let stenoBrief = 'S-T';
+      const stenoBrief = 'S-T';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -181,7 +181,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.W);
       stenoStroke = stenoStroke.set(strokeBits.R);
       stenoStroke = stenoStroke.set(strokeBits.RR);
-      let stenoBrief = 'WR-R';
+      const stenoBrief = 'WR-R';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -193,7 +193,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.L);
       stenoStroke = stenoStroke.set(strokeBits.RT);
       stenoStroke = stenoStroke.set(strokeBits.RS);
-      let stenoBrief = 'H-LTS';
+      const stenoBrief = 'H-LTS';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -204,7 +204,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.S);
       stenoStroke = stenoStroke.set(strokeBits.STAR);
       stenoStroke = stenoStroke.set(strokeBits.RT);
-      let stenoBrief = 'S*T';
+      const stenoBrief = 'S*T';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -217,7 +217,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.A);
       stenoStroke = stenoStroke.set(strokeBits.STAR);
       stenoStroke = stenoStroke.set(strokeBits.RT);
-      let stenoBrief = 'WRA*T';
+      const stenoBrief = 'WRA*T';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -228,7 +228,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.H);
       stenoStroke = stenoStroke.set(strokeBits.R);
       stenoStroke = stenoStroke.set(strokeBits.F);
-      let stenoBrief = 'HR-F';
+      const stenoBrief = 'HR-F';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -240,7 +240,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.R);
       stenoStroke = stenoStroke.set(strokeBits.F);
       stenoStroke = stenoStroke.set(strokeBits.RP);
-      let stenoBrief = 'HR-FP';
+      const stenoBrief = 'HR-FP';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -253,7 +253,7 @@ describe('return a string representing stroke', () => {
       stenoStroke = stenoStroke.set(strokeBits.F);
       stenoStroke = stenoStroke.set(strokeBits.RR);
       stenoStroke = stenoStroke.set(strokeBits.D);
-      let stenoBrief = '*EFRD';
+      const stenoBrief = '*EFRD';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -263,7 +263,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.HASH);
       stenoStroke = stenoStroke.set(strokeBits.Z);
-      let stenoBrief = '#-Z';
+      const stenoBrief = '#-Z';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -273,7 +273,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.HASH);
       stenoStroke = stenoStroke.set(strokeBits.RP);
-      let stenoBrief = '#-P';
+      const stenoBrief = '#-P';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });
@@ -283,7 +283,7 @@ describe('return a string representing stroke', () => {
       let stenoStroke = new Stroke();
       stenoStroke = stenoStroke.set(strokeBits.HASH);
       stenoStroke = stenoStroke.set(strokeBits.P);
-      let stenoBrief = '#P';
+      const stenoBrief = '#P';
       expect(stenoStroke.toString()).toEqual(stenoBrief);
     });
   });

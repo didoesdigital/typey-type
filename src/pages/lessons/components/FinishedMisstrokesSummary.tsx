@@ -37,7 +37,7 @@ const FinishedMisstrokesSummary = ({
   const setRevisionMode = useSetAtom(revisionModeState);
   const handleReviseClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     let revisionMode = true;
-    let newRevisionMaterial: SourceMaterialItem[] = [];
+    const newRevisionMaterial: SourceMaterialItem[] = [];
     for (let i = 0; i < currentLessonStrokes.length; i++) {
       if (currentLessonStrokes[i].checked === true) {
         const materialItem: SourceMaterialItem = {

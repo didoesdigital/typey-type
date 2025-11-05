@@ -16,21 +16,21 @@ export function parseLesson(
   lessonText: LessonText,
   path: LessonPathWithBasenameAndFilename
 ) {
-  let lines = lessonText.split("\n");
-  let lessonTitle = lines[0];
-  let lessonSubtitle = lines[1];
-  let sourceMaterial = [];
-  let settings: LessonSettings & { locales?: string } = { ignoredChars: "" };
+  const lines = lessonText.split("\n");
+  const lessonTitle = lines[0];
+  const lessonSubtitle = lines[1];
+  const sourceMaterial = [];
+  const settings: LessonSettings & { locales?: string } = { ignoredChars: "" };
 
   for (let i = 2; i < lines.length; i++) {
-    let line = lines[i];
-    let firstChar = line.charAt(0);
+    const line = lines[i];
+    const firstChar = line.charAt(0);
 
     // If it starts with a single quote, it's lesson material:
     if (firstChar === "'") {
-      let phraseAndStroke = line.split("': ");
-      let phrase = phraseAndStroke[0].substring(1, phraseAndStroke[0].length);
-      let stroke = phraseAndStroke[1];
+      const phraseAndStroke = line.split("': ");
+      const phrase = phraseAndStroke[0].substring(1, phraseAndStroke[0].length);
+      const stroke = phraseAndStroke[1];
       sourceMaterial.push({ phrase: phrase, stroke: stroke });
     }
     // If it doesn't start with a single quote and does include equals, it's a setting:

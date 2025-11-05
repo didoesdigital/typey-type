@@ -21,14 +21,14 @@ describe("create a global lookup dictionary", () => {
   });
 
   it("returns combined lookup Map of words with strokes and their source dictionaries", () => {
-    let personalDicts: PersonalDictionaryNameAndContents[] = [
+    const personalDicts: PersonalDictionaryNameAndContents[] = [
       ["personal.json", { "TAO*EUPT": "Typey Type" }],
     ];
-    let typeyDict = {
+    const typeyDict = {
       "SKP": "and",
       "APBD": "and",
     };
-    let expectedGlobalDict = new Map([
+    const expectedGlobalDict = new Map([
       ["Typey Type", [["TAO*EUPT", "user:personal.json"]]],
       [
         "and",

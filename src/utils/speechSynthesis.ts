@@ -65,7 +65,7 @@ export function synthesizeSpeech(
         voices = synth?.getVoices() ?? [];
       }
 
-      let utterThis = new SpeechSynthesisUtterance(utteranceText);
+      const utterThis = new SpeechSynthesisUtterance(utteranceText);
       // Debugging:
       // utterThis.onerror = function (event) {
       //   console.warn(`${event.error}: ${this.text}`);

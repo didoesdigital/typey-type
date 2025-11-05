@@ -8,7 +8,7 @@ import {
 
 describe('chooseFlashcardsToShow', () => {
   describe('for words you have never seen when revising recent mistakes', () => {
-    let state = {
+    const state = {
       sourceMaterial: [ { phrase: 'the', stroke: '-T' }, { phrase: 'it', stroke: 'T' }, { phrase: 'and', stroke: 'SKP' }, { phrase: 'a', stroke: 'AEU' }, ],
       flashcardsMetWords: { "the": { phrase: 'the', stroke: '-T', rung: 2 }, "it": { phrase: 'it', stroke: 'T', rung: 1 }, "and": { phrase: 'and', stroke: 'SKP', rung: 0 }, }
     };
@@ -35,7 +35,7 @@ describe('chooseFlashcardsToShow', () => {
   });
 
   describe('for words you have memorised when you only want to see 1 flashcard', () => {
-    let state = {
+    const state = {
       sourceMaterial: [ { phrase: 'the', stroke: '-T' }, { phrase: 'it', stroke: 'T' }, { phrase: 'and', stroke: 'SKP' }, { phrase: 'a', stroke: 'AEU' }, ],
       flashcardsMetWords: { "the": { phrase: 'the', stroke: '-T', rung: 2 }, "it": { phrase: 'it', stroke: 'T', rung: 1 }, "and": { phrase: 'and', stroke: 'SKP', rung: 0 }, }
     };
@@ -54,7 +54,7 @@ describe('chooseFlashcardsToShow', () => {
   });
 
   describe('for words you have never seen when revising recent mistakes', () => {
-    let state = {
+    const state = {
       sourceMaterial: [ { phrase: 'the', stroke: '-T' }, { phrase: 'it', stroke: 'T' }, { phrase: 'and', stroke: 'SKP' }, { phrase: 'a', stroke: 'AEU' }, ],
       flashcardsMetWords: { "the": { phrase: 'the', stroke: '-T', rung: 2 }, "it": { phrase: 'it', stroke: 'T', rung: 1 }, "and": { phrase: 'and', stroke: 'SKP', rung: 0 }, }
     };
@@ -77,7 +77,7 @@ describe('chooseFlashcardsToShow', () => {
   });
 
   describe('for words you have never seen when revising old, memorised words', () => {
-    let state = {
+    const state = {
       sourceMaterial: [ { phrase: 'the', stroke: '-T' }, { phrase: 'it', stroke: 'T' }, { phrase: 'and', stroke: 'SKP' }, { phrase: 'a', stroke: 'AEU' }, ],
       flashcardsMetWords: { "the": { phrase: 'the', stroke: '-T', rung: 2 }, "it": { phrase: 'it', stroke: 'T', rung: 1 }, "and": { phrase: 'and', stroke: 'SKP', rung: 0 }, }
     };
@@ -109,7 +109,7 @@ describe('chooseFlashcardsToShow', () => {
 });
 
 describe('getCurrentSlideContentAndType', () => {
-  let flashcards = [
+  const flashcards = [
     {
       phrase: 'it',
       stroke: 'T'
@@ -141,32 +141,32 @@ describe('getCurrentSlideContentAndType', () => {
 
 describe('getFlashcardsRungThreshold', () => {
   describe('when study schedule starts at 30 min and intervals multiply by 2', () => {
-    let baseUnitInMinutes = 30;
-    let multiplier = 2;
+    const baseUnitInMinutes = 30;
+    const multiplier = 2;
 
     describe('and flashcards were last seen 2 minutes ago', () => {
-      let timeAgoInMinutes = 2;
+      const timeAgoInMinutes = 2;
       it('should return rung 0', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(0);
       });
     });
 
     describe('and flashcards were last seen 40 minutes ago', () => {
-      let timeAgoInMinutes = 40;
+      const timeAgoInMinutes = 40;
       it('should return rung 1 (or lower)', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(1);
       });
     });
 
     describe('and flashcards were last seen 400 minutes ago', () => {
-      let timeAgoInMinutes = 400; // 400 min would be 4–8hrs
+      const timeAgoInMinutes = 400; // 400 min would be 4–8hrs
       it('should return rung 4 (or lower)', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(4);
       });
     });
 
     describe('and flashcards were last seen 7600 minutes ago', () => {
-      let timeAgoInMinutes = 7600; // 7680 min would be >5 days
+      const timeAgoInMinutes = 7600; // 7680 min would be >5 days
       it('should return rung 8 (or lower)', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(8);
       });
@@ -174,32 +174,32 @@ describe('getFlashcardsRungThreshold', () => {
   });
 
   describe('when study schedule starts at 10 min and intervals multiply by 5', () => {
-    let baseUnitInMinutes = 10;
-    let multiplier = 5;
+    const baseUnitInMinutes = 10;
+    const multiplier = 5;
 
     describe('and flashcards were last seen 2 minutes ago', () => {
-      let timeAgoInMinutes = 2;
+      const timeAgoInMinutes = 2;
       it('should return rung 0', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(0);
       });
     });
 
     describe('and flashcards were last seen 40 minutes ago', () => {
-      let timeAgoInMinutes = 40;
+      const timeAgoInMinutes = 40;
       it('should return rung 1 (or lower)', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(1);
       });
     });
 
     describe('and flashcards were last seen 6000 minutes ago', () => {
-      let timeAgoInMinutes = 6000; // 6000 min would be >4 days
+      const timeAgoInMinutes = 6000; // 6000 min would be >4 days
       it('should return rung 4 (or lower)', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(4);
       });
     });
 
     describe('and flashcards were last seen 3900000 minutes ago', () => {
-      let timeAgoInMinutes = 3900000; // 3906250 min would be >7 years
+      const timeAgoInMinutes = 3900000; // 3906250 min would be >7 years
       it('should return rung 8 (or lower)', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(8);
       });
@@ -208,7 +208,7 @@ describe('getFlashcardsRungThreshold', () => {
 });
 
 describe('getWordForCurrentStrokeSlideIndex', () => {
-  let flashcards = [
+  const flashcards = [
     {
       phrase: 'it',
       stroke: 'T'
@@ -239,13 +239,13 @@ describe('getWordForCurrentStrokeSlideIndex', () => {
 });
 
 describe('getStrokeForCurrentSlideContent', () => {
-  let sourceMaterial = [
+  const sourceMaterial = [
     {
       phrase: 'Loading flashcards…',
       stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
     },
   ];
-  let word = 'Loading flashcards…';
+  const word = 'Loading flashcards…';
   it('stroke should match stroke for phrase in sourceMaterial', () => {
     expect(getStrokeForCurrentSlideContent(word, sourceMaterial)).toEqual("HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ");
   });

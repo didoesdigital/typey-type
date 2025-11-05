@@ -5,7 +5,7 @@ import Zipper from "./zipper";
 import type { DictionaryIndexEntry } from "types";
 
 describe("lookUpDictionaryInIndex", () => {
-  let dictionaryIndex: DictionaryIndexEntry[] = [
+  const dictionaryIndex: DictionaryIndexEntry[] = [
     {
       "author": "Typey Type",
       "title": "Dictionary",
@@ -54,7 +54,7 @@ describe("lookUpDictionaryInIndex", () => {
 
   describe("is in index", () => {
     it("should return dictionary metadata", () => {
-      let path = import.meta.env.VITE_PUBLIC_URL + "/dictionaries/plover/main-16-aug-2017/";
+      const path = import.meta.env.VITE_PUBLIC_URL + "/dictionaries/plover/main-16-aug-2017/";
       expect(lookUpDictionaryInIndex(path, dictionaryIndex)).toEqual({
         author: "Plover",
         title: "Main Aug 16, 2017",
@@ -70,7 +70,7 @@ describe("lookUpDictionaryInIndex", () => {
 
   describe("is not in index", () => {
     it("should return dummy metadata", () => {
-      let path = import.meta.env.VITE_PUBLIC_URL + "/dictionaries/bad-path/bad-dict/";
+      const path = import.meta.env.VITE_PUBLIC_URL + "/dictionaries/bad-path/bad-dict/";
       expect(lookUpDictionaryInIndex(path, dictionaryIndex)).toEqual({
         author: "Typey Type",
         title: "Missing dictionary details",
@@ -86,7 +86,7 @@ describe("lookUpDictionaryInIndex", () => {
 
   describe("has a line with no tabs", () => {
     it("should return a lesson without that line", () => {
-      let customMaterial = `testWithSpace TEFT
+      const customMaterial = `testWithSpace TEFT
 testWithTab	TEFT
 `;
       expect(parseCustomMaterial(customMaterial)).toEqual([
@@ -109,7 +109,7 @@ testWithTab	TEFT
 
   describe("has a line with multiple tabs", () => {
     it("should return a lesson with the first stroke provided", () => {
-      let customMaterial = `testWithTab	TEFT	TEFTD`;
+      const customMaterial = `testWithTab	TEFT	TEFTD`;
       expect(parseCustomMaterial(customMaterial)).toEqual([
         {
           sourceMaterial: [{ phrase: "testWithTab", stroke: "TEFT" }],

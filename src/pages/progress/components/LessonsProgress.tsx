@@ -81,7 +81,7 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
   }
 
   const linkList = lessonIndex.map((lesson) => {
-    let htmlIdForLesson = slugifyTitle(
+    const htmlIdForLesson = slugifyTitle(
       lesson.path.slice(1).replace("/lesson.txt", "")
     );
     let lessonsubtitle = "";
@@ -98,13 +98,13 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
       lessonsProgress &&
       lessonsProgress[import.meta.env.VITE_PUBLIC_URL + "/lessons" + lesson.path]
     ) {
-      let toDiscover =
+      const toDiscover =
         lessonsProgress[import.meta.env.VITE_PUBLIC_URL + "/lessons" + lesson.path]
           ?.numberOfWordsToDiscover || 0;
-      let seen =
+      const seen =
         lessonsProgress[import.meta.env.VITE_PUBLIC_URL + "/lessons" + lesson.path]
           ?.numberOfWordsSeen || 0;
-      let memorised =
+      const memorised =
         lessonsProgress[import.meta.env.VITE_PUBLIC_URL + "/lessons" + lesson.path]
           ?.numberOfWordsMemorised || 0;
       numberOfWordsSeenOrMemorised = seen + memorised;

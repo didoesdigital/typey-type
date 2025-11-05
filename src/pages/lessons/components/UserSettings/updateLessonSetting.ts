@@ -55,7 +55,7 @@ export function updateRevisionMaterial(
   event: React.ChangeEvent<HTMLInputElement>
 ) {
   // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-  let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(
+  const newCurrentLessonStrokes = this.state.currentLessonStrokes.map(
     // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
     (stroke) => ({ ...stroke })
   );

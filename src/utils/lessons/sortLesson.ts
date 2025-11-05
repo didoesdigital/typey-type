@@ -30,8 +30,8 @@ function sortLesson(
     }
 
     presentedMaterial.sort(function (a, b) {
-      let seenA = met[spaceBefore + a.phrase + spaceAfter] || 0;
-      let seenB = met[spaceBefore + b.phrase + spaceAfter] || 0;
+      const seenA = met[spaceBefore + a.phrase + spaceAfter] || 0;
+      const seenB = met[spaceBefore + b.phrase + spaceAfter] || 0;
       return userSettings.sortOrder === "sortNew"
         ? seenA - seenB
         : seenB - seenA;

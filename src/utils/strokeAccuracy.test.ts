@@ -3,7 +3,7 @@ import { strokeAccuracy } from "./strokeAccuracy";
 describe("stroke accuracy for current phrase", () => {
   describe("should return false for real failed meetings", () => {
     it('you wrote cut instead of cat and Plover backtracked to " c"', () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " c", time: 2 },
         { text: " cu", time: 3 },
@@ -13,8 +13,8 @@ describe("stroke accuracy for current phrase", () => {
         { text: " ca", time: 7 },
         { text: " cat", time: 8 },
       ];
-      let targetStrokeCount = 1;
-      let unmatchedActual = "";
+      const targetStrokeCount = 1;
+      const unmatchedActual = "";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -29,7 +29,7 @@ describe("stroke accuracy for current phrase", () => {
     });
 
     it('you wrote cut instead of cat and Plover backtracked to " "', () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " c", time: 2 },
         { text: " cu", time: 3 },
@@ -41,8 +41,8 @@ describe("stroke accuracy for current phrase", () => {
         { text: " ca", time: 9 },
         { text: " cat", time: 10 },
       ];
-      let targetStrokeCount = 1;
-      let unmatchedActual = "";
+      const targetStrokeCount = 1;
+      const unmatchedActual = "";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -57,7 +57,7 @@ describe("stroke accuracy for current phrase", () => {
     });
 
     it('you wrote cut instead of cat and Plover backtracked to ""', () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " c", time: 2 },
         { text: " cu", time: 3 },
@@ -71,8 +71,8 @@ describe("stroke accuracy for current phrase", () => {
         { text: " ca", time: 11 },
         { text: " cat", time: 12 },
       ];
-      let targetStrokeCount = 1;
-      let unmatchedActual = "";
+      const targetStrokeCount = 1;
+      const unmatchedActual = "";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -87,7 +87,7 @@ describe("stroke accuracy for current phrase", () => {
     });
 
     it("you wrote sign, ss, and ss for sciences", () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " s", time: 2 },
         { text: " si", time: 3 },
@@ -108,8 +108,8 @@ describe("stroke accuracy for current phrase", () => {
         { text: " science", time: 18 },
         { text: " sciences", time: 19 },
       ];
-      let targetStrokeCount = 3;
-      let unmatchedActual = "";
+      const targetStrokeCount = 3;
+      const unmatchedActual = "";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -128,7 +128,7 @@ describe("stroke accuracy for current phrase", () => {
     });
 
     it('you wrote "verticax", "verticaw" for vertical', () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " v", time: 2 },
         { text: " ve", time: 3 },
@@ -141,8 +141,8 @@ describe("stroke accuracy for current phrase", () => {
         { text: " verticaw", time: 10 },
         { text: " vertical", time: 11 },
       ];
-      let targetStrokeCount = 2;
-      let unmatchedActual = "";
+      const targetStrokeCount = 2;
+      const unmatchedActual = "";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -160,7 +160,7 @@ describe("stroke accuracy for current phrase", () => {
     });
 
     it("you wrote were instead of we're", () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " w", time: 2 },
         { text: " we", time: 3 },
@@ -177,8 +177,8 @@ describe("stroke accuracy for current phrase", () => {
         // " we'r",
         // " we're"
       ];
-      let targetStrokeCount = 1;
-      let unmatchedActual = "r";
+      const targetStrokeCount = 1;
+      const unmatchedActual = "r";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -193,9 +193,9 @@ describe("stroke accuracy for current phrase", () => {
     });
 
     it("you wrote x when trying to write courageous in 1 stroke, giving you a misstroke AND recording x in attempts for feedback", () => {
-      let currentPhraseAttempts = [{ text: "x", time: 1 }];
-      let targetStrokeCount = 1;
-      let unmatchedActual = "x";
+      const currentPhraseAttempts = [{ text: "x", time: 1 }];
+      const targetStrokeCount = 1;
+      const unmatchedActual = "x";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -207,7 +207,7 @@ describe("stroke accuracy for current phrase", () => {
     });
 
     it("you wrote cor when trying to write courageous in 1 stroke", () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " c", time: 2 },
         { text: " co", time: 3 },
@@ -227,8 +227,8 @@ describe("stroke accuracy for current phrase", () => {
         // " courageou",
         // " courageous"
       ];
-      let targetStrokeCount = 1;
-      let unmatchedActual = "r";
+      const targetStrokeCount = 1;
+      const unmatchedActual = "r";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -248,7 +248,7 @@ describe("stroke accuracy for current phrase", () => {
     //       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
     //     });
     it("should detect attempts with overrun", () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " y", time: 2 },
         { text: " yo", time: 3 },
@@ -258,8 +258,8 @@ describe("stroke accuracy for current phrase", () => {
         { text: " your", time: 7 },
         { text: " you", time: 8 },
       ];
-      let targetStrokeCount = 1;
-      let unmatchedActual = "";
+      const targetStrokeCount = 1;
+      const unmatchedActual = "";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -276,7 +276,7 @@ describe("stroke accuracy for current phrase", () => {
 
   describe("should return true for real successful meetings", () => {
     it("you wrote sign and sciences for sciences with 3 stroke target", () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " s", time: 2 },
         { text: " si", time: 3 },
@@ -293,8 +293,8 @@ describe("stroke accuracy for current phrase", () => {
         { text: " science", time: 14 },
         { text: " sciences", time: 15 },
       ];
-      let targetStrokeCount = 3;
-      let unmatchedActual = "";
+      const targetStrokeCount = 3;
+      const unmatchedActual = "";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
@@ -309,7 +309,7 @@ describe("stroke accuracy for current phrase", () => {
     });
 
     it("you wrote sigh then sig when trying to write silent in 2 strokes", () => {
-      let currentPhraseAttempts = [
+      const currentPhraseAttempts = [
         { text: " ", time: 1 },
         { text: " s", time: 2 },
         { text: " si", time: 3 },
@@ -317,8 +317,8 @@ describe("stroke accuracy for current phrase", () => {
         { text: " sigh", time: 5 },
         { text: " sig", time: 5 },
       ];
-      let targetStrokeCount = 2;
-      let unmatchedActual = "g";
+      const targetStrokeCount = 2;
+      const unmatchedActual = "g";
       expect(
         strokeAccuracy(
           // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message

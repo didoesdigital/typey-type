@@ -66,8 +66,8 @@ function rankAffixes(
       return -1; // sort a before b
     }
 
-    let outlineA = a[0];
-    let outlineB = b[0];
+    const outlineA = a[0];
+    const outlineB = b[0];
 
     if (vowelSuffixTranslations.includes(translation)) {
       return (

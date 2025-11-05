@@ -15,7 +15,7 @@ export const useUpdateFlashcardsProgress = () => {
   const [state, setState] = useAtom(flashcardsProgressState);
 
   return (lessonpath: string) => {
-    let flashcardsProgress = { ...state };
+    const flashcardsProgress = { ...state };
 
     flashcardsProgress[lessonpath] = {
       lastSeen: Date.now()

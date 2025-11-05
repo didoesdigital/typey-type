@@ -103,7 +103,7 @@ describe(App, () => {
     window.URL.createObjectURL = vi.fn();
     global.fetch = vi.fn(async (path, options) => {
       const tweakedPath = `./public${(path as string).replace(import.meta.env.VITE_PUBLIC_URL, "")}`;
-      let content = (await readFile(tweakedPath)).toString();
+      const content = (await readFile(tweakedPath)).toString();
       return new Response(content);
     });
   });
@@ -151,7 +151,7 @@ describe(App, () => {
         screen.getByRole("combobox", { name: "Match spaces" }),
         spacePlacement
       );
-      for (let [name, value, type] of settings ?? []) {
+      for (const [name, value, type] of settings ?? []) {
         if (type === "dropdown") {
           await userEvent.selectOptions(
             screen.getByRole("combobox", { name }),

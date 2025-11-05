@@ -13,7 +13,7 @@ function stitchTogetherLessonData(
   startTime: number,
   wpm: number
 ): LessonData {
-  let lessonData = {
+  const lessonData = {
     version: 3,
     lessonStrokes,
     startTime,
@@ -24,13 +24,13 @@ function stitchTogetherLessonData(
 }
 
 function transformLessonDataToChartData(lessonData: LessonData) {
-  let transformedData: TransformedData = {
+  const transformedData: TransformedData = {
     averageWPM: lessonData.wpm,
     version: lessonData.version,
     dataPoints: [],
   };
 
-  let dataPoints: DataPoint[] = [];
+  const dataPoints: DataPoint[] = [];
 
   const minimumStrokes = 4;
   const minimumStrokesData = lessonData.lessonStrokes

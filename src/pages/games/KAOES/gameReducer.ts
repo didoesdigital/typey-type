@@ -37,7 +37,7 @@ export const gameReducer = (state: KAOESState, action: KAOESAction) => {
   let experimentalRoundToWin = roundToWin;
 
   try {
-    let storageRounds =
+    const storageRounds =
       window.localStorage.getItem(roundToWinStorageKey) ?? "0";
     if (
       isNormalInteger(storageRounds) &&

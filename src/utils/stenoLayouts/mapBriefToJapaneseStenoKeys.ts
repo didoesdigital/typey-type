@@ -68,7 +68,7 @@ const stenoKeys = [
 ] as const;
 
 function mapBriefToJapaneseStenoKeys(brief: Outline) {
-  let keys = {
+  const keys = {
     the漢: false,
     theLeftKagikakko: false,
     theLeft4: false,
@@ -101,7 +101,7 @@ function mapBriefToJapaneseStenoKeys(brief: Outline) {
     theカ: false,
   };
 
-  let briefLetters = brief.split("");
+  const briefLetters = brief.split("");
 
   for (let i = 0; i < stenoOrder.length; i++) {
     if (briefLetters.length > 0) {

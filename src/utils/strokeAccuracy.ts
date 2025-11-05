@@ -11,8 +11,8 @@ function strokeAccuracy(
   strokeAccuracy: boolean;
   attempts: Attempt[];
 } {
-  let strokeAccuracy = true;
-  let attempts = [];
+  const strokeAccuracy = true;
+  const attempts = [];
 
   for (let i = 0; i < currentPhraseAttempts.length - 1; i++) {
     let isAPeak = false;
@@ -81,12 +81,12 @@ function strokeAccuracy(
   if (!batchUpdate) {
     // If it's the final stroke, fail any unmatched characters immediately
     // (unless you're undoing a stroke and typed text is getting shorter)
-    let nextAttempt = attempts.length + 1;
-    let isFinalStroke = nextAttempt >= targetStrokeCount;
-    let hasUnmatchedChars = unmatchedActual.length > 0;
-    let failedSingleStrokeBrief =
+    const nextAttempt = attempts.length + 1;
+    const isFinalStroke = nextAttempt >= targetStrokeCount;
+    const hasUnmatchedChars = unmatchedActual.length > 0;
+    const failedSingleStrokeBrief =
       currentPhraseAttempts.length === 1 && targetStrokeCount === 1;
-    let isTypedTextLongerThanPrevious =
+    const isTypedTextLongerThanPrevious =
       currentPhraseAttempts.length > 1 &&
       currentPhraseAttempts[currentPhraseAttempts.length - 1].text.length >
         currentPhraseAttempts[currentPhraseAttempts.length - 2].text.length;
