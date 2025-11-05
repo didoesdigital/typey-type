@@ -130,7 +130,7 @@ const recursiveBuildStrokeHint = (
 
   for (let i = 0; i < splitsToTry.length; i++) {
     const splitter = splitsToTry[i];
-    const splitStrokes = splitter.apply(null, splitterArgs);
+    const splitStrokes = splitter(...splitterArgs);
     if (splitStrokes !== null) {
       return splitStrokes;
     }
