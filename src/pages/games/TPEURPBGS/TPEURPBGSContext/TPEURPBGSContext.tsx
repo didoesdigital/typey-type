@@ -7,11 +7,21 @@ export const ContextData = React.createContext({
 });
 
 export const ContextApi = React.createContext({
-  gameRestarted: () => {},
-  gameStarted: () => {},
-  materialSet: (untrustedMultilineString: UntrustedMultilineString) => {},
-  pairRestarted: () => {},
-  repeatCompleted: () => {},
+  gameRestarted: () => {
+    // do nothing
+  },
+  gameStarted: () => {
+    // do nothing
+  },
+  materialSet: (untrustedMultilineString: UntrustedMultilineString) => {
+    // do nothing
+  },
+  pairRestarted: () => {
+    // do nothing
+  },
+  repeatCompleted: () => {
+    // do nothing
+  },
 });
 
 export const TPEURPBGSDataProvider = ContextData.Provider;
