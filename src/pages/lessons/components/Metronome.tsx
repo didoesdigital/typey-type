@@ -16,7 +16,7 @@ import plink from "../../../sounds/digi_plink-with-silence.mp3";
 import { useAtomValue } from "jotai";
 import { beatsPerMinuteState } from "../../../states/userSettingsState";
 
-type Props = {};
+type Props = Record<string, never>;
 
 type Options = {
   id: string;
