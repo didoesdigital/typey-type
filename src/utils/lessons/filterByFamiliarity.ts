@@ -1,14 +1,14 @@
 import removeWhitespaceAndSumUniqMetWords from "../removeWhitespaceAndSumUniqMetWords";
 import trimAndSumUniqMetWords from "../trimAndSumUniqMetWords";
 
-import type { MetWords, PresentedMaterial } from "../../types";
+import type { MetWords, PresentedMaterial, UserSettings } from "../../types";
 
 type FamiliarityTest = (phrase: string) => boolean;
 
 function filterByFamiliarity(
   presentedMaterial: PresentedMaterial,
   met: MetWords,
-  userSettings: any,
+  userSettings: UserSettings,
   revisionMode: boolean
 ) {
   if (userSettings.spacePlacement === "spaceExact") {
