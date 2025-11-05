@@ -70,7 +70,7 @@ class ConfettiParticle {
     if (this.remainingLife > 0 && this.radius > 0) {
       ctx.beginPath();
       ctx.arc(p.startX, p.startY, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(" + this.rgbArray[0] + ',' + this.rgbArray[1] + ',' + this.rgbArray[2] + "," + this.rgbArray[3] + ")";
+      ctx.fillStyle = `rgba(${this.rgbArray[0]},${this.rgbArray[1]},${this.rgbArray[2]},${this.rgbArray[3]})`;
       ctx.fill();
 
       p.remainingLife -= confettiDecaySpeed;
