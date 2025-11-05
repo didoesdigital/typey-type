@@ -59,6 +59,4 @@ export type Rules = {
 
 type Filter = (outline: string, translation: string) => boolean;
 export type FilterAndExpectation = [Filter, boolean];
-export type RuleFunctionsTypes = {
-  [Property in keyof Rules]: Filter;
-};
+export type RuleFunctionsTypes = Record<keyof Rules, Filter>;
