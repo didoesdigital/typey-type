@@ -19,27 +19,27 @@ function filterByFamiliarity(
     met = removeWhitespaceAndSumUniqMetWords(met);
   }
 
-  var localRevisionMode = revisionMode,
+  let localRevisionMode = revisionMode,
     newWords = userSettings.newWords,
     seenWords = userSettings.seenWords,
     retainedWords = userSettings.retainedWords,
     spacePlacement = userSettings.spacePlacement;
 
-  var testNewWords = function (phrase: string) {
+  let testNewWords = function (phrase: string) {
     if (!(phrase in met)) {
       return true;
     } else {
       return met[phrase] < 1;
     }
   };
-  var testSeenWords = function (phrase: string) {
+  let testSeenWords = function (phrase: string) {
     if (!(phrase in met)) {
       return false;
     } else {
       return met[phrase] > 0 && met[phrase] < 30;
     }
   };
-  var testRetainedWords = function (phrase: string) {
+  let testRetainedWords = function (phrase: string) {
     if (!(phrase in met)) {
       return false;
     } else {
@@ -47,7 +47,7 @@ function filterByFamiliarity(
     }
   };
 
-  var tests: FamiliarityTest[] = [];
+  let tests: FamiliarityTest[] = [];
   if (localRevisionMode) {
     tests.push(testNewWords);
     tests.push(testSeenWords);
@@ -64,7 +64,7 @@ function filterByFamiliarity(
     }
   }
 
-  var filterFunction = function (phrase: string) {
+  let filterFunction = function (phrase: string) {
     if (spacePlacement === "spaceBeforeOutput") {
       phrase = " " + phrase;
     } else if (spacePlacement === "spaceAfterOutput") {
@@ -72,7 +72,7 @@ function filterByFamiliarity(
     } else if (spacePlacement === "spaceOff") {
       phrase = phrase.replace(/\s/g, "");
     }
-    for (var i = 0; i < tests.length; i++) {
+    for (let i = 0; i < tests.length; i++) {
       if (tests[i](phrase)) {
         return true;
       }
