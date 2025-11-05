@@ -28,6 +28,7 @@ export const flashcardsMetWordsState = atom(
     word: string,
     feedback: string,
     stroke: string,
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     rung: number = 0
   ) => {
     let localStroke = stroke || "XXX";
