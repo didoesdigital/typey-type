@@ -141,7 +141,7 @@ function getRecommendedNextLesson(
         recommendedNextLesson.repetitions = 1;
         break;
 
-      case "practiceLessons":
+      case "practiceLessons": {
         let recommendedPracticeLesson = courses.practiceCourse.find(
           (recommendable) => {
             let entryInLessonsProgress =
@@ -222,7 +222,7 @@ function getRecommendedNextLesson(
         }
 
         break;
-
+      }
       default:
         practiceParams = practiceParams.replace("newWords=1", "newWords=0");
         recommendedNextLesson.limitNumberOfWords = 300;
@@ -259,11 +259,13 @@ function getRecommendedNextLesson(
           "/lessons/progress/memorised/?recommended=true&" + PARAMS.drillParams;
         break;
 
-      case "drillLessons":
+      case "drillLessons": {
         let recommendedDrillLesson = courses.drillCourse.find(
           (recommendable) => {
             entryInLessonsProgress =
-              lessonsProgress[import.meta.env.VITE_PUBLIC_URL + recommendable.path];
+              lessonsProgress[
+                import.meta.env.VITE_PUBLIC_URL + recommendable.path
+              ];
 
             // No lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
             // It's not a great candidate for drilling
@@ -316,7 +318,7 @@ function getRecommendedNextLesson(
             PARAMS.drillParams;
         }
         break;
-
+      }
       default:
         recommendedNextLesson.studyType = "drill";
         recommendedNextLesson.limitNumberOfWords = 100;
@@ -351,14 +353,16 @@ function getRecommendedNextLesson(
           "/lessons/progress/seen/?recommended=true&" + PARAMS.reviseParams;
         break;
 
-      case "reviseLessons":
+      case "reviseLessons": {
         let entryInLessonsProgress;
         let recommendedRevisionLesson = courses.revisionCourse.find(
           (recommendable) => {
             // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
             // so it's probably not a good candidate for revision
             entryInLessonsProgress =
-              lessonsProgress[import.meta.env.VITE_PUBLIC_URL + recommendable.path];
+              lessonsProgress[
+                import.meta.env.VITE_PUBLIC_URL + recommendable.path
+              ];
             if (typeof entryInLessonsProgress === "undefined") {
               return false;
             }
@@ -404,7 +408,7 @@ function getRecommendedNextLesson(
             "/lessons/progress/seen/?recommended=true&" + PARAMS.reviseParams;
         }
         break;
-
+      }
       default:
         recommendedNextLesson.studyType = "revise";
         recommendedNextLesson.limitNumberOfWords = 50;
