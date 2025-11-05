@@ -6,7 +6,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-import { Howl } from "howler";
+import { Howl, Howler } from "howler";
 import MetronomeIcon from "../../../components/Icons/icon-images/Metronome.svg";
 import Icon from "../../../components/Icons/Icon";
 import Tooltip from "../../../components/Tooltip";
