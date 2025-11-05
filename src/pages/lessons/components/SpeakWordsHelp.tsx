@@ -108,7 +108,7 @@ const SpeakWordsHelp = ({ disabled }: Props) => {
           <p>
             Double-click the “Say word” button or type ⇧Enter (e.g.{" "}
             <code>{`"STP*R": "{#Shift_L(Return)}",`}</code>) from the text area
-            to hear the word again and keep focus on the text area.
+            to hear the word again and keep focus on the text&nbsp;area.
           </p>
         </div>
         <div className="text-right">
