@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { vi } from "vitest";
 import NumericInput from "components/NumericInput/NumericInput";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

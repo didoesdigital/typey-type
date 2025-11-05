@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import { getRecommendedNextLesson } from "./recommendations";
 import recommendationsJSON from "../../typey-type-data/lessons/recommendations.json";
 import lessonIndexJSON from "../../typey-type-data/lessons/lessonIndex.json";

@@ -1,3 +1,4 @@
+import { vi } from "vitest";
 import sortLesson from "./sortLesson";
 import { PresentedMaterial, UserSettings } from "../../types";
 
