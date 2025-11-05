@@ -283,7 +283,10 @@ class App extends Component<Props, AppState> {
           metWordsFromStateOrArg = parsedSource;
         }
       }
-      catch (error) { }
+      catch (error) {
+        console.error(error);
+        [metWordsFromStateOrArg, lessonsProgressState] = loadPersonalPreferences();
+      }
     }
     else {
       [metWordsFromStateOrArg, lessonsProgressState] = loadPersonalPreferences();
