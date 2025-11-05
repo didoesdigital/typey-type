@@ -65,19 +65,17 @@ class ConfettiParticle {
   this.remainingLife = this.life;
 
   this.draw = ctx => {
-    let p = this;
-
     if (this.remainingLife > 0 && this.radius > 0) {
       ctx.beginPath();
-      ctx.arc(p.startX, p.startY, p.radius, 0, Math.PI * 2);
+      ctx.arc(this.startX, this.startY, this.radius, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${this.rgbArray[0]},${this.rgbArray[1]},${this.rgbArray[2]},${this.rgbArray[3]})`;
       ctx.fill();
 
-      p.remainingLife -= confettiDecaySpeed;
-      p.radius -= confettiShrinkSpeed;
-      p.startX += p.velocity.x;
-      p.startY += p.velocity.y;
-      p.velocity.y = p.velocity.y + gravity;
+      this.remainingLife -= confettiDecaySpeed;
+      this.radius -= confettiShrinkSpeed;
+      this.startX += this.velocity.x;
+      this.startY += this.velocity.y;
+      this.velocity.y = this.velocity.y + gravity;
     }
     };
   }
