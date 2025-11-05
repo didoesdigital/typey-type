@@ -3,7 +3,9 @@ import React from "react";
 export const ContextData = React.createContext({ message: "" });
 
 export const ContextApi = React.createContext({
-  updateMessage: (message: string) => {},
+  updateMessage: (message: string) => {
+    // do nothing
+  },
 });
 
 export const AnnouncerDataProvider = ContextData.Provider;
