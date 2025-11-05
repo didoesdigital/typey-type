@@ -27,14 +27,19 @@ export function changeShowStrokesInLesson(
     });
   } else {
     let labelShowStrokesInLesson = "true";
-    try {
+    if (
+      // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+      this.state.lesson?.newPresentedMaterial?.current?.phrase &&
+      // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+      this.state.lesson?.newPresentedMaterial?.current?.stroke
+    ) {
       labelShowStrokesInLesson =
         // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.state.lesson.newPresentedMaterial.current.phrase +
         ": " +
         // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.state.lesson.newPresentedMaterial.current.stroke;
-    } catch {}
+    }
 
     GoogleAnalytics.event({
       category: "Stroke hint",
