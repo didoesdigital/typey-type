@@ -70,7 +70,7 @@ function isPeak(
 }
 
 function randomise(array: Material) {
-  var currentIndex = array.length,
+  let currentIndex = array.length,
     temporaryValue,
     randomIndex;
 
