@@ -879,7 +879,7 @@ class App extends Component<Props, AppState> {
 
       if (this.props.userSettings.speakMaterial) {
         const remaining = state.lesson.newPresentedMaterial.getRemaining();
-        if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
+        if (remaining && remaining.length > 0 && Object.prototype.hasOwnProperty.call(remaining[0], 'phrase')) {
           const phrase = remaining[0].phrase;
           sideEffects.push(() => this.say(phrase));
         }
@@ -942,7 +942,7 @@ class App extends Component<Props, AppState> {
   sayCurrentPhraseAgain() {
     if (this.props.userSettings.speakMaterial) {
       let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
-      if (currentPhrase && currentPhrase.hasOwnProperty('phrase')) {
+      if (currentPhrase && Object.prototype.hasOwnProperty.call(currentPhrase, 'phrase')) {
         this.say(currentPhrase.phrase);
       }
     }

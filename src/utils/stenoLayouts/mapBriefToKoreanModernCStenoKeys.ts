@@ -71,7 +71,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
   let numberslength = numbers.length;
   for (let i = 0; i < numberslength; i++) {
     const keyName = "the" + numbers[i] + "Key";
-    if (keys.hasOwnProperty(keyName)) {
+    if (Object.prototype.hasOwnProperty.call(keys, keyName)) {
       // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       keys[keyName] = true;
     }
@@ -79,7 +79,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
 
   let vowelslength = vowels.length;
   for (let i = 0; i < vowelslength; i++) {
-    if (keys.hasOwnProperty("the" + vowels[i] + "Key")) {
+    if (Object.prototype.hasOwnProperty.call(keys, "the" + vowels[i] + "Key")) {
       // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       keys["the" + vowels[i] + "Key"] = true;
     } else if (vowels[i] === "*") {
@@ -89,7 +89,12 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
 
   let leftSidelength = leftSide.length;
   for (let i = 0; i < leftSidelength; i++) {
-    if (keys.hasOwnProperty("theLeft" + leftSide[i] + "Key")) {
+    if (
+      Object.prototype.hasOwnProperty.call(
+        keys,
+        "theLeft" + leftSide[i] + "Key"
+      )
+    ) {
       // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       keys["theLeft" + leftSide[i] + "Key"] = true;
     }
@@ -97,7 +102,12 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
 
   let rightSidelength = rightSide.length;
   for (let i = 0; i < rightSidelength; i++) {
-    if (keys.hasOwnProperty("theRight" + rightSide[i] + "Key")) {
+    if (
+      Object.prototype.hasOwnProperty.call(
+        keys,
+        "theRight" + rightSide[i] + "Key"
+      )
+    ) {
       // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       keys["theRight" + rightSide[i] + "Key"] = true;
     }

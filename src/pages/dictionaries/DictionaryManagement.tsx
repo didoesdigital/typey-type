@@ -323,8 +323,8 @@ const DictionaryManagement = (props: Props) => {
           let parsedConfigLength = parsedConfig.length;
           for (let i = 0; i < parsedConfigLength; ++i) {
             if (
-              parsedConfig[i].hasOwnProperty("enabled") &&
-              parsedConfig[i].hasOwnProperty("path")
+              Object.prototype.hasOwnProperty.call(parsedConfig[i], "enabled") &&
+              Object.prototype.hasOwnProperty.call(parsedConfig[i], "path")
             ) {
               // @ts-expect-error TS(7015) FIXME: Element implicitly has an 'any' type because index... Remove this comment to see the full error message
               if (parsedConfig[i]["enabled"]) {

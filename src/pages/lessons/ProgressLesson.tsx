@@ -141,7 +141,7 @@ const Lesson = ({
 
       if (
         Object.keys(parsedParams).some((param) => {
-          return userSettings.hasOwnProperty(param);
+          return Object.prototype.hasOwnProperty.call(userSettings, param);
         })
       ) {
         const currentUserSettings = Object.assign({}, userSettings);
