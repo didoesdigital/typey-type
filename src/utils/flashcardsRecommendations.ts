@@ -54,7 +54,7 @@ export function getFlashcardsRecommendedCourses() {
   }
 
   return recommendedCourses;
-};
+}
 
 function getFlashcardsNextLesson(courses: FlashcardsRecommendedCoursesType, flashcardsProgress = {}, courseLevel: keyof FlashcardsRecommendedCoursesType = "expertCourse", currentFlashcardsCourseIndex = 0): [FlashcardsNextLesson, number] {
     // fallback lesson:
