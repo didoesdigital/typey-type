@@ -272,7 +272,7 @@ const DictionaryManagement = (props: Props) => {
   // @ts-expect-error TS(7006) FIXME: Parameter 'files' implicitly has an 'any' type.
   function validateConfig(files) {
     let validConfig = "";
-    const validDictionariesListedInConfig = [];
+    const validDictionariesListedInConfig: DictName[] = [];
     // @ts-expect-error TS(7034) FIXME: Variable 'invalidConfig' implicitly has type 'any[... Remove this comment to see the full error message
     let invalidConfig = [];
     const filesLength = files.length;
