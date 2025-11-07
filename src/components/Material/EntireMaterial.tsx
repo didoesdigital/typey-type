@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 
 import type { PresentedMaterialItem, SpacePlacement } from "../../types";
 
@@ -7,7 +7,7 @@ type Props = {
   spacePlacement: SpacePlacement;
 };
 
-export default React.memo(function EntireMaterial({
+export default memo(function EntireMaterial({
   presentedMaterial,
   spacePlacement,
 }: Props) {

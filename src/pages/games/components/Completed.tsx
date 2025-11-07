@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { memo, useCallback, useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga4";
 import { Link } from "react-router-dom";
 import { actions } from "../utilities/gameActions";
@@ -120,4 +120,4 @@ function Completed({ gameName, dispatch }: CompletedProps) {
   );
 }
 
-export default React.memo(Completed);
+export default memo(Completed);

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { memo, useCallback, useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga4";
 import { actions as SHUFLactions } from "../SHUFL/gameActions";
 import { actions as TPEUBGSZactions } from "../TPEUBGSZ/gameActions";
@@ -119,4 +119,4 @@ function LevelCompleted({ gameName, level, dispatch }: LevelCompletedProps) {
   );
 }
 
-export default React.memo(LevelCompleted);
+export default memo(LevelCompleted);

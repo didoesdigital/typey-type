@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import PseudoContentButton from "../../../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 
@@ -90,4 +90,4 @@ const CustomJSONLesson = () => {
   );
 };
 
-export default React.memo(CustomJSONLesson);
+export default memo(CustomJSONLesson);

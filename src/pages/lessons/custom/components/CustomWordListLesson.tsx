@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import PseudoContentButton from "../../../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 import { parseWordList } from "utils/parseWordList";
@@ -101,4 +101,4 @@ plover"
   );
 };
 
-export default React.memo(CustomWordListLesson);
+export default memo(CustomWordListLesson);

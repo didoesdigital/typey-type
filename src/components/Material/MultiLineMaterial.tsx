@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import CurrentMaterialHighlight from "./CurrentMaterialHighlight";
 import EntireMaterial from "./EntireMaterial";
 
@@ -15,7 +15,7 @@ type Props = {
   settings: LessonSettings;
 };
 
-export default React.memo(function MultiLineMaterial({
+export default memo(function MultiLineMaterial({
   actualText,
   currentPhrase,
   currentPhraseID,
