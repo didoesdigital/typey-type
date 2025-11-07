@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import queryString from "query-string";
+import { parse } from "query-string";
 import DocumentTitle from "react-document-title";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
@@ -94,7 +94,7 @@ const Lesson = ({
     if (window.localStorage) {
       startCustomLesson();
 
-      const parsedParams = queryString.parse(location.search);
+      const parsedParams = parse(location.search);
 
       if (
         Object.keys(parsedParams).some((param) => {

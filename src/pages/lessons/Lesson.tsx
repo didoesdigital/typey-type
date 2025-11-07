@@ -6,12 +6,13 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import queryString from "query-string";
+import { parse } from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
+// eslint-disable-next-line import/no-named-as-default
 import Flashcards from "./flashcards/Flashcards";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
@@ -125,7 +126,7 @@ const Lesson = ({
         handleLesson(import.meta.env.VITE_PUBLIC_URL + location.pathname + "lesson.txt");
       }
 
-      const parsedParams = queryString.parse(location.search);
+      const parsedParams = parse(location.search);
 
       if (
         Object.keys(parsedParams).some((param) => {
