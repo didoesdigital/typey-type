@@ -1,7 +1,6 @@
 import React from "react";
 
-import { within, userEvent } from "@storybook/test";
-import { expect } from "@storybook/test";
+import { expect, within, userEvent } from "@storybook/test";
 
 import CustomJSONLesson from "./CustomJSONLesson";
 
@@ -27,7 +26,7 @@ CustomJSONLessonEmptyState.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   await expect(
-    canvas.getByTestId("custom-lesson-formatted-pre"),
+    canvas.getByTestId("custom-lesson-formatted-pre")
   ).not.toHaveClass("quote");
 };
 
@@ -40,18 +39,18 @@ CustomJSONLessonFilled.play = async ({ canvasElement }) => {
 
   await userEvent.type(
     canvas.getByLabelText(
-      "Paste a JSON dictionary here to create a custom lesson:",
+      "Paste a JSON dictionary here to create a custom lesson:"
     ),
-    '{{"TEFT": "test"}',
+    '{{"TEFT": "test"}'
   );
 
   await expect(canvas.getByTestId("custom-lesson-formatted-pre")).toHaveClass(
-    "quote",
+    "quote"
   );
   await expect(
-    canvas.getByTestId("custom-lesson-formatted-code"),
+    canvas.getByTestId("custom-lesson-formatted-code")
   ).toHaveTextContent(/^test/);
   await expect(
-    canvas.getByTestId("custom-lesson-formatted-code"),
+    canvas.getByTestId("custom-lesson-formatted-code")
   ).toHaveTextContent(/TEFT$/);
 };
