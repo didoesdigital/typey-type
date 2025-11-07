@@ -1,6 +1,6 @@
 import "./instrument";
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "./components/ErrorBoundary";
 import App from "./App";
@@ -26,7 +26,7 @@ const AppWithAtomsCompat = withAtomsCompat(AppWrapper, [
   ["globalUserSettings", globalUserSettingsState],
 ]);
 
-ReactDOM.render(
+render(
   <DocumentTitle title="Typey Type for Stenographers">
     <Router
       basename={import.meta.env.VITE_PUBLIC_URL}
