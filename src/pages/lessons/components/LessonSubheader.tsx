@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import Subheader from "../../../components/Subheader";
 import type { PrettyLessonTitle } from "types";
@@ -13,7 +13,7 @@ type LessonSubheaderProps = {
   restartLesson: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
-const LessonSubheader = React.forwardRef(
+const LessonSubheader = forwardRef(
   (
     {
       createNewCustomLesson,
@@ -69,7 +69,7 @@ const LessonSubheader = React.forwardRef(
             href={path}
             onClick={(evt) => {
               evt.preventDefault();
-              stopLesson()
+              stopLesson();
             }}
             className="button button--secondary table-cell mr2"
             style={{ lineHeight: 2 }}
