@@ -1,8 +1,8 @@
-import React from "react";
+import { createContext } from "react";
 
-export const ContextData = React.createContext({ message: "" });
+export const ContextData = createContext({ message: "" });
 
-export const ContextApi = React.createContext({
+export const ContextApi = createContext({
   updateMessage: (message: string) => {
     // do nothing
   },
