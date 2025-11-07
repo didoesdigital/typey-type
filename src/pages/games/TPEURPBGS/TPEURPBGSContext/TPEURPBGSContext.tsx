@@ -1,12 +1,12 @@
-import React from "react";
+import { createContext } from "react";
 import { UntrustedMultilineString, defaultState } from "../gameReducer";
 
-export const ContextData = React.createContext({
+export const ContextData = createContext({
   ...defaultState,
   repeatToWin: 10, // TODO: this should come from somewhere else
 });
 
-export const ContextApi = React.createContext({
+export const ContextApi = createContext({
   gameRestarted: () => {
     // do nothing
   },
