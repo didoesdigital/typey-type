@@ -30,6 +30,7 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
         <div
           data-tooltip-id={id}
           data-tooltip-content={"Unstarted"}
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
           className={progressIconClasses("violet")}
         />
@@ -44,6 +45,7 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
         <div
           data-tooltip-id={id}
           data-tooltip-content={"In progress"}
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
           className={progressIconClasses("violet")}
         >
@@ -65,6 +67,7 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
         <div
           data-tooltip-id={id}
           data-tooltip-content={"100 words done or lesson complete"}
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
           className={progressIconClasses("green")}
         >
