@@ -105,6 +105,7 @@ const TodaysEffortsOrGoals = ({
                 autoCapitalize="off"
                 autoComplete="off"
                 autoCorrect="off"
+                // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus={false}
                 disabled={!showSetGoalsForm}
                 id="userGoalInputOldWords"
@@ -133,6 +134,7 @@ const TodaysEffortsOrGoals = ({
                 autoCapitalize="off"
                 autoComplete="off"
                 autoCorrect="off"
+                // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus={false}
                 disabled={!showSetGoalsForm}
                 id="userGoalInputNewWords"

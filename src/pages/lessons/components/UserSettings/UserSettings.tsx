@@ -86,6 +86,7 @@ const UserSettings = ({
                       autoCapitalize="off"
                       autoComplete="on"
                       autoCorrect="on"
+                      // eslint-disable-next-line jsx-a11y/no-autofocus
                       autoFocus={false}
                       disabled={disableUserSettings}
                       labelledbyId="label-limitNumberOfWords"
@@ -119,6 +120,7 @@ const UserSettings = ({
                       autoCapitalize="off"
                       autoComplete="on"
                       autoCorrect="on"
+                      // eslint-disable-next-line jsx-a11y/no-autofocus
                       autoFocus={false}
                       disabled={disableUserSettings || revisionMode}
                       labelledbyId="label-startFromWord"
@@ -153,6 +155,7 @@ const UserSettings = ({
                       autoCapitalize="off"
                       autoComplete="on"
                       autoCorrect="on"
+                      // eslint-disable-next-line jsx-a11y/no-autofocus
                       autoFocus={false}
                       disabled={disableUserSettings}
                       labelledbyId="label-repetitions"
@@ -217,6 +220,7 @@ const UserSettings = ({
                       autoCapitalize="off"
                       autoComplete="off"
                       autoCorrect="off"
+                      // eslint-disable-next-line jsx-a11y/no-autofocus
                       autoFocus={false}
                       disabled={disableUserSettings}
                       labelledbyId="label-beatsPerMinute"
@@ -532,6 +536,7 @@ const UserSettings = ({
                       autoCapitalize="off"
                       autoComplete="on"
                       autoCorrect="on"
+                      // eslint-disable-next-line jsx-a11y/no-autofocus
                       autoFocus={false}
                       disabled={disableUserSettings}
                       labelledbyId="label-diagramSize"

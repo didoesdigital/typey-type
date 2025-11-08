@@ -211,6 +211,7 @@ const NumericInput: React.FC<NumericInputProps> = ({
         autoCapitalize={autoCapitalize}
         autoComplete={autoComplete}
         autoCorrect={autoCorrect}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={autoFocus}
         disabled={disabled}
         inputMode={precision > 0 ? "decimal" : "numeric"}
