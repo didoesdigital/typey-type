@@ -87,12 +87,16 @@ const FinishedSummaryHeadings = ({
       canvasHeight
     );
 
-  const [headingText, subHeadingText] = useMemo(() => getHeadingsText(
-    wpm,
-    lessonTitle,
-    newTopSpeedToday,
-    newTopSpeedPersonalBest
-  ), [lessonTitle, newTopSpeedPersonalBest, newTopSpeedToday, wpm]);
+  const [headingText, subHeadingText] = useMemo(
+    () =>
+      getHeadingsText(
+        wpm,
+        lessonTitle,
+        newTopSpeedToday,
+        newTopSpeedPersonalBest
+      ),
+    [lessonTitle, newTopSpeedPersonalBest, newTopSpeedToday, wpm]
+  );
 
   return (
     <>
