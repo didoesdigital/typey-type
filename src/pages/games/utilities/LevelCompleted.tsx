@@ -97,6 +97,7 @@ function LevelCompleted({ gameName, level, dispatch }: LevelCompletedProps) {
         tabIndex={0}
         onClick={restartConfetti}
         onKeyDown={restartConfetti}
+        role="button"
         className="w-100"
       >
         <div className="w-100 mw-48 mx-auto" id="level-completed">
