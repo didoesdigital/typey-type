@@ -101,6 +101,9 @@ const FinishedSummaryHeadings = ({
         width={canvasWidth}
         height={canvasHeight}
         className="fixed celebration-canvas top-0 left-0 pointer-none"
+        // https://developer.mozilla.org/en-US/docs/Web/Accessibility/Guides/Understanding_WCAG/Text_labels_and_names#content_with_images_must_be_labeled
+        // https://dequeuniversity.com/rules/axe/4.10/role-img-alt
+        // eslint-disable-next-line jsx-a11y/no-interactive-element-to-noninteractive-role
         role="presentation"
       />
       <h3
