@@ -106,6 +106,7 @@ const FinishedSummaryHeadings = ({
         // eslint-disable-next-line jsx-a11y/no-interactive-element-to-noninteractive-role
         role="presentation"
       />
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <h3
         className="dib text-center mt3"
         ref={finishedHeadingRef}
