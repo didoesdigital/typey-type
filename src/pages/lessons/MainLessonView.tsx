@@ -190,6 +190,8 @@ const MainLessonView = ({
                   // @ts-expect-error TS(2769) FIXME: No overload matches this call.
                   ease={"cubic-bezier(0.645, 0.045, 0.355, 1)"}
                 >
+                  {/* This setting is available with accessible controls via the UserSettings */}
+                  {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
                   <div
                     className={
                       "mb3 " +
