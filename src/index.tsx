@@ -12,6 +12,7 @@ import { useLessonIndexWithFallback } from "./states/lessonIndexState";
 import { revisionModeState } from "./states/lessonState";
 import Analytics from "components/Analytics";
 
+// eslint-disable-next-line react-refresh/only-export-components
 function AppWrapper(props: object) {
   const lessonIndex = useLessonIndexWithFallback();
   // @ts-expect-error TS(2740) FIXME: Type '{ lessonIndex: LessonIndexEntry[]; }' is mis... Remove this comment to see the full error message

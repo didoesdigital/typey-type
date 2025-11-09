@@ -779,6 +779,7 @@ export class Flashcards extends Component<FlashcardsProps, State> {
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default withAppMethods(
   withAtomsCompat(FlashcardsWrapper, [
     ["userSettings", userSettingsState],

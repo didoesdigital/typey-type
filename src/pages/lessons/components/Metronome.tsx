@@ -181,4 +181,5 @@ const Metronome: FC<Props> = () => {
 };
 
 export default Metronome;
+// eslint-disable-next-line react-refresh/only-export-components
 export { bpmBracketsSprite, playId };

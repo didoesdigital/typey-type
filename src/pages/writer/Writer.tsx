@@ -431,12 +431,14 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function WriterWrapper(props: WithAppMethods<Props>) {
   const changeStenoLayout = useChangeStenoLayout()
   const changeWriterInput = useChangeWriterInput()
   return <Writer {...props} {...{changeStenoLayout, changeWriterInput}} />;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default withAppMethods(withAtomsCompat(WriterWrapper, [
   ["userSettings", userSettingsState],
   ["globalUserSettings", globalUserSettingsState]

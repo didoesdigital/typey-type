@@ -39,6 +39,7 @@ const AppMethodsContext = createContext<AppMethods>(null!);
 
 export default AppMethodsContext;
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAppMethods = () => {
   return useContext(AppMethodsContext);
 }
@@ -47,6 +48,7 @@ export const useAppMethods = () => {
 export type WithAppMethods<P> = {
   appMethods: AppMethods;
 } & P;
+// eslint-disable-next-line react-refresh/only-export-components
 export const withAppMethods = <P, >(Component: ComponentType<WithAppMethods<P>>) => (props: P) => {
   return (
     <AppMethodsContext.Consumer>

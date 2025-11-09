@@ -11,7 +11,7 @@
     "plugin:react-hooks/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "react-refresh"],
   "root": true,
   "ignorePatterns": [
     // Ignore top-level dot files:
@@ -52,7 +52,8 @@
     ],
     "react/display-name": "off",
     "react/no-unescaped-entities": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react-refresh/only-export-components": "warn"
   },
   "settings": {
     "react": {
