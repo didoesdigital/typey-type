@@ -1,4 +1,3 @@
-import React from "react";
 import describePunctuation from "../../../utils/describePunctuation";
 
 type Props = {

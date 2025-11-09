@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import * as React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import GoogleAnalytics from "react-ga4";
 import { useAtomValue } from "jotai";

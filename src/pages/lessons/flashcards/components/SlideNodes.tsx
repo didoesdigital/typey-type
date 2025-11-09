@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import { Slide } from "pure-react-carousel";
 
 type Props = {
@@ -10,7 +10,7 @@ const SlideNodes = ({ flashcards }: Props) => {
 
   flashcards.forEach((item: any, i: number) => {
     slides.push(
-      <React.Fragment key={i}>
+      <Fragment key={i}>
         <Slide
           role="option"
           // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'.
@@ -37,7 +37,7 @@ const SlideNodes = ({ flashcards }: Props) => {
             </div>
           </div>
         </Slide>
-      </React.Fragment>
+      </Fragment>
     );
   });
 

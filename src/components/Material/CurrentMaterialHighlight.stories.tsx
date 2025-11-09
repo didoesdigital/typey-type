@@ -1,4 +1,3 @@
-import React from "react";
 import CurrentMaterialHighlightComponent from "./CurrentMaterialHighlight";
 import userSettings from "../../stories/fixtures/userSettings";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import Completed from "./Completed";
 
 export default {

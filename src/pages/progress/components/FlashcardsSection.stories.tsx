@@ -1,4 +1,3 @@
-import React from "react";
 import FlashcardsSection from "./FlashcardsSection";
 import { useHydrateAtoms } from "jotai/utils";
 import { flashcardsRecommendationState } from "../../../states/flashcardsProgressState";

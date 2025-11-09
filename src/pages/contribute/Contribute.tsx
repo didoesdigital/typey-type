@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import OutboundLink from "../../components/OutboundLink";
 import { Link } from "react-router-dom";
 import Subheader from "../../components/Subheader";

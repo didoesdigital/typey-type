@@ -1,4 +1,3 @@
-import React from "react";
 import GoogleAnalytics from "react-ga4";
 import { Link } from "react-router-dom";
 import * as Utils from "../../../utils/utils";

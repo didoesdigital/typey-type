@@ -1,5 +1,3 @@
-import React from "react";
-
 const PageLoadingFailed = () => {
   return (
     <div className="mh-page">

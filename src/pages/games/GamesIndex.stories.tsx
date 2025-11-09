@@ -1,4 +1,3 @@
-import React from "react";
 import GamesIndex from "./GamesIndex";
 
 export default {

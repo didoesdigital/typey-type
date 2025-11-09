@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
 import TypeyTypeIcon from "components/Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "components/Icons/Icon";
@@ -38,7 +38,7 @@ const LookupResultsOutlinesAndDicts = ({
           aria-label={briefWithSpacesBetweenLetters}
         >
           {strokeAndDict[0].split("").map((stenoKey, stenoKeyIndex) => (
-            <React.Fragment key={stenoKeyIndex}>{stenoKey}</React.Fragment>
+            <Fragment key={stenoKeyIndex}>{stenoKey}</Fragment>
           ))}
         </span>
       );

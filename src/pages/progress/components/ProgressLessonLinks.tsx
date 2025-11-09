@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import PARAMS, { createParamString } from "../../../utils/params";
 import { Link } from "react-router-dom";
 
@@ -77,18 +77,18 @@ const ProgressLessonLinks = ({
   return (
     <>
       {[
-        <React.Fragment key="practice-all">
+        <Fragment key="practice-all">
           {getPracticeAllLink(yourSeenWordCount, yourMemorisedWordCount)}
-        </React.Fragment>,
-        <React.Fragment key="drill-memorised">
+        </Fragment>,
+        <Fragment key="drill-memorised">
           {getDrillMemorisedLink(yourMemorisedWordCount)}
-        </React.Fragment>,
-        <React.Fragment key="revise-seen">
+        </Fragment>,
+        <Fragment key="revise-seen">
           {getReviseSeenLink(yourSeenWordCount)}
-        </React.Fragment>,
-        <React.Fragment key="discover-new">
+        </Fragment>,
+        <Fragment key="discover-new">
           {getDiscoverNewLink(yourWordCount, userSettings)}
-        </React.Fragment>,
+        </Fragment>,
       ]}
     </>
   );

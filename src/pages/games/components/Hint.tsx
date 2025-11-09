@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import GoogleAnalytics from "react-ga4";
 import type { SingleStroke } from "types";
 

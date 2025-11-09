@@ -1,4 +1,5 @@
-import React, { createContext, useContext } from "react";
+import { createContext, useContext } from "react";
+import * as React from "react";
 
 // @ts-expect-error TS(2554) FIXME: Expected 1 arguments, but got 0.
 const ChartContext = createContext();

@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
   x1: string | number;
   y1: string | number;

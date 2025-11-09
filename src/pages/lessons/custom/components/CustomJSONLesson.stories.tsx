@@ -1,5 +1,3 @@
-import React from "react";
-
 import { expect, within, userEvent } from "@storybook/test";
 
 import CustomJSONLesson from "./CustomJSONLesson";

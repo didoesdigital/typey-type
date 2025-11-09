@@ -1,4 +1,4 @@
-import React, { ComponentType, createContext, useContext } from "react";
+import { ComponentType, createContext, useContext } from "react";
 import setCustomLessonContent from "../../pages/lessons/utilities/setCustomLessonContent";
 import customiseLesson from "../../pages/lessons/utilities/customiseLesson";
 import generateCustomLesson from "../../pages/lessons/custom/generator/utilities/generateCustomLesson";

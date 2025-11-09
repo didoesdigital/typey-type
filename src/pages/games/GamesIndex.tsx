@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import GameBox from "./components/GameBox";
 import RaverRobot from "../../images/RaverRobot.svg?react";
 import AussieRobot from "../../images/AussieRobot.svg?react";

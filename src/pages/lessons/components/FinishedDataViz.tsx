@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import DisplayMetric from "../../../components/DisplayMetric";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import ComponentLoading from "../../../components/ComponentLoading";

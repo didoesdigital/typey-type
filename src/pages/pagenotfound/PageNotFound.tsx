@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../components/OutboundLink";
 import * as Sentry from "@sentry/react";

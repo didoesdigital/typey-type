@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import * as React from "react";
 import ClosingCross from "../../components/Icons/icon-images/ClosingCross.svg";
 import Icon from "../../components/Icons/Icon";
 import { Link, useLocation } from "react-router-dom";

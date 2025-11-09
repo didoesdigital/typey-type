@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as React from "react";
 import BackupModal from "./BackupModal";
 import ClosingCross from "../../../components/Icons/icon-images/ClosingCross.svg";
 import Icon from "../../../components/Icons/Icon";

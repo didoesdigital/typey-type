@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 type RoundProps = {

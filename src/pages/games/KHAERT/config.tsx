@@ -1,4 +1,3 @@
-import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
 import DogPicture from "./DogPicture";
 import PhraseLookup from "./PhraseLookup";

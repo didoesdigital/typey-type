@@ -1,4 +1,3 @@
-import React from "react";
 import { humanDurationFormatter } from "../../../utils/formatters";
 
 const Warning = ({ duration }: { duration: number }) => (

@@ -1,4 +1,3 @@
-import React from "react";
 import TableOfContentsItem from "pages/lessons/components/LessonList/TableOfContentsItem";
 import type { Category, LessonIndexEntry } from "types";
 

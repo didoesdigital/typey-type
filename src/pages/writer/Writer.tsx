@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import * as React from 'react';
 import GoogleAnalytics from "react-ga4";
 import AmericanStenoDiagram from '../../StenoLayout/AmericanStenoDiagram';
 import LapwingStenoDiagram from '../../StenoLayout/LapwingStenoDiagram';

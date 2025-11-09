@@ -1,4 +1,3 @@
-import React from "react";
 import OutboundLink from "./OutboundLink";
 
 import type { Meta, StoryObj } from "@storybook/react";

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../../components/OutboundLink";
 import RecommendationDescription from "./RecommendationDescription";
@@ -224,43 +224,43 @@ const RecommendationBox = ({
   // eslint-disable-next-line no-extra-boolean-cast
   if (!!recommendedNextLesson) {
     metadataStats = (
-      <React.Fragment>
+      <Fragment>
         {recommendedNextLesson.limitNumberOfWords}{" "}
         {recommendedNextLesson.limitNumberOfWords === 1 ? "word" : "words"} |{" "}
         {recommendedNextLesson.repetitions} repetitions
-      </React.Fragment>
+      </Fragment>
     );
 
     studyType = recommendedNextLesson.studyType;
     if (studyType === "error") {
-      metadataStats = <React.Fragment>No recommendation.</React.Fragment>;
+      metadataStats = <Fragment>No recommendation.</Fragment>;
     } else if (studyType === "wildcard") {
-      metadataStats = <React.Fragment>External link.</React.Fragment>;
+      metadataStats = <Fragment>External link.</Fragment>;
     } else if (studyType === "game") {
       metadataStats = (
-        <React.Fragment>
+        <Fragment>
           Solve puzzles to exercise your steno knowledge
-        </React.Fragment>
+        </Fragment>
       );
     } else if (studyType === "compete") {
       metadataStats = (
-        <React.Fragment>
+        <Fragment>
           Increase your speed while racing against others
-        </React.Fragment>
+        </Fragment>
       );
     } else if (studyType === "break") {
       metadataStats = (
-        <React.Fragment>
+        <Fragment>
           Take 5&nbsp;minutes or come&nbsp;back in 4+&nbsp;hours.
-        </React.Fragment>
+        </Fragment>
       );
     } else if (recommendedNextLesson.repetitions === 1) {
       metadataStats = (
-        <React.Fragment>
+        <Fragment>
           {recommendedNextLesson.limitNumberOfWords}{" "}
           {recommendedNextLesson.limitNumberOfWords === 1 ? "word" : "words"} |{" "}
           {recommendedNextLesson.repetitions} repetition
-        </React.Fragment>
+        </Fragment>
       );
     }
 
@@ -269,19 +269,19 @@ const RecommendationBox = ({
       recommendedNextLesson.lessonTitle.length < 10
     ) {
       metadataStats = (
-        <React.Fragment>
+        <Fragment>
           {recommendedNextLesson.limitNumberOfWords}{" "}
           {recommendedNextLesson.limitNumberOfWords === 1 ? "word" : "words"}{" "}
           <br /> {recommendedNextLesson.repetitions} repetitions
-        </React.Fragment>
+        </Fragment>
       );
       if (recommendedNextLesson.repetitions === 1) {
         metadataStats = (
-          <React.Fragment>
+          <Fragment>
             {recommendedNextLesson.limitNumberOfWords}{" "}
             {recommendedNextLesson.limitNumberOfWords === 1 ? "word" : "words"}{" "}
             <br /> {recommendedNextLesson.repetitions} repetition
-          </React.Fragment>
+          </Fragment>
         );
       }
     }
@@ -403,7 +403,7 @@ const RecommendationBox = ({
     }
 
     recommendedNextLessonBox = (
-      <React.Fragment>
+      <Fragment>
         <div className="panel bg-white dark:bg-coolgrey-1000 min-h-424 p5 mb3">
           {recommendedNextLessonHeading}
           <p className="mb0 mt4">
@@ -430,7 +430,7 @@ const RecommendationBox = ({
         <div className="flex flex-wrap content-start-ns">
           <div className="flex flex-wrap"></div>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   } else {
     recommendedNextLessonBox = <RecommendationBoxFallback />;
@@ -440,7 +440,7 @@ const RecommendationBox = ({
     return <Navigate to={recommendedNextLesson.link} />;
   }
 
-  return <React.Fragment>{recommendedNextLessonBox}</React.Fragment>;
+  return <Fragment>{recommendedNextLessonBox}</Fragment>;
 };
 
 export default RecommendationBox;

@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
   sectionHierachy: "major" | "minor";
   children: JSX.Element | JSX.Element[];

@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import getStenoDiagram from "../pages/lessons/utilities/getStenoDiagram";
 import getMapBriefsFn from "../pages/lessons/utilities/getMapBriefsFn";
 
@@ -29,7 +29,7 @@ const StrokesAsDiagrams = ({
       {userSettings?.showStrokesAsDiagrams &&
         listOfStrokeDictNamespaceMisstroke.length > 0 &&
         strokes.map((strokeToDraw, index) => (
-          <React.Fragment key={index}>
+          <Fragment key={index}>
             {Object.values(mapBriefsFunction(strokeToDraw)).some(
               (item) => item
             ) && (
@@ -43,11 +43,11 @@ const StrokesAsDiagrams = ({
                 />
               </div>
             )}
-          </React.Fragment>
+          </Fragment>
         ))}
       {userSettings?.showStrokesAsDiagrams &&
       listOfStrokeDictNamespaceMisstroke.length === 0 ? (
-        <React.Fragment>
+        <Fragment>
           <div className="mt1 mr2 mb2">
             <StenoLayoutDiagram
               classes="steno-diagram-svg"
@@ -57,7 +57,7 @@ const StrokesAsDiagrams = ({
               diagramWidth="192"
             />
           </div>
-        </React.Fragment>
+        </Fragment>
       ) : null}
     </div>
   );

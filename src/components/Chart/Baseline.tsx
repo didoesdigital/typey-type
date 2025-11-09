@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
   scaleRange: [number, number];
   tickSize: number;

@@ -1,4 +1,3 @@
-import React from "react";
 import Intro from "../components/Intro";
 import Prompt from "./Prompt";
 import WriteYourWords from "./WriteYourWords";

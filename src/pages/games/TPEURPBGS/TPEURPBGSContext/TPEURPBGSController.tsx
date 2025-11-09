@@ -1,4 +1,5 @@
-import React, { FC, useMemo, useReducer } from "react";
+import { FC, useMemo, useReducer } from "react";
+import * as React from "react";
 import { initConfig, gameReducer } from "../gameReducer";
 import {
   TPEURPBGSApiProvider,

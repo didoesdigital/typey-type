@@ -1,4 +1,3 @@
-import React from "react";
 import { useAnnouncerData } from "./useAnnouncer";
 
 const Announcer = () => {

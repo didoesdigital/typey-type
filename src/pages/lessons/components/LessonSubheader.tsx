@@ -1,4 +1,5 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import Subheader from "../../../components/Subheader";
 import type { PrettyLessonTitle } from "types";

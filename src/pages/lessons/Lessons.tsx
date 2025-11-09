@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, lazy, Suspense } from "react";
+import { ComponentPropsWithoutRef, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";

@@ -1,4 +1,3 @@
-import React from "react";
 import DictionaryManagement from "./DictionaryManagement";
 
 export default {

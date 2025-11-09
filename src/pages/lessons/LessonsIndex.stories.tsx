@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import LessonsIndex from "./LessonsIndex";
 import Zipper from "../../utils/zipper";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";

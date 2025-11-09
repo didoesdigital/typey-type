@@ -1,4 +1,3 @@
-import React from "react";
 import RecommendationDescription from "./RecommendationDescription";
 
 export default {

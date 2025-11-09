@@ -1,4 +1,3 @@
-import React from "react";
 import SingleLineMaterialComponent from "./SingleLineMaterial";
 import userSettings from "../../stories/fixtures/userSettings";
 

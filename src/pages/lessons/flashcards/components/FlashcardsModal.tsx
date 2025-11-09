@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 import ReactModal from "react-modal";
 

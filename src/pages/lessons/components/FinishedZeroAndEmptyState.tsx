@@ -1,4 +1,3 @@
-import React from "react";
 import FinishedNextLessonButton from "./FinishedNextLessonButton";
 import { useAtomValue } from "jotai";
 import {

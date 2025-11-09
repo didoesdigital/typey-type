@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import type { RuleStatus } from "pages/lessons/custom/generator/types";
 
 // This could one day be something like `type RuleName = keyof Required<Rules>;`

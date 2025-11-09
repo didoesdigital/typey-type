@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { format } from "d3-format";
 import type { ScaleLinear } from "d3-scale";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import MultiLineMaterialComponent from "./MultiLineMaterial";
 import userSettings from "../../stories/fixtures/userSettings";
 

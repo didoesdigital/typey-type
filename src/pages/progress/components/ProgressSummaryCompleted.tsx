@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import * as React from "react";
 import GoogleAnalytics from "react-ga4";
 import ProgressLessonLinks from "./ProgressLessonLinks";
 import { format } from "d3-format";

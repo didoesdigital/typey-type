@@ -1,4 +1,3 @@
-import React from "react";
 import SingleLineMaterial from "./Material/SingleLineMaterial";
 import MultiLineMaterial from "./Material/MultiLineMaterial";
 import OnePhraseMaterial from "./Material/OnePhraseMaterial";

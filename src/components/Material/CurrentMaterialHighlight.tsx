@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { matchSplitText } from "utils/matchSplitText";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";

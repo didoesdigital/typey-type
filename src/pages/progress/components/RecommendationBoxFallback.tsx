@@ -1,9 +1,9 @@
-import React from "react";
+import { Fragment } from "react";
 import RecommendationDescription from "./RecommendationDescription";
 
 const RecommendationBoxFallback = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="panel bg-white dark:bg-coolgrey-1000 min-h-424 p5 mb3">
         <h3 className="mt0 pb1 bb b--brand-primary-tint mb3">Recommended…</h3>
         <p className="mb0 mt4">
@@ -36,7 +36,7 @@ const RecommendationBoxFallback = () => {
       <div className="flex flex-wrap content-start-ns">
         <div className="flex flex-wrap"></div>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

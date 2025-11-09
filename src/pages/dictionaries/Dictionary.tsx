@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link, useLocation } from "react-router-dom";
 import DictionaryNotFound from "./DictionaryNotFound";

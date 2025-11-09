@@ -1,4 +1,3 @@
-import React from "react";
 import ProgressSummaryAndLinks from "./ProgressSummaryAndLinks";
 import metWordsNovice from "../../../fixtures/metWordsNovice.json";
 import metWords10000WordsSeen10000Memorised from "../../../fixtures/metWords10000WordsSeen10000Memorised.json";

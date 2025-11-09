@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import * as React from "react";
 import ReactModal from "react-modal";
 import Metronome from "./Metronome";
 import { useAtomValue } from "jotai";

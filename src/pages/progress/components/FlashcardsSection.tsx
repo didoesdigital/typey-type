@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import GoogleAnalytics from "react-ga4";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import FlashcardsBox from "./FlashcardsBox";

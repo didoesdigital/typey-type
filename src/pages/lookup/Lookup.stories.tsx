@@ -1,4 +1,3 @@
-import React from "react";
 import Lookup from "./Lookup";
 import userSettings from "../../stories/fixtures/userSettings";
 import { expect, within, userEvent } from "@storybook/test";

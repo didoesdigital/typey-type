@@ -1,4 +1,3 @@
-import React from "react";
 import TPEURPBGSCompleted from "./TPEURPBGSCompleted";
 import TPEURPBGSMainContent from "./TPEURPBGSMainContent";
 import TPEURPBGSNotStarted from "./TPEURPBGSNotStarted";

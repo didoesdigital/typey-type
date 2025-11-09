@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import createStrokeHintForPhrase from "../../../utils/transformingDictionaries/createStrokeHintForPhrase";
 import type { LookupDictWithNamespacedDictsAndConfig } from "types";
 
@@ -28,7 +28,7 @@ const PhraseLookup = ({ phraseToLookup, globalLookupDictionary }: Props) => {
         aria-label={[...strokeHint].join(" ").replace("-", "dash")}
       >
         {[...strokeHint].map((item, i) => (
-          <React.Fragment key={i}>{item}</React.Fragment>
+          <Fragment key={i}>{item}</Fragment>
         ))}
       </span>
     </p>

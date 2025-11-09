@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useRef } from "react";
+import { FC, useCallback, useRef } from "react";
 import {
   useTPEURPBGSApi,
   useTPEURPBGSData,

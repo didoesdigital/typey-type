@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/react";
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
-import React, { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import GoogleAnalytics from "react-ga4";
 import Notification from "../../components/Notification";
@@ -682,20 +682,20 @@ const DictionaryManagement = (props: Props) => {
 
   if (validDictionariesState && validDictionariesState.length > 0) {
     showYourDictionaries = (
-      <React.Fragment>
+      <Fragment>
         {validDictionariesState.length === 1 ? (
           <p>Your added dictionary:</p>
         ) : (
           <p>Your added dictionaries:</p>
         )}
         <ul className="wrap">{validDictionaryList}</ul>
-      </React.Fragment>
+      </Fragment>
     );
   }
 
   if (invalidDictionariesState && invalidDictionariesState.length > 0) {
     showDictionaryErrors = (
-      <React.Fragment>
+      <Fragment>
         {invalidDictionariesState.length === 1 ? (
           <p>This dictionary is invalid:</p>
         ) : (
@@ -704,14 +704,14 @@ const DictionaryManagement = (props: Props) => {
         <ul className="bg-danger dark:text-coolgrey-900 pl1 pr3 wrap">
           {invalidDictionaryList}
         </ul>
-      </React.Fragment>
+      </Fragment>
     );
   }
 
   if (validConfig && validConfig.length > 4) {
     // '.cfg' is 4 characters
     showYourConfig = (
-      <React.Fragment>
+      <Fragment>
         <p className="wrap">
           Your added dictionary config ({validConfig}) contains these
           dictionaries:
@@ -719,18 +719,18 @@ const DictionaryManagement = (props: Props) => {
         <ul className="wrap unstyled-list">
           {validDictionariesListedInConfig}
         </ul>
-      </React.Fragment>
+      </Fragment>
     );
   }
 
   if (invalidConfig && invalidConfig.length === 2) {
     showConfigErrors = (
-      <React.Fragment>
+      <Fragment>
         <p>This dictionary config is invalid:</p>
         <p className="bg-danger dark:text-coolgrey-900 pl1 pr3 wrap">
           {invalidConfig[0]}: {invalidConfig[1]}
         </p>
-      </React.Fragment>
+      </Fragment>
     );
   }
 

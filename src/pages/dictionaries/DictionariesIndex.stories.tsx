@@ -1,4 +1,3 @@
-import React from "react";
 import DictionariesIndex from "./DictionariesIndex";
 import userSettings from "../../stories/fixtures/userSettings";
 import { useHydrateAtoms } from "jotai/utils";

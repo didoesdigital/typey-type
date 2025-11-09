@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as React from "react";
 import { utcFormat } from "d3-time-format";
 import prompts from "./prompts";
 

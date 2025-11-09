@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Input from "../components/Input";
 import {

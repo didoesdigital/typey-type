@@ -1,4 +1,5 @@
-import React, { memo, useCallback, useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useRef } from "react";
+import * as React from "react";
 import GoogleAnalytics from "react-ga4";
 import { Link } from "react-router-dom";
 import { actions } from "../utilities/gameActions";

@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 
 import type { MetWords, UserSettings } from "../../../types";
 
@@ -18,15 +18,15 @@ const YourWordsHighlighted = ({ metWords, userSettings, yourWords }: Props) => {
     .map((wordPunctuationOrWhitespace, index, yourSplitWords) => {
       if (wordPunctuationOrWhitespace === " ")
         return (
-          <React.Fragment key={index}>
+          <Fragment key={index}>
             {wordPunctuationOrWhitespace}
-          </React.Fragment>
+          </Fragment>
         );
       if (wordPunctuationOrWhitespace === "\n")
         return (
-          <React.Fragment key={index}>
+          <Fragment key={index}>
             <br />
-          </React.Fragment>
+          </Fragment>
         );
 
       const typedCount = yourSplitWords.filter(
@@ -62,9 +62,9 @@ const YourWordsHighlighted = ({ metWords, userSettings, yourWords }: Props) => {
         );
 
       return (
-        <React.Fragment key={index}>
+        <Fragment key={index}>
           {wordPunctuationOrWhitespace}
-        </React.Fragment>
+        </Fragment>
       );
     });
 

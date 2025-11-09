@@ -1,4 +1,3 @@
-import React from "react";
 import InfoIconAndTooltip from "components/InfoIconAndTooltip";
 import ErrorBoundary from "components/ErrorBoundary";
 import NumericInput from "components/NumericInput/NumericInput";

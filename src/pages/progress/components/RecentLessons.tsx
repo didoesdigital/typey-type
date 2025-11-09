@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import PARAMS from "../../../utils/params";
 import { Link } from "react-router-dom";
 import type {
@@ -94,10 +94,10 @@ const RecentLessons = ({ lessonIndex }: Props) => {
     : undefined;
 
   const recentLessons = hasRecentLessons ? (
-    <React.Fragment>
+    <Fragment>
       <h3>Recent lessons</h3>
       <ul className="unstyled-list">{linkList}</ul>
-    </React.Fragment>
+    </Fragment>
   ) : null;
 
   return recentLessons;

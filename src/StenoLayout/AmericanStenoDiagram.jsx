@@ -1,4 +1,3 @@
-import React from "react";
 import strokeBits from "../utils/strokeBits";
 
 const idKeyLookup = {

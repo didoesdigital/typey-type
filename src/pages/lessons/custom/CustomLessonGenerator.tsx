@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
+import * as React from "react";
 import GoogleAnalytics from "react-ga4";
 import { actions } from "./generator/rulesActions";
 import { actions as rulesWithDataActions } from "./generator/rulesWithDataActions";

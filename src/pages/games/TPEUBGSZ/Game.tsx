@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { actions } from "./gameActions";
 import { initConfig, gameReducer, roundToWin, levelToWin } from "./gameReducer";
 import Completed from "../components/Completed";

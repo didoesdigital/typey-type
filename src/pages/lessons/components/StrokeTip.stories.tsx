@@ -1,4 +1,3 @@
-import React from "react";
 import { useHydrateAtoms } from "jotai/utils";
 import StrokeTip from "./StrokeTip";
 import userSettings from "../../../stories/fixtures/userSettings";

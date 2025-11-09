@@ -1,4 +1,3 @@
-import React from "react";
 import { wrangleId } from "./wrangleId";
 import type { Category, LessonIndexEntry } from "types";
 

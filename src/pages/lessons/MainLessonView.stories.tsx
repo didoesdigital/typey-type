@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useHydrateAtoms } from "jotai/utils";
 import { userSettingsState } from "../../states/userSettingsState";

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { shouldShowStroke } from 'utils/shouldShowStroke';
 import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";

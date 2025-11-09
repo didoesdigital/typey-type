@@ -1,5 +1,5 @@
 import * as Sentry from "@sentry/react";
-import React, { Component } from "react";
+import { Component } from "react";
 
 // To test this component out, throw an error in the child component that the boundary wraps:
 // constructor () {

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 const popoverMaxWidth = 240;
 const halfPopoverMaxWidth = popoverMaxWidth / 2;

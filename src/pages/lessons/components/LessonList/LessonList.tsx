@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import * as React from "react";
 import GoogleAnalytics from "react-ga4";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { groups } from "d3-array";

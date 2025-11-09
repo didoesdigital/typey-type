@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import TypeyTypeIcon from "./Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "./Icons/Icon";

@@ -1,4 +1,3 @@
-import React from "react";
 import FinishedSpeedChart from "../components/FinishedSpeedChart";
 import catHavoc from "./fixtures/catHavoc.json";
 import customTestPhrases from "./fixtures/customTestPhrases.json";

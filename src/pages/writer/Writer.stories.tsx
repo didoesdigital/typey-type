@@ -1,4 +1,3 @@
-import React from "react";
 import Writer from "./Writer";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";
 import appMethods from "../../stories/fixtures/appMethods";

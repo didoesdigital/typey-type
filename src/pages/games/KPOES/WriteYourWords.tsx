@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import * as React from "react";
 import { useAtomValue } from "jotai";
 import PseudoContentButton from "../../../components/PseudoContentButton";
 import YourWordsHighlighted from "./YourWordsHighlighted";

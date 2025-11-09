@@ -1,4 +1,5 @@
-import React, { memo, useCallback, useState } from "react";
+import { memo, useCallback, useState } from "react";
+import * as React from "react";
 import PseudoContentButton from "../../../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 

@@ -3,7 +3,6 @@ import {
   Flashcards,
   type FlashcardsProps,
 } from "pages/lessons/flashcards/Flashcards";
-import React from "react";
 import { useUpdateFlashcardsProgress } from "states/flashcardsProgressState";
 import { useAppMethods } from "states/legacy/AppMethodsContext";
 

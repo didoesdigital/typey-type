@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 const numberBarKeyStrokeColor = "#7109aa";
 const numberBarKeyOnColor = "#7109AA";

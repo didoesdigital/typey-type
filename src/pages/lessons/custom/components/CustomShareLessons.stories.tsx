@@ -1,5 +1,3 @@
-import React from "react";
-
 import CustomShareLessons from "./CustomShareLessons";
 
 export default {

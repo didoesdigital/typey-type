@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import LessonCanvasFooter from "./LessonCanvasFooter";
 import FinishedZeroAndEmptyStateMessage from "./FinishedZeroAndEmptyState";

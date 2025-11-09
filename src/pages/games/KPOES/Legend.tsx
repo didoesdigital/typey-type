@@ -1,5 +1,3 @@
-import React from "react";
-
 const Legend = () => {
   return (
     <div className="mt3">

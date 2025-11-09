@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 const strokeColor = "#7109AA";
 const onTextColor = "#fff";

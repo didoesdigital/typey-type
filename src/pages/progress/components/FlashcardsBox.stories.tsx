@@ -1,4 +1,3 @@
-import React from "react";
 import FlashcardsBox from "./FlashcardsBox";
 
 export default {

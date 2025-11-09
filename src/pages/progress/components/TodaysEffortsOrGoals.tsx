@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import NumericInput from "components/NumericInput/NumericInput";
 import AlertRobot from "../../../images/AlertRobot.svg?react";
 import BoredRobot from "../../../images/BoredRobot.svg?react";

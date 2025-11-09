@@ -1,4 +1,3 @@
-import React from "react";
 import Game from "./Game";
 import metWordsBeginner from "../../../fixtures/metWordsBeginner.json";
 

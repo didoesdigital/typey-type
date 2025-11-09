@@ -1,10 +1,5 @@
-import React, {
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import * as React from "react";
 import GoogleAnalytics from "react-ga4";
 import ReactModal from "react-modal";
 import { TransitionGroup, CSSTransition } from "react-transition-group";

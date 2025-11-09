@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 import type { Outline, StenoLayout } from "../../../types";
 
 type Props = {
@@ -28,7 +28,7 @@ const StrokeTipText = ({ isMultiline, currentStroke, stenoLayout }: Props) => {
           aria-label={[...currentStroke].join(" ").replace("-", "dash")}
         >
           {[...currentStroke].map((item, i) => (
-            <React.Fragment key={i}>{item}</React.Fragment>
+            <Fragment key={i}>{item}</Fragment>
           ))}
         </span>
       </pre>

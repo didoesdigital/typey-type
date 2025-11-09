@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Intro from "../components/Intro";
 import AussieRobot from "../../../images/AussieRobot.svg?react";
 // eslint-disable-next-line import/no-named-as-default

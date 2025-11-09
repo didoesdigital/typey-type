@@ -1,4 +1,3 @@
-import React from "react";
 import RecentLessons from "./RecentLessons";
 import { recentLessonHistoryState } from "../../../states/recentLessonHistoryState";
 import { useHydrateAtoms } from "jotai/utils";

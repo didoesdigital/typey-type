@@ -1,4 +1,3 @@
-import React from "react";
 // eslint-disable-next-line import/no-named-as-default
 import Flashcards from "./Flashcards";
 import { useHydrateAtoms } from "jotai/utils";

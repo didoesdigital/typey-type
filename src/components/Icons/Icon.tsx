@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 type IconProps = React.ComponentPropsWithoutRef<"span"> & {
   /** e.g. `ClosingCross` with `import ClosingCross from "./icon-images/ClosingCross.svg";` */

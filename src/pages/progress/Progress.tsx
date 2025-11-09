@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import { Fragment, Suspense, useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import PseudoContentButton from "../../components/PseudoContentButton";
@@ -327,7 +327,7 @@ const Progress = (props: Props) => {
   }
 
   const loadForm = showLoadInput ? (
-    <React.Fragment>
+    <Fragment>
       <label
         htmlFor="js-metwords-from-personal-store--small"
         className="inline-block mb05 visually-hidden"
@@ -353,7 +353,7 @@ const Progress = (props: Props) => {
           Load progress
         </PseudoContentButton>
       </div>
-    </React.Fragment>
+    </Fragment>
   ) : (
     <button
       onClick={showLoadInputFn.bind(this)}

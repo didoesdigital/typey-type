@@ -1,4 +1,3 @@
-import React from "react";
 import Metronome from "./Metronome";
 import userSettings from "../../../stories/fixtures/userSettings";
 

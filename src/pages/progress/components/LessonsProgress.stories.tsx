@@ -1,4 +1,3 @@
-import React from "react";
 import LessonsProgress from "./LessonsProgress";
 import lessonIndex from "../../../stories/fixtures/lessonIndex";
 

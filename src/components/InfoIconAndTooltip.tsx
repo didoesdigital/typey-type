@@ -1,4 +1,3 @@
-import React from "react";
 import Icon from "./Icons/Icon";
 import Info from "./Icons/icon-images/Info.svg";
 import Tooltip from "./Tooltip";

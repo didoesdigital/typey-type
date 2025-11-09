@@ -1,5 +1,3 @@
-import React from "react";
-
 const ComponentLoadingFailed = () => {
   return (
     <div className="center-all">

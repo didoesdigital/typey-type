@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 let hidden = true;
 let theカStrokeColor = "#7109AA";

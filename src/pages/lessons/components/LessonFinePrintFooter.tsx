@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../../components/OutboundLink";

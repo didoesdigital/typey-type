@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import Checkmark from "../../../components/Icons/icon-images/Checkmark.svg";
 import TriangleRight from "../../../components/Icons/icon-images/TriangleRight.svg";

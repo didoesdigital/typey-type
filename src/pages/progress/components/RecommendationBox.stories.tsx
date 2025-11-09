@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import metWordsNovice from "../../../fixtures/metWordsNovice.json";
 import RecommendationBox from "./RecommendationBox";
 import RecommendationBoxFallback from "./RecommendationBoxFallback";

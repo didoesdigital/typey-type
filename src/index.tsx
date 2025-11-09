@@ -1,5 +1,4 @@
 import "./instrument";
-import React from "react";
 import { render } from "react-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "./components/ErrorBoundary";

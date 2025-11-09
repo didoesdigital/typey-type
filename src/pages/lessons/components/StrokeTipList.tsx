@@ -1,5 +1,3 @@
-import React from "react";
-
 import AFFIXES from "../../../utils/affixes/affixes";
 import LookupResultsOutlinesAndDicts from "../../../components/LookupResultsOutlinesAndDicts";
 import createListOfStrokes from "../../../utils/createListOfStrokes";

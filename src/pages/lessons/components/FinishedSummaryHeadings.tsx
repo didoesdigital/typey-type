@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import * as React from "react";
 import * as Confetti from "../../../utils/confetti";
 import getHeadingsText from "../utilities/getHeadingsText";
 

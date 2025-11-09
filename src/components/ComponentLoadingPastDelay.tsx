@@ -1,5 +1,3 @@
-import React from "react";
-
 const ComponentLoadingPastDelay = () => {
   return (
     <div className="center-all">

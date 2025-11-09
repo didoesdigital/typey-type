@@ -1,4 +1,3 @@
-import React from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 
 const CustomShareLessons = () => {

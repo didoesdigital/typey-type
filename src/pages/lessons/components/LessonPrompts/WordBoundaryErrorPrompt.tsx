@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";
 import { hasWordBoundaryError } from "pages/lessons/components/LessonPrompts/hasWordBoundaryError";

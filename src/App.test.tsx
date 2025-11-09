@@ -2,7 +2,6 @@ import { Mock, vi } from 'vitest'
 import App from "./App";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, useNavigate, useLocation } from "react-router-dom";
-import React from "react";
 import { readFile } from "node:fs/promises";
 import userEvent from "@testing-library/user-event";
 import { SpacePlacement } from "./types";
@@ -391,7 +390,7 @@ describe(App, () => {
               "word": "You"
             },
             {
-              ...spacePlacement === "spaceExact" ? {
+              ...(spacePlacement === "spaceExact" ? {
                 "accuracy": false,
                 "attempts": [{
                   text: "rs",
@@ -402,7 +401,7 @@ describe(App, () => {
               } : {
                 "accuracy": true,
                 "attempts": []
-              },
+              }),
               "checked": true,
               "hintWasShown": true,
               "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.2,
@@ -518,7 +517,7 @@ describe(App, () => {
                   "word": "can"
                 },
                 {
-                  ...spacePlacement === "spaceExact" ? {
+                  ...(spacePlacement === "spaceExact" ? {
                     accuracy: false,
                     attempts: [{
                       "hintWasShown": true,
@@ -529,7 +528,7 @@ describe(App, () => {
                   } : {
                     "accuracy": true,
                     "attempts": []
-                  },
+                  }),
                   "checked": true,
                   "hintWasShown": true,
                   "numberOfMatchedWordsSoFar": hasExtraSpaces ? 2.6 : 2,
@@ -595,7 +594,7 @@ describe(App, () => {
                   "word": "too bad"
                 },
                 {
-                  ...spacePlacement === "spaceExact" ? {
+                  ...(spacePlacement === "spaceExact" ? {
                     // s was considered input to second
                     accuracy: false,
                     attempts: [{
@@ -607,7 +606,7 @@ describe(App, () => {
                   } : {
                     "accuracy": true,
                     "attempts": []
-                  },
+                  }),
                   "checked": true,
                   "hintWasShown": true,
                   "numberOfMatchedWordsSoFar": hasExtraSpaces ? 3.2 : 2.8,

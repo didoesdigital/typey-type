@@ -1,6 +1,7 @@
 import { atom, useAtom } from "jotai";
 import type { Atom, WritableAtom } from "jotai";
-import React, { ComponentType } from "react";
+import { ComponentType } from "react";
+import * as React from "react";
 
 export const subFieldAtomGenerator = <S,>(state: WritableAtom<S, [S], void>) => <T extends keyof S>(field: T) => atom(
   (get) => get(state)[field],

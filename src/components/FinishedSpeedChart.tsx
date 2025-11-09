@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import { bisector, max, min } from "d3-array";
 import { format } from "d3-format";

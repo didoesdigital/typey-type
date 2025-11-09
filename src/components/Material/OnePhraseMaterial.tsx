@@ -1,4 +1,3 @@
-import React from "react";
 import { matchSplitText } from "utils/matchSplitText";
 
 import { useAtomValue } from "jotai";

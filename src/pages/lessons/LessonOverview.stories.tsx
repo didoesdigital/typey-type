@@ -1,4 +1,3 @@
-import React from "react";
 import LessonOverview from "./LessonOverview";
 
 export default {

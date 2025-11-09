@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
 import LessonList from "./components/LessonList/LessonList";

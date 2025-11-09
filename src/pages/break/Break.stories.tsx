@@ -1,4 +1,3 @@
-import React from "react";
 import Break from "./Break";
 
 const meta = { component: Break, title: "Pages/Break" };

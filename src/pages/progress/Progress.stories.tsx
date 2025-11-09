@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import Progress from "./Progress";
 import userSettings from "../../stories/fixtures/userSettings";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";

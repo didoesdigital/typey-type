@@ -1,5 +1,3 @@
-import React from "react";
-
 import type { MaterialText, StrokeDictNamespaceAndMisstrokeStatus } from "../types";
 
 type Props = {

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import * as React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { parse } from "query-string";
 import DocumentTitle from "react-document-title";

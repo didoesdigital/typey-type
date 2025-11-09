@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import RestartIcon from "../../../components/Icons/icon-images/Restart.svg";
 import Icon from "../../../components/Icons/Icon";
 import FinishedNextLessonButton from "./FinishedNextLessonButton";

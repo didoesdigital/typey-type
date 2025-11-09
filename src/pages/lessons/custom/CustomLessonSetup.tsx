@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import CustomJSONLesson from "./components/CustomJSONLesson";
 import CustomLessonIntro from "./components/CustomLessonIntro";

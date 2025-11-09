@@ -1,4 +1,5 @@
-import React, { FC, useMemo, useCallback, useState } from "react";
+import { FC, useMemo, useCallback, useState } from "react";
+import * as React from "react";
 import {
   AnnouncerApiProvider,
   AnnouncerDataProvider,

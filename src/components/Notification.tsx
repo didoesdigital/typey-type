@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import * as React from "react";
 import ClosingCross from "./Icons/icon-images/ClosingCross.svg";
 import Icon from "./Icons/Icon";
 

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as React from "react";
 import { vi } from "vitest";
 import NumericInput from "components/NumericInput/NumericInput";
 import { render, screen, waitFor } from "@testing-library/react";

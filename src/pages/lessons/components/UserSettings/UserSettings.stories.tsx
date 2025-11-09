@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import UserSettings from "./UserSettings";
 import userSettingsFixture from "../../../../stories/fixtures/userSettings";
 import AppMethodsContext from "../../../../states/legacy/AppMethodsContext";

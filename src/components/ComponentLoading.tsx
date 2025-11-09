@@ -1,4 +1,3 @@
-import React from "react";
 import * as Sentry from "@sentry/react";
 import ComponentLoadingFailed from "./ComponentLoadingFailed";
 import ComponentLoadingPastDelay from "./ComponentLoadingPastDelay";

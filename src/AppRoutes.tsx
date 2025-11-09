@@ -1,4 +1,5 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
+import * as React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import PageLoading from "./components/PageLoading";
