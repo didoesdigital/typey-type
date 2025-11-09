@@ -1617,37 +1617,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2":
-  version: 7.7.7
-  resolution: "@babel/runtime@npm:7.7.7"
-  dependencies:
-    regenerator-runtime: "npm:^0.13.2"
-  checksum: 10c0/c1b2eeaf8044cec95358ef89efc67e176259520e4c218736224d9c68a9b3c4fd334e878b07e29fd28ff5eab799531d6777d02df92941681f7fd3dcbb6fa8b842
-  languageName: node
-  linkType: hard
-
-"@babel/runtime@npm:^7.12.5":
-  version: 7.16.3
-  resolution: "@babel/runtime@npm:7.16.3"
-  dependencies:
-    regenerator-runtime: "npm:^0.13.4"
-  checksum: 10c0/37a7f334e8ad1383a78d39224ba9f95b94556189a0f1e93bc1b5729dc18d9eb5eb0ba3742073629cd4024fc101315fe8945931f80ba32518f651a4f0438ec4dc
-  languageName: node
-  linkType: hard
-
-"@babel/runtime@npm:^7.16.3":
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8":
   version: 7.28.4
   resolution: "@babel/runtime@npm:7.28.4"
   checksum: 10c0/792ce7af9750fb9b93879cc9d1db175701c4689da890e6ced242ea0207c9da411ccf16dc04e689cc01158b28d7898c40d75598f4559109f761c12ce01e959bf7
-  languageName: node
-  linkType: hard
-
-"@babel/runtime@npm:^7.17.8":
-  version: 7.18.3
-  resolution: "@babel/runtime@npm:7.18.3"
-  dependencies:
-    regenerator-runtime: "npm:^0.13.4"
-  checksum: 10c0/bb218b2ab2f9b28c7b131f466f4b72d87f998481dd475b315c4fc54c0422e697fdd442dcfef4e8e230424d2933cf56a301af67376f2aaa32c08b1a4b5e59d588
   languageName: node
   linkType: hard
 
@@ -9756,20 +9729,6 @@ __metadata:
   version: 1.4.2
   resolution: "regenerate@npm:1.4.2"
   checksum: 10c0/f73c9eba5d398c818edc71d1c6979eaa05af7a808682749dd079f8df2a6d91a9b913db216c2c9b03e0a8ba2bba8701244a93f45211afbff691c32c7b275db1b8
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.13.2":
-  version: 0.13.3
-  resolution: "regenerator-runtime@npm:0.13.3"
-  checksum: 10c0/090f036b37c1c39981dc79f3001efb3ae9fe578535e26e679f83e38d9a87cd6b273c97a42360b17d682b9a6ed0ff05e536d3c19417f7204f06edcec3acb46878
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.13.4":
-  version: 0.13.7
-  resolution: "regenerator-runtime@npm:0.13.7"
-  checksum: 10c0/4731a13643ced51020fcb20eaf77ff7b50aa11e5e53d8bf0affccb8c2beb9ce7f881059b961be4e1df959eb396e8c2daed2ecf6e8409b235fbc234e6c63784d0
   languageName: node
   linkType: hard
 
