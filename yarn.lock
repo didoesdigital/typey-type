@@ -5394,6 +5394,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-react-refresh@npm:^0.4.24":
+  version: 0.4.24
+  resolution: "eslint-plugin-react-refresh@npm:0.4.24"
+  peerDependencies:
+    eslint: ">=8.40"
+  checksum: 10c0/7471a25663cdec2886b5aec53cff6319475a6704616f96db4eef7ada3cba1236abeb71b4c2db6396e48a3a8a3a416a0266b2eac06bb6ef77d8b5674604ece7fb
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-react@npm:^7.27.1":
   version: 7.37.5
   resolution: "eslint-plugin-react@npm:7.37.5"
@@ -10263,6 +10272,7 @@ __metadata:
     eslint-plugin-jsx-a11y: "npm:^6.10.2"
     eslint-plugin-react: "npm:^7.27.1"
     eslint-plugin-react-hooks: "npm:4.6.2"
+    eslint-plugin-react-refresh: "npm:^0.4.24"
     eslint-plugin-storybook: "npm:0.12.0"
     howler: "npm:^2.2.3"
     jotai: "npm:^2.8.0"
