@@ -2098,37 +2098,31 @@ small .svg-icon-wrapper.svg-baseline svg {
   padding-top: .25em;
 }
 
-.homepage-demo-xs {
-  max-width: 100%;
-  margin-bottom: 16px;
+.homepage-demo-container {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+
   @media (min-width: 960px) {
-    display: none;
+    flex-direction: row;
+    align-items: center;
   }
 }
-.homepage-demo-lg {
-  display: none;
+
+.homepage-demo-intro {
+  max-width: 584px;
+
   @media (min-width: 960px) {
-    display: initial;
-    left: 584px;
-    padding-left: 24px;
-    position: absolute;
-    top: 35px + 24px;
-    width: calc(960px - 584px - 24px - 24px);
+    flex-basis: 584px;
   }
-  @media (min-width: $large-breakpoint) {
-    display: initial;
-    left: 584px;
-    padding-left: 24px;
-    position: absolute;
-    top: 35px + 24px;
-    width: calc(1024px - 584px - 24px - 24px);
-  }
-  @media (min-width: 1440px) {
-    position: absolute;
-    left: 584px;
-    top: 0;
-    max-width: 100%;
-    width: calc(1440px - 584px - 24px - 24px);
+}
+
+img.homepage-demo-gif {
+  max-width: 100%;
+
+  @media (prefers-reduced-motion: reduce) {
+    content:url("images/typey-type-for-stenographers-demo-cover-image.png");
   }
 }
 

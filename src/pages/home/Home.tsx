@@ -21,6 +21,21 @@ const Home = () => {
         : typeyTypeyDemoCoverImage
     );
 
+  const keyboardToggleDemoGIF = (
+    event: React.KeyboardEvent<HTMLDivElement>
+  ) => {
+    if (
+      event &&
+      (event.key === "Enter" ||
+        event.keyCode === 13 ||
+        event.key === "Space" ||
+        event.keyCode === 32)
+    ) {
+      event.preventDefault();
+      toggleDemoGIF();
+    }
+  };
+
   return (
     <div>
       <main id="main">
@@ -42,43 +57,42 @@ const Home = () => {
         </div>
         <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
-            <div className="mw-584">
-              <div className="relative">
-                <img
-                  data-chromatic="ignore"
-                  src={typeyTypeDemoSrc}
-                  className="homepage-demo-lg"
-                  alt="Demo of Typey Type for Stenographers in action"
-                  onClick={toggleDemoGIF}
-                />
+            <div className="homepage-demo-container">
+              <div className="homepage-demo-intro">
+                <h3 className="tiny-rule relative">What is stenography?</h3>
+                <p>
+                  The process of writing shorthand is called{" "}
+                  <strong>stenography</strong> (steno). Want to write over 100
+                  words per minute? Grab yourself a fancy keyboard and start
+                  learning stenography!
+                </p>
+                <p>
+                  Typey&nbsp;Type for Stenographers is a free typing app
+                  designed to help steno students practise and master
+                  stenography.
+                </p>
+                <Link
+                  to="/support"
+                  className="link-button dib"
+                  style={{ lineHeight: 2 }}
+                >
+                  Learn more
+                </Link>
               </div>
-              <h3 className="tiny-rule relative">What is stenography?</h3>
-              <p>
-                The process of writing shorthand is called{" "}
-                <strong>stenography</strong> (steno). Want to write over 100
-                words per minute? Grab yourself a fancy keyboard and start
-                learning stenography!
-              </p>
-              <p>
-                Typey&nbsp;Type for Stenographers is a free typing app designed
-                to help steno students practise and master stenography.
-              </p>
-              <div className="relative">
-                <img
-                  data-chromatic="ignore"
-                  src={typeyTypeDemoSrc}
-                  className="homepage-demo-xs"
-                  alt="Demo of Typey Type for Stenographers in action"
-                  onClick={toggleDemoGIF}
-                />
-              </div>
-              <Link
-                to="/support"
-                className="link-button dib"
-                style={{ lineHeight: 2 }}
+              <div
+                onClick={toggleDemoGIF}
+                onKeyDown={keyboardToggleDemoGIF}
+                role="button"
+                aria-pressed={typeyTypeDemoSrc === typeyTypeDemoGIF}
+                tabIndex={0}
               >
-                Learn more
-              </Link>
+                <img
+                  data-chromatic="ignore"
+                  src={typeyTypeDemoSrc}
+                  className="homepage-demo-gif"
+                  alt="Demo of Typey Type for Stenographers in action"
+                />
+              </div>
             </div>
           </div>
         </div>
