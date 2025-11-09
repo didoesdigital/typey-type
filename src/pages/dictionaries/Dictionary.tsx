@@ -256,6 +256,7 @@ const Dictionary = () => {
                 <pre
                   className="quote h-168 overflow-scroll mw-384 mt1 mb3"
                   id="js-dictionary-json-pre"
+                  // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
                   tabIndex={0}
                 >
                   <code>{contents}</code>

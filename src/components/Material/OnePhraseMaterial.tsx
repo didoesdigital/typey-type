@@ -49,6 +49,7 @@ export default function OnePhraseMaterial({
               className={currentAndUpcomingPhrasesClasses}
               data-testid="current-and-upcoming-phrases"
             >
+              {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
               <strong className="fw7" tabIndex={0} data-testid="current-phrase">
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>
