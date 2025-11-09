@@ -98,6 +98,7 @@ function Completed({ gameName, dispatch }: CompletedProps) {
         tabIndex={0}
         onClick={restartConfetti}
         onKeyDown={restartConfetti}
+        role="button"
         className="w-100 pt1"
       >
         <div className="w-100 mw-48 mx-auto">
