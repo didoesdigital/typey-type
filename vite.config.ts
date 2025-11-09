@@ -25,8 +25,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       !process.env.VITEST
         ? checker({
-            // Later, add TS check here:
-            // typescript: true,
+            typescript: true,
             eslint: {
               // This should match `package.json` lint script:
               lintCommand: "eslint 'src/**/*.{js,jsx,ts,tsx}'",
