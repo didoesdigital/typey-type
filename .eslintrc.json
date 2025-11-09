@@ -1,6 +1,5 @@
 {
   "extends": [
-    "react-app",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
@@ -44,11 +43,21 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
+    ],
     "react/display-name": "off",
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off"
   },
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/resolver": {
       // Using this setting requires installing and configuring the TypeScript resolver:
       // https://github.com/import-js/eslint-import-resolver-typescript#configuration
