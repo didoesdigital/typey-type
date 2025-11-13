@@ -28,6 +28,7 @@ async function fetchFlashcardsRecommendations(): Promise<FlashcardsRecommendedCo
     const json = await response.json();
     return json;
   } catch (e) {
+    console.error(e);
     return {
       "beginnerCourse": [
         {

@@ -173,6 +173,7 @@ const Progress = (props: Props) => {
       setOldWordsGoalMet(false);
       setNewWordsGoalMet(false);
     } catch (error) {
+      console.error(error);
       numberOfMetWords = "BAD_PROGRESS_INPUT";
     }
 

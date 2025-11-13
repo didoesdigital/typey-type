@@ -58,6 +58,7 @@ const runAllPersonalDictionariesMigrations = function (
     );
     // [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV1ToV2(personalDictionaries, dirtyFlag);
   } catch (exception) {
+    console.error(exception);
     return [
       null,
       false,
