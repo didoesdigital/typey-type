@@ -8,7 +8,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended-legacy"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "react-refresh"],
@@ -53,7 +53,16 @@
     "react/display-name": "off",
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
-    "react-refresh/only-export-components": "warn"
+    "react-refresh/only-export-components": "warn",
+    // eslint v9 new eslint:recommended rules:
+    "no-constant-binary-expression": "off",
+    "no-empty-static-block": "off",
+    "no-new-native-nonconstructor": "off",
+    "no-unused-private-class-members": "off",
+    //
+    // Note: you must disable the base rule as it can report incorrect errors
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "error"
   },
   "settings": {
     "react": {

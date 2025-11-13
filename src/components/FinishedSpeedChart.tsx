@@ -186,7 +186,11 @@ export default function FinishedSpeedChart({ data }: Props) {
   };
 
   const onCircleFocus = (_: any, d: Datum) => {
-    d ? setHighlightedDatum(d) : setHighlightedDatum(null);
+    if (d) {
+      setHighlightedDatum(d);
+    } else {
+      setHighlightedDatum(null);
+    }
   };
 
   const accessibleLabel = (d: Datum) => {
