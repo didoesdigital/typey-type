@@ -4,9 +4,10 @@ type Props = {
   x2: string | number;
   y2: string | number;
   stroke: string;
+  strokeDasharray?: string;
 };
 
-const Rule = ({ x1, y1, x2, y2, stroke }: Props) => (
+const Rule = ({ x1, y1, x2, y2, stroke, strokeDasharray }: Props) => (
   <line
     x1={x1}
     y1={y1}
@@ -14,6 +15,7 @@ const Rule = ({ x1, y1, x2, y2, stroke }: Props) => (
     y2={y2}
     fill="none"
     stroke={stroke}
+    strokeDasharray={strokeDasharray}
     role="presentation"
   />
 );

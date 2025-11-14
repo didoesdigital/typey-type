@@ -16,6 +16,7 @@ import LessonFinePrintFooter from "./LessonFinePrintFooter";
 import getNumericAccuracy from "../utilities/getNumericAccuracy";
 import type { ConfettiConfig } from "./FinishedSummaryHeadings";
 import type { FinishedProps, LessonData, TransformedData } from "../types";
+import type { LessonHistory, LessonResult } from "../../../types";
 import {
   newTopSpeedPersonalBestState,
   newTopSpeedTodayState,
@@ -63,18 +64,18 @@ const Finished = ({
 }: FinishedProps) => {
   const [chartData, setChartData] = useState<TransformedData>(
     transformLessonDataToChartData(
-      stitchTogetherLessonData(currentLessonStrokes, startTime ?? 0, 0)
-    )
+      stitchTogetherLessonData(currentLessonStrokes, startTime ?? 0, 0),
+    ),
   );
   const [confettiConfig, setConfettiConfig] = useState<ConfettiConfig>(null);
   const [topSpeedPersonalBest, setTopSpeedPersonalBest] = useAtom(
-    topSpeedPersonalBestState
+    topSpeedPersonalBestState,
   );
   const [newTopSpeedPersonalBest, setNewTopSpeedPersonalBest] = useAtom(
-    newTopSpeedPersonalBestState
+    newTopSpeedPersonalBestState,
   );
   const [newTopSpeedToday, setNewTopSpeedToday] = useAtom(
-    newTopSpeedTodayState
+    newTopSpeedTodayState,
   );
   const [numericAccuracy, setNumericAccuracy] = useState(0);
   const [wpm, setWpm] = useState(0);
@@ -91,27 +92,59 @@ const Finished = ({
       currentLessonStrokes,
       // In theory, startTime should always be set to a number already if the lesson was run in order to even reach the Finished component, but we'll use a nullish coalesce operator here so we don't have to handle null type
       startTime ?? 0,
-      wpm
+      wpm,
     );
     setChartData(transformLessonDataToChartData(lessonData));
   }, [currentLessonStrokes, startTime, wpm]);
 
   // update hero data in FinishedDataViz
   useEffect(() => {
-    setNumericAccuracy(
-      getNumericAccuracy(
-        totalNumberOfMistypedWords,
-        totalNumberOfHintedWords,
-        currentLessonStrokes,
-        wpm
-      )
+    const calculatedNumericAccuracy = getNumericAccuracy(
+      totalNumberOfMistypedWords,
+      totalNumberOfHintedWords,
+      currentLessonStrokes,
+      wpm,
     );
+    setNumericAccuracy(calculatedNumericAccuracy);
   }, [
     currentLessonStrokes,
     totalNumberOfHintedWords,
     totalNumberOfMistypedWords,
     wpm,
   ]);
+
+  // save lesson results to local storage (separate effect with proper dependencies)
+  // adds duplicate entries without checking if lesson ahs already been saved
+  const [lessonSaved, setLessonSaved] = useState(false);
+  useEffect(() => {
+    if (wpm > 0 && numericAccuracy > 0 && !lessonSaved) {
+      // Wait for both values to be calculated
+      const lessonResult: LessonResult = {
+        timestamp: new Date().toISOString(),
+        lessonTitle,
+        wpm,
+        accuracy: Math.round(numericAccuracy),
+        words: Math.floor(totalNumberOfMatchedWords),
+      };
+
+      const lessonHistoryString = window.localStorage.getItem("lessonHistory");
+      const lessonHistory: LessonHistory = lessonHistoryString
+        ? JSON.parse(lessonHistoryString)
+        : [];
+      lessonHistory.push(lessonResult);
+      window.localStorage.setItem(
+        "lessonHistory",
+        JSON.stringify(lessonHistory),
+      );
+      setLessonSaved(true);
+    }
+  }, [
+    wpm,
+    numericAccuracy,
+    lessonTitle,
+    totalNumberOfMatchedWords,
+    lessonSaved,
+  ]); // Proper dependencies
 
   // update top speed today or ever and headings and confetti
   useEffect(() => {

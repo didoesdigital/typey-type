@@ -630,3 +630,13 @@ export type FlashcardsCourseLevel =
   | "competentCourse"
   | "proficientCourse"
   | "expertCourse";
+
+export type LessonResult = {
+  timestamp: string;
+  lessonTitle: string;
+  wpm: number;
+  accuracy: number;
+  words: number;
+};
+
+export type LessonHistory = LessonResult[];

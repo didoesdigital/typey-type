@@ -14,7 +14,9 @@ import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 import DownloadProgressButton from "./components/DownloadProgressButton";
 import Subheader from "../../components/Subheader";
-import type { LessonsProgressIndex, MetWords } from "../../types";
+import ProgressGraph from "./components/ProgressGraph";
+import ProgressHistoryList from "./components/ProgressHistoryList";
+import type { LessonHistory, LessonsProgressIndex, MetWords } from "../../types";
 import BackupBanner from "./components/BackupBanner";
 import BackupModal from "./components/BackupModal";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
@@ -72,6 +74,16 @@ const Progress = (props: Props) => {
   const [userGoalInputOldWords, setUserGoalInputOldWords] = useState(50);
   const [userGoalInputNewWords, setUserGoalInputNewWords] = useState(15);
   const [isBackupModalOpen, setBackupModalOpen] = useState(false);
+  const [lessonHistory, setLessonHistory] = useState<LessonHistory>([]);
+  const [showHistory, setShowHistory] = useState(false);
+
+  useEffect(() => {
+    const lessonHistoryString = window.localStorage.getItem("lessonHistory");
+    const history: LessonHistory = lessonHistoryString
+      ? JSON.parse(lessonHistoryString)
+      : [];
+    setLessonHistory(history);
+  }, [props.metWords]);
 
   useEffect(() => {
     if (mainHeading) {
@@ -156,15 +168,47 @@ const Progress = (props: Props) => {
       textareas.length > 1 ? textareas[1] : textareas[0]
     ) as HTMLTextAreaElement;
 
-    setPersonalPreferences(textareaContents.value);
-    setFlashWarning("To update your lesson progress, visit the lessons.");
+    const jsonString = textareaContents.value;
+    if (!jsonString.trim()) {
+      // Handle empty input
+      GoogleAnalytics.event({
+        category: "Progress",
+        action: "Update progress",
+        label: "Load met words: EMPTY_PROGRESS_INPUT",
+      });
+      return;
+    }
 
-    let numberOfMetWords = "0";
+    let metWordsToLoad: MetWords | null = null;
+    let metWordsString = '';
+
     try {
-      const parsedMetWords = JSON.parse(textareaContents.value);
-      numberOfMetWords = Object.keys(parsedMetWords).length.toString();
+      const parsedData = JSON.parse(jsonString);
 
-      updateStartingMetWordsAndCounts(parsedMetWords);
+      if (parsedData.metWords && Array.isArray(parsedData.lessonHistory)) {
+        // New format
+        metWordsToLoad = parsedData.metWords;
+        const lessonHistoryToLoad = parsedData.lessonHistory;
+        metWordsString = JSON.stringify(metWordsToLoad);
+        window.localStorage.setItem('lessonHistory', JSON.stringify(lessonHistoryToLoad));
+        setLessonHistory(lessonHistoryToLoad);
+      } else {
+        // Old format
+        metWordsToLoad = parsedData;
+        metWordsString = jsonString;
+        window.localStorage.removeItem('lessonHistory');
+        setLessonHistory([]);
+      }
+
+      setPersonalPreferences(metWordsString);
+      setFlashWarning("Your progress has been loaded.");
+
+      if (!metWordsToLoad) {
+        throw new Error("No metWords found in the loaded data.");
+      }
+      
+      const numberOfMetWords = Object.keys(metWordsToLoad).length.toString();
+      updateStartingMetWordsAndCounts(metWordsToLoad);
 
       setOldWordsGoalUnveiled(false);
       setNewWordsGoalUnveiled(false);
@@ -172,19 +216,21 @@ const Progress = (props: Props) => {
       setTodayNewWordCount(0);
       setOldWordsGoalMet(false);
       setNewWordsGoalMet(false);
+
+      GoogleAnalytics.event({
+        category: "Progress",
+        action: "Update progress",
+        label: "Load met words: " + numberOfMetWords,
+      });
+
     } catch (error) {
-      numberOfMetWords = "BAD_PROGRESS_INPUT";
+      GoogleAnalytics.event({
+        category: "Progress",
+        action: "Update progress",
+        label: "Load met words: BAD_PROGRESS_INPUT",
+      });
+      setFlashWarning("Could not load progress. The data format is invalid.");
     }
-
-    if (textareaContents.value === "" || textareaContents.value === " ") {
-      numberOfMetWords = "EMPTY_PROGRESS_INPUT";
-    }
-
-    GoogleAnalytics.event({
-      category: "Progress",
-      action: "Update progress",
-      label: "Load met words: " + numberOfMetWords,
-    });
   }
 
   function saveGoals(event: any) {
@@ -376,7 +422,7 @@ const Progress = (props: Props) => {
             </header>
           </div>
           <div className="flex mxn2">
-            <DownloadProgressButton metWords={props.metWords} />
+            <DownloadProgressButton metWords={props.metWords} lessonHistory={lessonHistory} />
           </div>
         </Subheader>
         <canvas
@@ -417,9 +463,15 @@ const Progress = (props: Props) => {
               />
               <div className="flex flex-wrap" style={{ rowGap: "16px" }}>
                 <div className="flex">{loadForm}</div>
+                <textarea
+                  id="js-full-progress-to-copy"
+                  style={{ position: 'absolute', left: '-9999px' }}
+                  readOnly
+                  value={JSON.stringify({ metWords: props.metWords, lessonHistory: lessonHistory })}
+                />
                 <PseudoContentButton
                   className="js-clipboard-button link-button copy-to-clipboard"
-                  dataClipboardTarget="#js-metwords-from-typey-type"
+                  dataClipboardTarget="#js-full-progress-to-copy"
                   aria-label="Copy progress to clipboard"
                 >
                   Copy progress
@@ -527,6 +579,22 @@ const Progress = (props: Props) => {
           >
             <small>{JSON.stringify(props.metWords)}</small>
           </p>
+
+          <ProgressGraph lessonHistory={lessonHistory} />
+
+          <div className="mt3">
+            <button
+              onClick={() => setShowHistory(!showHistory)}
+              className="button button--secondary"
+            >
+              {showHistory ? "Hide" : "Show"} Full History
+            </button>
+          </div>
+          {showHistory && (
+            <div className="mt3">
+              <ProgressHistoryList lessonHistory={lessonHistory} />
+            </div>
+          )}
         </div>
       </main>
     </div>
