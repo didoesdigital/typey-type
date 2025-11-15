@@ -8,7 +8,6 @@ import { useAnnouncerApi } from "../../../components/Announcer/useAnnouncer";
 import type {
   FullRecommendationsStudyType,
   LessonsProgressIndex,
-  MetWords,
 } from "../../../types";
 import { useAtom, useSetAtom } from "jotai";
 import { revisionModeState } from "../../../states/lessonState";
