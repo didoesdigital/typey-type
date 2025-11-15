@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Intro from "../components/Intro";
 import AussieRobot from "../../../images/AussieRobot.svg?react";
-// eslint-disable-next-line import/no-named-as-default
 import Chatbot from "react-chatbot-kit";
 import "./styles.scss";
 import makeConfig, { botName } from "./config";
