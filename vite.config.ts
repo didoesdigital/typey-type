@@ -26,12 +26,12 @@ export default defineConfig(({ mode }) => {
       !process.env.VITEST
         ? checker({
             typescript: true,
-            // eslint: {
-            //   // This should match `package.json` lint script:
-            //   lintCommand: "ESLINT_USE_FLAT_CONFIG=false eslint 'src/**/*.{js,jsx,ts,tsx}'",
-            //   watchPath: "src",
-            //   useFlatConfig: false,
-            // },
+            eslint: {
+              // This should match `package.json` lint script:
+              lintCommand: "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+              watchPath: "src",
+              useFlatConfig: true,
+            },
           })
         : undefined,
 
