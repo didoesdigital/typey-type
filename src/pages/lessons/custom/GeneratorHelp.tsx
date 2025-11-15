@@ -175,7 +175,6 @@ const GeneratorHelp = ({ hideHelp, containerId }: Props) => (
         <p className="mb0">
           This rule looks for any punctuation and symbols, including emoji.
         </p>
-        {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
         <p className="mb0">
           E.g. includes “I'll”, “£”, “©”, “💯”, and{" "}
           <code>&#123;&amp;%&#125;</code>.

@@ -13,7 +13,6 @@ import ErrorBoundary from "../../components/ErrorBoundary";
 import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
-// eslint-disable-next-line import/no-named-as-default
 import Flashcards from "./flashcards/Flashcards";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";

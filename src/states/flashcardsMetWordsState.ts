@@ -17,7 +17,7 @@ const _flashcardsMetWordsState = atomWithStorage<FlashcardsMetWords>(
       stroke: "-T",
       rung: 0,
     },
-  }
+  },
 );
 
 export const flashcardsMetWordsState = atom(
@@ -28,8 +28,9 @@ export const flashcardsMetWordsState = atom(
     word: string,
     feedback: string,
     stroke: string,
+    // Explicitly typing the parameter here and disabling the warning is better than explicitly typing the whole function to avoid triggering the warning or removing the parameter annotation and causing type errors
     // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-    rung: number = 0
+    rung: number = 0,
   ) => {
     const localStroke = stroke || "XXX";
     const flashcardsMetWords = { ...get(_flashcardsMetWordsState) };
@@ -55,5 +56,5 @@ export const flashcardsMetWordsState = atom(
     };
 
     set(_flashcardsMetWordsState, flashcardsMetWords);
-  }
+  },
 );

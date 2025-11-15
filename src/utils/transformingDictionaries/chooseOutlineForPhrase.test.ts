@@ -171,7 +171,6 @@ describe("choose outline for phrase", () => {
     //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHRORB", 1 ]);
     // });
 
-    // eslint-disable-next-line no-template-curly-in-string
     it("for dollar with suppressed trailing space should match ${^}", () => {
       const wordOrPhrase = "$";
       const chosenStroke = "";
