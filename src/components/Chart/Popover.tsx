@@ -19,7 +19,6 @@ const Popover = ({
   translateX,
   translateY,
   children,
-  ...props
 }: Props) => {
   const leftEdge = translateX - halfPopoverMaxWidth < 0;
   const rightEdge = translateX + halfPopoverMaxWidth > dimensions.width;

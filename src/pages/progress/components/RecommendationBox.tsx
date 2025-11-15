@@ -51,14 +51,12 @@ type Props = {
   lessonsProgress: LessonsProgressIndex;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
-  metWords: MetWords;
 };
 
 const RecommendationBox = ({
   lessonsProgress,
   yourSeenWordCount,
   yourMemorisedWordCount,
-  metWords,
 }: Props) => {
   const [toRecommendedNextLesson, setToRecommendedNextLesson] = useState(false);
   const lessonIndex = useLessonIndex();

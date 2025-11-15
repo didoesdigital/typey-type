@@ -648,13 +648,13 @@ const DictionaryManagement = (props: Props) => {
   let showConfigErrors = null;
 
   const validDictionaryList = validDictionariesState.map(
-    (dictionary, index, array) => {
+    (dictionary, index) => {
       return <li key={index}>{dictionary[0]}</li>;
     }
   );
 
   const invalidDictionaryList = invalidDictionariesState.map(
-    (dictionary, index, array) => {
+    (dictionary, index) => {
       return (
         <li key={index}>
           {dictionary[0]}: {dictionary[1]}
@@ -666,7 +666,7 @@ const DictionaryManagement = (props: Props) => {
   const namesOfValidImportedDictionaries =
     namesOfValidImportedDictionariesState;
   const validDictionariesListedInConfig =
-    validDictionariesListedInConfigState.map((dictionary, index, array) => {
+    validDictionariesListedInConfigState.map((dictionary, index) => {
       let className = "";
       if (namesOfValidImportedDictionaries.indexOf(dictionary) > -1) {
         className = "unstyled-list-item";

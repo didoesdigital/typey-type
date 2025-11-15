@@ -447,7 +447,6 @@ const Progress = (props: Props) => {
                     lessonsProgress={props.lessonsProgress}
                     yourSeenWordCount={props.yourSeenWordCount}
                     yourMemorisedWordCount={props.yourMemorisedWordCount}
-                    metWords={props.metWords}
                   />
                 </Suspense>
               </ErrorBoundary>

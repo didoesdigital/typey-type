@@ -141,7 +141,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
     }
   }
 
-  downloadDiagramSVG(e: any) {
+  downloadDiagramSVG() {
     // First version of this:
     const svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
 

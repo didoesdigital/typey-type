@@ -19,7 +19,7 @@ const splitOnSpace: SplitterFunction = (
 
   return phraseBits
     .slice(0, getPhraseSplitLimit(depth))
-    .map((phraseBit, i) => {
+    .map((phraseBit) => {
       return recursiveBuildStrokeHint(
         phraseBit,
         globalLookupDictionary,

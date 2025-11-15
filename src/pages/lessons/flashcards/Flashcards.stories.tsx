@@ -21,8 +21,7 @@ const globalLookupDictionary = new Map([
   ["gonna", [["TKPW*G", "typey:typey-type.json"]]],
 ]);
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
-const Template = (args) => {
+const Template = () => {
   useHydrateAtoms([[flashcardsProgressState, flashcardsProgress]]);
   return (
     <div className="p3">

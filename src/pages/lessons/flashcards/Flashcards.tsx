@@ -162,7 +162,7 @@ export class Flashcards extends Component<FlashcardsProps, State> {
   }
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (
       prevProps.lessonpath !== this.props.lessonpath &&
       this.props.locationpathname.endsWith("flashcards")
@@ -175,8 +175,7 @@ export class Flashcards extends Component<FlashcardsProps, State> {
     window.removeEventListener("resize", this.handleResize);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  handleResize = (event) => {
+  handleResize = () => {
     if (window.matchMedia("(orientation: landscape)").matches) {
       let currentSlide = 0;
       if (this.flashcardsCarousel) {

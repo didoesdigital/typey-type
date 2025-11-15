@@ -5,8 +5,7 @@ export default {
   component: CustomShareLessons,
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
-const Template = (args) => (
+const Template = () => (
   <div className="p3">
     <CustomShareLessons />
   </div>
