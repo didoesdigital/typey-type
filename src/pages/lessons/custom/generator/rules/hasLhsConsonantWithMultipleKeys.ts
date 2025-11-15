@@ -1,6 +1,5 @@
 const hasLhsConsonantWithMultipleKeys = (
   outline: string,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _translation: string
 ) =>
   !!(

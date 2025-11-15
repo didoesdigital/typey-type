@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const isSuperlative = (_outline: string, translation: string) =>
   !["wildebeest", "unrest"].includes(translation) &&
   // (!translation.includes(" ") && translation.endsWith("er")) ||
