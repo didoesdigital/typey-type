@@ -100,7 +100,7 @@ describe(App, () => {
     currentState = undefined;
     Date.now = vi.fn(() => 1234567890123);
     window.URL.createObjectURL = vi.fn();
-    global.fetch = vi.fn(async (path, options) => {
+    global.fetch = vi.fn(async (path, _options) => {
       const tweakedPath = `./public${(path as string).replace(import.meta.env.VITE_PUBLIC_URL, "")}`;
       const content = (await readFile(tweakedPath)).toString();
       return new Response(content);
@@ -178,11 +178,11 @@ describe(App, () => {
       // TODO: what else we want to check?
       return {
         currentLessonStrokes: currentState.currentLessonStrokes.map((stroke: any) => Object.fromEntries(
-          Object.entries(stroke).filter(([k, v]) =>
+          Object.entries(stroke).filter(([k, _v]) =>
             !["typedText"].includes(k)
           )
         )),
-        ...Object.fromEntries(Object.entries(currentState).filter(([k, v]) =>
+        ...Object.fromEntries(Object.entries(currentState).filter(([k, _v]) =>
           ["totalNumberOfMatchedChars",
             "totalNumberOfNewWordsMet",
             "totalNumberOfLowExposuresSeen",

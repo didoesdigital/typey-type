@@ -15,7 +15,7 @@ export const ContextApi = createContext({
   gameStarted: () => {
     // do nothing
   },
-  materialSet: (untrustedMultilineString: UntrustedMultilineString) => {
+  materialSet: (_untrustedMultilineString: UntrustedMultilineString) => {
     // do nothing
   },
   pairRestarted: () => {
