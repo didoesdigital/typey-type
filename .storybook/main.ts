@@ -22,7 +22,6 @@ const config: StorybookConfig = {
 
   core: {
     disableTelemetry: true,
-    enableCrashReports: false,
   },
 
   // https://storybook.js.org/docs/8/configure/environment-variables#using-storybook-configuration
