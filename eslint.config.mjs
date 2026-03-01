@@ -12,7 +12,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import storybook from "eslint-plugin-storybook";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import tseslint from "typescript-eslint";
-// import vitest from "@vitest/eslint-plugin";
+import vitest from "@vitest/eslint-plugin";
 
 const reactSettings = {
   react: {
@@ -205,6 +205,20 @@ const storybookConfig = defineConfig({
   extends: [storybook.configs["flat/recommended"]],
 });
 
+const vitestConfig = defineConfig({
+  files: ["src/**/*.test.{ts,tsx}"],
+  plugins: {
+    vitest,
+  },
+  rules: {
+    ...vitest.configs.recommended.rules, // you can also use vitest.configs.all.rules to enable all rules
+    // Disable these rules with lots of errors until we can gradually address them:
+    "vitest/no-commented-out-tests": "off",
+    "vitest/no-identical-title": "off",
+    "vitest/no-disabled-tests": "off",
+  },
+});
+
 export default defineConfig([
   globalIgnores([
     // <https://eslint.org/docs/latest/use/configure/ignore#ignoring-files>
@@ -236,6 +250,7 @@ export default defineConfig([
   tsConfig,
   reactJsxConfig,
   storybookConfig,
+  vitestConfig,
   {
     languageOptions: {
       globals: {
