@@ -5977,6 +5977,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"globals@npm:^17.3.0":
+  version: 17.3.0
+  resolution: "globals@npm:17.3.0"
+  checksum: 10c0/7f21443ecaa60c6e9ff56d9fb6f10a9b5f9514e7f22e5392f715472bb220ce31c865ebf414a32695150e733fb3e1013e6322dbce70fddd1e066f372b8d55a4b8
+  languageName: node
+  linkType: hard
+
 "globalthis@npm:^1.0.4":
   version: 1.0.4
   resolution: "globalthis@npm:1.0.4"
@@ -9969,6 +9976,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:7.0.1"
     eslint-plugin-react-refresh: "npm:^0.4.24"
     eslint-plugin-storybook: "npm:0.12.0"
+    globals: "npm:^17.3.0"
     howler: "npm:^2.2.3"
     jotai: "npm:^2.8.0"
     jsdom: "npm:^27.0.1"
