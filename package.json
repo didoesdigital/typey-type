@@ -90,6 +90,7 @@
     "@types/react-transition-group": "^4.4.5",
     "@vitejs/plugin-react": "^4.6.0",
     "@vitest/coverage-v8": "4.0.3",
+    "@vitest/eslint-plugin": "^1.6.9",
     "@vitest/ui": "4.0.3",
     "chromatic": "^12.2.0",
     "eslint": "9.39.1",
