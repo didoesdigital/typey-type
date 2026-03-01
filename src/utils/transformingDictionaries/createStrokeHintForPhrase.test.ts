@@ -2225,7 +2225,7 @@ describe("create stroke hint for phrase", () => {
     });
   });
 
-  describe("code symbols ", () => {
+  describe("code symbols", () => {
     it("shows hint for =>", () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       const wordOrPhraseMaterial = "=>";
