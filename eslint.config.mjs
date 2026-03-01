@@ -1,5 +1,6 @@
 // @ts-check
 
+import globals from "globals";
 import { defineConfig, globalIgnores } from "eslint/config";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tsParser from "@typescript-eslint/parser";
@@ -237,6 +238,9 @@ export default defineConfig([
   storybookConfig,
   {
     languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
       parser: tsParser,
       parserOptions: {
         projectService: {
