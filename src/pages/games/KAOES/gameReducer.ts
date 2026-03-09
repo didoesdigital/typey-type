@@ -1,5 +1,6 @@
 import isNormalInteger from "../../../utils/isNormalInteger";
 import { actions } from "../utilities/gameActions";
+import { choosePuzzleKey } from "./utilities";
 
 export const roundToWin = 8;
 
@@ -33,7 +34,7 @@ const defaultState: KAOESState = {
   firstGuess: true,
   gameComplete: false,
   roundIndex: 0,
-  puzzleText: "",
+  puzzleText: choosePuzzleKey(""),
 };
 
 export const initConfig = (state: undefined | KAOESState): KAOESState => ({

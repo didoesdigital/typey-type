@@ -101,13 +101,10 @@ export default function Game({
   const [state, dispatch] = useReducer(
     gameReducer,
     undefined, // init state
-    initConfig
+    initConfig,
   );
+
   useEffect(() => {
-    dispatch({
-      type: actions.setPuzzleText,
-      payload: { puzzleText: choosePuzzleKey("") },
-    });
     ReactModal.setAppElement("#js-app");
   }, []);
 
