@@ -2457,6 +2457,9 @@ img.homepage-demo-gif {
 .bloop-appear.bloop-appear-active {
   transform: scale(2);
   transition: transform 0.5s cubic-bezier(.61,0,.48,1);
+  @media (prefers-reduced-motion: reduce) {
+    transform: scale(1);
+  }
 }
 .bloop-enter-done {
   transform: scale(1);
