@@ -2,7 +2,7 @@ import isNormalInteger from "../../../utils/isNormalInteger";
 import { actions } from "../utilities/gameActions";
 import { choosePuzzleKey } from "./utilities";
 
-export const roundToWin = 8;
+export const defaultRoundToWin = 8;
 
 const roundToWinStorageKey = "typey-KAOES-rounds";
 
@@ -11,6 +11,7 @@ type KAOESState = {
   gameComplete: boolean;
   roundIndex: number;
   puzzleText: string;
+  roundToWin: number;
 };
 
 type KAOESActionGameRestarted = { type: typeof actions.gameRestarted };
@@ -18,6 +19,13 @@ type KAOESActionGameRestarted = { type: typeof actions.gameRestarted };
 type KAOESActionMakeGuess = { type: typeof actions.makeGuess };
 
 type KAOESActionRoundCompleted = { type: typeof actions.roundCompleted };
+
+type KAOESActionRoundToWinUpdated = {
+  type: typeof actions.roundToWinUpdated;
+  payload: {
+    roundToWin: number;
+  };
+};
 
 type SetPuzzleText = {
   type: typeof actions.setPuzzleText;
@@ -28,12 +36,34 @@ type KAOESAction =
   | KAOESActionGameRestarted
   | KAOESActionMakeGuess
   | KAOESActionRoundCompleted
+  | KAOESActionRoundToWinUpdated
   | SetPuzzleText;
+
+const getInitialRoundToWin = () => {
+  let initialRoundToWin = defaultRoundToWin;
+
+  try {
+    const storageRounds =
+      window.localStorage.getItem(roundToWinStorageKey) ?? "0";
+    if (
+      isNormalInteger(storageRounds) &&
+      +storageRounds > 1 &&
+      +storageRounds < 10000
+    ) {
+      initialRoundToWin = +storageRounds;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return initialRoundToWin;
+};
 
 const defaultState: KAOESState = {
   firstGuess: true,
   gameComplete: false,
   roundIndex: 0,
+  roundToWin: getInitialRoundToWin(),
   puzzleText: choosePuzzleKey(""),
 };
 
@@ -49,23 +79,25 @@ const getPuzzleTextState = (state: KAOESState, action: SetPuzzleText) => {
   };
 };
 
-export const gameReducer = (state: KAOESState, action: KAOESAction) => {
-  let experimentalRoundToWin = roundToWin;
+const getRoundToWinUpdatedState = (
+  state: KAOESState,
+  action: KAOESActionRoundToWinUpdated,
+) => {
+  const newRoundToWin = action.payload.roundToWin;
 
   try {
-    const storageRounds =
-      window.localStorage.getItem(roundToWinStorageKey) ?? "0";
-    if (
-      isNormalInteger(storageRounds) &&
-      +storageRounds > 1 &&
-      +storageRounds < 10000
-    ) {
-      experimentalRoundToWin = +storageRounds;
-    }
-  } catch (e) {
-    console.error(e);
+    window.localStorage.setItem(roundToWinStorageKey, `${newRoundToWin}`);
+  } catch (err) {
+    console.error(err);
   }
 
+  return {
+    ...state,
+    roundToWin: newRoundToWin,
+  };
+};
+
+export const gameReducer = (state: KAOESState, action: KAOESAction) => {
   switch (action.type) {
     case actions.makeGuess:
       return {
@@ -74,7 +106,7 @@ export const gameReducer = (state: KAOESState, action: KAOESAction) => {
       };
 
     case actions.roundCompleted:
-      return state.roundIndex + 1 === experimentalRoundToWin
+      return state.roundIndex + 1 === state.roundToWin
         ? {
             ...state,
             gameComplete: true,
@@ -92,6 +124,9 @@ export const gameReducer = (state: KAOESState, action: KAOESAction) => {
         gameComplete: false,
         roundIndex: 0,
       };
+
+    case actions.roundToWinUpdated:
+      return getRoundToWinUpdatedState(state, action);
 
     case actions.setPuzzleText:
       return getPuzzleTextState(state, action);

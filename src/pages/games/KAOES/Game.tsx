@@ -5,11 +5,11 @@ import ReactModal from "react-modal";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import * as Confetti from "../../../utils/confetti";
 import { actions } from "../utilities/gameActions";
-import { initConfig, gameReducer, roundToWin } from "./gameReducer";
+import { initConfig, gameReducer, defaultRoundToWin } from "./gameReducer";
 import Completed from "../components/Completed";
 import Intro from "../components/Intro";
 import Input from "../components/Input";
-import GameProgress from "../components/GameProgress";
+import { ProgressWrapper, Round } from "../components/GameProgress";
 import StenoLayoutDiagram from "../../../StenoLayout/AmericanStenoDiagram";
 import Stroke from "utils/stroke";
 import strokeBits from "utils/strokeBits";
@@ -223,6 +223,18 @@ export default function Game({
     });
   };
 
+  const setContinuousKAOES = () => {
+    // If you can write a key every second then 1000 rounds is about 17 min.
+    // At that point a beginner student may wish to move onto actual stenography.
+    const infiniteRounds = 1000;
+    dispatch({
+      type: "roundToWinUpdated",
+      payload: {
+        roundToWin: state.roundToWin > 8 ? defaultRoundToWin : infiniteRounds,
+      },
+    });
+  };
+
   return (
     <div className="flex flex-wrap justify-between">
       <div className="mx-auto mw-1024 min-width-320 w-100">
@@ -251,6 +263,7 @@ export default function Game({
             <div className="flex flex-wrap pb1">
               <Intro
                 introText={introText}
+                maxWidthClass="mw-800"
                 robot={
                   <MischievousRobot
                     id="mischievous-robot-KAOES"
@@ -260,11 +273,23 @@ export default function Game({
                 }
               />
               <div id={"good-guess"} className="flex flex-grow">
-                <GameProgress
-                  // NOTE: this is a hack to show "∞" when current round is higher than expected
-                  round={state.roundIndex + 1 > 9 ? -1 : state.roundIndex + 1}
-                  roundToWin={roundToWin}
-                />
+                <ProgressWrapper>
+                  <Round
+                    round={state.roundIndex + 1}
+                    roundToWin={state.roundToWin}
+                  />
+
+                  <label htmlFor="continuousKAOES" className="">
+                    <input
+                      type="checkbox"
+                      name="continuousKAOES"
+                      id="continuousKAOES"
+                      onChange={setContinuousKAOES}
+                      checked={state.roundToWin > 8}
+                    />{" "}
+                    Infinite
+                  </label>
+                </ProgressWrapper>
               </div>
             </div>
             <Puzzle puzzleText={prettyKey(state.puzzleText)} />

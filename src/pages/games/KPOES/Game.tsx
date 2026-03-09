@@ -46,6 +46,7 @@ export default function Game({
               {gameName} game
             </h3>
             <Intro
+              maxWidthClass="mw100"
               introText={introText}
               robot={
                 <ComposingRobot

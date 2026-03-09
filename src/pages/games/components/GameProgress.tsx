@@ -6,15 +6,15 @@ type RoundProps = {
   roundToWin: number;
 };
 
-const Round: FC<RoundProps> = ({ round, roundToWin }) => (
+export const Round: FC<RoundProps> = ({ round, roundToWin }) => (
   <>
     Round:{" "}
     <TransitionGroup className={"dib"} component={"span"} key={round}>
       <CSSTransition timeout={500} classNames="bloop" appear={true}>
-        <strong className="dib">{round < 1 ? "∞" : round}</strong>
+        <strong className="dib">{round}</strong>
       </CSSTransition>
-    </TransitionGroup>{" "}
-    of {roundToWin}
+    </TransitionGroup>
+    {roundToWin > 9 ? "" : ` of ${roundToWin}`}
     <br />
   </>
 );
@@ -39,13 +39,19 @@ type Props = {
   levelToWin?: number;
 };
 
+export const ProgressWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="flex flex-grow">
+      <p className="text-center w-100">{children}</p>
+    </div>
+  );
+};
+
 const GameProgress: FC<Props> = ({ level, levelToWin, round, roundToWin }) => (
-  <div className="flex flex-grow">
-    <p className="text-center w-100">
-      <Round round={round} roundToWin={roundToWin} />
-      <Level level={level} levelToWin={levelToWin} />
-    </p>
-  </div>
+  <ProgressWrapper>
+    <Round round={round} roundToWin={roundToWin} />
+    <Level level={level} levelToWin={levelToWin} />
+  </ProgressWrapper>
 );
 
 export default GameProgress;
