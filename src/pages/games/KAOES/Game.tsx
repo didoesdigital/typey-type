@@ -95,7 +95,6 @@ export default function Game({
   const [typedText, setTypedText] = useState("");
   const [modalVisibility, setModalVisibility] = useState(false);
 
-  const [puzzleText, setPuzzleText] = useState("");
   const [stenoStroke, setStenoStroke] = useState(new Stroke());
   const [previousStenoStroke, setPreviousStenoStroke] = useState(new Stroke());
   const [rightWrongColor, setRightWrongColor] = useState(neutralDarkColor);
@@ -105,7 +104,10 @@ export default function Game({
     initConfig
   );
   useEffect(() => {
-    setPuzzleText(choosePuzzleKey(""));
+    dispatch({
+      type: actions.setPuzzleText,
+      payload: { puzzleText: choosePuzzleKey("") },
+    });
     ReactModal.setAppElement("#js-app");
   }, []);
 
@@ -141,10 +143,13 @@ export default function Game({
     }
     const tmpBoard = new Stroke();
     const clickedKey = tmpBoard.set(key).toString();
-    if (puzzleText === clickedKey) {
+    if (state.puzzleText === clickedKey) {
       setPreviousCompletedPhraseAsTyped("");
       restartConfetti();
-      setPuzzleText(choosePuzzleKey(clickedKey));
+      dispatch({
+        type: actions.setPuzzleText,
+        payload: { puzzleText: choosePuzzleKey(clickedKey) },
+      });
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
       dispatch({ type: actions.roundCompleted });
@@ -180,11 +185,14 @@ export default function Game({
           stenoTypedTextToKeysMapping[comparableTypedKeyString] ?? 0
         : rawStenoKeyNumber;
 
-    if (puzzleText === comparableTypedKeyString) {
+    if (state.puzzleText === comparableTypedKeyString) {
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(typedStenoKey);
       restartConfetti();
-      setPuzzleText(choosePuzzleKey(comparableTypedKeyString));
+      dispatch({
+        type: actions.setPuzzleText,
+        payload: { puzzleText: choosePuzzleKey(comparableTypedKeyString) },
+      });
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
       dispatch({ type: actions.roundCompleted });
@@ -262,7 +270,7 @@ export default function Game({
                 />
               </div>
             </div>
-            <Puzzle puzzleText={prettyKey(puzzleText)} />
+            <Puzzle puzzleText={prettyKey(state.puzzleText)} />
             <div className="flex flex-wrap flex-grow justify-center pt1 pb3">
               <div className="inline-flex relative mx-auto mw100">
                 <TransitionGroup
@@ -283,7 +291,7 @@ export default function Game({
                         {...mapBriefsFunction(
                           state.firstGuess ? "" : previousStenoStroke.toString()
                         )}
-                        brief={`duplicate-${puzzleText}`}
+                        brief={`duplicate-${state.puzzleText}`}
                         classes="w-100 steno-diagram-svg"
                         diagramWidth={diagramWidth}
                         handleOnClick={undefined}
@@ -302,7 +310,7 @@ export default function Game({
                   id="stenoDiagram"
                   {...mapBriefsFunction(stenoStroke.toString())}
                   handleOnClick={onClickHandler}
-                  brief={puzzleText}
+                  brief={state.puzzleText}
                   diagramWidth={diagramWidth}
                   hideLetters={true}
                   onStrokeColor={neutralDarkColor}

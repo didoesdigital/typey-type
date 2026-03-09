@@ -9,6 +9,7 @@ type KAOESState = {
   firstGuess: boolean;
   gameComplete: boolean;
   roundIndex: number;
+  puzzleText: string;
 };
 
 type KAOESActionGameRestarted = { type: typeof actions.gameRestarted };
@@ -17,21 +18,35 @@ type KAOESActionMakeGuess = { type: typeof actions.makeGuess };
 
 type KAOESActionRoundCompleted = { type: typeof actions.roundCompleted };
 
+type SetPuzzleText = {
+  type: typeof actions.setPuzzleText;
+  payload: { puzzleText: string };
+};
+
 type KAOESAction =
   | KAOESActionGameRestarted
   | KAOESActionMakeGuess
-  | KAOESActionRoundCompleted;
+  | KAOESActionRoundCompleted
+  | SetPuzzleText;
 
 const defaultState: KAOESState = {
   firstGuess: true,
   gameComplete: false,
   roundIndex: 0,
+  puzzleText: "",
 };
 
 export const initConfig = (state: undefined | KAOESState): KAOESState => ({
   ...defaultState,
   ...state,
 });
+
+const getPuzzleTextState = (state: KAOESState, action: SetPuzzleText) => {
+  return {
+    ...state,
+    puzzleText: action.payload.puzzleText,
+  };
+};
 
 export const gameReducer = (state: KAOESState, action: KAOESAction) => {
   let experimentalRoundToWin = roundToWin;
@@ -50,12 +65,13 @@ export const gameReducer = (state: KAOESState, action: KAOESAction) => {
     console.error(e);
   }
 
-  switch (action?.type) {
+  switch (action.type) {
     case actions.makeGuess:
       return {
         ...state,
         firstGuess: false,
       };
+
     case actions.roundCompleted:
       return state.roundIndex + 1 === experimentalRoundToWin
         ? {
@@ -67,6 +83,7 @@ export const gameReducer = (state: KAOESState, action: KAOESAction) => {
             ...state,
             roundIndex: state.roundIndex + 1,
           };
+
     case actions.gameRestarted:
       return {
         ...state,
@@ -74,6 +91,9 @@ export const gameReducer = (state: KAOESState, action: KAOESAction) => {
         gameComplete: false,
         roundIndex: 0,
       };
+
+    case actions.setPuzzleText:
+      return getPuzzleTextState(state, action);
 
     default:
       return state;
