@@ -1,5 +1,5 @@
 import "./instrument";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "./components/ErrorBoundary";
 import App from "./App";
@@ -26,7 +26,10 @@ const AppWithAtomsCompat = withAtomsCompat(AppWrapper, [
   ["globalUserSettings", globalUserSettingsState],
 ]);
 
-render(
+const container = document.getElementById("root");
+const root = createRoot(container!);
+
+root.render(
   <DocumentTitle title="Typey Type for Stenographers">
     <Router
       basename={import.meta.env.VITE_PUBLIC_URL}
@@ -41,6 +44,5 @@ render(
         </Routes>
       </ErrorBoundary>
     </Router>
-  </DocumentTitle>,
-  document.getElementById("root")
+  </DocumentTitle>
 );
