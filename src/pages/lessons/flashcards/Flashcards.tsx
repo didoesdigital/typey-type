@@ -655,7 +655,6 @@ export class Flashcards extends Component<FlashcardsProps, State> {
                     callback={this.onChangeCurrentSlide.bind(this)}
                     aria-labelledby="flashcards-listbox-label"
                   >
-                    {/* @ts-expect-error TS(2786) FIXME: 'SlideNodes' cannot be used as a JSX component. */}
                     <SlideNodes flashcards={this.state.flashcards} />
                   </Slider>
 
