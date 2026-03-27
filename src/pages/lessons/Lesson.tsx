@@ -8,7 +8,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { parse } from "query-string";
-import DocumentTitle from "react-document-title";
+import DocumentTitle from "components/DocumentTitle";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";

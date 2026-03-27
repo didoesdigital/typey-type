@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/react";
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 import { Fragment, useEffect, useRef, useState } from "react";
-import DocumentTitle from "react-document-title";
+import DocumentTitle from "components/DocumentTitle";
 import GoogleAnalytics from "react-ga4";
 import Notification from "../../components/Notification";
 import { getListOfValidDictionariesAddedAndInConfig } from "../../utils/transformingDictionaries/transformingDictionaries";

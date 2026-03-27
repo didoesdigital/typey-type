@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import * as React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { parse } from "query-string";
-import DocumentTitle from "react-document-title";
+import DocumentTitle from "components/DocumentTitle";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
 import { loadPersonalPreferences } from "utils/storage";

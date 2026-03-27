@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import DocumentTitle from "react-document-title";
+import DocumentTitle from "components/DocumentTitle";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import PageLoading from "../../components/PageLoading";
 import "./Games.scss";

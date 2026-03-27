@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import DocumentTitle from "react-document-title";
+import DocumentTitle from "components/DocumentTitle";
 import { Link } from "react-router-dom";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import Subheader from "../../components/Subheader";

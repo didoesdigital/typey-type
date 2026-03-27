@@ -4,7 +4,7 @@ import ClosingCross from "../../components/Icons/icon-images/ClosingCross.svg";
 import Icon from "../../components/Icons/Icon";
 import { Link, useLocation } from "react-router-dom";
 import AnimateHeight from "react-animate-height";
-import DocumentTitle from "react-document-title";
+import DocumentTitle from "components/DocumentTitle";
 import LessonCanvasFooter, {
   type LessonCanvasFooterProps,
 } from "./components/LessonCanvasFooter";

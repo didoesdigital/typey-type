@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import * as React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import DocumentTitle from "react-document-title";
+import DocumentTitle from "components/DocumentTitle";
 import PageLoading from "./components/PageLoading";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Lessons from "./pages/lessons/Lessons";

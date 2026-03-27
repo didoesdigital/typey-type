@@ -1,6 +1,6 @@
 import "./instrument";
 import { createRoot } from "react-dom/client";
-import DocumentTitle from "react-document-title";
+import DocumentTitle from "components/DocumentTitle";
 import ErrorBoundary from "./components/ErrorBoundary";
 import App from "./App";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
