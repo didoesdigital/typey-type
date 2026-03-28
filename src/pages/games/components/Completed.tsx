@@ -16,7 +16,7 @@ const particles: Confetti.ConfettiParticle[] = [];
 const handlePlayAgainClick = (
   event: React.MouseEvent,
   gameName: string,
-  dispatch: (...actions: any) => void
+  dispatch: (...actions: any) => void,
 ) => {
   event.preventDefault();
 
@@ -50,7 +50,7 @@ function Completed({ gameName, dispatch }: CompletedProps) {
         particles,
         canvasRef.current,
         canvasWidth,
-        canvasHeight
+        canvasHeight,
       );
     }
     return function cleanup() {
@@ -59,27 +59,29 @@ function Completed({ gameName, dispatch }: CompletedProps) {
   }, [canvasRef, canvasWidth, canvasHeight]);
 
   const restartConfetti = useCallback(
-    (event) => {
+    (event: any) => {
+      const isKeyboard = "keyCode" in event;
       if (
         event &&
-        ((event.keyCode && event.keyCode === 13) || event.type === "click")
+        ((isKeyboard && event.keyCode && event.keyCode === 13) ||
+          event.type === "click")
       ) {
         particles.splice(0);
         Confetti.cancelAnimation();
         Confetti.setupCanvas(
           { sparsity: 170, colors: 4 },
           "you-win",
-          particles
+          particles,
         );
         Confetti.restartAnimation(
           particles,
           canvasRef.current,
           canvasWidth,
-          canvasHeight
+          canvasHeight,
         );
       }
     },
-    [canvasRef, canvasWidth, canvasHeight]
+    [canvasRef, canvasWidth, canvasHeight],
   );
 
   return (
