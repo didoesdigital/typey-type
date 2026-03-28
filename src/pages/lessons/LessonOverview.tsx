@@ -15,7 +15,7 @@ const getLessonOverview = async (lessonFile: any) => {
 
 type LessonOverviewProps = {
   lessonIndex: LessonIndexEntry[];
-  lessonMetadata?: any;
+  lessonMetadata?: LessonIndexEntry;
   lessonPath: string;
   lessonTitle?: string;
   lessonTxtPath: string;
@@ -36,27 +36,32 @@ const LessonOverview = ({
 </div>`);
   const [error, setError] = useState(false);
 
-  const updateLessonOverviewContent = useCallback((metadata) => {
-    if (metadata?.title) {
-      setTitle(metadata.title);
-    }
+  const updateLessonOverviewContent = useCallback(
+    (metadata: LessonIndexEntry) => {
+      if (metadata?.title) {
+        setTitle(metadata.title);
+      }
 
-    if (metadata?.overview) {
-      getLessonOverview(import.meta.env.VITE_PUBLIC_URL + "/lessons" + metadata.overview)
-        .then((text) => {
-          setContent(text);
-          setError(
-            text.toLowerCase().startsWith("<!doctype html>") ? true : false
-          );
-        })
-        .catch((e) => {
-          setError(true);
-          console.error(e);
-        });
-    } else {
-      setError(true);
-    }
-  }, []);
+      if (metadata?.overview) {
+        getLessonOverview(
+          import.meta.env.VITE_PUBLIC_URL + "/lessons" + metadata.overview,
+        )
+          .then((text) => {
+            setContent(text);
+            setError(
+              text.toLowerCase().startsWith("<!doctype html>") ? true : false,
+            );
+          })
+          .catch((e) => {
+            setError(true);
+            console.error(e);
+          });
+      } else {
+        setError(true);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     mainHeading.current?.focus();
@@ -69,7 +74,7 @@ const LessonOverview = ({
       try {
         const metadata = getLessonMetadata(
           lessonIndex,
-          import.meta.env.VITE_PUBLIC_URL + lessonTxtPath
+          import.meta.env.VITE_PUBLIC_URL + lessonTxtPath,
         );
         updateLessonOverviewContent(metadata);
       } catch (e: unknown) {

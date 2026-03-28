@@ -14,13 +14,13 @@ const AnnouncerController: FC<Props> = ({ children }) => {
 
   const data = useMemo(() => ({ message }), [message]);
 
-  const updateMessage = useCallback((msg) => setMessage(msg), []);
+  const updateMessage = useCallback((msg: string) => setMessage(msg), []);
 
   const api = useMemo(
     () => ({
       updateMessage,
     }),
-    [updateMessage]
+    [updateMessage],
   );
 
   return (
