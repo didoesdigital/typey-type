@@ -25,6 +25,8 @@
     "chromatic": "echo \"Chromatic is set up with a private token for use by Di. This script exists to stop Chromatic offering to add it for me.\""
   },
   "resolutions": {
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.1",
     "loader-utils": "^2.0.4",
     "minimist": "^1.2.6"
   },
