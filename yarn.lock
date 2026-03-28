@@ -10196,6 +10196,15 @@ __metadata:
     vite-plugin-svgr: "npm:^4.5.0"
     vite-tsconfig-paths: "npm:^4.3.2"
     vitest: "npm:4.0.3"
+  dependenciesMeta:
+    "@parcel/watcher":
+      built: true
+    "@sentry/cli":
+      built: true
+    esbuild:
+      built: true
+    unrs-resolver:
+      built: true
   languageName: unknown
   linkType: soft
 
