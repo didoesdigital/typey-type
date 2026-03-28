@@ -66,7 +66,7 @@ function LevelCompleted({ gameName, level, dispatch }: LevelCompletedProps) {
   }, [canvasRef, canvasWidth, canvasHeight]);
 
   const restartConfetti = useCallback(
-    (event) => {
+    (event: any) => {
       if (
         event &&
         ((event.keyCode && event.keyCode === 13) || event.type === "click")
