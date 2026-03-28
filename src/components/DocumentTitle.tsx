@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDocumentTitle from "react-document-title";
+import { Helmet } from "react-helmet";
 
 type Props = {
   title: string;
@@ -7,7 +7,14 @@ type Props = {
 };
 
 const DocumentTitle = ({ children, title }: Props) => {
-  return <ReactDocumentTitle title={title}>{children}</ReactDocumentTitle>;
+  return (
+    <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      {children}
+    </>
+  );
 };
 
 export default DocumentTitle;
