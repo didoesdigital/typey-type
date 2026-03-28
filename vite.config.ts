@@ -32,6 +32,9 @@ export default defineConfig(({ mode }) => {
               watchPath: "src",
               useFlatConfig: true,
             },
+            overlay: {
+              initialIsOpen: false,
+            },
           })
         : undefined,
 
