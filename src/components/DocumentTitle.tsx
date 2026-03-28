@@ -1,14 +1,15 @@
-import React from "react";
-import { Helmet } from "react-helmet";
+import { type ReactNode } from "react";
+import Helmet from "react-helmet";
 
 type Props = {
   title: string;
-  children?: React.ReactChild | null | undefined;
+  children?: ReactNode;
 };
 
 const DocumentTitle = ({ children, title }: Props) => {
   return (
     <>
+      {/* @ts-ignore */}
       <Helmet>
         <title>{title}</title>
       </Helmet>
