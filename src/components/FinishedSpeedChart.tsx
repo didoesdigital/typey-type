@@ -147,11 +147,11 @@ export default function FinishedSpeedChart({ data }: Props) {
   );
 
   const xAccessorScaled = useCallback(
-    (d) => xScale(xAccessor(d)),
+    (d: Datum) => xScale(xAccessor(d)),
     [xAccessor, xScale]
   );
   const yAccessorScaled = useCallback(
-    (d) => yScale(yAccessor(d)),
+    (d: Datum) => yScale(yAccessor(d)),
     [yAccessor, yScale]
   );
   // eslint-disable-next-line react-hooks/exhaustive-deps
