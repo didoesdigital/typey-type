@@ -1,5 +1,5 @@
 import * as Sentry from "@sentry/react";
-import { Component } from "react";
+import { Component, type ErrorInfo, type ReactNode } from "react";
 
 // To test this component out, throw an error in the child component that the boundary wraps:
 // constructor () {
@@ -15,6 +15,7 @@ type State = {
 type Props = {
   vanish?: boolean;
   relative?: boolean;
+  children?: ReactNode;
 };
 
 class ErrorBoundary extends Component<Props, State> {
@@ -23,7 +24,12 @@ class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false, disabledCookieError: false };
   }
 
-  componentDidCatch(error: any, info: any) {
+  static getDerivedStateFromError() {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
     this.setState({ hasError: true });
 
     let disabledCookieError = false;
