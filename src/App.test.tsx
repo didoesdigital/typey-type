@@ -4,7 +4,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, useNavigate, useLocation } from "react-router-dom";
 import { readFile } from "node:fs/promises";
 import userEvent from "@testing-library/user-event";
-import { SpacePlacement } from "./types";
+import { type SpacePlacement } from "./types";
 import { useAtom } from "jotai";
 import { userSettingsState } from "./states/userSettingsState";
 import { globalUserSettingsState } from "./states/globalUserSettingsState";
