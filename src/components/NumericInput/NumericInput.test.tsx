@@ -85,7 +85,7 @@ const setup = (setupOptions: SetupOptions) => {
       id={id}
       initialValue={initialValue}
       {...otherNumericInputProps}
-    />
+    />,
   );
 
   const input = screen.getByRole("textbox") as HTMLInputElement;
@@ -205,9 +205,11 @@ describe("NumericInput", () => {
       initialSelectionStart: 0,
       initialSelectionEnd: 0,
     });
-    input.blur();
 
-    expect(input.value).toBe("0"); // Either original value (3) or interim valid value (0) would be fine
+    await waitFor(() => {
+      input.blur();
+      expect(input.value).toBe("0"); // Either original value (3) or interim valid value (0) would be fine
+    });
   });
 
   it("cleans up gibberish in field even if parsed input value is the same as `value`", async () => {
@@ -246,15 +248,18 @@ describe("NumericInput", () => {
     // Move to start and type "4", which immediately changes the field to "4" instead of "4xa"
     await user.type(input, "{backspace}xa");
     input.setSelectionRange(0, 0);
+
     await user.type(input, "4", {
       skipClick: true,
       initialSelectionStart: 0,
       initialSelectionEnd: 0,
     });
-    input.blur();
 
     expect(spyValue).toHaveBeenCalledWith(4);
-    expect(input.value).toBe("4");
+    await waitFor(() => {
+      input.blur();
+      expect(input.value).toBe("4");
+    });
   });
 
   it("allows 'a' while field has focus then revert to previous valid value on blur", async () => {
@@ -275,9 +280,11 @@ describe("NumericInput", () => {
     const { user, input } = setup({ ...defaultProps, min: 0, max: 30 });
 
     await user.type(input, "{backspace}5");
-    input.blur();
 
-    expect(input.value).toBe("5");
+    await waitFor(() => {
+      input.blur();
+      expect(input.value).toBe("5");
+    });
   });
 
   it("with precision 0 discards decimal points", async () => {
@@ -308,11 +315,13 @@ describe("NumericInput", () => {
     });
 
     await user.type(input, "{backspace} 1.1"); // Note: leading whitespace
-    input.blur();
 
-    expect(spyValue).toHaveBeenCalledWith(1.1);
+    await waitFor(() => {
+      input.blur();
 
-    expect(input.value).toBe("1.1"); // No leading whitespace
+      expect(spyValue).toHaveBeenCalledWith(1.1);
+      expect(input.value).toBe("1.1"); // No leading whitespace
+    });
   });
 
   it("clamps number over max to max", async () => {
@@ -327,13 +336,14 @@ describe("NumericInput", () => {
     // Starts at "2"
     // Changes to "" then "3" then "34"
     await user.type(input, "{backspace}34");
-    input.blur();
-
-    expect(spyValue).toHaveBeenCalled();
-    expect(spyValue).toHaveBeenCalledWith(3);
-    expect(spyValue).toHaveBeenCalledTimes(2);
 
     await waitFor(() => {
+      input.blur();
+
+      expect(spyValue).toHaveBeenCalled();
+      expect(spyValue).toHaveBeenCalledWith(3);
+      expect(spyValue).toHaveBeenCalledTimes(2);
+
       expect(input.value).toBe("30");
     });
   });
@@ -484,9 +494,10 @@ describe("NumericInput", () => {
     expect(input.value).toBe("25");
     await user.type(input, "{arrowup}", { skipClick: true });
     expect(input.value).toBe("35");
-    input.blur();
 
     await waitFor(() => {
+      input.blur();
+
       expect(input.value).toBe("35");
     });
   });
