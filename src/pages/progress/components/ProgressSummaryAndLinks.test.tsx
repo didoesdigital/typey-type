@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import ProgressSummaryAndLinks from "./ProgressSummaryAndLinks";
@@ -43,10 +44,24 @@ const userSettings: UserSettings = {
   hideOtherSettings: false,
 };
 
+const Wrapper = ({ children }: { children: ReactNode }) => {
+  return (
+    <Router
+      basename="/"
+      future={{
+        v7_relativeSplatPath: false,
+        v7_startTransition: false,
+      }}
+    >
+      {children}
+    </Router>
+  );
+};
+
 describe("progress summary and links", () => {
   it("renders", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -61,7 +76,7 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
     const textElement = screen.getByText(/successfully typed/i);
     expect(textElement).toBeInTheDocument();
@@ -69,7 +84,7 @@ describe("progress summary and links", () => {
 
   it("celebrates finishing Typey Type", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -84,7 +99,7 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
     const textElement = screen.getByText(/You rock!/i);
     expect(textElement).toBeInTheDocument();
@@ -92,7 +107,7 @@ describe("progress summary and links", () => {
 
   it("has 1 seen and 0 memorised", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -109,11 +124,11 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
 
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent(
-      "Practice"
+      "Practice",
     );
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent("Drill");
     expect(screen.getByText(/Revise/i)).toBeInTheDocument();
@@ -122,7 +137,7 @@ describe("progress summary and links", () => {
 
   it("has 1 seen and 1 memorised", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -139,11 +154,11 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
 
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent(
-      "Practice"
+      "Practice",
     );
     expect(screen.getByText(/Drill/i)).toBeInTheDocument();
     expect(screen.getByText(/Revise/i)).toBeInTheDocument();
@@ -152,7 +167,7 @@ describe("progress summary and links", () => {
 
   it("has 0 seen and 1 memorised", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -169,11 +184,11 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
 
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent(
-      "Practice"
+      "Practice",
     );
     expect(screen.getByText(/Drill/i)).toBeInTheDocument();
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent("Revise");
@@ -182,7 +197,7 @@ describe("progress summary and links", () => {
 
   it("has 10 seen and 0 memorised", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -210,11 +225,11 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
 
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent(
-      "Practice"
+      "Practice",
     );
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent("Drill");
     expect(screen.getByText(/Revise/i)).toBeInTheDocument();
@@ -223,7 +238,7 @@ describe("progress summary and links", () => {
 
   it("has 10 seen and 1 memorised", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -252,7 +267,7 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
 
     expect(screen.getByText(/Practice/i)).toBeInTheDocument();
@@ -263,7 +278,7 @@ describe("progress summary and links", () => {
 
   it("has 10 seen and 2 memorised", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -293,7 +308,7 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
 
     expect(screen.getByText(/Practice/i)).toBeInTheDocument();
@@ -304,7 +319,7 @@ describe("progress summary and links", () => {
 
   it("has 0 seen and 0 memorised", () => {
     render(
-      <Router basename="/">
+      <Wrapper>
         <Routes>
           <Route
             path={"/"}
@@ -321,18 +336,18 @@ describe("progress summary and links", () => {
             }
           />
         </Routes>
-      </Router>
+      </Wrapper>,
     );
 
     const textElement = screen.getByText(/successfully typed/i);
     expect(textElement).toBeInTheDocument();
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent(
-      "Practice"
+      "Practice",
     );
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent("Drill");
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent("Revise");
     expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent(
-      "Discover"
+      "Discover",
     );
   });
 });
