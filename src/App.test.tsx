@@ -121,7 +121,9 @@ describe('App', () => {
     const input = () => screen.findByTestId("your-typed-text");
     const typeIn = async (text: string) => {
       await userEvent.type(await input(), text);
-      await timer(BUFFER_INTERVAL_MILLIS); // make sure buffered input is processed before next typeIn comes in
+      await waitFor(async() => {
+        await timer(BUFFER_INTERVAL_MILLIS); // make sure buffered input is processed before next typeIn comes in
+      })
     };
     const assertText = async (text: string) =>
       await waitFor(async () => expect(await input()).toHaveValue(text));
@@ -195,6 +197,7 @@ describe('App', () => {
       beforeEach(async () => {
         await loadPage(PAGES.proverbsStartingWithY);
       });
+
       it("accepts inputs letter by letter", async () => {
         const { spBefore, spAfter } = getSpacer(spacePlacement);
 
