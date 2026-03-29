@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import { mean } from "d3-array";
 import type {
   DataPoint,
@@ -5,8 +6,19 @@ import type {
   TransformedData,
 } from "pages/lessons/types";
 
-const calculatedAdjustedWPM = (wordCount: number, duration: number) =>
-  Math.max(wordCount - 1, 0) / (duration / 1000 / 60);
+const calculatedAdjustedWPM = (wordCount: number, duration: number) => {
+  try {
+    // eslint-disable-next-line eqeqeq
+    if (wordCount == undefined) {
+      throw new Error("wordCount is undefined in calculatedAdjustedWPM");
+    }
+  } catch (error) {
+    console.error(error);
+    Sentry.captureException(error);
+    wordCount = 0; // At least it's not "NaN"
+  }
+  return Math.max(wordCount - 1, 0) / (duration / 1000 / 60);
+};
 
 function stitchTogetherLessonData(
   lessonStrokes: any[],
