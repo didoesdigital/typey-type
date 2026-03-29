@@ -170,8 +170,6 @@ describe('App', () => {
           `Write ${expectedFirstPhrase}`
         )
       );
-
-      document.cookie = "batchUpdate=1";
     };
 
     function getStatsState() {
@@ -253,95 +251,8 @@ describe('App', () => {
           }
         );
       });
-      // TODO: once we're happy that with the new behaviour as the permanent default, remove all the `batchUpdate`-specific branching code and tests:
-      it.skip("accepts excess chars except for spaceAfterOutput", async () => {
-        document.cookie = "batchUpdate=0";
-        // This user with spaceOff setting actually puts space after
-        const spBefore = spacePlacement === "spaceBeforeOutput" ? " " : "";
-        const spAfter = spacePlacement === "spaceAfterOutput" || spacePlacement === "spaceOff" ? " " : "";
-        await assertCurrentPhrase("You");
-        await assertText("");
-        await typeIn(spBefore + "yours" + spAfter);
-        await timer(100);
-        if (spacePlacement === "spaceAfterOutput") {
-          // spaceAfterOutput only rejects nicely currently
-          await assertCurrentPhrase("You");
-          await assertText("yours ");
-          await typeIn("{backspace}{backspace}{backspace} ");
-        } else {
-          await assertCurrentPhrase("can");
-          if (spacePlacement === "spaceOff") {
-            await assertText("rs ");
-            await typeIn("{backspace}{backspace}{backspace}");
-          } else {
-            await assertText("rs");
-            await typeIn("{backspace}{backspace}");
-          }
-        }
-        await assertText("");
-        await assertCurrentPhrase("can");
-        await typeIn(spBefore + "can" + spAfter);
-        await assertCurrentPhrase("lead");
-        // it was accepted ignoring extra spaces, but this user anyway input space after
-        await assertText(spacePlacement === "spaceOff" ? " " : "");
-        expect(getStatsState()).toEqual({
-            "currentLessonStrokes": [
-              {
-                ...(spacePlacement === "spaceAfterOutput" ? {
-                  accuracy: true, // No misstroke because you needed two strokes, "KPA/U". Fixed with batch update
-                  // rejects nicely today
-                  attempts: [{
-                    "hintWasShown": true,
-                    "numberOfMatchedWordsSoFar": 0.6,
-                    "text": "yours ",
-                    "time": 1234567890123
-                  }]
-                } : {
-                  "accuracy": true,
-                  "attempts": []
-                }),
-                "checked": true,
-                "hintWasShown": true,
-                "numberOfMatchedWordsSoFar": hasExtraSpaces ? 0.8 : 0.6,
-                "stroke": "KPA/U",
-                "time": 1234567890123,
-                "word": "You"
-              },
-              {
-                ...(spacePlacement === "spaceAfterOutput" ? {
-                  accuracy: true,
-                  attempts: []
-                } : {
-                  "accuracy": false,
-                  "attempts": [
-                    // improperly attributes misstroke to the second word
-                    {
-                      "hintWasShown": true,
-                      "numberOfMatchedWordsSoFar": hasExtraSpaces ? 0.8 : 0.6,
-                      "text": spacePlacement === "spaceOff" ? "rs " : "rs",
-                      "time": 1234567890123
-                    }
-                  ]
-                }),
-                "checked": true,
-                "hintWasShown": true,
-                "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.2,
-                "stroke": "K",
-                "time": 1234567890123,
-                "word": "can"
-              }
-            ],
-            "totalNumberOfHintedWords": 2,
-            "totalNumberOfLowExposuresSeen": 0,
-            "totalNumberOfMatchedChars": hasExtraSpaces ? 8 : 6,
-            // Thanks to capitalization expected for first phrase and expectation is 2 strokes, `yours {bsp}{bsp}{bsp} ` is not counted as mistyped
-            "totalNumberOfMistypedWords": spacePlacement === "spaceAfterOutput" ? 0 : 1,
-            "totalNumberOfNewWordsMet": 0,
-            "totalNumberOfRetainedWords": 0
-          }
-        );
-      });
-      // New behavior
+
+
       it("doesn't accept excess chars", async () => {
         const { spBefore, spAfter } = getSpacer(spacePlacement);
         await assertCurrentPhrase("You");
@@ -629,10 +540,8 @@ describe('App', () => {
       beforeEach(async () => {
         await loadPage(PAGES.partyTricks);
       });
-      // TODO: once we're happy that this will be the permanent new default behaviour, remove all the `batchUpdate`-specific branching code and tests:
-      // it.each([1, 0])("records interim strokes for correct phrase (batchUpdate=%s)", async (batchUpdate) => {
-      it.each([1])("records interim strokes for correct phrase (batchUpdate=%s)", async (batchUpdate) => {
-        document.cookie = `batchUpdate=${batchUpdate}`;
+
+      it("records interim strokes for correct phrase", async () => {
         const { spBefore, spAfter } = getSpacer(spacePlacement);
         await typeIn(spBefore + "sigh" + spAfter);
         const leapt = spBefore + "leapt" + spAfter;

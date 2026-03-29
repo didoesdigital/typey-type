@@ -702,14 +702,7 @@ class App extends Component<Props, AppState> {
 
   updateMarkup(event: React.ChangeEvent<HTMLTextAreaElement>) {
     const actualText = event.target.value;
-    // TODO: once we're happy that this will be the permanent new default behaviour, remove all the `batchUpdate`-specific branching code and tests:
-    // const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
-    const batchUpdate = true;
-    if(!batchUpdate) {
-      // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 1.
-      this.processBuffer(actualText);
-      return;
-    }
+
     // Immediately update the text in the input field
     this.setState({ actualText });
     // @ts-expect-error TS(2322) FIXME: Type 'any' is not assignable to type 'never'.
