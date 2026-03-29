@@ -1,8 +1,16 @@
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
-import * as React from "react";
+import {
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+  type ChangeEventHandler,
+  type MouseEventHandler,
+} from "react";
 import GoogleAnalytics from "react-ga4";
 import ReactModal from "react-modal";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { motion } from "motion/react";
+import { useReducedMotion } from "framer-motion";
 import * as Confetti from "../../../utils/confetti";
 import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer, defaultRoundToWin } from "./gameReducer";
@@ -78,7 +86,7 @@ const GiveKAOESfeedback = ({ idModifier = "" }) => (
 );
 
 type KAOESGameProps = {
-  changeInputForKAOES: React.ChangeEventHandler<HTMLInputElement>;
+  changeInputForKAOES: ChangeEventHandler<HTMLInputElement>;
   inputForKAOES: GlobalUserSettings["inputForKAOES"];
 };
 
@@ -86,6 +94,8 @@ export default function Game({
   changeInputForKAOES,
   inputForKAOES,
 }: KAOESGameProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
   const canvasHeight = Math.floor(window.innerHeight);
@@ -108,16 +118,12 @@ export default function Game({
     ReactModal.setAppElement("#js-app");
   }, []);
 
-  const handleOpenModal: React.MouseEventHandler<HTMLButtonElement> = (
-    event
-  ) => {
+  const handleOpenModal: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     setModalVisibility(true);
   };
 
-  const handleCloseModal: React.MouseEventHandler<HTMLButtonElement> = (
-    event
-  ) => {
+  const handleCloseModal: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     setModalVisibility(false);
   };
@@ -130,7 +136,7 @@ export default function Game({
       particles,
       canvasRef.current,
       canvasWidth,
-      canvasHeight
+      canvasHeight,
     );
   }, [canvasRef, canvasWidth, canvasHeight]);
 
@@ -179,7 +185,7 @@ export default function Game({
     const comparableTypedKeyNumber =
       inputForKAOES === "qwerty"
         ? // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-          stenoTypedTextToKeysMapping[comparableTypedKeyString] ?? 0
+          (stenoTypedTextToKeysMapping[comparableTypedKeyString] ?? 0)
         : rawStenoKeyNumber;
 
     if (state.puzzleText === comparableTypedKeyString) {
@@ -295,38 +301,46 @@ export default function Game({
             <Puzzle puzzleText={prettyKey(state.puzzleText)} />
             <div className="flex flex-wrap flex-grow justify-center pt1 pb3">
               <div className="inline-flex relative mx-auto mw100">
-                <TransitionGroup
+                <motion.div
                   className={
                     "duplicate-steno-diagram absolute pointer-none w-100"
                   }
-                  component={"div"}
+                  initial={{
+                    opacity: shouldReduceMotion ? 1 : 1,
+                    filter: shouldReduceMotion ? "blur(0)" : "blur(0)",
+                  }}
+                  animate={{
+                    opacity: shouldReduceMotion ? 0 : 0.01,
+                    filter: shouldReduceMotion ? "blur(0)" : "blur(.5rem)",
+                  }}
+                  transition={{
+                    duration: 1,
+                    filter: {
+                      inherit: true,
+                      duration: 1.5,
+                    },
+                  }}
                   key={previousStenoStroke.toString()}
                 >
-                  <CSSTransition
-                    timeout={5000}
-                    classNames="key-dissolve"
-                    appear={true}
-                  >
-                    <div className="avoid-transition-classes-clashing-on-child-component">
-                      <StenoLayoutDiagram
-                        id="duplicateStenoDiagram"
-                        {...mapBriefsFunction(
-                          state.firstGuess ? "" : previousStenoStroke.toString()
-                        )}
-                        brief={`duplicate-${state.puzzleText}`}
-                        classes="w-100 steno-diagram-svg"
-                        diagramWidth={diagramWidth}
-                        handleOnClick={undefined}
-                        onStrokeColor={rightWrongColor}
-                        offStrokeColor="transparent"
-                        onTextColor="#fff"
-                        offTextColor="transparent"
-                        onKeyColor={rightWrongColor}
-                        offKeyColor="transparent"
-                      />
-                    </div>
-                  </CSSTransition>
-                </TransitionGroup>
+                  <div className="avoid-transition-classes-clashing-on-child-component">
+                    <StenoLayoutDiagram
+                      id="duplicateStenoDiagram"
+                      {...mapBriefsFunction(
+                        state.firstGuess ? "" : previousStenoStroke.toString(),
+                      )}
+                      brief={`duplicate-${state.puzzleText}`}
+                      classes="w-100 steno-diagram-svg"
+                      diagramWidth={diagramWidth}
+                      handleOnClick={undefined}
+                      onStrokeColor={rightWrongColor}
+                      offStrokeColor="transparent"
+                      onTextColor="#fff"
+                      offTextColor="transparent"
+                      onKeyColor={rightWrongColor}
+                      offKeyColor="transparent"
+                    />
+                  </div>
+                </motion.div>
                 <StenoLayoutDiagram
                   classes="steno-diagram-svg"
                   id="stenoDiagram"

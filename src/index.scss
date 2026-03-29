@@ -2159,21 +2159,6 @@ img.homepage-demo-gif {
 
 
 
-.key-dissolve-appear {
-  filter: blur(0);
-  opacity: 1;
-}
-.key-dissolve-appear.key-dissolve-appear-active {
-  filter: blur(.5rem);
-  opacity: 0.01;
-  transition: opacity 1s linear,
-              filter  1.5s ease-in;
-}
-.key-dissolve-enter-done {
-  opacity: 0.0;
-  transition: opacity 2s linear;
-}
-
 // see also: revision-mode-button
 // see also: de-emphasized-button
 .show-scores-control {
