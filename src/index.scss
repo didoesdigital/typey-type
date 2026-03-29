@@ -2159,27 +2159,6 @@ img.homepage-demo-gif {
 
 
 
-.dissolve-appear {
-  color: color.adjust($brand-primary, $saturation: -5%);
-  filter: blur(0);
-  opacity: 1;
-  // will-change: filter;
-}
-
-.dissolve-appear.dissolve-appear-active {
-  color: color.adjust(add-tint($brand-success, 20%), $saturation: 10%);
-  filter: blur(.5rem);
-  opacity: 0.01;
-  transition: opacity .2s linear,
-              color   .0s linear,
-              filter   .5s linear;
-}
-
-.dissolve-enter-done {
-  opacity: 0.0;
-  transition: opacity .2s linear;
-}
-
 .key-dissolve-appear {
   filter: blur(0);
   opacity: 1;
