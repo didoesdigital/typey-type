@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
-import * as React from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { type ChangeEventHandler, useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "framer-motion";
 
 type InputProps = {
   onChangeInput: (inputText: string) => void;
@@ -18,6 +18,7 @@ export default function Input({
   gameName,
 }: InputProps) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (inputRef) {
@@ -25,8 +26,8 @@ export default function Input({
     }
   }, []);
 
-  const onChangeTypedText: React.ChangeEventHandler<HTMLTextAreaElement> = (
-    event
+  const onChangeTypedText: ChangeEventHandler<HTMLTextAreaElement> = (
+    event,
   ) => {
     const inputText = event?.target?.value || "";
     onChangeInput(inputText);
@@ -42,22 +43,34 @@ export default function Input({
       </label>
       <div className="relative">
         <samp className="pointer-none absolute absolute--fill w-100">
-          <TransitionGroup
+          <motion.span
             className={"dib flex justify-center"}
-            component={"span"}
+            initial={{
+              opacity: shouldReduceMotion ? 1 : 1,
+              filter: shouldReduceMotion ? "blur(0)" : "blur(0)",
+            }}
+            animate={{
+              opacity: shouldReduceMotion ? 0 : 0.01,
+              filter: shouldReduceMotion ? "blur(0)" : "blur(.5rem)",
+            }}
+            transition={{
+              duration: 0.2,
+              filter: {
+                inherit: true,
+                duration: 0.5,
+              },
+            }}
             key={round}
           >
-            <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
-              <kbd
-                className={
-                  "text-green-700 successfully-typed-text typed-text-input-positioning pre relative text-center"
-                }
-                aria-hidden="true"
-              >
-                {round > 1 ? previousCompletedPhraseAsTyped : ""}
-              </kbd>
-            </CSSTransition>
-          </TransitionGroup>
+            <kbd
+              className={
+                "text-green-700 successfully-typed-text typed-text-input-positioning pre relative text-center"
+              }
+              aria-hidden="true"
+            >
+              {round > 1 ? previousCompletedPhraseAsTyped : ""}
+            </kbd>
+          </motion.span>
         </samp>
         <textarea
           ref={inputRef}
