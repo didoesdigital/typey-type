@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { motion } from "motion/react";
+import { useReducedMotion } from "framer-motion";
 import Input from "../components/Input";
 import {
   useTPEURPBGSApi,
@@ -11,6 +12,7 @@ type Props = {
 };
 
 const GamePlay: FC<Props> = ({ gameName }) => {
+  const shouldReduceMotion = useReducedMotion();
   const [typedText, setTypedText] = useState("");
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
@@ -31,15 +33,25 @@ const GamePlay: FC<Props> = ({ gameName }) => {
   return (
     <>
       <p className="text-center" data-chromatic="ignore">
-        <TransitionGroup
+        <motion.span
           className={"dib"}
-          component={"span"}
+          animate={{
+            transform: shouldReduceMotion
+              ? "scale(1)"
+              : ["scale(1)", "scale(1.2)", "scale(1)"],
+          }}
+          transition={{
+            duration: 0.5,
+            times: [0, 0.4, 1],
+            ease: [
+              [0.41, 0, 0.48, 1],
+              [0.61, 0, 0.28, 1],
+            ],
+          }}
           key={repeatIndex + 1}
         >
-          <CSSTransition timeout={500} classNames="bloop" appear={true}>
-            <strong>{puzzleText}</strong>
-          </CSSTransition>
-        </TransitionGroup>
+          <strong>{puzzleText}</strong>
+        </motion.span>
       </p>
       <Input
         onChangeInput={onChangeTPEURPBGSInput}

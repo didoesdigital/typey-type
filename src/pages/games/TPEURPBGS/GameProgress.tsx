@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { motion } from "motion/react";
+import { useReducedMotion } from "framer-motion";
 import { useTPEURPBGSData } from "./TPEURPBGSContext/useTPEURPBGS";
 
 const Section: FC = () => {
@@ -32,20 +33,31 @@ const Pair: FC = () => {
 };
 
 const Repeat: FC = () => {
+  const shouldReduceMotion = useReducedMotion();
   const { repeatIndex, repeatToWin } = useTPEURPBGSData();
   return (
     <div className="flex justify-between">
       <span>Repeat: </span>
       <span>
-        <TransitionGroup
+        <motion.span
           className={"dib"}
-          component={"span"}
+          animate={{
+            transform: shouldReduceMotion
+              ? "scale(1)"
+              : ["scale(1)", "scale(1.2)", "scale(1)"],
+          }}
+          transition={{
+            duration: 0.5,
+            times: [0, 0.4, 1],
+            ease: [
+              [0.41, 0, 0.48, 1],
+              [0.61, 0, 0.28, 1],
+            ],
+          }}
           key={repeatIndex + 1}
         >
-          <CSSTransition timeout={500} classNames="bloop" appear={true}>
-            <strong>{repeatIndex + 1 || 1}</strong>
-          </CSSTransition>
-        </TransitionGroup>{" "}
+          <strong>{repeatIndex + 1 || 1}</strong>
+        </motion.span>{" "}
         of {repeatToWin}
       </span>
     </div>
