@@ -1,6 +1,11 @@
-import { useEffect, useRef } from "react";
-import * as React from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import {
+  useEffect,
+  useRef,
+  type ChangeEventHandler,
+  type KeyboardEvent,
+} from "react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "framer-motion";
 import GoogleAnalytics from "react-ga4";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../states/userSettingsState";
@@ -18,13 +23,14 @@ type Props = {
   currentPhrase: string;
   previousCompletedPhraseAsTyped: string;
   sayCurrentPhraseAgain: () => void;
-  updateMarkup: React.ChangeEventHandler<HTMLTextAreaElement>;
+  updateMarkup: ChangeEventHandler<HTMLTextAreaElement>;
   focusTriggerInt: number;
 };
 
 const TypedText = (props: Props) => {
   const userSettings = useAtomValue(userSettingsState);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     return () => {
@@ -64,7 +70,7 @@ const TypedText = (props: Props) => {
     });
   }
 
-  function keyPress(event: React.KeyboardEvent<HTMLTextAreaElement>) {
+  function keyPress(event: KeyboardEvent<HTMLTextAreaElement>) {
     if (event && event.charCode && event.charCode === 13) {
       // Enter key
       event.preventDefault();
@@ -118,27 +124,39 @@ const TypedText = (props: Props) => {
         {sayCurrentPhraseButton}
         <p className="input-text mx-auto">
           <samp className="pointer-none absolute absolute--fill w-100">
-            <TransitionGroup
+            <motion.span
               className={`dib${isMultiline ? " flex justify-center" : ""}`}
-              component={"span"}
+              initial={{
+                opacity: shouldReduceMotion ? 1 : 1,
+                filter: shouldReduceMotion ? "blur(0)" : "blur(0)",
+              }}
+              animate={{
+                opacity: shouldReduceMotion ? 0 : 0.01,
+                filter: shouldReduceMotion ? "blur(0)" : "blur(.5rem)",
+              }}
+              transition={{
+                duration: 0.2,
+                filter: {
+                  inherit: true,
+                  duration: 0.5,
+                },
+              }}
               key={previousCompletedPhraseAsTypedKey}
             >
-              <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
-                <kbd
-                  className={`successfully-typed-text typed-text-input-positioning whitespace-pre relative${
-                    isMultiline ? " text-center" : " text-left"
-                  }`}
-                  style={{
-                    color: previousCompletedPhraseAccuracy
-                      ? "#23512C"
-                      : "#953159",
-                  }}
-                  aria-hidden="true"
-                >
-                  {props.previousCompletedPhraseAsTyped}
-                </kbd>
-              </CSSTransition>
-            </TransitionGroup>
+              <kbd
+                className={`successfully-typed-text typed-text-input-positioning whitespace-pre relative${
+                  isMultiline ? " text-center" : " text-left"
+                }`}
+                style={{
+                  color: previousCompletedPhraseAccuracy
+                    ? "#23512C"
+                    : "#953159",
+                }}
+                aria-hidden="true"
+              >
+                {props.previousCompletedPhraseAsTyped}
+              </kbd>
+            </motion.span>
           </samp>
           <span>
             <textarea
