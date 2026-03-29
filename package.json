@@ -42,7 +42,7 @@
     "d3-time": "^3.0.0",
     "d3-time-format": "^4.1.0",
     "howler": "^2.2.3",
-    "jotai": "^2.8.0",
+    "jotai": "^2.19.0",
     "motion": "^12.38.0",
     "pure-react-carousel": "https://github.com/didoesdigital/pure-react-carousel.git#add-slider-callback",
     "query-string": "^6.2.0",
