@@ -104,8 +104,6 @@ function fetchAndSetupGlobalDict(
       isGlobalDictionaryUpToDate = true;
       // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
       this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-      // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-      this.setState({ globalLookupDictionaryLoaded: true });
     })
       .catch((error) => {
         console.error("Error while loading Typey Type dictionaries:", error);

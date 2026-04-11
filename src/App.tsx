@@ -694,10 +694,12 @@ class App extends Component<Props, AppState> {
   }
 
   updateGlobalLookupDictionary(combinedLookupDictionary: LookupDictWithNamespacedDictsAndConfig) {
-    // This flushSync ensures `globalLookupDictionary` is set when we call `generateListOfWordsAndStrokes` with it so that we create `stroke` entries with the correct values from a full lookup dictionary Map instead of an empty one on first page load with personal dictionaries in local storage:
     flushSync(() => {
       this.setState({
+        // This flushSync ensures `globalLookupDictionary` is set when we call `generateListOfWordsAndStrokes` with it so that we create `stroke` entries with the correct values from a full lookup dictionary Map instead of an empty one on first page load with personal dictionaries in local storage:
         globalLookupDictionary: combinedLookupDictionary,
+        // This flushSync ensures `globalLookupDictionaryLoaded` is set in `StrokesForWords` when navigating to Lookup:
+        globalLookupDictionaryLoaded: true,
       });
     })
   }
