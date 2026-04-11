@@ -1,5 +1,4 @@
-import { Component } from 'react';
-import * as React from 'react';
+import { Component, type ChangeEvent, type MouseEvent } from 'react';
 import { flushSync } from 'react-dom';
 import { isLessonTextValid } from 'utils/utils';
 import {
@@ -643,7 +642,7 @@ class App extends Component<Props, AppState> {
     });
   }
 
-  createCustomLesson(event: React.ChangeEvent<HTMLTextAreaElement>) {
+  createCustomLesson(event: ChangeEvent<HTMLTextAreaElement>) {
     if (event && event.target) {
       const providedText = event.target.value || '';
       const [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
@@ -671,7 +670,7 @@ class App extends Component<Props, AppState> {
     return event;
   }
 
-  reviseLesson(event: React.MouseEvent<HTMLAnchorElement>, newRevisionMaterial: RevisionMaterial) {
+  reviseLesson(event: MouseEvent<HTMLAnchorElement>, newRevisionMaterial: RevisionMaterial) {
     event.preventDefault();
     this.stopLesson();
     this.setupLesson({
@@ -681,7 +680,7 @@ class App extends Component<Props, AppState> {
     });
   }
 
-  restartLesson(event: React.MouseEvent<HTMLAnchorElement>) {
+  restartLesson(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     this.stopLesson();
     this.setupLesson({
@@ -706,7 +705,7 @@ class App extends Component<Props, AppState> {
   markupBuffer = [];
   updateBufferTimer = null;
 
-  updateMarkup(event: React.ChangeEvent<HTMLTextAreaElement>) {
+  updateMarkup(event: ChangeEvent<HTMLTextAreaElement>) {
     const actualText = event.target.value;
 
     // Immediately update the text in the input field
