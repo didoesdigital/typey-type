@@ -9,6 +9,7 @@ import { useAtom } from "jotai";
 import { userSettingsState } from "./states/userSettingsState";
 import { globalUserSettingsState } from "./states/globalUserSettingsState";
 import { useLessonIndexWithFallback } from "./states/lessonIndexState";
+import { AppState } from 'App.types';
 
 // Depending on environment, userEvent.type() could be so slow that keydowns have interval of more than 16ms.
 // Increase this if test gets too flaky
@@ -64,7 +65,7 @@ vi.mock("./components/InfoIconAndTooltip.tsx", () => ({
 }));
 
 describe('App', () => {
-  let currentState: any = undefined;
+  let currentState: AppState | undefined = undefined;
 
   class StateLoggingApp extends App {
     render() {
@@ -177,12 +178,12 @@ describe('App', () => {
     function getStatsState() {
       // TODO: what else we want to check?
       return {
-        currentLessonStrokes: currentState.currentLessonStrokes.map((stroke: any) => Object.fromEntries(
+        currentLessonStrokes: currentState?.currentLessonStrokes.map((stroke: any) => Object.fromEntries(
           Object.entries(stroke).filter(([k, _v]) =>
             !["typedText"].includes(k)
           )
         )),
-        ...Object.fromEntries(Object.entries(currentState).filter(([k, _v]) =>
+        ...Object.fromEntries(Object.entries(currentState ?? {}).filter(([k, _v]) =>
           ["totalNumberOfMatchedChars",
             "totalNumberOfNewWordsMet",
             "totalNumberOfLowExposuresSeen",
