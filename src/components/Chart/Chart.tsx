@@ -19,10 +19,10 @@ type Props = {
 
 const Chart = ({
   dimensions,
-  onMouseMove = undefined,
-  onTouchMove = undefined,
-  onMouseOut = undefined,
-  onTouchEnd = undefined,
+  onMouseMove,
+  onTouchMove,
+  onMouseOut,
+  onTouchEnd,
   accessibleTitle,
   children,
 }: Props) => (

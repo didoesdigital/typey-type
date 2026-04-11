@@ -20,7 +20,6 @@ export default function Game({ globalLookupDictionary }: Props) {
   const [config, setConfig] = useState(makeConfig());
 
   useEffect(() => {
-    // @ts-expect-error FIXME: needs proper types
     const newConfig = makeConfig(globalLookupDictionary);
     setConfig(newConfig);
   }, [globalLookupDictionary]);

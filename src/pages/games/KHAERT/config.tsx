@@ -4,22 +4,25 @@ import PhraseLookup from "./PhraseLookup";
 import ExternalLink from "./ExternalLink";
 import AussieRobotAvatar from "../../../images/AussieRobotAvatar.svg?react";
 import Stenographer from "../../../images/Stenographer.svg?react";
+import { type LookupDictWithNamespacedDictsAndConfig } from "types";
 
 export const botName = "Shazza";
 
 const defaultEmptyDict = new Map([]);
 
-const makeConfig = (globalLookupDictionary = undefined) => ({
+const makeConfig = (
+  globalLookupDictionary?: LookupDictWithNamespacedDictsAndConfig,
+) => ({
   initialMessages: [
     // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 1.
     createChatBotMessage(`Hi! I'm ${botName} and I love talking about steno`),
     createChatBotMessage(
       `I'm a newly built bot so I don't have much to say yet`,
-      { delay: 300 }
+      { delay: 300 },
     ),
     createChatBotMessage(
       `Send Di a message if you have ideas for useful things to teach me`,
-      { delay: 600 }
+      { delay: 600 },
     ),
   ],
   botName: botName,

@@ -14,7 +14,7 @@ const SettingCheckbox = ({
   checked,
   disabled,
   label,
-  modalAndButton = undefined,
+  modalAndButton,
   nameAndId,
   onChange,
   wrapperClasses = "",

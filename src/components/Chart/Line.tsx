@@ -7,6 +7,7 @@ type LineProps = {
   xAccessor: (d: any) => number;
   yAccessor: (d: any) => number;
   y0Accessor: (d: any) => number;
+  /** e.g. "#9880C2" */
   colorAccessor: string;
   interpolation: CurveFactory;
 };
@@ -17,7 +18,7 @@ const Line = ({
   xAccessor,
   yAccessor,
   y0Accessor,
-  colorAccessor = "#9880C2",
+  colorAccessor,
   interpolation,
   ...props
 }: LineProps) => {
