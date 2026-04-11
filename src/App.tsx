@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import * as React from 'react';
+import { flushSync } from 'react-dom';
 import { isLessonTextValid } from 'utils/utils';
 import {
   writePersonalPreferences
@@ -694,7 +695,12 @@ class App extends Component<Props, AppState> {
   }
 
   updateGlobalLookupDictionary(combinedLookupDictionary: LookupDictWithNamespacedDictsAndConfig) {
-    this.setState({globalLookupDictionary: combinedLookupDictionary});
+    // This flushSync ensures `globalLookupDictionary` is set when we call `generateListOfWordsAndStrokes` with it so that we create `stroke` entries with the correct values from a full lookup dictionary Map instead of an empty one on first page load with personal dictionaries in local storage:
+    flushSync(() => {
+      this.setState({
+        globalLookupDictionary: combinedLookupDictionary,
+      });
+    })
   }
 
   markupBuffer = [];
