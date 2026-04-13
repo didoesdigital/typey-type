@@ -1,4 +1,4 @@
-import { expect, within, userEvent } from "@storybook/test";
+import { expect, within, userEvent } from "storybook/test";
 
 import CustomLessonGenerator from "./CustomLessonGenerator";
 import AppMethodsContext from "../../../states/legacy/AppMethodsContext";

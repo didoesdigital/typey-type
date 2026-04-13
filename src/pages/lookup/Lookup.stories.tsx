@@ -1,6 +1,6 @@
 import Lookup from "./Lookup";
 import userSettings from "../../stories/fixtures/userSettings";
-import { expect, within, userEvent } from "@storybook/test";
+import { expect, within, userEvent } from "storybook/test";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";
 import appMethods from "../../stories/fixtures/appMethods";
 import { useHydrateAtoms } from "jotai/utils";

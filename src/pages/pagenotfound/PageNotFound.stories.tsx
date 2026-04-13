@@ -1,6 +1,6 @@
 import PageNotFound from "./PageNotFound";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof PageNotFound> = {
   title: "Pages/PageNotFound",

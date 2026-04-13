@@ -2,7 +2,7 @@ import CustomLessonSetup from "./CustomLessonSetup";
 import AppMethodsContext from "../../../states/legacy/AppMethodsContext";
 import appMethods from "../../../stories/fixtures/appMethods";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof CustomLessonSetup> = {
   title: "Pages/CustomLessonSetup",

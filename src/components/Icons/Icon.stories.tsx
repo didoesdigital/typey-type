@@ -3,7 +3,7 @@ import Icon from "./Icon";
 import ClosingCross from "./icon-images/ClosingCross.svg";
 import "./Icon.stories.css";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof Icon> = {
   component: Icon,

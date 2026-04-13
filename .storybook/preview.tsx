@@ -1,5 +1,5 @@
 import { MemoryRouter as Router, Route, Routes } from "react-router-dom";
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
 
 import "../src/index.scss";
 

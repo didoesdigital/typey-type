@@ -1,8 +1,8 @@
-import { expect, within, userEvent } from "@storybook/test";
+import { expect, within, userEvent } from "storybook/test";
 
 import CustomWordListLesson from "./CustomWordListLesson";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type {
   DictionaryConfig,
   LookupDictWithNamespacedDicts,
