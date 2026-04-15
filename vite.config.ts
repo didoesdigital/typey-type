@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 import react from "@vitejs/plugin-react";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
-import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
@@ -21,6 +20,9 @@ export default defineConfig(({ mode }) => {
       typecheck: {
         enabled: true,
       },
+    },
+    resolve: {
+      tsconfigPaths: true,
     },
     plugins: [
       !process.env.VITEST
@@ -43,8 +45,6 @@ export default defineConfig(({ mode }) => {
       // svgr options: https://react-svgr.com/docs/options/
       // svgr({ svgrOptions: { icon: true } }),
       svgr(),
-
-      tsconfigPaths(),
 
       // Put the Sentry vite plugin after all other plugins
       !process.env.TYPEY_TYPE_RELEASE
