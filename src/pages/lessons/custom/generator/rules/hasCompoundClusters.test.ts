@@ -29,6 +29,10 @@ describe("hasCompoundClusters", () => {
     expect(hasCompoundClusters("RA*PL", "ramp")).toEqual(true);
   });
 
+  it("returns true for FRP -mp", async () => {
+    expect(hasCompoundClusters("HRAFRP", "lamp")).toEqual(true);
+  });
+
   it("returns false for test", async () => {
     expect(hasCompoundClusters("TEFT", "test")).toEqual(false);
   });

@@ -19,7 +19,8 @@ const hasCompoundClusters = (outline: string, translation: string) =>
       translation.match(/[^g]/) &&
       !translation.match(/cs$/) &&
       !translation.match(/x$/)) ||
-    (outline.match(/.+\*.*PL/) && translation.match(/mp/))
+    (outline.match(/.+\*.*PL/) && translation.match(/mp/)) ||
+    (outline.match(/.+FRP/) && translation.match(/mp/))
   );
 
 export default hasCompoundClusters;
