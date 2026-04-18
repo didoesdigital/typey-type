@@ -1,6 +1,7 @@
 import { MemoryRouter as Router, Route, Routes } from "react-router-dom";
 import type { Preview } from "@storybook/react-vite";
 
+// @ts-expect-error Cannot find module or type declarations for side-effect import of '../src/index.scss' ts(2882)
 import "../src/index.scss";
 
 const preview: Preview = {
