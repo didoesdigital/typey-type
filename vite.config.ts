@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: "/typey-type",
     build: {
+      cssMinify: "esbuild",
       sourcemap: true,
       outDir: "build",
     },
