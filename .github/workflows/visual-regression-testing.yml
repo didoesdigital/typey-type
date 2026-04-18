@@ -14,23 +14,27 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
     steps:
+      # https://github.com/actions/checkout
       - name: 🏗️ Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
           fetch-depth: 0
 
+      # https://github.com/actions/setup-node
       - name: 🏗️ Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: "22.14.0"
+          node-version: "24.14.1"
           cache: "yarn"
 
       - name: 🏗️ Install dependencies
         run: yarn install --immutable
 
+      # https://github.com/chromaui/action
+      # https://github.com/chromaui/chromatic-cli
       - name: ☑️ Build Chromatic
-        uses: chromaui/action@v12.2.0
+        uses: chromaui/action@v16.2.0
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitZeroOnChanges: ${{ github.ref == 'refs/heads/master' && true || false }}

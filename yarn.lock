@@ -3964,9 +3964,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^12.2.0":
-  version: 12.2.0
-  resolution: "chromatic@npm:12.2.0"
+"chromatic@npm:16.2.0":
+  version: 16.2.0
+  resolution: "chromatic@npm:16.2.0"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
@@ -3979,7 +3979,7 @@ __metadata:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 10c0/c40c977c589fe03d788103281c3e000224049c65932f67293e9825faadccc654931f1b68ec442beb516d87449d00420d73e3984103b49faca42ead1c12867932
+  checksum: 10c0/9de6ec3e405970f429f056906f16e5fd4c4340ab587fc24dd91a16df32a06b7ad614f60791e7cdfc46033f5e3a5f28037f8e90afba6372ce68975b5951e8daf0
   languageName: node
   linkType: hard
 
@@ -9270,7 +9270,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:4.1.4"
     "@vitest/eslint-plugin": "npm:^1.6.13"
     "@vitest/ui": "npm:4.1.4"
-    chromatic: "npm:^12.2.0"
+    chromatic: "npm:16.2.0"
     clipboard: "npm:^1.7.1"
     d3-array: "npm:^3.1.1"
     d3-format: "npm:^3.1.0"
