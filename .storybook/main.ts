@@ -11,7 +11,7 @@ const config: StorybookConfig = {
     "@storybook/addon-a11y",
     "@storybook/addon-links",
     "@chromatic-com/storybook",
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
   ],
 
   framework: {
@@ -32,6 +32,17 @@ const config: StorybookConfig = {
 
   staticDirs: ["../public"],
   docs: {},
+
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    const { mergeConfig } = await import("vite");
+
+    return mergeConfig(config, {
+      build: {
+        cssMinify: "esbuild",
+      },
+    });
+  },
 };
 
 export default config;
