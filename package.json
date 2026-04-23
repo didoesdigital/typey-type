@@ -152,5 +152,5 @@
   "engines": {
     "node": ">=24.14.1"
   },
-  "packageManager": "yarn@4.13.0"
+  "packageManager": "pnpm@10.33.0"
 }
