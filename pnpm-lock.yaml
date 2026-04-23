@@ -118,13 +118,6 @@ importers:
       usehooks-ts:
         specifier: ^2.9.1
         version: 2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    dependenciesMeta:
-      '@parcel/watcher':
-        built: true
-      '@sentry/cli':
-        built: true
-      unrs-resolver:
-        built: true
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^5.1.1
