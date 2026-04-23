@@ -64,7 +64,7 @@ vi.mock("./components/InfoIconAndTooltip.tsx", () => ({
   }
 }));
 
-describe('App', () => {
+describe('App', { tags: ['ui'] }, () => {
   let currentState: AppState | undefined = undefined;
 
   class StateLoggingApp extends App {

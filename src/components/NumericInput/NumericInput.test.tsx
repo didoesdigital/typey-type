@@ -101,7 +101,7 @@ const setup = (setupOptions: SetupOptions) => {
   };
 };
 
-describe("NumericInput", () => {
+describe("NumericInput", { tags: ['ui'] }, () => {
   afterEach(() => {
     vi.resetAllMocks();
   });

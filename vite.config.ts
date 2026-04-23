@@ -21,6 +21,16 @@ export default defineConfig(({ mode }) => {
       typecheck: {
         enabled: true,
       },
+      tags: [
+        {
+          name: "ui",
+          description: "Tests written for UI, e.g. using Testing Library.",
+        },
+        {
+          name: "unit",
+          description: "Tests written for TS logic.",
+        },
+      ],
     },
     resolve: {
       tsconfigPaths: true,

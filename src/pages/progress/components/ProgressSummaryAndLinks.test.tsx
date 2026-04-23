@@ -58,7 +58,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
   );
 };
 
-describe("progress summary and links", () => {
+describe("progress summary and links", { tags: ['ui'] }, () => {
   it("renders", () => {
     render(
       <Wrapper>
