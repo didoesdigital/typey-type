@@ -31,7 +31,7 @@ fi
 VERSION=$(git describe --abbrev=0 --tags)
 
 # Build the production app!
-TYPEY_TYPE_RELEASE="${VERSION}" yarn run build:production
+TYPEY_TYPE_RELEASE="${VERSION}" pnpm run build:production
 
 # Sync static build files to server
 rsync --itemize-changes -avz --exclude=".DS_Store" ~/projects/typey-type/build/ di@159.203.100.121:www/typey-type/
