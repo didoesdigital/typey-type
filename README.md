@@ -33,7 +33,7 @@ Typey Type avoids generic typing features, such as competing for speed and accur
 
 ### Requirements
 
-Install [yarn](https://yarnpkg.com/lang/en/docs/install/). Note: the project is currently built with Node version 24.
+Install [`pnpm`](https://pnpm.io/installation). Note: the project is currently built with Node version 24.
 
 ### Installation
 
@@ -56,10 +56,10 @@ If you haven't already, change directory into the cloned repository:
 cd typey-type
 ```
 
-Once you've cloned the repository and updated its submodules, yarn install packages from `package.json`:
+Once you've cloned the repository and updated its submodules, `pnpm` install packages from `package.json`:
 
 ```sh
-yarn install
+pnpm install --frozen-lockfile
 ```
 
 ### Updates
@@ -75,7 +75,7 @@ git submodule update
 Run the Typey Type app:
 
 ```sh
-yarn start
+pnpm start
 ```
 
 Open the Vite local link <http://localhost:5173/typey-type> to view it in the browser.
@@ -89,36 +89,36 @@ To use Typey Type offline, you can follow the steps in this README to install an
 Run the test runner during development:
 
 ```sh
-yarn test
+pnpm test
 ```
 
-`yarn test` will run all of the tests and watch for changes to source files, but if you want to focus on running a specific subset, there's also:
+`pnpm test` will run all of the tests and watch for changes to source files, but if you want to focus on running a specific subset, there's also:
 
-- `yarn test:unit`, which has the most coverage for the app and runs quickly
-- `yarn test:ui`, which covers the most critical part of progressing through words in lessons and takes longer to run
+- `pnpm test:unit`, which has the most coverage for the app and runs quickly
+- `pnpm test:ui`, which covers the most critical part of progressing through words in lessons and takes longer to run
 
-Run `yarn vitest:ui` to open the [Vitest UI](https://vitest.dev/guide/ui.html#vitest-ui).
+Run `pnpm vitest:ui` to open the [Vitest UI](https://vitest.dev/guide/ui.html#vitest-ui).
 
-Run `yarn test:coverage` to review test coverage.
+Run `pnpm test:coverage` to review test coverage.
 
 ### Checks
 
 Run the TypeScript type checker:
 
 ```
-yarn types
+pnpm types
 ```
 
 Run `eslint` to check for code issues:
 
 ```
-yarn lint
+pnpm lint
 ```
 
 Run `eslint` and fix any auto-fixable code issues:
 
 ```
-yarn lint:fix
+pnpm lint:fix
 ```
 
 ### Storybook
@@ -126,7 +126,7 @@ yarn lint:fix
 Run the [Storybook](https://storybook.js.org/) command to develop and test components in isolation:
 
 ```sh
-yarn storybook
+pnpm storybook
 ```
 
 ### Vite
