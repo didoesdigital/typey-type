@@ -14,31 +14,38 @@ jobs:
     steps:
       # https://github.com/actions/checkout
       - name: 🏗️ Check out repository code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
 
+      # https://github.com/pnpm/action-setup
+      - name: 🏗️ Install pnpm package manager
+        uses: pnpm/action-setup@v6
+        with:
+          version: "10.33.0"
+
       # https://github.com/actions/setup-node
-      - name: 🏗️ Setup Node.js
-        uses: actions/setup-node@v5
+      - name: 🏗️ Install Node.js and cache packages
+        uses: actions/setup-node@v6
         with:
           node-version: "24.14.1"
-          cache: "yarn"
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: "pnpm"
 
       - name: 🏗️ Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       - name: ☑️ Check TypeScript compiles
-        run: yarn run types
+        run: pnpm run types
 
       - name: ☑️ Run tests
-        run: yarn run test:ci
+        run: pnpm run test:ci
 
       - name: ☑️ Lint
-        run: yarn run lint:ci
+        run: pnpm run lint:ci
 
       - name: ☑️ Run a production-like staging build but without a Sentry release
-        run: yarn run build:staging
+        run: pnpm run build:staging
 
       - name: ☑️ Build Storybook
-        run: yarn run build-storybook
+        run: pnpm run build-storybook
