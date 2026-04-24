@@ -35,6 +35,9 @@ Typey Type avoids generic typing features, such as competing for speed and accur
 
 Install [`pnpm`](https://pnpm.io/installation). Note: the project is currently built with Node version 24.
 
+> [!WARNING]
+> This project previously used `yarn` to manage `npm` packages. If you previously set up Typey Type using `yarn`, delete `node_modules` and any stray `yarn` files/folders in the Typey Type directory, such as `.yarn/`, `.yarnrc.yml`, `yarn.lock`. Install `pnpm` and run `pnpm install --frozen-lockfile` to re-create `node_modules`.
+
 ### Installation
 
 This project includes a Git submodule for [Typey Type data](https://github.com/didoesdigital/typey-type-data). If you want to clone this repository as well as its submodules, you can use the `--recursive` parameter:
@@ -165,4 +168,3 @@ Typey Type was created by [Di](https://didoesdigital.com).
 - [Typey Type CLI](https://github.com/didoesdigital/typey-type-cli)
 - [Di's steno dictionaries](https://github.com/didoesdigital/steno-dictionaries)
 - [Stenoboard diagram SVG to React](https://github.com/didoesdigital/typey-type-stenoboard-diagram-svg-to-react)
-
