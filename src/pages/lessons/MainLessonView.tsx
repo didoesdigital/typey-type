@@ -3,7 +3,7 @@ import * as React from "react";
 import ClosingCross from "../../components/Icons/icon-images/ClosingCross.svg";
 import Icon from "../../components/Icons/Icon";
 import { Link, useLocation } from "react-router-dom";
-import AnimateHeight from "react-animate-height";
+import { motion } from "motion/react";
 import DocumentTitle from "components/DocumentTitle";
 import LessonCanvasFooter, {
   type LessonCanvasFooterProps,
@@ -45,7 +45,7 @@ export type MainLessonViewProps = {
   overviewLink: JSX.Element | undefined;
   actualText: string;
   changeShowStrokesInLesson: (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => boolean;
   chooseStudy: LessonCanvasFooterProps["chooseStudy"];
   completedPhrases: MaterialText[];
@@ -185,17 +185,20 @@ const MainLessonView = ({
                 >
                   Show scores
                 </button>
-                <AnimateHeight
-                  duration={300}
-                  height={userSettings.showScoresWhileTyping ? "auto" : 0}
-                  // @ts-expect-error TS(2769) FIXME: No overload matches this call.
-                  ease={"cubic-bezier(0.645, 0.045, 0.355, 1)"}
+                <motion.div
+                  animate={{
+                    height: userSettings.showScoresWhileTyping ? "auto" : 0,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [[0.645, 0.045, 0.355, 1]],
+                  }}
                 >
                   {/* This setting is available with accessible controls via the UserSettings */}
                   {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
                   <div
                     className={
-                      "mb3 " +
+                      "pb3 " +
                       (userSettings.showScoresWhileTyping
                         ? "scores--shown"
                         : "scores--hidden")
@@ -214,7 +217,7 @@ const MainLessonView = ({
                       totalNumberOfHintedWords={totalNumberOfHintedWords}
                     />
                   </div>
-                </AnimateHeight>
+                </motion.div>
                 <div className="lesson-canvas panel overflow-hidden flex relative bg-white dark:bg-coolgrey-1000 mx-auto mw-1440 p2 mb3 flex">
                   {revisionMode && (
                     <div>
