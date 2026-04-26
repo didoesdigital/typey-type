@@ -9,8 +9,7 @@ import {
 } from "react";
 import GoogleAnalytics from "react-ga4";
 import ReactModal from "react-modal";
-import { motion } from "motion/react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import * as Confetti from "../../../utils/confetti";
 import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer, defaultRoundToWin } from "./gameReducer";

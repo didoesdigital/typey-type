@@ -4,8 +4,7 @@ import {
   type ChangeEventHandler,
   type KeyboardEvent,
 } from "react";
-import { motion } from "motion/react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import GoogleAnalytics from "react-ga4";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../states/userSettingsState";

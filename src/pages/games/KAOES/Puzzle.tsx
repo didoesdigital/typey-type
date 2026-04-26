@@ -1,5 +1,4 @@
-import { motion } from "motion/react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 
 type Props = {
   puzzleText: string;

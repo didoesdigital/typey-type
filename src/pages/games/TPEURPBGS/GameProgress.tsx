@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { motion } from "motion/react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { useTPEURPBGSData } from "./TPEURPBGSContext/useTPEURPBGS";
 
 const Section: FC = () => {

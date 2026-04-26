@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
-import { motion } from "motion/react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import Input from "../components/Input";
 import {
   useTPEURPBGSApi,

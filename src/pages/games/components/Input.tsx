@@ -1,6 +1,5 @@
 import { type ChangeEventHandler, useEffect, useRef } from "react";
-import { motion } from "motion/react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 
 type InputProps = {
   onChangeInput: (inputText: string) => void;

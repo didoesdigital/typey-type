@@ -1,6 +1,5 @@
 import { FC, type ReactNode } from "react";
-import { motion } from "motion/react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 
 type RoundProps = {
   round: number;
