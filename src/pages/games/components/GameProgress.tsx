@@ -15,7 +15,7 @@ export const Round: FC<RoundProps> = ({ round, roundToWin }) => {
         className={"dib"}
         animate={{
           transform: shouldReduceMotion
-            ? "scale(1)"
+            ? ["scale(1)", "scale(1)", "scale(1)"]
             : ["scale(1)", "scale(2)", "scale(1)"],
         }}
         transition={{
