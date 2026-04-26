@@ -91,9 +91,6 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
-      react-animate-height:
-        specifier: ^2.0.5
-        version: 2.0.23(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-chatbot-kit:
         specifier: ^2.2.2
         version: 2.2.2
@@ -3231,13 +3228,6 @@ packages:
   query-string@7.1.3:
     resolution: {integrity: sha512-hh2WYhq4fi8+b+/2Kg9CEge4fDPvHS534aOOvOZeQ3+Vf2mCFsaFBYj0i+iXcAq6I9Vzp5fjMFBlONvayDC1qg==}
     engines: {node: '>=6'}
-
-  react-animate-height@2.0.23:
-    resolution: {integrity: sha512-DucSC/1QuxWEFzR9IsHMzrf2nrcZ6qAmLIFoENa2kLK7h72XybcMA9o073z7aHccFzdMEW0/fhAdnQG7a4rDow==}
-    engines: {node: '>= 6.0.0'}
-    peerDependencies:
-      react: '>=15.6.2'
-      react-dom: '>=15.6.2'
 
   react-chatbot-kit@2.2.2:
     resolution: {integrity: sha512-8p/i0KkzkhoyG2XsL6Pb6f72k9j7GYNAc5SOa4f9OZwbCD3Q34uEruNPc06qa1wZHKfT6aFna19PA2plFuO2NA==}
@@ -7082,13 +7072,6 @@ snapshots:
       filter-obj: 1.1.0
       split-on-first: 1.1.0
       strict-uri-encode: 2.0.0
-
-  react-animate-height@2.0.23(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      classnames: 2.5.1
-      prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   react-chatbot-kit@2.2.2:
     dependencies:
