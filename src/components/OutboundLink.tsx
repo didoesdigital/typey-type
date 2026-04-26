@@ -40,6 +40,20 @@ const OutboundLink = ({
     }
   };
 
+  const safeTo = React.useMemo(() => {
+    try {
+      const parsedUrl = new URL(to, "https://example.com");
+
+      if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
+        return to;
+      }
+
+      return undefined;
+    } catch {
+      return undefined;
+    }
+  }, [to]);
+
   const newTabProps = newTabAndIUnderstandTheAccessibilityImplications
     ? {
         target: "_blank",
@@ -49,7 +63,7 @@ const OutboundLink = ({
 
   return (
     <a
-      href={to}
+      href={safeTo}
       aria-label={ariaLabel}
       className={className}
       onClick={clickHandler}
