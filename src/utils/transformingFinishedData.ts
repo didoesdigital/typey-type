@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/react";
 import { mean } from "d3-array";
 import type {
   DataPoint,
@@ -13,8 +12,7 @@ const calculatedAdjustedWPM = (wordCount: number, duration: number) => {
       throw new Error("wordCount is undefined in calculatedAdjustedWPM");
     }
   } catch (error) {
-    console.error(error);
-    Sentry.captureException(error);
+    console.warn(error);
     wordCount = 0; // At least it's not "NaN"
   }
   return Math.max(wordCount - 1, 0) / (duration / 1000 / 60);
