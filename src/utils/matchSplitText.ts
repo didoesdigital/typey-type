@@ -44,6 +44,9 @@ function matchSplitText(
   } else if (userSettings?.spacePlacement === "spaceAfterOutput") {
     expected = expected + " ";
   }
+  // NFC aligns precomposed vs decomposed accents (common with some OS/steno input paths).
+  expected = expected.normalize("NFC");
+  actualText = actualText.normalize("NFC");
   const expectedChars = expected.split("");
   const actualTextChars = actualText.split("");
   let charactersMatch: (char1: string, char2: string) => boolean;

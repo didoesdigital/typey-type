@@ -708,7 +708,8 @@ class App extends Component<Props, AppState> {
   updateBufferTimer = null;
 
   updateMarkup(event: ChangeEvent<HTMLTextAreaElement>) {
-    const actualText = event.target.value;
+    // NFC so buffer/state matches matchSplitText prefixes (e.g. after combining strokes).
+    const actualText = event.target.value.normalize("NFC");
 
     // Immediately update the text in the input field
     this.setState({ actualText });
@@ -794,10 +795,8 @@ class App extends Component<Props, AppState> {
 
     const currentPhraseAttempts = state.currentPhraseAttempts.map(copy => ({...copy}));
 
-    if (buffer) {
-      // Assuming a single buffer contains inputs from one stroke, peaks are always at the end of buffer. (i.e. steno can either keep typing or backspace first and then keep typing) Since currentPhraseAttempts is only used to calculate attempts and its logic is to use peaks or the last strokes, it's safe to push elements that lacks `numberOfMatchedWordsSoFar` and `hintWasShown` into `currentPhraseAttempts`.
-      currentPhraseAttempts.push(...buffer.slice(0, -1));
-    }
+    // One debounced batch == one steno stroke; omit buffer intermediates so strokeAccuracy
+    // does not count multi-event OS input (e.g. combining marks) as extra attempts.
     currentPhraseAttempts.push({
       text: actualText,
       time: time,
