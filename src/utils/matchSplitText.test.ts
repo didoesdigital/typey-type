@@ -4,6 +4,41 @@ import {
 } from "./matchSplitText";
 
 describe("matchSplitText", () => {
+  describe("Unicode normalization (NFC)", () => {
+    const settings = { ignoredChars: "" };
+    const userSettings: PartialUserSettingsAndCaseAndSpacePlacement = {
+      caseSensitive: true,
+      simpleTypography: true,
+      retainedWords: false,
+      limitNumberOfWords: 0,
+      startFromWord: 1,
+      newWords: true,
+      repetitions: 1,
+      showStrokes: false,
+      showStrokesAsDiagrams: false,
+      hideStrokesOnLastRepetition: false,
+      spacePlacement: "spaceOff",
+      sortOrder: "sortOff",
+      seenWords: true,
+    };
+
+    it("matches NFC lesson text when actual text is NFD (base + combining mark)", () => {
+      const expectedText = "Jos\u00e9";
+      const actualText = "Jos\u0065\u0301";
+      expect(
+        matchSplitText(expectedText, actualText, settings, userSettings)
+      ).toEqual(["José", "", "José", ""]);
+    });
+
+    it("matches NFD lesson text when actual text is NFC", () => {
+      const expectedText = "Jos\u0065\u0301";
+      const actualText = "Jos\u00e9";
+      expect(
+        matchSplitText(expectedText, actualText, settings, userSettings)
+      ).toEqual(["José", "", "José", ""]);
+    });
+  });
+
   describe("case insensitive, ignore spacing", () => {
     const settings = { ignoredChars: "" };
     const userSettings: PartialUserSettingsAndCaseAndSpacePlacement = {
